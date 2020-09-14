@@ -26,8 +26,6 @@ class CCards extends StatefulWidget {
   _CCardsState createState() => _CCardsState();
 }
 
-//
-
 class _CCardsState extends State<CCards> {
   bool ope;
   Widget chil;
@@ -473,15 +471,21 @@ class _YMDLookUpState extends State<YMDLookUp> {
     //Complicated logic that handles leap years based on previous state
     setState(() {
       year = 2060 - newyear;
-      var boy = DateTime(2060 - newyear , 1, 1, 12, 00);
+      var boy = DateTime(2060 - newyear, 1, 1, 12, 00);
       if (newyear % 4 == 0) {
         print('is leap');
-        outYMD = boy.add(Duration(days: jjj));jjj+=1;
+        outYMD = boy.add(Duration(days: jjj));
+        jjj += 1;
         daysInyea = 366;
       } else {
         print('is not leap');
-        if(daysInyea==366){outYMD = boy.add(Duration(days: jjj-2));jjj-=1;}
-        else{outYMD = boy.add(Duration(days: jjj-1));jjj;}
+        if (daysInyea == 366) {
+          outYMD = boy.add(Duration(days: jjj - 2));
+          jjj -= 1;
+        } else {
+          outYMD = boy.add(Duration(days: jjj - 1));
+          jjj;
+        }
         daysInyea = 365;
       }
     });
@@ -724,81 +728,6 @@ class GlossaryCard extends StatelessWidget {
 //helper class
 typedef void IntCallBack();
 
-class CustomPicker extends CommonPickerModel {
-  String digits(int value, int length) {
-    return '$value'.padLeft(length, "0");
-  }
-
-  CustomPicker({DateTime currentTime, LocaleType locale})
-      : super(locale: locale) {
-    this.currentTime = currentTime ?? DateTime.now();
-    this.setLeftIndex(this.currentTime.hour);
-    this.setMiddleIndex(this.currentTime.minute);
-    this.setRightIndex(this.currentTime.second);
-  }
-
-  @override
-  String leftStringAtIndex(int index) {
-    if (index >= 0 && index < 24) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String middleStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String rightStringAtIndex(int index) {
-    if (index >= 0 && index < 60) {
-      return this.digits(index, 2);
-    } else {
-      return null;
-    }
-  }
-
-  @override
-  String leftDivider() {
-    return "|";
-  }
-
-  @override
-  String rightDivider() {
-    return "|";
-  }
-
-  @override
-  List<int> layoutProportions() {
-    return [1, 2, 1];
-  }
-
-  @override
-  DateTime finalTime() {
-    return currentTime.isUtc
-        ? DateTime.utc(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex())
-        : DateTime(
-            currentTime.year,
-            currentTime.month,
-            currentTime.day,
-            this.currentLeftIndex(),
-            this.currentMiddleIndex(),
-            this.currentRightIndex());
-  }
-}
-
 class Row2 extends StatelessWidget {
   final Widget one, two;
   double l, t, r, b;
@@ -821,5 +750,183 @@ class Row2 extends StatelessWidget {
               Row(children: [one, Spacer(), two]),
               Spacer()
             ])));
+  }
+}
+
+class DistanceBody extends StatefulWidget {
+  @override
+  _DistanceBodyState createState() => _DistanceBodyState();
+}
+
+class _DistanceBodyState extends State<DistanceBody> {
+  var controllerOne = TextEditingController();
+  var controllerTwo = TextEditingController();
+  var one, two, oneIn, twoOut;
+  CustomTextField tfOne, tfTwo;
+  List<Distance> list = List();
+  bool toggle = true;
+
+  @override
+  void initState() {
+    controllerOne.addListener(() {
+      oneChanged(toggle);
+    });
+    controllerTwo.addListener(() {
+      twoChanged(toggle);
+    });
+    tfOne = CustomTextField(controllerOne);
+    tfTwo = CustomTextField(controllerTwo);
+    list.add(Distance('32nds Inch', 0.00079375));
+    list.add(Distance('Milimeter', 0.001));
+    list.add(Distance('16nths Inch', 0.0015875));
+    list.add(Distance('Centimeter', 0.01));
+    list.add(Distance('Inch', 0.0254));
+    list.add(Distance('Foot', 0.3048));
+    list.add(Distance('Yard', 0.9144));
+    list.add(Distance('Meter', 1));
+    list.add(Distance('Kiliometer', 1000));
+    list.add(Distance('Mile', 1609.344));
+    list.add(Distance('Nautical Mile', 1852));
+    one = 0;
+    two = 0;
+    oneIn = 0;
+    twoOut = '';
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controllerTwo.dispose();
+    controllerOne.dispose();
+    super.dispose();
+  }
+
+  void twoChanged(var i) {
+    if (i is int) {
+      //if not bool, try to get the int
+      two = i;
+      toggle = true;
+    }
+
+    if (toggle) {
+      toggle = !toggle;
+      String x = controllerTwo.text;
+      if (x == '' || x == null) {
+        x = '0';
+      }
+      controllerOne.text = (double.parse(x) * //double from feild 1 times
+              list[two].numOfBases / //double from spinner 1 base divided by
+              list[one].numOfBases)
+          .toStringAsPrecision(6); //spinner 2 base
+    } else {
+      toggle = !toggle;
+    }
+  }
+
+  void oneChanged(var i) {
+    if (i is int) {
+      //if not bool, try to get the int
+      one = i;
+      toggle = true;
+    }
+    if (toggle) {
+      toggle = !toggle;
+      String x = controllerOne.text;
+      if (x == '' || x == null) {
+        x = '0';
+      }
+      controllerTwo.text = (double.parse(x) * //double from feild 1 times
+              list[one].numOfBases / //double from spinner 1 base divided by
+              list[two].numOfBases)
+          .toStringAsPrecision(6); //spinner 2 base
+    } else {
+      toggle = !toggle;
+    }
+  }
+
+  distanceChanges() {}
+  @override
+  Widget build(BuildContext context) {
+    return //Column(children: [
+        Padding(
+            padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+            child: Row(children: [
+              Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white60),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: Column(children: [
+                    tfOne,
+                    Container(
+                        width: 160,
+                        height: 30,
+                        child: CupertinoPicker(
+                          children: list,
+                          onSelectedItemChanged: (int i) => {
+                            oneChanged(i),
+                          },
+                          itemExtent: 30,
+                        )),
+                  ])),
+              Spacer(),
+              Text('=',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white60)),
+              Spacer(),
+              Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.white60),
+                      borderRadius: BorderRadius.all(Radius.circular(5))),
+                  child: Column(children: [
+                    tfTwo,
+                    Container(
+                        width: 160,
+                        height: 30,
+                        child: CupertinoPicker(
+                          children: list,
+                          onSelectedItemChanged: (int i) => {twoChanged(i)},
+                          itemExtent: 30,
+                        )),
+                  ])),
+            ]));
+  }
+}
+
+class Distance extends StatelessWidget {
+  // base is a meter
+  double numOfBases;
+  String name;
+  Distance(this.name, this.numOfBases);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+        child: Text(name, style: TextStyle(color: Colors.white60)));
+  }
+}
+
+class CustomTextField extends StatefulWidget {
+  TextEditingController c;
+  CustomTextField(this.c);
+  @override
+  _CustomTextFieldState createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  @override
+  Widget build(BuildContext context) {
+    return //Flexible(child:
+        Container(
+            height: 30,
+            width: 160,
+            child: TextField(
+              controller: this.widget.c,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white60))),
+              keyboardType: TextInputType.number,
+              textAlign: TextAlign.center,
+            ));
+    //);
   }
 }

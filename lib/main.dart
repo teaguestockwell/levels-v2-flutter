@@ -47,7 +47,16 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return Listener(
+  onPointerDown: (_) {
+    FocusScopeNode currentFocus = FocusScope.of(context);
+    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
+      currentFocus.focusedChild.unfocus();
+    }
+  },
+
+      
+      child:MaterialApp(
         theme: ThemeData.light(),
         darkTheme: ThemeData.dark(),
         home: Scaffold(
@@ -78,7 +87,7 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             onPageChanged: onPageChanged,
             controller: _pageController,
           ),
-        ));
+        )));
   }
 
   void onPageChanged(int page) {
