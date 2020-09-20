@@ -806,7 +806,7 @@ class _DistanceBodyState extends State<DistanceBody> {
       //if not bool, try to get the int
       two = i;
       toggle = true;
-    
+    }
 
     if (toggle) {
       toggle = !toggle;
