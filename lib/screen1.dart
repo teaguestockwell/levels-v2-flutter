@@ -7,6 +7,7 @@ class Screen1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: [
       CCards('Distance',DistanceBody()),
+      CCards('Distance 2', tDistanceBody())
     ]);
   }
 }

@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:ui';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:five_level_one/services.dart';
@@ -928,5 +929,260 @@ class _CustomTextFieldState extends State<CustomTextField> {
               textAlign: TextAlign.center,
             ));
     //);
+  }
+}
+
+class tDistanceBody extends StatefulWidget {
+  @override
+  _tDistanceBodyState createState() => _tDistanceBodyState();
+}
+
+class _tDistanceBodyState extends State<tDistanceBody> {
+  var controllerOne = TextEditingController();
+  var controllerTwo = TextEditingController();
+  var one, two, oneIn, twoOut, number;
+  CustomTextField tfOne, tfTwo;
+  List<Distance> list = List();
+
+  bool toggle = true;
+
+  @override
+  void initState() {
+    controllerOne.addListener(() {
+      oneChanged(toggle);
+    });
+    controllerTwo.addListener(() {
+      twoChanged(toggle);
+    });
+    tfOne = CustomTextField(controllerOne);
+    tfTwo = CustomTextField(controllerTwo);
+    list = Unit(0).list;
+    one = 0;
+    two = 0;
+    oneIn = 0;
+    twoOut = '';
+    number = 0;
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    controllerTwo.dispose();
+    controllerOne.dispose();
+    super.dispose();
+  }
+
+  getUnits() {
+    List<Widget> list = [];
+    list.add(listElement('Length'));
+    list.add(listElement('Mass'));
+    list.add(listElement('Area'));
+    list.add(listElement('Time'));
+    list.add(listElement('Volume'));
+    list.add(listElement('Speed'));
+    return list;
+  }
+
+  unitChange(var n) {
+    print(n);
+    setState(() {
+      list = Unit(n).list;
+    });
+  }
+
+  void twoChanged(var i) {
+    if (i is int) {
+      //if not bool, try to get the int
+      two = i;
+      toggle = true;
+    }
+
+    if (toggle) {
+      toggle = !toggle;
+      String x = controllerTwo.text;
+      if (x == '' || x == null) {
+        x = '0';
+      }
+      controllerOne.text = (double.parse(x) * //double from feild 1 times
+              list[two].numOfBases / //double from spinner 1 base divided by
+              list[one].numOfBases)
+          .toStringAsPrecision(6); //spinner 2 base
+    } else {
+      toggle = !toggle;
+    }
+  }
+
+  void oneChanged(var i) {
+    if (i is int) {
+      //if not bool, try to get the int
+      one = i;
+      toggle = true;
+    }
+    if (toggle) {
+      toggle = !toggle;
+      String x = controllerOne.text;
+      if (x == '' || x == null) {
+        x = '0';
+      }
+      controllerTwo.text = (double.parse(x) * //double from feild 1 times
+              list[one].numOfBases / //double from spinner 1 base divided by
+              list[two].numOfBases)
+          .toStringAsPrecision(6); //spinner 2 base
+    } else {
+      toggle = !toggle;
+    }
+  }
+
+  distanceChanges() {}
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      RowCenter(Container(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          width: 160,
+          height: 30,
+          child: CupertinoPicker(
+            children: getUnits(),
+            onSelectedItemChanged: unitChange,
+            itemExtent: 30,
+          ))),
+      Divider(),
+      Padding(
+          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          child: Row(children: [
+            Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white60),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: Column(children: [
+                  tfOne,
+                  Container(
+                      width: 160,
+                      height: 30,
+                      child: CupertinoPicker(
+                        children: list,
+                        onSelectedItemChanged: (int i) => {
+                          oneChanged(i),
+                        },
+                        itemExtent: 30,
+                      )),
+                ])),
+            Spacer(),
+            Text('=',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white60)),
+            Spacer(),
+            Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white60),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: Column(children: [
+                  tfTwo,
+                  Container(
+                      width: 160,
+                      height: 30,
+                      child: CupertinoPicker(
+                        children: list,
+                        onSelectedItemChanged: (int i) => {twoChanged(i)},
+                        itemExtent: 30,
+                      )),
+                ])),
+          ]))
+    ]);
+  }
+}
+
+class Unit {
+  List<Distance> list = List();
+  int unit;
+  Unit(this.unit) {
+    // list.add(Distance('',));
+    //if distance 'x',1 then that unit is the base multiplier
+    switch (unit) {
+      case 0:
+        list.add(Distance('32nds Inch', 0.00079375));
+        list.add(Distance('Milimeter', 0.001));
+        list.add(Distance('16nths Inch', 0.0015875));
+        list.add(Distance('Centimeter', 0.01));
+        list.add(Distance('Inch', 0.0254));
+        list.add(Distance('Foot', 0.3048));
+        list.add(Distance('Yard', 0.9144));
+        list.add(Distance('Meter', 1));
+        list.add(Distance('Kiliometer', 1000));
+        list.add(Distance('Mile', 1609.344));
+        list.add(Distance('Nautical Mile', 1852));
+        break;
+      case 1:
+        list.add(Distance('Microgram', 0.000000001));
+        list.add(Distance('Miligram', 0.000001));
+        list.add(Distance('Gram', 0.001));
+        list.add(Distance('Ounce', 0.0283495));
+        list.add(Distance('Pound', 0.453592));
+        list.add(Distance('Kilogram', 1));
+        list.add(Distance('Stone', 6.35029));
+        list.add(Distance('US Ton', 907.185));
+        list.add(Distance('Metric Ton', 1000));
+        list.add(Distance('Imperial Ton', 1016.05));
+        break;
+      case 2:
+        list.add(Distance('Inch^2', 0.00064516));
+        list.add(Distance('Foot^2', 0.092903));
+        list.add(Distance('Yard^2', 0.092903));
+        list.add(Distance('Meter^2', 1));
+        list.add(Distance('Acre', 4046.86));
+        list.add(Distance('Hectare', 10000));
+        list.add(Distance('Kilometer^2', 1000000));
+        list.add(Distance('Mile^2', 2589988.1103360000998));
+        break;
+      case 3:
+        list.add(Distance('Nanosecond', 0.000000000000011574));
+        list.add(Distance('Microsecond', 0.000000000011574));
+        list.add(Distance('Milisecond', 0.000000011574));
+        list.add(Distance('Second', 0.000011574));
+        list.add(Distance('Minute', 0.000694444));
+        list.add(Distance('Hour', 0.0416667));
+        list.add(Distance('Day', 1));
+        list.add(Distance('Week', 7));
+        list.add(Distance('Month', 30.4167243334));
+        list.add(Distance('Year', 365));
+        list.add(Distance('Decade', 3650));
+        list.add(Distance('Century', 36500));
+        break;
+      case 4:
+        list.add(Distance('Mililiter', 0.001));
+        list.add(Distance('US Teaspoon', 0.00492892));
+        list.add(Distance('US Tablespoon', 0.0147868));
+        list.add(Distance('Inch^3', 0.0163871));
+        list.add(Distance('US Fluid Ounce', 0.0295735));
+        list.add(Distance('US Cup', 0.24));
+        list.add(Distance('US Pint', 0.473176));
+        list.add(Distance('US Quart', 0.946353));
+        list.add(Distance('Liter', 1));
+        list.add(Distance('US Gallon', 3.78541));
+        list.add(Distance('Foot^3', 28.3168));
+        list.add(Distance('Meter^3', 1000));
+        break;
+      case 5:
+        list.add(Distance('Kilometer/Hr', 1));
+        list.add(Distance('Foot/Sec', 1.09728));
+        list.add(Distance('Miler/Hr', 1.60934));
+        list.add(Distance('Knot', 1.852));
+        list.add(Distance('Meter/Sec', 3.6));
+        break;
+    }
+  }
+}
+
+class listElement extends StatelessWidget {
+  String name;
+  listElement(this.name);
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+        child: Text(
+          name,
+          style: TextStyle(color: Colors.white70, fontSize: 18),
+        ));
   }
 }
