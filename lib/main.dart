@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'screen0.dart';
-import 'screen1.dart';
 import 'screen2.dart';
 import 'screen3.dart';
 
@@ -28,7 +27,6 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
 
   List<Widget> tabPages = [
     Screen0(),
-    Screen1(),
     Screen2(),
     Screen3(),
   ];
@@ -73,9 +71,9 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             type: BottomNavigationBarType.fixed,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.access_alarm), title: Text("Time")),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.fitness_center), title: Text("Units")),
+                  icon: Icon(Icons.access_alarm), title: Text("Units")),
+              // BottomNavigationBarItem(
+              //     icon: Icon(Icons.fitness_center), title: Text("Units")),
               BottomNavigationBarItem(
                   icon: Icon(Icons.flight_land), title: Text("%MAC")),
               BottomNavigationBarItem(
