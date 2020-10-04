@@ -23,6 +23,6 @@ class Aircraft{
     this.name,this.weight0,this.weight1,this.moment0,this.moment1,this.fs0,
     this.fs1,this.doc
   ){
-    doc.
+    //doc.
   }
 }

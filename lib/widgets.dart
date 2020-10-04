@@ -1165,7 +1165,7 @@ class Unit {
       case 5:
         list.add(Distance('Kilometer/Hr', 1));
         list.add(Distance('Foot/Sec', 1.09728));
-        list.add(Distance('Miler/Hr', 1.60934));
+        list.add(Distance('Miles/Hr', 1.60934));
         list.add(Distance('Knot', 1.852));
         list.add(Distance('Meter/Sec', 3.6));
         break;
