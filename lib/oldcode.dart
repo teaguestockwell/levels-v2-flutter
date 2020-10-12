@@ -117,3 +117,60 @@
 //     );
 //   }
 // }
+// import 'package:flutter/cupertino.dart';
+// import 'package:flutter/material.dart';
+// import 'package:provider/provider.dart';
+// import 'widgets.dart';
+// import 'services.dart';
+// import 'model.dart';
+
+// class Screen3 extends StatefulWidget {
+//   @override
+//   _Screen3State createState() => _Screen3State();
+// }
+
+// class _Screen3State extends State<Screen3> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return StreamProvider<List<Glossary>>.value(
+//     value: DatabaseService().glossary,
+//     child: GlossaryList());
+//   }
+// }
+
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'model.dart';
+
+// class DatabaseService{
+//   // collection reference
+//   final CollectionReference glossaryCollection = FirebaseFirestore.instance.collection('glossary');
+//   final CollectionReference aircraftCollection = FirebaseFirestore.instance.collection('mds');
+//   final CollectionReference glossaryall = FirebaseFirestore.instance.collection('glossaryall');
+//   final DocumentReference generalDoc = FirebaseFirestore.instance.collection('general').doc('general');
+
+
+//   // brew list from snapshot
+//   List<Glossary> _glossarylistFromSnapshot(QuerySnapshot snapshot) {
+//     return snapshot.docs.map((doc){
+//       //print(doc.data);
+//       return Glossary(doc.get('title'), doc.get('body'));
+//     }).toList();
+//   }
+
+//   // get brews stream
+//   Stream<List<Glossary>> get glossary {
+//     return glossaryCollection.snapshots()
+//         .map(_glossarylistFromSnapshot);
+//   }
+
+//   copyDoc(){
+// // get the data from 'name@xxx.com'
+// glossaryall.doc('C-17A-ER').get().then((doc) {
+//     if (doc.exists) {
+//         var data = doc.data();
+//         // saves the data to 'name'
+//         glossaryall.doc("C-17A-NON-ER").set(data);
+//     }
+// });
+//   }
+// }

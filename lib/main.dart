@@ -1,16 +1,22 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:five_level_one/home.dart';
+import 'package:five_level_one/model.dart';
+import 'package:five_level_one/screen4.dart';
 import 'package:flutter/material.dart';
 import 'screen0.dart';
 import 'screen2.dart';
-import 'screen3.dart';
+import 'screen4.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyBottomBarDemo());
+  runApp(HomePage());
 }
 
 class MyBottomBarDemo extends StatefulWidget {
+  final Aircraft air;
+  MyBottomBarDemo(this.air);
+
   @override
   _MyBottomBarDemoState createState() => new _MyBottomBarDemoState();
 }
@@ -18,6 +24,7 @@ class MyBottomBarDemo extends StatefulWidget {
 class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   int _pageIndex = 0;
   PageController _pageController;
+  Screen4 s4;
 
   Color topBot = Colors.black87;
   Color select = Colors.white70;
@@ -28,11 +35,13 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   List<Widget> tabPages = [
     Screen0(),
     Screen2(),
-    Screen3(),
+    //Screen3(),
   ];
 
   @override
   void initState() {
+    s4 = Screen4(this.widget.air);
+    tabPages.add(s4);
     super.initState();
     _pageController = PageController(initialPage: _pageIndex);
   }
@@ -46,18 +55,14 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   @override
   Widget build(BuildContext context) {
     return Listener(
-  onPointerDown: (_) {
-    FocusScopeNode currentFocus = FocusScope.of(context);
-    if (!currentFocus.hasPrimaryFocus && currentFocus.focusedChild != null) {
-      currentFocus.focusedChild.unfocus();
-    }
-  },
-
-      
-      child:MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
-        home: Scaffold(
+        onPointerDown: (_) {
+          FocusScopeNode currentFocus = FocusScope.of(context);
+          if (!currentFocus.hasPrimaryFocus &&
+              currentFocus.focusedChild != null) {
+            currentFocus.focusedChild.unfocus();
+          }
+        },
+        child: Scaffold(
           appBar: AppBar(
             backgroundColor: topBot,
             title: Text("BottomNavigationBar"),
@@ -85,7 +90,7 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             onPageChanged: onPageChanged,
             controller: _pageController,
           ),
-        )));
+        ));
   }
 
   void onPageChanged(int page) {

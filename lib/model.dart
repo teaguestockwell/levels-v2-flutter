@@ -1,28 +1,43 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+class Glossary {
+  final String title, body;
 
-class Glossary{
-  final String title,body;
-  Glossary(this.title,this.body);
+  Glossary(this.title, this.body);
 }
 
-class Tank{
-  final String name,weight,moment;
-  List<String> weights,moments;
-  Tank(this.name,this.weight,this.moment){
-    weights = weight.split(',');
-    moments = moment.split(',');
-  }
-}
+class Aircraft {
+  final String name, fs0, fs1, mom0, mom1, weight0, weight1, simplemom;
 
-class Aircraft{
-  List<Tank> tanks;
-  final String name,weight0,weight1,moment0,moment1,fs0,fs1;
-  QueryDocumentSnapshot doc;
-  
+  final List<dynamic> tanknames,
+      tankmoms,
+      tankweights,
+      titles,
+      bodys,
+      cargonames,
+      cargoweights,
+      cargomoms;
+
   Aircraft(
-    this.name,this.weight0,this.weight1,this.moment0,this.moment1,this.fs0,
-    this.fs1,this.doc
-  ){
-    //doc.
-  }
+    this.name,
+    this.fs0,
+    this.fs1,
+    this.mom0,
+    this.mom1,
+    this.weight0,
+    this.weight1,
+    this.simplemom,
+    this.tanknames,
+    this.tankmoms,
+    this.tankweights,
+    this.titles,
+    this.bodys,
+    this.cargonames,
+    this.cargoweights,
+    this.cargomoms,
+  );
+}
+
+class General {
+  String csvAllMds, welcometitle, welcomebody;
+
+  General(this.csvAllMds, this.welcometitle, this.welcomebody);
 }
