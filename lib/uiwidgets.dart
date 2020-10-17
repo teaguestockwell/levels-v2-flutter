@@ -255,6 +255,36 @@ class Row2 extends StatelessWidget {
   }
 }
 
+class RowCenterOne extends StatelessWidget {
+  Widget w;
+  double l,t,r,b;
+  RowCenterOne(
+    this.w,
+    {
+      this.l=0,
+      this.t=0,
+      this.r=0,
+      this.b=0,
+    }
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(l, t, r, b),
+      child: Container(
+        height: 30,
+        margin: EdgeInsets.all(10),
+        child: Column(children: [
+          Spacer(),
+          Row(children: [Spacer(),w,Spacer()],),
+          Spacer()
+        ],),
+      )
+    ,);
+  }
+}
+
 
 
 

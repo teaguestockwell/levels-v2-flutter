@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:five_level_one/model.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -976,17 +977,17 @@ class PerMacScreen extends StatefulWidget {
 }
 
 class _PerMacScreenState extends State<PerMacScreen> {
-Widget body;
-Aircraft air;
-var tankWeightSelection = List<String>();
+  Widget body;
+  Aircraft air;
+  List<TankRow> tankRows = List<TankRow>();
 
-@override
-void initState() {
+  @override
+  void initState() {
     air = this.widget.air;
 
     //init default tank selection
-    for(int i=0; i<air.tanknames.length; i++){
-      
+   for (Tank t in air.tanks) {
+      tankRows.add(TankRow(t));
     }
     super.initState();
   }
@@ -1001,9 +1002,129 @@ void initState() {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return ListView(
+      children: [
+        CCards("Aircraft", Row2(Text("MDS"),Text(air.name))),
+        CCards(
+          "Tanks",
+           Column(
+             children: tankRows
+          ),
+        ),
+        ChartCRow(air),
+      ]
     );
   }
 }
 
+// appon loading the permac widget, build a cc
+
+//column
+//cccard("fuel", fuelcardbody)
+//ccardf("chart c", chartcbody)
+//ccard("cargo", cargobody)
+
+class TankRow extends StatefulWidget {
+  Tank t;
+  NameWeightFS selected;
+  TankRow(this.t);
+  @override
+  _TankRowState createState() => _TankRowState();
+}
+
+class _TankRowState extends State<TankRow> {
+  @override
+  void initState() {
+    this.widget.selected = this.widget.t.nameWeightFSs[0];
+    super.initState();
+  }
+
+  lenChange(var n) {
+    print(n);
+    setState(() {
+      this.widget.selected = this.widget.t.nameWeightFSs[n];
+      print(this.widget.selected.toString());
+    });
+  }
+
+  getTankWidgetsForSpinner() {
+    List<Widget> list = [];
+    for (int i = 0; i < this.widget.t.nameWeightFSs.length; i++) {
+      list.add(Padding(
+          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
+          child: Text(
+            this.widget.t.nameWeightFSs[i].weight,
+            style: TextStyle(color: Colors.white70, fontSize: 18),
+          )));
+    }
+    return list;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row2(
+        Text(this.widget.t.name),
+        Row(children: <Widget>[
+          Padding(
+              padding: EdgeInsets.all(0),
+              child: Container(
+                  width: 120,
+                  height: 30,
+                  child: CupertinoPicker(
+                    children: getTankWidgetsForSpinner(),
+                    onSelectedItemChanged: lenChange,
+                    itemExtent: 30,
+                  )))
+        ]),);
+  }
+}
+
+class ChartCRow extends StatefulWidget {
+  Aircraft a;
+  ChartCRow(this.a);
+  @override
+  _ChartCRowState createState() => _ChartCRowState();
+}
+
+class _ChartCRowState extends State<ChartCRow> {
+
+  @override
+  Widget build(BuildContext context) {
+    return CCards(
+      "Chart C",
+       Column(children: [
+         RowCenterOne(
+
+           Container(
+             width: 240,
+             height: 30,
+             child: 
+           TextField(
+             decoration: InputDecoration(labelText: "Enter Basic Weight"),
+             keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+                                ],
+           )
+         )
+         ),
+         Divider(),
+
+         RowCenterOne(
+           Container(
+             width: 240,
+             height: 30,
+             child:
+           
+           TextField(
+             decoration: InputDecoration(labelText: "Enter Basic Moment"),
+             keyboardType: TextInputType.number,
+              inputFormatters: <TextInputFormatter>[
+              FilteringTextInputFormatter.digitsOnly
+                                ],
+           )
+         )
+         ),
+       ],));
+  }
+}

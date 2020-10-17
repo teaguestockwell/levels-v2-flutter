@@ -25,6 +25,7 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   int _pageIndex = 0;
   PageController _pageController;
   Screen4 s4;
+  Screen2 s2;
 
   Color topBot = Colors.black87;
   Color select = Colors.white70;
@@ -34,13 +35,15 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
 
   List<Widget> tabPages = [
     Screen0(),
-    Screen2(),
+    //Screen2(),
     //Screen3(),
   ];
 
   @override
   void initState() {
     s4 = Screen4(this.widget.air);
+    s2 = Screen2(this.widget.air);
+    tabPages.add(s2);
     tabPages.add(s4);
     super.initState();
     _pageController = PageController(initialPage: _pageIndex);
