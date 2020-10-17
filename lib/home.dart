@@ -1,6 +1,3 @@
-//read welcome text into home general.disclaimer
-//read all aircraft doc names into a cuperino spinner general.allmds
-//read all aircraft image into image arr
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_level_one/main.dart';
@@ -52,8 +49,6 @@ class _HomePageState extends State<HomePage> {
                   v.get('cargomoms'));
 
               body = MyBottomBarDemo(air);
-              print(air.tankmoms.elementAt(0));
-              print(air.tankmoms.elementAt(1));
             }));
   }
 

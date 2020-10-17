@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:five_level_one/model.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -966,3 +967,43 @@ class Distance extends StatelessWidget {
         child: Text(name, style: TextStyle(color: Colors.white60)));
   }
 }
+
+class PerMacScreen extends StatefulWidget {
+  Aircraft air;
+  PerMacScreen(this.air);
+  @override
+  _PerMacScreenState createState() => _PerMacScreenState();
+}
+
+class _PerMacScreenState extends State<PerMacScreen> {
+Widget body;
+Aircraft air;
+var tankWeightSelection = List<String>();
+
+@override
+void initState() {
+    air = this.widget.air;
+
+    //init default tank selection
+    for(int i=0; i<air.tanknames.length; i++){
+      
+    }
+    super.initState();
+  }
+
+  // Widget buildTankRowsAtI(int i){
+  //   var ret;
+  //   if(i==0){ret = Row2.padding(0, 5, 0, 0, one, two);}
+  //   else if(i!= air.tanknames.length-1){ret = Row2();}
+  //   else{ret = Row2.padding(0, 0, 0, 5, one, two);}
+  //   return ret;
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      
+    );
+  }
+}
+
