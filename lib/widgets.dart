@@ -984,10 +984,13 @@ class PerMacScreen extends StatefulWidget {
   _PerMacScreenState createState() => _PerMacScreenState();
 }
 
-class _PerMacScreenState extends State<PerMacScreen> {
+class _PerMacScreenState extends State<PerMacScreen>  with AutomaticKeepAliveClientMixin<PerMacScreen> { ///
   Widget body;
   Aircraft air;
   List<Widget> tankRows = List<Widget>();
+
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
