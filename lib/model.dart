@@ -135,7 +135,7 @@ class Aircraft {
 
     @override
     String toString(){
-      return("name: "+name+" weight: "+weight+" mom: "+getMom()+" fs: "+getFS());
+      return("name: "+name+" weight: "+weight+" mom: "+getMom()+" fs: "+getFS()+ 'qty' +qty);
     }
 
     String getMom(){

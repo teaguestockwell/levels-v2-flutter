@@ -1020,13 +1020,6 @@ class _PerMacScreenState extends State<PerMacScreen> {
   }
 }
 
-// appon loading the permac widget, build a cc
-
-//column
-//cccard("fuel", fuelcardbody)
-//ccardf("chart c", chartcbody)
-//ccard("cargo", cargobody)
-
 class TankRow extends StatefulWidget {
   Tank t;
   NameWeightFS selected;
@@ -1043,11 +1036,8 @@ class _TankRowState extends State<TankRow> {
   }
 
   lenChange(var n) {
-    print(n);
-    setState(() {
       this.widget.selected = this.widget.t.nameWeightFSs[n];
       print(this.widget.selected.toString());
-    });
   }
 
   getTankWidgetsForSpinner() {
