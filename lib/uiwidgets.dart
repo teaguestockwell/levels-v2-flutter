@@ -79,7 +79,8 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 30,
+        height: Constant.pickerHeight,
+        width: Constant.pickerWidth,
         child: FlatButton(
           onPressed: () {
             onPressed();

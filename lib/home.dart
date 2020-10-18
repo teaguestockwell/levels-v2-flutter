@@ -66,7 +66,8 @@ class _HomePageState extends State<HomePage> {
               body = ListView(children: <Widget>[
                 Image(image: AssetImage('assets/0.png')),
                 CCards(gen.welcometitle, RowCenterText(gen.welcomebody)),
-                CCards('Select MDS', selectedMdsBody)
+                CCards('Select MDS', selectedMdsBody),
+               // CCards('Now', TimeGrid())
               ]);
             }));
   }

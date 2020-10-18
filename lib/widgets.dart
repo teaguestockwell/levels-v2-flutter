@@ -5,6 +5,7 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'uiwidgets.dart';
 
@@ -13,13 +14,20 @@ class TimeGrid extends StatefulWidget {
 }
 
 class _TimeGrid extends State<TimeGrid> {
+  Timer t;
   @override
   void initState() {
-    Timer.periodic(Duration(seconds: 1), (v) {
+   t = Timer.periodic(Duration(seconds: 1), (v) {
       setState(() {});
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose(){
+    t.cancel();
+    super.dispose();
   }
 
   @override
@@ -232,7 +240,7 @@ class _InspBodyState extends State<InspBody> {
               Padding(
                   padding: EdgeInsets.all(0),
                   child: Container(
-                      width: 40,
+                      width: Constant.pickerWidth,
                       height: 30,
                       child: CupertinoPicker(
                         children: get1to48(),
@@ -384,7 +392,7 @@ class _YMDLookUpState extends State<YMDLookUp> {
               Padding(
                   padding: EdgeInsets.all(0),
                   child: Container(
-                      width: 80,
+                      width: Constant.pickerWidth,
                       height: 30,
                       child: CupertinoPicker(
                         children: getYear(),
@@ -399,7 +407,7 @@ class _YMDLookUpState extends State<YMDLookUp> {
               Padding(
                   padding: EdgeInsets.all(0),
                   child: Container(
-                      width: 80,
+                      width: Constant.pickerWidth,
                       height: 30,
                       child: CupertinoPicker(
                         children: getDays(),
@@ -979,38 +987,33 @@ class PerMacScreen extends StatefulWidget {
 class _PerMacScreenState extends State<PerMacScreen> {
   Widget body;
   Aircraft air;
-  List<TankRow> tankRows = List<TankRow>();
+  List<Widget> tankRows = List<Widget>();
 
   @override
   void initState() {
     air = this.widget.air;
 
     //init default tank selection
-   for (Tank t in air.tanks) {
-      tankRows.add(TankRow(t));
-    }
+   for(Tank t in air.tanks){
+     tankRows.add(TankRow(t));
+     tankRows.add(Divider());
+   }
+   tankRows.removeAt(tankRows.length-1);
+
+  
     super.initState();
   }
 
-  // Widget buildTankRowsAtI(int i){
-  //   var ret;
-  //   if(i==0){ret = Row2.padding(0, 5, 0, 0, one, two);}
-  //   else if(i!= air.tanknames.length-1){ret = Row2();}
-  //   else{ret = Row2.padding(0, 0, 0, 5, one, two);}
-  //   return ret;
-  // }
+  columnOfTanks(){
+    return Column(children: tankRows);
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
         CCards("Aircraft", Row2(Text("MDS"),Text(air.name))),
-        CCards(
-          "Tanks",
-           Column(
-             children: tankRows
-          ),
-        ),
+        CCards("Tanks",columnOfTanks()),
         ChartCRow(air),
       ]
     );
@@ -1080,55 +1083,89 @@ class _TankRowState extends State<TankRow> {
 }
 
 class ChartCRow extends StatefulWidget {
+  bool valid =false;
   Aircraft a;
+  String weight ='0', mom='0';
   ChartCRow(this.a);
   @override
   _ChartCRowState createState() => _ChartCRowState();
 }
 
 class _ChartCRowState extends State<ChartCRow> {
+  InputDecoration wi = InputDecoration(
+    border: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
+    focusedBorder: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
+    );
+
+
+    validate(){
+      if(double.parse(this.widget.weight)<double.parse(this.widget.a.weight1)&&
+        double.parse(this.widget.weight)>double.parse(this.widget.a.weight0)){
+        if(double.parse(this.widget.mom)<double.parse(this.widget.a.mom1)&&
+          double.parse(this.widget.mom)>double.parse(this.widget.a.mom0)){
+            this.widget.valid=true;
+          }else{this.widget.valid=false;}
+      }else{this.widget.valid=false;}
+      print(this.widget.valid);
+    }
 
   @override
   Widget build(BuildContext context) {
-    return CCards(
+    return 
+    CCards(
       "Chart C",
        Column(children: [
-         RowCenterOne(
 
+         Row2.padding(0,5,0,0, Text("Basic Weight"),
            Container(
-             width: 240,
+             width: 120,
              height: 30,
              child: 
            TextField(
-             decoration: InputDecoration(labelText: "Enter Basic Weight"),
-             keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-                                ],
+              onChanged: (String s){this.widget.weight=s; validate();},
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+              textAlign: TextAlign.center,
+              decoration:  wi,
            )
          )
-         ),
+        ),
+
          Divider(),
 
-         RowCenterOne(
+         Row2.padding(0,5,0,0, Text("Basic Moment"),
            Container(
-             width: 240,
+             width: 120,
              height: 30,
-             child:
-           
+             child: 
            TextField(
-             decoration: InputDecoration(labelText: "Enter Basic Moment"),
-             keyboardType: TextInputType.number,
-              inputFormatters: <TextInputFormatter>[
-              FilteringTextInputFormatter.digitsOnly
-                                ],
+              onChanged: (String s){this.widget.mom=s; validate();},
+              keyboardType: TextInputType.numberWithOptions(decimal: true),
+              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+              textAlign: TextAlign.center,
+              decoration:  wi,
            )
          )
-         ),
+        ),
+
        ],));
   }
 }
+class DecimalTextInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    final regEx = RegExp(r"^\d*\.?\d*");
+    String newString = regEx.stringMatch(newValue.text) ?? "";
+    return newString == newValue.text ? newValue : oldValue;
+  }
+}
 
-class custompick extends CommonPickerModel{
+class Constant{
+  static final 
+  double pickerWidth = 160,
+  pickerHeight = 30;
   
 }
+
+
+
