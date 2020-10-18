@@ -2,10 +2,13 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:five_level_one/home.dart';
 import 'package:five_level_one/model.dart';
 import 'package:five_level_one/screen4.dart';
+import 'package:five_level_one/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'screen0.dart';
 import 'screen2.dart';
 import 'screen4.dart';
+import 'widgets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,8 +27,7 @@ class MyBottomBarDemo extends StatefulWidget {
 class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   int _pageIndex = 0;
   PageController _pageController;
-  Screen4 s4;
-  Screen2 s2;
+  var s2,s4;
 
   Color topBot = Colors.black87;
   Color select = Colors.white70;
@@ -44,7 +46,7 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   @override
   void initState() {
     s4 = Screen4(this.widget.air);
-    s2 = Screen2(this.widget.air);
+    s2 = PerMacScreen(this.widget.air);
     tabPages.add(s2);
     tabPages.add(s4);
     super.initState();
@@ -80,12 +82,10 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             backgroundColor: topBot,
             selectedItemColor: select,
             unselectedItemColor: deselect,
-            type: BottomNavigationBarType.fixed, 
+            type: BottomNavigationBarType.fixed,
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
                   icon: Icon(Icons.access_alarm), label: 'Units',),
-              // BottomNavigationBarItem(
-              //     icon: Icon(Icons.fitness_center), title: Text("Units")),
               BottomNavigationBarItem(
                   icon: Icon(Icons.flight_land), label: '%MAC',),
               BottomNavigationBarItem(
