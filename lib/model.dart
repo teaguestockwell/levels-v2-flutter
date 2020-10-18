@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Aircraft {
@@ -114,7 +115,8 @@ class Aircraft {
     name,
     weight,
     mom, ///simple moment 
-    fs;
+    fs,
+    qty;
 
     NameWeightFS(
       {
@@ -125,6 +127,7 @@ class Aircraft {
         this.fs='',
         this.mom='',
         this.simplemom='0',
+        this.qty='1'
       }
     ){
       print(this.toString());

@@ -244,6 +244,7 @@ class Row2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+        key: UniqueKey(),
         padding: EdgeInsets.fromLTRB(l, t, r, b),
         child: Container(
             height: 30,
@@ -285,6 +286,8 @@ class RowCenterOne extends StatelessWidget {
     ,);
   }
 }
+
+
 
 
 

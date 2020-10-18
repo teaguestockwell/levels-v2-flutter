@@ -1097,16 +1097,37 @@ class _ChartCRowState extends State<ChartCRow> {
     focusedBorder: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
     );
 
+  InputDecoration re = InputDecoration(
+    border: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
+    focusedBorder: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
+    );
+
+    InputDecoration w,m;
+
+    @override
+    initState(){
+      w= wi;
+      m=wi;
+      super.initState();
+    }
+
+
 
     validate(){
+
+      var vali = true;
+
       if(double.parse(this.widget.weight)<double.parse(this.widget.a.weight1)&&
-        double.parse(this.widget.weight)>double.parse(this.widget.a.weight0)){
-        if(double.parse(this.widget.mom)<double.parse(this.widget.a.mom1)&&
+          double.parse(this.widget.weight)>double.parse(this.widget.a.weight0)){
+          setState((){w=re;});
+      }else{vali=false;}
+
+      if(double.parse(this.widget.mom)<double.parse(this.widget.a.mom1)&&
           double.parse(this.widget.mom)>double.parse(this.widget.a.mom0)){
-            this.widget.valid=true;
-          }else{this.widget.valid=false;}
-      }else{this.widget.valid=false;}
-      print(this.widget.valid);
+            setState((){m=re;});
+      }else{vali=false;}
+
+      this.widget.valid=vali;print(vali);
     }
 
   @override
@@ -1118,22 +1139,24 @@ class _ChartCRowState extends State<ChartCRow> {
 
          Row2.padding(0,5,0,0, Text("Basic Weight"),
            Container(
+             key: UniqueKey(),
              width: 120,
              height: 30,
              child: 
            TextField(
+              key: UniqueKey(),
               onChanged: (String s){this.widget.weight=s; validate();},
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
               textAlign: TextAlign.center,
-              decoration:  wi,
+              decoration:  w,
            )
          )
         ),
 
          Divider(),
 
-         Row2.padding(0,5,0,0, Text("Basic Moment"),
+         Row2.padding(0,0,0,5, Text("Basic Moment"),
            Container(
              width: 120,
              height: 30,
@@ -1143,7 +1166,7 @@ class _ChartCRowState extends State<ChartCRow> {
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
               textAlign: TextAlign.center,
-              decoration:  wi,
+              decoration:  m,
            )
          )
         ),
@@ -1166,6 +1189,8 @@ class Constant{
   pickerHeight = 30;
   
 }
+
+
 
 
 
