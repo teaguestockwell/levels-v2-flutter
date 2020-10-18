@@ -39,6 +39,8 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
     //Screen3(),
   ];
 
+  var titleArr = ['Units','%MAC','Glossary'];
+
   @override
   void initState() {
     s4 = Screen4(this.widget.air);
@@ -68,24 +70,26 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: topBot,
-            title: Text("BottomNavigationBar"),
+            title: Text(titleArr[_pageIndex]),
           ),
           bottomNavigationBar: BottomNavigationBar(
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
             currentIndex: _pageIndex,
             onTap: onTabTapped,
             backgroundColor: topBot,
             selectedItemColor: select,
             unselectedItemColor: deselect,
-            type: BottomNavigationBarType.fixed,
+            type: BottomNavigationBarType.fixed, 
             items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: Icon(Icons.access_alarm), title: Text("Units")),
+                  icon: Icon(Icons.access_alarm), label: 'Units',),
               // BottomNavigationBarItem(
               //     icon: Icon(Icons.fitness_center), title: Text("Units")),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.flight_land), title: Text("%MAC")),
+                  icon: Icon(Icons.flight_land), label: '%MAC',),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.receipt), title: Text("Glossary")),
+                  icon: Icon(Icons.receipt), label: 'Glossary',),
             ],
           ),
           body: PageView(
