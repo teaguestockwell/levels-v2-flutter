@@ -8,11 +8,11 @@ class Screen0 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: <Widget>[
       CCards('Now', TimeGrid()),
-      CCards('Pre/Insp Expire', InspBody()),
-      CCards('Julian Lookup', JulianLookupBody()),
-      CCards('YYYY MM DD Lookup', YMDLookUp()),
-      CCards('Duration', DateTimeDiffrence()),
-      CCards('Unit Conversion', tDistanceBody()),
+      CCards.C('Pre/Insp Expire', InspBody()),
+      CCards.C('Julian Lookup', JulianLookupBody()),
+      CCards.C('YYYY MM DD Lookup', YMDLookUp()),
+      CCards.C('Duration', DateTimeDiffrence()),
+      CCards.C('Unit Conversion', tDistanceBody()),
     ]);
   }
 }

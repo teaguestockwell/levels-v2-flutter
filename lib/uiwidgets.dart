@@ -70,6 +70,33 @@ class _CCardsState extends State<CCards> {
                 ))));
   }
 }
+class CardAllwaysOpen extends StatelessWidget {
+  CardAllwaysOpen(this.title,this.chil);
+  final Widget chil;
+  final String title;
+
+   @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.all(2),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Card(
+                color: Colors.white10,
+                shape: Border(
+                    top: BorderSide(
+                  color: Colors.white10,
+                  width: 22,
+                )),
+                child: Column(
+                  children: [
+                    InkWell(
+                        child: AlignPadding(3.0, Alignment.center, Text(title)),),
+                    chil
+                  ],
+                ))));
+  }
+}
 
 class CustomButton extends StatelessWidget {
   final String text;

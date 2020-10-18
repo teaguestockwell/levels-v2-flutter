@@ -5,7 +5,6 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'dart:async';
 import 'uiwidgets.dart';
 
@@ -838,10 +837,10 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
   }
 
   mdsChanged(int i) {
-    setState(() {
+    //setState(() {
       selectedMDS = mdss.elementAt(i);
       this.widget.selection = mdss.elementAt(i);
-    });
+    //});
   }
 
   @override
@@ -1084,7 +1083,7 @@ class ChartCRow extends StatefulWidget {
   _ChartCRowState createState() => _ChartCRowState();
 }
 
-class _ChartCRowState extends State<ChartCRow> {
+class _ChartCRowState extends State<ChartCRow> with AutomaticKeepAliveClientMixin<ChartCRow>{
   InputDecoration wi = InputDecoration(
     border: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
     focusedBorder: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
@@ -1096,6 +1095,9 @@ class _ChartCRowState extends State<ChartCRow> {
     );
 
     InputDecoration w,m;
+
+    @override
+    bool get wantKeepAlive => true; 
 
     @override
     initState(){
@@ -1126,7 +1128,7 @@ class _ChartCRowState extends State<ChartCRow> {
   @override
   Widget build(BuildContext context) {
     return 
-    CCards(
+    CardAllwaysOpen(
       "Chart C",
        Column(children: [
 
@@ -1180,6 +1182,7 @@ class Constant{
   static final 
   double pickerWidth = 160,
   pickerHeight = 30;
+
   
 }
 
