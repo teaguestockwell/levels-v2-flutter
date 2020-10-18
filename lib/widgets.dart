@@ -1128,3 +1128,7 @@ class _ChartCRowState extends State<ChartCRow> {
        ],));
   }
 }
+
+class custompick extends CommonPickerModel{
+  
+}
