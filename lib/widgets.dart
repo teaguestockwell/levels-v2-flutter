@@ -1014,8 +1014,8 @@ class _PerMacScreenState extends State<PerMacScreen>  with AutomaticKeepAliveCli
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        CCards("Aircraft", Row2(Text("MDS"),Text(air.name))),
-        CCards("Tanks",columnOfTanks()),
+        CardAllwaysOpen("Aircraft", Row2(Text("MDS"),Text(air.name))),
+        CardAllwaysOpen("Tanks",columnOfTanks()),
         ChartCRow(air),
       ]
     );
