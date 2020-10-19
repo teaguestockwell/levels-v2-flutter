@@ -978,47 +978,96 @@ class Distance extends StatelessWidget {
 
 class PerMacScreen extends StatefulWidget {
   Aircraft air;
+  
   PerMacScreen(this.air);
   @override
   _PerMacScreenState createState() => _PerMacScreenState();
 }
 
 class _PerMacScreenState extends State<PerMacScreen>  with AutomaticKeepAliveClientMixin<PerMacScreen> { ///
-  Widget body;
-  Aircraft air;
-  List<Widget> tankRows = List<Widget>();
-
   @override
   bool get wantKeepAlive => true;
 
+  TanksCard tankCard;
+  ChartCRow chartcCard;
+
   @override
   void initState() {
-    air = this.widget.air;
-
-    //init default tank selection
-   for(Tank t in air.tanks){
-     tankRows.add(TankRow(t));
-     tankRows.add(Divider());
-   }
-   tankRows.removeAt(tankRows.length-1);
-
-  
+    tankCard= TanksCard(this.widget.air);
+    chartcCard = ChartCRow(this.widget.air);
     super.initState();
   }
 
-  columnOfTanks(){
-    return Column(children: tankRows);
+  bool validate(){
+    bool ret = true;
+    if(!tankCard.valid){ret=false;}
+    if(!chartcCard.valid){ret =false;}
+    //cargo card goes here
+    return ret;
+  }
+
+  getMac(){
+    if(validate()){
+      var nwf = List<NameWeightFS>();
+      nwf.addAll(tankCard.getNameWeightFS());
+      nwf.addAll(chartcCard.getNameWeightFS());
+      print(nwf);
+      print(NameWeightFS.getPerMac(
+        this.widget.air.lemac,
+        this.widget.air.mac,
+         nwf)
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return ListView(
       children: [
-        CardAllwaysOpen("Aircraft", Row2(Text("MDS"),Text(air.name))),
-        CardAllwaysOpen("Tanks",columnOfTanks()),
-        ChartCRow(air),
+        CardAllwaysOpen("Aircraft", Row2(Text("MDS"),Text(this.widget.air.name))),
+        tankCard,
+        chartcCard,
+        CustomButton('get mac', onPressed: (){getMac();}),
       ]
     );
+  }
+}
+
+class TanksCard extends StatefulWidget {
+  Aircraft air;
+  var tankRows = List<Widget>();
+  final bool valid = true;
+
+  List<NameWeightFS> getNameWeightFS(){
+    var ret = List<NameWeightFS>();
+
+    for(var t in tankRows){
+      if(t is TankRow){ret.add(t.selected);}
+    }
+    return ret;
+  }
+
+  TanksCard(this.air);
+  @override
+  _TanksCardState createState() => _TanksCardState();
+}
+
+class _TanksCardState extends State<TanksCard> {
+   @override
+  void initState() {
+    //init default tank selection
+   for(Tank t in this.widget.air.tanks){
+     this.widget.tankRows.add(TankRow(t));
+     this.widget.tankRows.add(Divider());
+   }
+
+   this.widget.tankRows.removeAt(this.widget.tankRows.length-1);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CardAllwaysOpen("Tanks",Column(children: this.widget.tankRows));
   }
 }
 
@@ -1075,9 +1124,16 @@ class _TankRowState extends State<TankRow> {
 }
 
 class ChartCRow extends StatefulWidget {
-  bool valid =false;
+  bool valid = false;
   Aircraft a;
   String weight ='0', mom='0';
+
+  List<NameWeightFS> getNameWeightFS(){
+    var ret = List<NameWeightFS>();
+    ret.add(NameWeightFS(name: 'Basic Aircraft', mom: this.mom,weight: this.weight,));
+    return ret;
+  }
+
   ChartCRow(this.a);
   @override
   _ChartCRowState createState() => _ChartCRowState();
@@ -1134,12 +1190,10 @@ class _ChartCRowState extends State<ChartCRow> with AutomaticKeepAliveClientMixi
 
          Row2.padding(0,5,0,0, Text("Basic Weight"),
            Container(
-             key: UniqueKey(),
              width: 120,
              height: 30,
              child: 
            TextField(
-              key: UniqueKey(),
               onChanged: (String s){this.widget.weight=s; validate();},
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],

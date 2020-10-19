@@ -39,6 +39,9 @@ class _HomePageState extends State<HomePage> {
                   v.get('weight0'),
                   v.get('weight1'),
                   v.get('simplemom'),
+                  v.get('lemac'),
+                  v.get('mac'),
+                  
                   v.get('tanknames'),
                   v.get('tankmoms'),
                   v.get('tankweights'),
@@ -46,7 +49,9 @@ class _HomePageState extends State<HomePage> {
                   v.get('bodys'),
                   v.get('cargonames'),
                   v.get('cargoweights'),
-                  v.get('cargomoms'));
+                  v.get('cargomoms'),
+                  
+                  );
 
               body = MyBottomBarDemo(air);
             }));

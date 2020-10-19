@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Aircraft {
-  final String name, fs0, fs1, mom0, mom1, weight0, weight1, simplemom;
+  final String 
+    name, 
+    fs0, 
+    fs1, 
+    mom0, 
+    mom1,
+    weight0,
+    weight1,
+    simplemom,
+    lemac,
+    mac;
 
   final List<dynamic> 
     tanknames,
@@ -30,6 +40,9 @@ class Aircraft {
     this.weight0,
     this.weight1,
     this.simplemom,
+    this.lemac,
+    this.mac,
+
     this.tanknames,
     this.tankmoms,
     this.tankweights,
@@ -135,7 +148,7 @@ class Aircraft {
 
     @override
     String toString(){
-      return("name: "+name+" weight: "+weight+" mom: "+getMom()+" fs: "+getFS()+ 'qty' +qty);
+      return("name: "+name+" weight: "+weight+" mom: "+getMom()+" fs: "+getFS()+ ' qty: ' +qty);
     }
 
     String getMom(){
@@ -146,6 +159,23 @@ class Aircraft {
     String getFS(){
       if(fs.isNotEmpty){return fs;}
       return (P.p(mom) * P.p(simplemom) / P.p(weight)).toString();
+    }
+
+    static String getPerMac(String lemac, String mac,List<NameWeightFS> nwfs){
+      double 
+      totMom=0,
+      totWeight=0,
+      perMacD=0,
+      simpMom = P.p(nwfs[0].simplemom);
+
+      for(int i=0; i<nwfs.length;i++){
+        totMom += P.p(nwfs[i].getMom());
+        totWeight += P.p(nwfs[i].weight);
+        print(nwfs[i].name+' totMom: ' +totMom.toString()+ ' totWeight: '+totWeight.toString());
+      }
+      print('lemac: '+ lemac+ ' mac: '+mac+' simpMom: '+simpMom.toString());
+      perMacD = ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
+      return perMacD.toString();
     }
   }
 
