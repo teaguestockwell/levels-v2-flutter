@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
 import 'uiwidgets.dart';
@@ -1001,7 +1002,12 @@ class _PerMacScreenState extends State<PerMacScreen>  with AutomaticKeepAliveCli
   bool validate(){
     bool ret = true;
     if(!tankCard.valid){ret=false;}
-    if(!chartcCard.valid){ret =false;}
+    if(!chartcCard.valid){ret =false;Fluttertoast.showToast(
+        msg: 'Invalid Chart C',
+        timeInSecForIosWeb: 3,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        webPosition: "center",);}
     //cargo card goes here
     return ret;
   }
@@ -1012,10 +1018,12 @@ class _PerMacScreenState extends State<PerMacScreen>  with AutomaticKeepAliveCli
       nwf.addAll(tankCard.getNameWeightFS());
       nwf.addAll(chartcCard.getNameWeightFS());
       print(nwf);
-      print(NameWeightFS.getPerMac(
-        this.widget.air.lemac,
-        this.widget.air.mac,
-         nwf)
+      Fluttertoast.showToast(
+        msg: NameWeightFS.getPerMac(this.widget.air.lemac,this.widget.air.mac, nwf),
+        timeInSecForIosWeb: 3,
+        toastLength: Toast.LENGTH_LONG,
+        gravity: ToastGravity.CENTER,
+        webPosition: "center",
       );
     }
   }
@@ -1139,7 +1147,7 @@ class ChartCRow extends StatefulWidget {
   _ChartCRowState createState() => _ChartCRowState();
 }
 
-class _ChartCRowState extends State<ChartCRow> with AutomaticKeepAliveClientMixin<ChartCRow>{
+class _ChartCRowState extends State<ChartCRow> {
   InputDecoration wi = InputDecoration(
     border: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
     focusedBorder: OutlineInputBorder( borderRadius: const BorderRadius.all(const Radius.circular(5.0),),borderSide: BorderSide(color: Colors.white70,width: 1.0,),),
@@ -1152,8 +1160,6 @@ class _ChartCRowState extends State<ChartCRow> with AutomaticKeepAliveClientMixi
 
     InputDecoration w,m;
 
-    @override
-    bool get wantKeepAlive => true; 
 
     @override
     initState(){

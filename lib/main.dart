@@ -74,8 +74,8 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             title: Text(titleArr[_pageIndex]),
           ),
           bottomNavigationBar: BottomNavigationBar(
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
+            showSelectedLabels: true,
+            showUnselectedLabels: true,
             currentIndex: _pageIndex,
             onTap: onTabTapped,
             backgroundColor: topBot,

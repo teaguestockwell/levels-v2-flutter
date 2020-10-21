@@ -11,8 +11,8 @@ class Screen4 extends StatefulWidget {
 }
 
 class _Screen4State extends State<Screen4> {
-  List<CCards> getGlossCards() {
-    var ret = List<CCards>();
+  List<Widget> getGlossCards() {
+    var ret = List<Widget>();
 
     ret.add(CCards(
         'About',
@@ -24,11 +24,14 @@ class _Screen4State extends State<Screen4> {
       ret.add(CCards.C(this.widget.air.titles.elementAt(i),
           RowCenterText(this.widget.air.bodys.elementAt(i))));
     }
+    
     return ret;
   }
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: getGlossCards());
+    return ListView(
+      reverse: true,
+      children: getGlossCards());
   }
 }

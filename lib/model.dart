@@ -174,7 +174,7 @@ class Aircraft {
         print(nwfs[i].name+' totMom: ' +totMom.toString()+ ' totWeight: '+totWeight.toString());
       }
       print('lemac: '+ lemac+ ' mac: '+mac+' simpMom: '+simpMom.toString());
-      perMacD = ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
+      perMacD = 100.0 *((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
       return perMacD.toString();
     }
   }
