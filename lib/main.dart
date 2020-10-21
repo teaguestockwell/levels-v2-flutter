@@ -33,6 +33,8 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
   Color deselect = Colors.white30;
   Color back = Colors.black;
   Color car = Colors.white30;
+  Color background = Colors.black;
+  Color bottombarcolor = Colors.white10;
 
   List<Widget> tabPages = [
     Screen0(),
@@ -69,8 +71,9 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
           }
         },
         child: Scaffold(
+          backgroundColor: background,
           appBar: AppBar(
-            backgroundColor: topBot,
+            backgroundColor: bottombarcolor,
             title: Text(titleArr[_pageIndex]),
           ),
           bottomNavigationBar: BottomNavigationBar(
@@ -78,7 +81,7 @@ class _MyBottomBarDemoState extends State<MyBottomBarDemo> {
             showUnselectedLabels: true,
             currentIndex: _pageIndex,
             onTap: onTabTapped,
-            backgroundColor: topBot,
+            backgroundColor: bottombarcolor,
             selectedItemColor: select,
             unselectedItemColor: deselect,
             type: BottomNavigationBarType.fixed,

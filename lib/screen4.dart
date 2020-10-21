@@ -31,7 +31,7 @@ class _Screen4State extends State<Screen4> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      reverse: true,
+      //reverse: true,
       children: getGlossCards());
   }
 }

@@ -80,8 +80,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.light(),
-        darkTheme: ThemeData.dark(),
+        theme: ThemeData.dark(),
         home: Scaffold(
           body: body,
           backgroundColor: Colors.black,
