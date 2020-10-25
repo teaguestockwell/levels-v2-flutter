@@ -148,7 +148,6 @@
 //   final CollectionReference glossaryall = FirebaseFirestore.instance.collection('glossaryall');
 //   final DocumentReference generalDoc = FirebaseFirestore.instance.collection('general').doc('general');
 
-
 //   // brew list from snapshot
 //   List<Glossary> _glossarylistFromSnapshot(QuerySnapshot snapshot) {
 //     return snapshot.docs.map((doc){

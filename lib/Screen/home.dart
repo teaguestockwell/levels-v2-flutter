@@ -1,11 +1,11 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:five_level_one/main.dart';
+import 'package:five_level_one/Widgets/LogicWidgets/selectmds.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'model.dart';
-import "widgets.dart";
-import 'uiwidgets.dart';
+import '../Backend/model.dart';
+import 'bottomnav.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -31,29 +31,27 @@ class _HomePageState extends State<HomePage> {
         .get()
         .then((v) => setState(() {
               air = Aircraft(
-                  v.get('name'),
-                  v.get('fs0'),
-                  v.get('fs1'),
-                  v.get('mom0'),
-                  v.get('mom1'),
-                  v.get('weight0'),
-                  v.get('weight1'),
-                  v.get('simplemom'),
-                  v.get('lemac'),
-                  v.get('mac'),
-                  
-                  v.get('tanknames'),
-                  v.get('tankmoms'),
-                  v.get('tankweights'),
-                  v.get('titles'),
-                  v.get('bodys'),
-                  v.get('cargonames'),
-                  v.get('cargoweights'),
-                  v.get('cargomoms'),
-                  
-                  );
+                v.get('name'),
+                v.get('fs0'),
+                v.get('fs1'),
+                v.get('mom0'),
+                v.get('mom1'),
+                v.get('weight0'),
+                v.get('weight1'),
+                v.get('simplemom'),
+                v.get('lemac'),
+                v.get('mac'),
+                v.get('tanknames'),
+                v.get('tankmoms'),
+                v.get('tankweights'),
+                v.get('titles'),
+                v.get('bodys'),
+                v.get('cargonames'),
+                v.get('cargoweights'),
+                v.get('cargomoms'),
+              );
 
-              body = MyBottomBarDemo(air);
+              body = BottomNav(air);
             }));
   }
 
@@ -70,9 +68,10 @@ class _HomePageState extends State<HomePage> {
 
               body = ListView(children: <Widget>[
                 Image(image: AssetImage('assets/0.png')),
-                CardAllwaysOpen(gen.welcometitle, RowCenterText(gen.welcomebody)),
+                CardAllwaysOpen(
+                    gen.welcometitle, RowCenterText(gen.welcomebody)),
                 CardAllwaysOpen('Select MDS', selectedMdsBody),
-               // CCards('Now', TimeGrid())
+                // CCards('Now', TimeGrid())
               ]);
             }));
   }
