@@ -113,7 +113,7 @@ class _YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
             ])),
         Divider(),
         Row2.padding(
-            0, 0, 0, 5.0, Text('YYYY MM DD'), Text(dfYMD.format(outYMD)))
+            0, 0, 0, 5.0, Text('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],
     );
   }

@@ -13,8 +13,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return //Flexible(child:
         Container(
-            height: 30,
-            width: 160,
+            height: Const.pickerHeight,
+            width: Const.pickerWidth,
             child: TextField(
               controller: this.widget.c,
               decoration: InputDecoration(

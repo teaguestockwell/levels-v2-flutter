@@ -98,7 +98,11 @@ class _PreInspState extends State<PreInsp> {
                       )))
             ])),
         Divider(),
-        Row2.padding(0, 0, 0, 5.0, Text('Expires At'), Text(expireAt))
+        Row2.padding(
+          0, 0, 0, 5.0, 
+          Text('Expires At'), 
+          ConstText(expireAt)
+          )
       ],
     );
   }

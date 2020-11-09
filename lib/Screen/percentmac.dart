@@ -1,4 +1,7 @@
 import 'package:five_level_one/Widgets/PercentMacWidgets/Tanks.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftcard.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/cargo.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
@@ -23,11 +26,13 @@ class _PerMacScreenState extends State<PerMacScreen>
 
   TanksCard tankCard;
   ChartCRow chartcCard;
+  CargoCard cargoCard;
 
   @override
   void initState() {
     tankCard = TanksCard(this.widget.air);
     chartcCard = ChartCRow(this.widget.air);
+    cargoCard = CargoCard(this.widget.air);
     super.initState();
   }
 
@@ -70,10 +75,10 @@ class _PerMacScreenState extends State<PerMacScreen>
   @override
   Widget build(BuildContext context) {
     return ListView(children: [
-      CardAllwaysOpen(
-          "Aircraft", Row2(Text("MDS"), Text(this.widget.air.name))),
+      aircraftCard(this.widget.air.name),
       tankCard,
       chartcCard,
+      cargoCard,
       CustomButton('get mac', onPressed: () {
         getMac();
       }),

@@ -19,14 +19,14 @@ class Aircraft {
       bodys,
       cargonames,
       cargoweights,
-      cargomoms;
+      cargomoms,
+      configStrings;
 
-  List<Tank> tanks = List<Tank>();
+  var tanks = List<Tank>();
 
-  List<NameWeightFS> addaCargo = List<NameWeightFS>(),
+  var configs = List<Config>();
 
-      ///List of all add cargo
-      config;
+  var addaCargo = List<NameWeightFS>();
 
   ///the dynamicly created list of NameWeightFS consisting of fuel, cargo, basic mom, basic w
 
@@ -49,6 +49,7 @@ class Aircraft {
     this.cargonames,
     this.cargoweights,
     this.cargomoms,
+    this.configStrings,
   ) {
     // create tanks
     for (int i = 0; i < tanknames.length; i++) {
@@ -68,6 +69,13 @@ class Aircraft {
         mom: cargomoms[i],
         simplemom: this.simplemom,
       ));
+    }
+
+    //create configs
+    for(int i=0;i<configStrings.length;i++) {
+      configs.add(
+        Config(configStrings[i],this.simplemom)
+      );
     }
   }
 }
@@ -99,20 +107,42 @@ class Tank {
     }
   }
 }
+class Config{
+  var nwfList = List<NameWeightFS>();
+  String 
+  name,
+  simplemom;
+  Config(String csv,this.simplemom){
+    var nameWeightMomentQtyList = csv.split(';');
+    this.name=nameWeightMomentQtyList[0];
+    print(name);
+
+    for(int i=1;i<nameWeightMomentQtyList.length;i++){
+      String nwmqAtIndex = nameWeightMomentQtyList[i];
+      var nwmqAtIndexList = nwmqAtIndex.split(',');
+
+    this.nwfList.add(
+      NameWeightFS(
+        name: nwmqAtIndexList[0].trim(),
+        weight: (P.p(nwmqAtIndexList[1].trim()) / P.p(nwmqAtIndexList[3].trim())).toString(), // weight = totweight / qty
+        mom: (P.p(nwmqAtIndexList[2].trim()) / P.p(nwmqAtIndexList[3].trim())).toString(), // mom = totmom / qty
+        simplemom: this.simplemom,
+        qty: nwmqAtIndexList[3].trim() // qty = qty
+      )
+    );  
+    }
+  }
+}
 
 /// NameWeightMom hold a String name,weight,fs,moment; of a cargo item;
 class NameWeightFS {
-  String simplemom,
-
-      /// modifier for simple moment
+  String simplemom,/// modifier for simple moment
       name,
       weight,
-      mom,
-
-      ///simple moment
+      mom,///simple moment
       fs,
       qty;
-
+    int id;
   NameWeightFS(
       {
       //these are named optinal params
@@ -122,7 +152,9 @@ class NameWeightFS {
       this.fs = '',
       this.mom = '',
       this.simplemom = '0',
-      this.qty = '1'}) {
+      this.qty = '1',
+      }) {
+    this.id = P.getUniqueIdx();
     print(this.toString());
   }
 
@@ -137,7 +169,9 @@ class NameWeightFS {
         " fs: " +
         getFS() +
         ' qty: ' +
-        qty);
+        qty +
+        ' id: ' +
+        id.toString());
   }
 
   String getMom() {
@@ -190,6 +224,7 @@ class Glossary {
 
 ///Helper class to try parsing doubles.
 class P {
+  static int _idx=0;
   ///Given a string try to parse into double. If fail make toast with error.
   static double p(String s) {
     double p, z = 0.0;
@@ -202,5 +237,9 @@ class P {
       gravity: ToastGravity.CENTER,
     );
     return z;
+  }
+  static int getUniqueIdx(){
+    _idx++;
+    return _idx-1;
   }
 }

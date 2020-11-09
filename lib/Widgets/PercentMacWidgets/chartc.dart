@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
@@ -117,8 +118,8 @@ class _ChartCRowState extends State<ChartCRow> {
                 0,
                 Text("Basic Weight"),
                 Container(
-                    width: 120,
-                    height: 30,
+                    width: Const.pickerWidth,
+                    height: Const.pickerHeight,
                     child: TextField(
                       onChanged: (String s) {
                         this.widget.weight = s;
@@ -140,8 +141,8 @@ class _ChartCRowState extends State<ChartCRow> {
                 5,
                 Text("Basic Moment"),
                 Container(
-                    width: 120,
-                    height: 30,
+                    width: Const.pickerWidth,
+                    height: Const.pickerHeight,
                     child: TextField(
                       onChanged: (String s) {
                         this.widget.mom = s;

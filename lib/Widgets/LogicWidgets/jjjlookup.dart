@@ -50,7 +50,7 @@ class _JJJLookupState extends State<JJJLookup> {
             )),
         Divider(),
         Row2.padding(
-            0, 0, 0, 5.0, Text('Julian Day'), Text(dfJJJ.format(dateAcomp)))
+            0, 0, 0, 5.0, Text('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],
     );
   }

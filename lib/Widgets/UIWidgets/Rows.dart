@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
@@ -132,5 +133,27 @@ class RowTwo extends StatelessWidget {
         child: Row(
           children: <Widget>[this.one, Spacer(), this.two],
         ));
+  }
+}
+
+class ConstText extends StatelessWidget {
+  final String text;
+  ConstText(this.text);
+  @override
+  Widget build(BuildContext context) {
+    var text = Text(
+                this.text,
+                 textAlign: TextAlign.center
+              );
+    return Container(
+            width: Const.pickerWidth,
+            height: Const.pickerHeight,
+            child: Center(
+              child: Text(
+                this.text,
+                textAlign: TextAlign.center,
+              )
+             )
+    );
   }
 }

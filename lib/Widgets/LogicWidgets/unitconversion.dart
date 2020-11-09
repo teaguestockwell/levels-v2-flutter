@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -109,8 +110,8 @@ class _DistanceBodyState extends State<DistanceBody> {
                   child: Column(children: [
                     tfOne,
                     Container(
-                        width: 160,
-                        height: 30,
+                        width: Const.pickerWidth,
+                        height: Const.pickerHeight,
                         child: CupertinoPicker(
                           children: list,
                           onSelectedItemChanged: (int i) => {
@@ -131,8 +132,8 @@ class _DistanceBodyState extends State<DistanceBody> {
                   child: Column(children: [
                     tfTwo,
                     Container(
-                        width: 160,
-                        height: 30,
+                        width: Const.pickerWidth,
+                        height: Const.pickerHeight,
                         child: CupertinoPicker(
                           children: list,
                           onSelectedItemChanged: (int i) => {twoChanged(i)},
@@ -250,8 +251,8 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     return Column(children: [
       RowCenter(Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          width: 160,
-          height: 30,
+          width: Const.pickerWidth,
+          height: Const.pickerHeight,
           child: CupertinoPicker(
             children: getUnits(),
             onSelectedItemChanged: unitChange,
@@ -268,8 +269,8 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                 child: Column(children: [
                   tfOne,
                   Container(
-                      width: 160,
-                      height: 30,
+                      width: Const.pickerWidth,
+                      height: Const.pickerHeight,
                       child: CupertinoPicker(
                         children: list,
                         onSelectedItemChanged: (int i) => {
@@ -290,8 +291,8 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                 child: Column(children: [
                   tfTwo,
                   Container(
-                      width: 160,
-                      height: 30,
+                      width: Const.pickerWidth,
+                      height: Const.pickerHeight,
                       child: CupertinoPicker(
                         children: list,
                         onSelectedItemChanged: (int i) => {twoChanged(i)},

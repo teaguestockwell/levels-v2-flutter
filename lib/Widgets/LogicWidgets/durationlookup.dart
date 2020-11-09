@@ -79,7 +79,7 @@ class _DurationLookupState extends State<DurationLookup> {
             },
           )),
       Divider(),
-      Row2.padding(0, 0, 0, 5.0, Text('Duration hhhhh:mm:ss'), Text(getDiff()))
+      Row2.padding(0, 0, 0, 5.0, Text('Duration hhhhh:mm:ss'), ConstText(getDiff()))
     ]);
   }
 }

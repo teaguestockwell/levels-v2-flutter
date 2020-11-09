@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -85,8 +86,8 @@ class _TankRowState extends State<TankRow> {
         Padding(
             padding: EdgeInsets.all(0),
             child: Container(
-                width: 120,
-                height: 30,
+                width: Const.pickerWidth,
+                height: Const.pickerHeight,
                 child: CupertinoPicker(
                   children: getTankWidgetsForSpinner(),
                   onSelectedItemChanged: lenChange,

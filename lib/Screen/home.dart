@@ -49,11 +49,14 @@ class _HomePageState extends State<HomePage> {
                 v.get('cargonames'),
                 v.get('cargoweights'),
                 v.get('cargomoms'),
+                v.get('configs')
               );
 
               body = BottomNav(air);
             }));
   }
+
+ 
 
   init() {
     FirebaseFirestore.instance
