@@ -22,11 +22,37 @@ class Row2 extends StatelessWidget {
         // key: UniqueKey(),
         padding: EdgeInsets.fromLTRB(l, t, r, b),
         child: Container(
-            height: 30,
+            height: Const.rowHeight,
             margin: EdgeInsets.all(10),
             child: Column(children: [
               Spacer(),
               Row(children: [one, Spacer(), two]),
+              Spacer()
+            ])));
+  }
+}
+
+class Row3 extends StatelessWidget {
+  final Widget one, two, three;
+  double l, t, r, b;
+  Row3.padding(this.l, this.t, this.r, this.b, this.one, this.two, this.three);
+  Row3(this.one, this.two, this.three) {
+    this.l = 0;
+    this.t = 0;
+    this.r = 0;
+    this.b = 0;
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        // key: UniqueKey(),
+        padding: EdgeInsets.fromLTRB(l, t, r, b),
+        child: Container(
+            height: Const.rowHeight,
+            margin: EdgeInsets.all(10),
+            child: Column(children: [
+              Spacer(),
+              Row(children: [one, Spacer(), two, Spacer(), three]),
               Spacer()
             ])));
   }

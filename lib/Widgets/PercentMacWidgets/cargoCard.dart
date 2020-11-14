@@ -1,6 +1,7 @@
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,14 @@ class _CargoCardState extends State<CargoCard> {
     print(this.widget.selected.name + ' selected');
   }
 
+  addConfig(){
+
+  }
+
+  removeConfig(){
+
+  }
+
   Widget build(BuildContext context) {
     return CardAllwaysOpen(
         'Cargo',
@@ -51,7 +60,11 @@ class _CargoCardState extends State<CargoCard> {
                     children: getWidgetForSpinner(),
                     onSelectedItemChanged: (int i) => {change(i)},
                     itemExtent: 30,
-                  )))
+                  ))),
+                  Row2(
+                    CustomButton('Update Config', onPressed: addConfig()),
+                    CustomButton('Remove All')
+                  )
         ]));
   }
 }
