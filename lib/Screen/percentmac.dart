@@ -17,7 +17,6 @@ class PerMacScreen extends StatefulWidget {
 
 class _PerMacScreenState extends State<PerMacScreen>
     with AutomaticKeepAliveClientMixin<PerMacScreen> {
-  ///
   @override
   bool get wantKeepAlive => true;
 

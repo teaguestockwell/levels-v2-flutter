@@ -26,7 +26,10 @@ class TanksCard extends StatefulWidget {
   _TanksCardState createState() => _TanksCardState();
 }
 
-class _TanksCardState extends State<TanksCard> {
+class _TanksCardState extends State<TanksCard> 
+with AutomaticKeepAliveClientMixin<TanksCard> {
+  @override
+  bool get wantKeepAlive => true;
   @override
   void initState() {
     //init default tank selection

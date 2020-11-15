@@ -26,7 +26,10 @@ class ChartCRow extends StatefulWidget {
   _ChartCRowState createState() => _ChartCRowState();
 }
 
-class _ChartCRowState extends State<ChartCRow> {
+class _ChartCRowState extends State<ChartCRow> 
+with AutomaticKeepAliveClientMixin<ChartCRow> {
+  @override
+  bool get wantKeepAlive => true;
   InputDecoration wi = InputDecoration(
     border: OutlineInputBorder(
       borderRadius: const BorderRadius.all(
