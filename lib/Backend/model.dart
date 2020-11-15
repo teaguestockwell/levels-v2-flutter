@@ -178,14 +178,25 @@ class NameWeightFS {
     if (mom.isNotEmpty) {
       return mom;
     }
-    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
+    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toStringAsFixed(1);
   }
 
   String getFS() {
     if (fs.isNotEmpty) {
       return fs;
     }
-    return (P.p(mom) * P.p(simplemom) / P.p(weight)).toString();
+    return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
+  }
+
+  bool valid(String fs0, String fs1, String weight1,){
+    if(
+      this.name.isNotEmpty &&
+      P.p(this.qty) > 0 &&
+      P.p(this.weight) < P.p(weight1) &&
+      P.p(this.fs) > P.p(fs0) &&
+      P.p(this.fs) < P.p(fs1)
+    ){return true;}
+    return false;
   }
 
   static String getPerMac(String lemac, String mac, List<NameWeightFS> nwfs) {
@@ -206,7 +217,7 @@ class NameWeightFS {
     print(
         'lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
     perMacD = 100.0 * ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
-    return perMacD.toString();
+    return perMacD.toStringAsFixed(2);
   }
 }
 
@@ -224,7 +235,7 @@ class Glossary {
 
 ///Helper class to try parsing doubles.
 class P {
-  static int _idx=0;
+  static int idx=0;
   ///Given a string try to parse into double. If fail make toast with error.
   static double p(String s) {
     double p, z = 0.0;
@@ -239,7 +250,7 @@ class P {
     return z;
   }
   static int getUniqueIdx(){
-    _idx++;
-    return _idx-1;
+    idx++;
+    return idx-1;
   }
 }

@@ -1,11 +1,29 @@
 async general doc read
+
 clever img loading animation
+
 general,mds loading animations
 
+input more cargo configs to firebase 
 
-
-input cargo configs to firebase
 model cargo configs
-addintal cargo gui
+
+refractor
+
+CargoUI
+    remove button
+    add button
+    larger name text box
+    lighter color
+    input validation num vs letters
+
+CargoCard
+    valid function with user notifcation error msg auto open error card and hilight error
+
+PercentMac
+    add cargo into calc
+
+
+
 
 
