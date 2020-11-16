@@ -16,6 +16,7 @@ CargoUI
     larger name text box
     lighter color
     input validation num vs letters
+    setstate for qty change to update CCard title
 
 CargoCard
     valid function with user notifcation error msg auto open error card and hilight error
