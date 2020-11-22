@@ -20,6 +20,7 @@ CargoUI
 
 CargoCard
     valid function with user notifcation error msg auto open error card and hilight error
+    implement button that will remove the cargo cardUI from the colum of widgets
 
 PercentMac
     add cargo into calc

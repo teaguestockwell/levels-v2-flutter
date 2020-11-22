@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -152,4 +153,74 @@ class InputDec{
       ),
     ),
   );
+}
+
+class CustomButtomSpinnerModalString extends StatefulWidget {
+  int spinIdx;
+  String selected;
+  List<String> stringList;
+  CustomButtomSpinnerModalString(this.stringList,{this.spinIdx});
+  @override
+  _CustomButtomSpinnerModalStringState createState() => _CustomButtomSpinnerModalStringState();
+}
+
+class _CustomButtomSpinnerModalStringState extends State<CustomButtomSpinnerModalString> {
+ 
+  @override
+  void initState() {
+    this.widget.spinIdx ??=0;
+    this.widget.selected = this.widget.stringList[this.widget.spinIdx];
+    super.initState();
+  }
+
+  void _spin(int newIdx){
+    this.widget.spinIdx = newIdx;
+    this.widget.selected = this.widget.stringList[newIdx];
+    //rebuild to change button text
+    setState((){});
+  }
+
+  List<Widget> _getSpinnerWidgets(){
+    var ret = List<Widget>();
+    for(String x in this.widget.stringList){
+      ret.add(Text(x));
+    }
+    return ret;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomButton(
+        this.widget.selected,
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.black,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                      height: 200,
+                      child:
+                      CupertinoPicker(
+                        scrollController: FixedExtentScrollController(initialItem: this.widget.spinIdx),
+                        children: _getSpinnerWidgets(),
+                        onSelectedItemChanged: _spin,
+                        itemExtent: 35,
+                      )
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      );
+  }
 }

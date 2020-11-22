@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 class CargoCard extends StatefulWidget {
   Aircraft air;
   Config selected;
+  int configSpinIdx;
   var configIndexes = List<int>();
   var cargo = HashMap<int,Widget>();
   CargoCard(this.air);
@@ -24,10 +25,12 @@ class CargoCard extends StatefulWidget {
 class _CargoCardState extends State<CargoCard> {
   @override
   initState() {
+    this.widget.configSpinIdx=0;
     this.widget.selected = this.widget.air.configs[0];
     super.initState();
   }
 
+  //implemt button within cargo ui for this method
   void removeCargoID(int id){
     this.widget.cargo.remove(id);
     setState((){});
@@ -36,19 +39,21 @@ class _CargoCardState extends State<CargoCard> {
   getWidgetForSpinner() {
     List<Widget> list = [];
     for (int i = 0; i < this.widget.air.configs.length; i++) {
-      list.add(Padding(
-          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-          child: Text(
-            this.widget.air.configs[i].name,
-            style: TextStyle(color: Colors.white70, fontSize: 18),
-          )));
+      list.add(
+          Text(
+          this.widget.air.configs[i].name,
+          style: TextStyle(color: Colors.white70, fontSize: 18),
+          ));
     }
     return list;
   }
 
   change(int i) {
+    this.widget.configSpinIdx=i;
     this.widget.selected = this.widget.air.configs[i];
-    print(this.widget.selected.name + ' selected');
+
+    //rebuild tree to update config button text
+    setState(() {});
   }
 
   addConfig(){
@@ -91,14 +96,41 @@ class _CargoCardState extends State<CargoCard> {
         Column(children: <Widget>[
           Row2(
               Text('Select Config'),
-              Container(
-                  width: Const.pickerWidth,
-                  height: Const.pickerHeight,
-                  child: CupertinoPicker(
-                    children: getWidgetForSpinner(),
-                    onSelectedItemChanged: (int i) => {change(i)},
-                    itemExtent: 30,
-                  ))),
+
+              CustomButton(
+        this.widget.selected.name,
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.black,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Container(
+                      height: 200,
+                      child:
+                      CupertinoPicker(
+                        scrollController: FixedExtentScrollController(initialItem: this.widget.configSpinIdx),
+                        children: getWidgetForSpinner(),
+                        onSelectedItemChanged: (int i)=>{change(i)},
+                        itemExtent: 35,
+                      )
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        },
+      )),
+
+
                   Row2(
                     CustomButton('Update Config', onPressed: ()=>{addConfig()} ),
                     CustomButton('Remove All', onPressed: ()=>{removeConfig()},)
