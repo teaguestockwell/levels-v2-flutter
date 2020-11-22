@@ -1,4 +1,3 @@
-import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
@@ -27,8 +26,8 @@ class TanksCard extends StatefulWidget {
   _TanksCardState createState() => _TanksCardState();
 }
 
-class _TanksCardState extends State<TanksCard> 
-with AutomaticKeepAliveClientMixin<TanksCard> {
+class _TanksCardState extends State<TanksCard>
+    with AutomaticKeepAliveClientMixin<TanksCard> {
   @override
   bool get wantKeepAlive => true;
   @override
@@ -61,32 +60,28 @@ class TankRow extends StatefulWidget {
 class _TankRowState extends State<TankRow> {
   @override
   void initState() {
-    this.widget.spinIdx=0;
+    this.widget.spinIdx = 0;
     this.widget.selected = this.widget.t.nameWeightFSs[0];
     super.initState();
   }
 
   lenChange(var n) {
-    this.widget.spinIdx=n;
+    this.widget.spinIdx = n;
     this.widget.selected = this.widget.t.nameWeightFSs[n];
-    setState(() {
-    });
+    setState(() {});
     print(this.widget.selected.toString());
   }
 
   getTankWidgetsForSpinner() {
     List<Widget> list = [];
     for (int i = 0; i < this.widget.t.nameWeightFSs.length; i++) {
-      list.add(
-        Text(
+      list.add(Text(
         this.widget.t.nameWeightFSs[i].weight,
         style: TextStyle(color: Colors.white70, fontSize: 22),
-          ));
+      ));
     }
     return list;
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -107,15 +102,14 @@ class _TankRowState extends State<TankRow> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Container(
-                      height: 200,
-                      child:
-                      CupertinoPicker(
-                        scrollController: FixedExtentScrollController(initialItem: this.widget.spinIdx),
-                        children: getTankWidgetsForSpinner(),
-                        onSelectedItemChanged: lenChange,
-                        itemExtent: 35,
-                      )
-                      ),
+                          height: 200,
+                          child: CupertinoPicker(
+                            scrollController: FixedExtentScrollController(
+                                initialItem: this.widget.spinIdx),
+                            children: getTankWidgetsForSpinner(),
+                            onSelectedItemChanged: lenChange,
+                            itemExtent: 35,
+                          )),
                     ],
                   ),
                 ),
@@ -124,19 +118,6 @@ class _TankRowState extends State<TankRow> {
           );
         },
       ),
-      
-      // Row(children: <Widget>[
-      //   Padding(
-      //       padding: EdgeInsets.all(0),
-      //       child: Container(
-      //           width: Const.pickerWidth,
-      //           height: Const.pickerHeight,
-      //           child: CupertinoPicker(
-      //             children: getTankWidgetsForSpinner(),
-      //             onSelectedItemChanged: lenChange,
-      //             itemExtent: 30,
-      //           )))
-      // ]),
     );
   }
 }

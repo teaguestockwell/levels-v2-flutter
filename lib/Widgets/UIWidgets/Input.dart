@@ -183,7 +183,13 @@ class _CustomButtomSpinnerModalStringState extends State<CustomButtomSpinnerModa
   List<Widget> _getSpinnerWidgets(){
     var ret = List<Widget>();
     for(String x in this.widget.stringList){
-      ret.add(Text(x));
+      ret.add(
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 7, 0, 0),
+          child:Text(x,
+            style: TextStyle(color: Colors.white70, fontSize: 18),
+      )));
+      print(x);
     }
     return ret;
   }
