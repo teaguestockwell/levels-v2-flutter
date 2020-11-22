@@ -1,5 +1,6 @@
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,47 +31,8 @@ class _ChartCRowState extends State<ChartCRow>
 with AutomaticKeepAliveClientMixin<ChartCRow> {
   @override
   bool get wantKeepAlive => true;
-  InputDecoration wi = InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Colors.white70,
-        width: 1.0,
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Colors.white70,
-        width: 1.0,
-      ),
-    ),
-  );
-
-  InputDecoration re = InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Colors.white70,
-        width: 1.0,
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Colors.white70,
-        width: 1.0,
-      ),
-    ),
-  );
+var wi = InputDec.wi;
+var re = InputDec.re;
 
   InputDecoration w, m;
 
