@@ -9,6 +9,8 @@ input more cargo configs to firebase
 model cargo configs
 
 refractor
+    yyyymmdd spinner refractor to use modal spinner
+    unit conversion refractor to use modal spinner
 
 CargoUI
     remove button
@@ -24,6 +26,9 @@ CargoCard
 
 PercentMac
     add cargo into calc
+
+
+
 
 
 
