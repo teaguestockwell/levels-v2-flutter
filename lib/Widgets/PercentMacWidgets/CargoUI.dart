@@ -44,7 +44,7 @@ class _CargoUIState extends State<CargoUI> {
     tcFS.addListener(() {this.widget.nwf.fs = tcFS.text; ps();});
     
     tcQty.text = this.widget.nwf.qty;
-    tcQty.addListener(() {this.widget.nwf.qty = tcQty.text;ps();});
+    tcQty.addListener(() {this.widget.nwf.qty = tcQty.text; setState((){}); ps();});
 
     super.initState();
   }
@@ -53,10 +53,10 @@ class _CargoUIState extends State<CargoUI> {
     if(this.widget.ope == false){return Container();}
 
     var ret = Column(children: [
-      RowCenter(CustomTextFieldText.d(tcName)),
-      Row2(Text('Weight'), CustomTextFieldText(tcWeight)),
-      Row2(Text('Fuselage Station'), CustomTextFieldText(tcFS)),
-      Row2(Text('Qty'), CustomTextFieldText(tcQty)),
+      RowCenter(CustomTextFieldTextMax(tcName)),
+      Row2(Text('Weight'), CustomTextField(tcWeight)),
+      Row2(Text('Fuselage Station'), CustomTextField(tcFS)),
+      Row2(Text('Qty'), CustomTextField(tcQty)),
     ],);
     return ret;
   }
