@@ -28,6 +28,11 @@ class _CargoCardState extends State<CargoCard> {
     super.initState();
   }
 
+  void removeCargoID(int id){
+    this.widget.cargo.remove(id);
+    setState((){});
+  }
+
   getWidgetForSpinner() {
     List<Widget> list = [];
     for (int i = 0; i < this.widget.air.configs.length; i++) {
