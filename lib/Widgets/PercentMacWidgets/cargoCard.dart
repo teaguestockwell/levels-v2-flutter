@@ -99,6 +99,7 @@ class _CargoCardState extends State<CargoCard> {
                     CustomButton('Remove All', onPressed: ()=>{removeConfig()},)
                   ),
                   Column(
+                    
                     children: getCargo()
                   )
 

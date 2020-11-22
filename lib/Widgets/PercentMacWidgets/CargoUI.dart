@@ -84,7 +84,7 @@ class _CargoUIState extends State<CargoUI> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(2),
+        padding: EdgeInsets.fromLTRB(2,5,2,5),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
