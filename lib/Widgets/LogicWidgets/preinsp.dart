@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,11 +8,13 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class PreInsp extends StatefulWidget {
+  CustomButtomSpinnerModalString buttonDurration;
   @override
   _PreInspState createState() => _PreInspState();
 }
 
 class _PreInspState extends State<PreInsp> {
+  
   var f = DateFormat('yyyy MM dd HH:mm');
   var number = 48;
   var acompDate = DateTime.now().subtract(Duration(hours: 48));
@@ -20,6 +23,15 @@ class _PreInspState extends State<PreInsp> {
       .toString();
   var expireAt =
       DateFormat('yyyy MM dd HH:mm').format(DateTime.now()).toString();
+  
+  initState(){
+    var stringList = List<String>();
+    for(int i=1;i<=48;i++){
+      stringList.add(i.toString());
+    }
+    this.widget.buttonDurration = CustomButtomSpinnerModalString(stringList,onPressed: lenChange,);
+    super.initState();
+  }
 
   timeChange(var date) {
     setState(() {
@@ -31,7 +43,7 @@ class _PreInspState extends State<PreInsp> {
     });
   }
 
-  lenChange(var n) {
+  lenChange(int n) {
     print(n);
     setState(() {
       number = 48 - n;
@@ -41,18 +53,7 @@ class _PreInspState extends State<PreInsp> {
     });
   }
 
-  get1to48() {
-    List<Widget> list = [];
-    for (int i = 48; i > 0; i--) {
-      list.add(Padding(
-          padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-          child: Text(
-            i.toString(),
-            style: TextStyle(color: Colors.white70, fontSize: 18),
-          )));
-    }
-    return list;
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +86,7 @@ class _PreInspState extends State<PreInsp> {
         Divider(),
         Row2(
             Text('Hours Until Expire'),
-            Row(children: <Widget>[
-              Padding(
-                  padding: EdgeInsets.all(0),
-                  child: Container(
-                      width: Const.pickerWidth,
-                      height: 30,
-                      child: CupertinoPicker(
-                        children: get1to48(),
-                        onSelectedItemChanged: lenChange,
-                        itemExtent: 30,
-                      )))
-            ])),
+            this.widget.buttonDurration),
         Divider(),
         Row2.padding(
           0, 0, 0, 5.0, 

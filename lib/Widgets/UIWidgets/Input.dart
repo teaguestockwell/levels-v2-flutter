@@ -87,6 +87,7 @@ class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
 }
 
 typedef void IntCallBack();
+typedef void IntCallBackIntPara(int i);
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -159,7 +160,8 @@ class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;
   List<String> stringList;
-  CustomButtomSpinnerModalString(this.stringList,{this.spinIdx});
+  IntCallBackIntPara onPressed;
+  CustomButtomSpinnerModalString(this.stringList,{this.spinIdx,this.onPressed});
   @override
   _CustomButtomSpinnerModalStringState createState() => _CustomButtomSpinnerModalStringState();
 }
@@ -176,6 +178,7 @@ class _CustomButtomSpinnerModalStringState extends State<CustomButtomSpinnerModa
   void _spin(int newIdx){
     this.widget.spinIdx = newIdx;
     this.widget.selected = this.widget.stringList[newIdx];
+    this.widget.onPressed(newIdx);
     //rebuild to change button text
     setState((){});
   }
