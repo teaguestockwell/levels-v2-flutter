@@ -206,7 +206,7 @@ class _CustomButtomSpinnerModalStringState extends State<CustomButtomSpinnerModa
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: 200,
+                height: 210,
                 color: Colors.black,
                 child: Center(
                   child: Column(
@@ -214,15 +214,16 @@ class _CustomButtomSpinnerModalStringState extends State<CustomButtomSpinnerModa
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Container(
-                      height: 200,
+                      height: 210,
                       child:
+                      Center(child:
                       CupertinoPicker(
                         scrollController: FixedExtentScrollController(initialItem: this.widget.spinIdx),
                         children: _getSpinnerWidgets(),
                         onSelectedItemChanged: _spin,
                         itemExtent: 35,
                       )
-                      ),
+                      )),
                     ],
                   ),
                 ),
