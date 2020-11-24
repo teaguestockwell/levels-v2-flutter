@@ -1,5 +1,4 @@
 import 'package:five_level_one/Backend/cont.dart';
-import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -83,11 +82,11 @@ class _PreInspState extends State<PreInsp> {
                     locale: LocaleType.en);
               },
             )),
-        Divider(),
+        Divider(thickness: Const.divThickness,),
         Row2(
             Text('Hours Until Expire'),
             this.widget.buttonDurration),
-        Divider(),
+        Divider(thickness: Const.divThickness,),
         Row2.padding(
           0, 0, 0, 5.0, 
           Text('Expires At'), 

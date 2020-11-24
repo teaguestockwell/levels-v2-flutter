@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
@@ -54,9 +55,12 @@ class _CargoUIState extends State<CargoUI> {
 
     var ret = Column(children: [
       RowCenter(CustomTextFieldTextMax(tcName)),
-      Row2(Text('Weight'), CustomTextField(tcWeight)),
-      Row2(Text('Fuselage Station'), CustomTextField(tcFS)),
-      Row2(Text('Qty'), CustomTextField(tcQty)),
+      Divider(thickness:1),
+      Row2.height(Text('Weight'), CustomTextFieldNumSize(tcWeight,8),Const.pickerHeight*1.7),
+      Divider(thickness:1),
+      Row2.height(Text('Fuselage Station'), CustomTextFieldNumSize(tcFS,8),Const.pickerHeight*1.7),
+      Divider(thickness:1),
+      Row2.height(Text('Qty'), CustomTextFieldNumSize(tcQty,6,decimal: false,),Const.pickerHeight*1.7),
     ],);
     return ret;
   }

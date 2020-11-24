@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
@@ -35,7 +36,7 @@ class _TanksCardState extends State<TanksCard>
     //init default tank selection
     for (Tank t in this.widget.air.tanks) {
       this.widget.tankRows.add(TankRow(t));
-      this.widget.tankRows.add(Divider());
+      this.widget.tankRows.add(Divider(thickness: Const.divThickness,),);
     }
 
     this.widget.tankRows.removeAt(this.widget.tankRows.length - 1);
@@ -75,10 +76,14 @@ class _TankRowState extends State<TankRow> {
   getTankWidgetsForSpinner() {
     List<Widget> list = [];
     for (int i = 0; i < this.widget.t.nameWeightFSs.length; i++) {
-      list.add(Text(
+      list.add(
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child:
+        Text(
         this.widget.t.nameWeightFSs[i].weight,
         style: TextStyle(color: Colors.white70, fontSize: 22),
-      ));
+      )));
     }
     return list;
   }

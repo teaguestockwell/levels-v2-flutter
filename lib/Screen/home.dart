@@ -27,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   press() {
     FirebaseFirestore.instance
         .collection('mds')
-        .doc(selectedMdsBody.selection)
+        .doc(selectedMdsBody.mdsSpin.selected)
         .get()
         .then((v) => setState(() {
               air = Aircraft(
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 Image(image: AssetImage('assets/0.png')),
                 CardAllwaysOpen(
                     gen.welcometitle, RowCenterText(gen.welcomebody)),
-                CardAllwaysOpen('Select MDS', selectedMdsBody),
+                CardAllwaysOpen('Aircraft', selectedMdsBody),
                 // CCards('Now', TimeGrid())
               ]);
             }));

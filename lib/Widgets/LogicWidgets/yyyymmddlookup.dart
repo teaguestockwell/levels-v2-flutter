@@ -96,7 +96,7 @@ class _YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
                         itemExtent: 30,
                       )))
             ])),
-        Divider(),
+        Divider(thickness: Const.divThickness,),
         Row2(
             Text('Julian Day'),
             Row(children: <Widget>[
@@ -111,7 +111,7 @@ class _YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
                         itemExtent: 30,
                       )))
             ])),
-        Divider(),
+        Divider(thickness: Const.divThickness,),
         Row2.padding(
             0, 0, 0, 5.0, Text('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],

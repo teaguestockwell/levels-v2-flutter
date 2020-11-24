@@ -98,7 +98,7 @@ var re = InputDec.re;
                       textAlign: TextAlign.center,
                       decoration: w,
                     ))),
-            Divider(),
+            Divider(thickness: Const.divThickness,),
             Row2.padding(
                 0,
                 0,

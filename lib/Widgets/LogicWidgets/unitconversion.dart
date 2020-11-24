@@ -258,7 +258,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
             onSelectedItemChanged: unitChange,
             itemExtent: 30,
           ))),
-      Divider(),
+      Divider(thickness: Const.divThickness,),
       Padding(
           padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
           child: Row(children: [

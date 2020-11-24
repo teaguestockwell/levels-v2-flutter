@@ -8,21 +8,29 @@ import '../Uitls.dart';
 
 class Row2 extends StatelessWidget {
   final Widget one, two;
+  double height;
   double l, t, r, b;
   Row2.padding(this.l, this.t, this.r, this.b, this.one, this.two);
+  Row2.height(this.one,this.two,this.height){
+    this.l = 0;
+    this.t = 0;
+    this.r = 0;
+    this.b = 0;
+  }
   Row2(this.one, this.two) {
     this.l = 0;
     this.t = 0;
     this.r = 0;
     this.b = 0;
   }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
         // key: UniqueKey(),
         padding: EdgeInsets.fromLTRB(l, t, r, b),
         child: Container(
-            height: Const.rowHeight,
+            height: this.height??Const.pickerHeight,
             margin: EdgeInsets.all(10),
             child: Column(children: [
               Spacer(),

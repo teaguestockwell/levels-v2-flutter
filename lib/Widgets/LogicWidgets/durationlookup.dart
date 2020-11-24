@@ -1,3 +1,4 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
@@ -57,7 +58,7 @@ class _DurationLookupState extends State<DurationLookup> {
                   locale: LocaleType.en);
             },
           )),
-      Divider(),
+      Divider(thickness: Const.divThickness,),
       Row2(
           Text('Date Time Two'),
           CustomButton(
@@ -78,7 +79,7 @@ class _DurationLookupState extends State<DurationLookup> {
                   locale: LocaleType.en);
             },
           )),
-      Divider(),
+      Divider(thickness: Const.divThickness,),
       Row2.padding(0, 0, 0, 5.0, Text('Duration hhhhh:mm:ss'), ConstText(getDiff()))
     ]);
   }

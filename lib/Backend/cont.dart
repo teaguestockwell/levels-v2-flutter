@@ -6,7 +6,8 @@ class Const {
   pickerWidth = 160,
   pickerHeight = 30,
   timeGridDivSize = 1,
-  rowHeight = 30;
+  rowHeight = 30,
+  divThickness=1.5;
 
   static Color topBot = Colors.black87,
       navBarSelected = Colors.white70,
@@ -15,5 +16,6 @@ class Const {
       car = Colors.white30,
       background = Colors.black,
       bottombarcolor = Colors.white10,
-      timeGridLinescolor = Colors.white60;
+      timeGridLinescolor = Colors.white60,
+      buttonColor = Colors.white10;
 }

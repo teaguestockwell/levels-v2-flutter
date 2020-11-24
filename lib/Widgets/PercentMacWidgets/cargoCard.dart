@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/CargoUI.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
@@ -82,6 +83,7 @@ class _CargoCardState extends State<CargoCard> {
         'Cargo',
         Column(children: <Widget>[
           Row2(Text('Select Config'), this.widget.configSpin),
+          Divider(thickness: Const.divThickness,),
           Row2(
               CustomButton('Update Config', onPressed: () => {addConfig()}),
               CustomButton(
