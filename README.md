@@ -1,7 +1,11 @@
 A X-Platform application for aircraft weight an balance using Google Flutter and Firebase.
 Presentation https://www.youtube.com/watch?v=ybnVkH23D60&feature=youtu.be
 
-Run on local web server
+Run from dev server
+
+https://fivelevel.web.app
+
+Run on localy
 
 npm install --global http-server
 
