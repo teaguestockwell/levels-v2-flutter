@@ -21,7 +21,7 @@ CargoCard
     make colum a ListView in CargoCard && make ListView a Column on percentmac screen for cargo card view recycling 
 
 PercentMac
-    add cargo into calc
+    add cargo into calc.
 
 
 
