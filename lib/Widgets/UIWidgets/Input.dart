@@ -183,7 +183,7 @@ class CustomButtomSpinnerModalString extends StatefulWidget {
   List<String> stringList;
   IntCallBackIntPara onPressed;
   CustomButtomSpinnerModalString(this.stringList,
-      {this.spinIdx, this.onPressed});
+      {this.spinIdx, this.onPressed,this.selected});
   @override
   _CustomButtomSpinnerModalStringState createState() =>
       _CustomButtomSpinnerModalStringState();
@@ -202,7 +202,7 @@ class _CustomButtomSpinnerModalStringState
     this.widget.spinIdx = newIdx;
     this.widget.selected = this.widget.stringList[newIdx];
 
-    this.widget.onPressed ?? (newIdx);
+    this.widget.onPressed?.call(newIdx);
     //rebuild to change button text
     setState(() {});
   }

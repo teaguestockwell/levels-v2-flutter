@@ -6,8 +6,6 @@ general,mds loading animations
 
 input more cargo configs to firebase 
 
-model cargo configs
-
 refractor
     unit conversion refractor to use modal spinner
     padd all rows equaly / add padding dynamicly to first and last index of CCcard
@@ -20,6 +18,7 @@ CargoUI
 CargoCard
     valid function with user notifcation error msg auto open error card and hilight error
     implement button that will remove the cargo cardUI from the colum of widgets
+    make colum a ListView in CargoCard && make ListView a Column on percentmac screen for cargo card view recycling 
 
 PercentMac
     add cargo into calc
