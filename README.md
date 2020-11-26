@@ -1,15 +1,15 @@
-A X-Platform application for aircraft weight an balance using Google Flutter and Firebase.
-Presentation https://www.youtube.com/watch?v=ybnVkH23D60&feature=youtu.be
+A X-Platform application for aircraft weight an balance using Google Flutter.
+AMC MX Group Confrence presentation https://www.youtube.com/watch?v=ybnVkH23D60&feature=youtu.be
 
-Run from dev server
+To run an old web build that is hosted on the interwebs: https://fivelevel.web.app
 
-https://fivelevel.web.app
-
-Run on localy
+To run the latest web build run in terminal:
 
 npm install --global http-server
 
-cd build/web
+git clone https://code.il2.dsop.io/tron/products/five_level.git
+
+cd five_level/build/web
 
 http-server
 
