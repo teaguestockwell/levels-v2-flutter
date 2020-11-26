@@ -68,6 +68,7 @@ class Distance extends StatelessWidget {
 
 class Unit {
   List<Distance> list = List();
+  static final units = ['Length','Mass','Area','Time','Volume','Speed'];
   int unit;
   Unit(this.unit) {
     // list.add(Distance('',));

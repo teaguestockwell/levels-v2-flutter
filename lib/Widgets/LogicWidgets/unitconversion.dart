@@ -13,10 +13,10 @@ class tDistanceBody extends StatefulWidget {
 class _tDistanceBodyState extends State<tDistanceBody> {
   var controllerOne = TextEditingController();
   var controllerTwo = TextEditingController();
-  var one, two, oneIn, twoOut, number;
+  var one, two, oneIn, twoOut, unitIdx;
   CustomTextField tfOne, tfTwo;
-  List<Distance> list = List();
-
+  List<Distance> selectedUnitUnits = List();
+  String unitName, selectedOne, selectedTwo;
   bool toggle = true;
 
   @override
@@ -29,13 +29,22 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     });
     tfOne = CustomTextField(controllerOne);
     tfTwo = CustomTextField(controllerTwo);
-    list = Unit(0).list;
+    selectedUnitUnits = Unit(0).list;
+    unitName = Unit.units[0];
+    unitIdx = 0;
     one = 0;
     two = 0;
     oneIn = 0;
     twoOut = '';
-    number = 0;
     super.initState();
+  }
+
+  List<String> getListDistanceNames() {
+    var ret = List<String>();
+    for (Distance d in selectedUnitUnits) {
+      ret.add(d.name);
+    }
+    return ret;
   }
 
   @override
@@ -45,21 +54,15 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     super.dispose();
   }
 
-  getUnits() {
-    List<Widget> list = [];
-    list.add(ListElement('Length'));
-    list.add(ListElement('Mass'));
-    list.add(ListElement('Area'));
-    list.add(ListElement('Time'));
-    list.add(ListElement('Volume'));
-    list.add(ListElement('Speed'));
-    return list;
-  }
-
-  unitChange(var n) {
-    print(n);
+  unitChange(int n) {
     setState(() {
-      list = Unit(n).list;
+      one = 0;
+      two = 0;
+      selectedUnitUnits = Unit(n).list;
+      unitIdx = n;
+      unitName = Unit.units[n];
+      selectedOne = Unit(n).list[0].name;
+      selectedTwo = Unit(n).list[0].name;
     });
   }
 
@@ -67,6 +70,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     if (i is int) {
       //if not bool, try to get the int
       two = i;
+      selectedTwo = selectedUnitUnits[i].name;
       toggle = true;
     }
 
@@ -77,8 +81,8 @@ class _tDistanceBodyState extends State<tDistanceBody> {
         x = '0';
       }
       controllerOne.text = (double.parse(x) * //double from feild 1 times
-              list[two].numOfBases / //double from spinner 1 base divided by
-              list[one].numOfBases)
+              selectedUnitUnits[two].numOfBases / //double from spinner 1 base divided by
+              selectedUnitUnits[one].numOfBases)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
@@ -89,6 +93,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     if (i is int) {
       //if not bool, try to get the int
       one = i;
+      selectedOne = selectedUnitUnits[i].name;
       toggle = true;
     }
     if (toggle) {
@@ -98,15 +103,14 @@ class _tDistanceBodyState extends State<tDistanceBody> {
         x = '0';
       }
       controllerTwo.text = (double.parse(x) * //double from feild 1 times
-              list[one].numOfBases / //double from spinner 1 base divided by
-              list[two].numOfBases)
+              selectedUnitUnits[one].numOfBases / //double from spinner 1 base divided by
+              selectedUnitUnits[two].numOfBases)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
     }
   }
 
-  distanceChanges() {}
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -114,14 +118,15 @@ class _tDistanceBodyState extends State<tDistanceBody> {
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           width: Const.pickerWidth,
           height: Const.pickerHeight,
-          child: CupertinoPicker(
-            children: getUnits(),
-            onSelectedItemChanged: unitChange,
-            itemExtent: 30,
+          child: CustomButtomSpinnerModalString(
+            Unit.units,
+            onPressed: unitChange,
+            selected: unitName,
+            spinIdx: unitIdx,
           ))),
-      Divider(thickness: Const.divThickness,),
+      //Divider(thickness: Const.divThickness,),
       Padding(
-          padding: EdgeInsets.fromLTRB(5, 5, 5, 5),
+          padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(children: [
             Container(
                 decoration: BoxDecoration(
@@ -129,16 +134,12 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
-                  Container(
-                      width: Const.pickerWidth,
-                      height: Const.pickerHeight,
-                      child: CupertinoPicker(
-                        children: list,
-                        onSelectedItemChanged: (int i) => {
-                          oneChanged(i),
-                        },
-                        itemExtent: 30,
-                      )),
+                  CustomButtomSpinnerModalString(
+                    getListDistanceNames(),
+                    onPressed: oneChanged,
+                    selected: selectedOne,
+                    spinIdx: one,
+                  ),
                 ])),
             Spacer(),
             Text('=',
@@ -151,14 +152,12 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,
-                  Container(
-                      width: Const.pickerWidth,
-                      height: Const.pickerHeight,
-                      child: CupertinoPicker(
-                        children: list,
-                        onSelectedItemChanged: (int i) => {twoChanged(i)},
-                        itemExtent: 30,
-                      )),
+                  CustomButtomSpinnerModalString(
+                    getListDistanceNames(),
+                    onPressed: twoChanged,
+                    selected: selectedOne,
+                    spinIdx: two,
+                  ),
                 ])),
           ]))
     ]);
