@@ -14,17 +14,17 @@ class CargoCard extends StatefulWidget {
   CustomButtomSpinnerModalString configSpin;
   int configSpinIdx;
   var configIndexes = List<int>();
-  var cargo = HashMap<int, Widget>();
+  var cargo = LinkedHashMap<int, CargoUI>();
+  var cargoList = List<Widget>();
   CargoCard(this.air);
   @override
   _CargoCardState createState() => _CargoCardState();
 }
 
 class _CargoCardState extends State<CargoCard> {
-  List<Widget> cargo;
   @override
   initState() {
-    getCargo();
+    //getCargo();
     this.widget.configSpinIdx = 0;
     this.widget.selected = this.widget.air.configs[0];
     this.widget.configSpin =
@@ -43,6 +43,7 @@ class _CargoCardState extends State<CargoCard> {
   //implemt button within cargo ui for this method
   void removeCargoID(int id) {
     this.widget.cargo.remove(id);
+    print('removing '+id.toString());
     setState(() {});
   }
 
@@ -60,6 +61,7 @@ class _CargoCardState extends State<CargoCard> {
       );
       this.widget.configIndexes.add(configCargo.id);
     }
+    this.widget.configIndexes.forEach((element) {print(element.toString());});
     setState(() {});
   }
 
@@ -67,8 +69,14 @@ class _CargoCardState extends State<CargoCard> {
     for (int idx in this.widget.configIndexes) {
       try {
         this.widget.cargo.removeWhere((key, value) => key == idx);
-      } catch (Exception) {}
+      } catch (Exception) {print('could not remove idx: ' + idx.toString());}
     }
+    this.widget.configIndexes.clear();
+    setState(() {});
+  }
+
+  void removeAll(){
+    this.widget.cargo.clear();
     this.widget.configIndexes.clear();
     setState(() {});
   }
@@ -78,11 +86,16 @@ class _CargoCardState extends State<CargoCard> {
     this.widget.cargo.forEach((key, value) {
       ret.add(value);
     });
-    cargo = ret;
+    this.widget.cargoList = ret;
+  }
+
+  void printCargo(){
+    this.widget.cargo.forEach((key, value) {print(value.nwf.toString());});
   }
 
   Widget build(BuildContext context) {
     getCargo();
+    printCargo();
     return CardAllwaysOpen(
         'Cargo',
         Column(children: <Widget>[
@@ -92,15 +105,15 @@ class _CargoCardState extends State<CargoCard> {
               CustomButton('Update Config', onPressed: () => {addConfig()}),
               CustomButton(
                 'Remove All',
-                onPressed: () => {removeConfig()},
+                onPressed: () => {removeAll()},
               )),
               //recycle viewer goes here. Dont render CargoUI that is not on screen
               ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
-                itemCount: cargo.length,
+                itemCount: this.widget.cargoList.length,
                 itemBuilder: (BuildContext context,int index){ 
-                  return cargo[index];}
+                  return this.widget.cargoList[index];}
               ),
         ]));
   }

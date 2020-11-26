@@ -15,6 +15,7 @@ class CargoUI extends StatefulWidget {/// interates the data model NameWeightFS 
   simpleMom;
   NameWeightFS nwf;
   IntCallBackIntPara onPressed;
+
   CargoUI(this.fs0,this.fs1,this.weight1,this.simpleMom,{this.nwf, this.onPressed}){
     if(this.nwf == null){this.nwf = NameWeightFS();}
     this.nwf.simplemom = this.simpleMom;
@@ -32,8 +33,12 @@ class _CargoUIState extends State<CargoUI> {
   var tcWeight = TextEditingController();
   var tcFS = TextEditingController();
   var tcQty = TextEditingController();
-   
-  initState(){
+
+  void removePress(){
+    this.widget.onPressed(this.widget.nwf.id);
+  }
+
+  Widget buildInput(){
     tcName.text = this.widget.nwf.name;
     tcName.addListener(() {this.widget.nwf.name = tcName.text; setState((){}); ps();});
     
@@ -46,14 +51,6 @@ class _CargoUIState extends State<CargoUI> {
     tcQty.text = this.widget.nwf.qty;
     tcQty.addListener(() {this.widget.nwf.qty = tcQty.text; setState((){}); ps();});
 
-    super.initState();
-  }
-
-  void removePress(){
-    this.widget.onPressed(this.widget.nwf.id);
-  }
-
-  Widget buildInput(){
     if(this.widget.ope == false){return Container();}
       var ret = Column(children: [
       RowCenter(CustomTextFieldTextMax(tcName)),
@@ -70,7 +67,7 @@ class _CargoUIState extends State<CargoUI> {
   }
 
   ps(){
-    print(this.widget.nwf.toString());
+   // print(this.widget.nwf.toString());
   }
 
   toggle(){
