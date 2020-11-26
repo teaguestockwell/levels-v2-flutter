@@ -91,6 +91,7 @@ class _CargoCardState extends State<CargoCard> {
                 'Remove All',
                 onPressed: () => {removeConfig()},
               )),
+              //recycle viewer goes here. Dont render CargoUI that is not on screen
           Column(children: getCargo())
         ]));
   }
