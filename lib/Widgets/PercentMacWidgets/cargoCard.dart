@@ -21,8 +21,10 @@ class CargoCard extends StatefulWidget {
 }
 
 class _CargoCardState extends State<CargoCard> {
+  List<Widget> cargo;
   @override
   initState() {
+    getCargo();
     this.widget.configSpinIdx = 0;
     this.widget.selected = this.widget.air.configs[0];
     this.widget.configSpin =
@@ -71,15 +73,16 @@ class _CargoCardState extends State<CargoCard> {
     setState(() {});
   }
 
-  List<Widget> getCargo() {
+  void getCargo() {
     var ret = List<Widget>();
     this.widget.cargo.forEach((key, value) {
       ret.add(value);
     });
-    return ret;
+    cargo = ret;
   }
 
   Widget build(BuildContext context) {
+    getCargo();
     return CardAllwaysOpen(
         'Cargo',
         Column(children: <Widget>[
@@ -92,7 +95,13 @@ class _CargoCardState extends State<CargoCard> {
                 onPressed: () => {removeConfig()},
               )),
               //recycle viewer goes here. Dont render CargoUI that is not on screen
-          Column(children: getCargo())
+              ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
+                shrinkWrap: true,
+                itemCount: cargo.length,
+                itemBuilder: (BuildContext context,int index){ 
+                  return cargo[index];}
+              ),
         ]));
   }
 }

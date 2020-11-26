@@ -14,6 +14,7 @@ class GlossaryScreen extends StatefulWidget {
 }
 
 class _GlossaryScreenState extends State<GlossaryScreen> {
+  final sc = ScrollController();
   initState(){
     this.widget.cards = getGlossCards();
     super.initState();
@@ -23,7 +24,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
     var ret = List<Widget>();
     ret.add(aircraftCard(this.widget.air.name));
     for (int i = 0; i < this.widget.air.titles.length; i++) {
-      ret.add(CCards.C(this.widget.air.titles.elementAt(i),
+      ret.add(CCards(this.widget.air.titles.elementAt(i),
           RowCenterText(this.widget.air.bodys.elementAt(i))));
     }
     return ret;
@@ -31,10 +32,11 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder( //ony render on screen widgets-recycle viewer
+    return CupertinoScrollbar(isAlwaysShown: true,controller: sc, child:ListView.builder(
+      controller: sc, //ony render on screen widgets-recycle viewer
       itemCount: this.widget.cards.length,
       itemBuilder: (BuildContext context,int index){ 
           return this.widget.cards[index];}
-    );
+    ));
   }
 }

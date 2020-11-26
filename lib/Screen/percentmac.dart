@@ -3,6 +3,7 @@ import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftcard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../Backend/model.dart';
@@ -20,6 +21,7 @@ class _PerMacScreenState extends State<PerMacScreen>
   @override
   bool get wantKeepAlive => true;
 
+  final sc = ScrollController();
   TanksCard tankCard;
   ChartCRow chartcCard;
   CargoCard cargoCard;
@@ -70,14 +72,19 @@ class _PerMacScreenState extends State<PerMacScreen>
 
   @override
   Widget build(BuildContext context) {
-    return ListView(children: [
-      aircraftCard(this.widget.air.name),
-      tankCard,
-      chartcCard,
-      cargoCard,
-      CustomButton('get mac', onPressed: () {
-        getMac();
-      }),
-    ]);
+    return CupertinoScrollbar(
+        isAlwaysShown: true,
+        controller: sc,
+        child: SingleChildScrollView(
+          controller: sc,
+          child: Column(children: [
+            aircraftCard(this.widget.air.name),
+            tankCard,
+            chartcCard,
+            cargoCard,
+            CustomButton('get mac', onPressed: () {
+              getMac();
+          }),
+        ])));
   }
 }
