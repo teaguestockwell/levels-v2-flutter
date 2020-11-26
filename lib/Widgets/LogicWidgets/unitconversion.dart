@@ -13,30 +13,35 @@ class tDistanceBody extends StatefulWidget {
 class _tDistanceBodyState extends State<tDistanceBody> {
   var controllerOne = TextEditingController();
   var controllerTwo = TextEditingController();
-  var one, two, oneIn, twoOut, unitIdx;
+  var leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
   CustomTextField tfOne, tfTwo;
-  List<Distance> selectedUnitUnits = List();
-  String unitName, selectedOne, selectedTwo;
+  var selectedUnitUnits = List<Distance>();
+  String unitName;
   bool toggle = true;
 
   @override
   void initState() {
     controllerOne.addListener(() {
-      oneChanged(toggle);
+      leftUnitUnitChanged(toggle);
     });
     controllerTwo.addListener(() {
-      twoChanged(toggle);
+      rightUnitUnitChanged(toggle);
     });
     tfOne = CustomTextField(controllerOne);
     tfTwo = CustomTextField(controllerTwo);
     selectedUnitUnits = Unit(0).list;
     unitName = Unit.units[0];
     unitIdx = 0;
-    one = 0;
-    two = 0;
-    oneIn = 0;
-    twoOut = '';
+    leftUnitUnitIdx = 0;
+    rightUnitUnitIdx = 0;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    controllerTwo.dispose();
+    controllerOne.dispose();
+    super.dispose();
   }
 
   List<String> getListDistanceNames() {
@@ -47,30 +52,21 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     return ret;
   }
 
-  @override
-  void dispose() {
-    controllerTwo.dispose();
-    controllerOne.dispose();
-    super.dispose();
-  }
-
   unitChange(int n) {
     setState(() {
-      one = 0;
-      two = 0;
+      leftUnitUnitIdx = 0;
+      rightUnitUnitIdx = 0;
       selectedUnitUnits = Unit(n).list;
       unitIdx = n;
       unitName = Unit.units[n];
-      selectedOne = Unit(n).list[0].name;
-      selectedTwo = Unit(n).list[0].name;
     });
   }
 
-  void twoChanged(var i) {
+  ///accepts bool to unlock toggle
+  void rightUnitUnitChanged(var i) {
     if (i is int) {
       //if not bool, try to get the int
-      two = i;
-      selectedTwo = selectedUnitUnits[i].name;
+      rightUnitUnitIdx = i;
       toggle = true;
     }
 
@@ -81,19 +77,20 @@ class _tDistanceBodyState extends State<tDistanceBody> {
         x = '0';
       }
       controllerOne.text = (double.parse(x) * //double from feild 1 times
-              selectedUnitUnits[two].numOfBases / //double from spinner 1 base divided by
-              selectedUnitUnits[one].numOfBases)
+              selectedUnitUnits[rightUnitUnitIdx]
+                  .numOfBases / //double from spinner 1 base divided by
+              selectedUnitUnits[leftUnitUnitIdx].numOfBases)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
     }
   }
 
-  void oneChanged(var i) {
+  ///accepts bool to unlock toggle
+  void leftUnitUnitChanged(var i) {
     if (i is int) {
       //if not bool, try to get the int
-      one = i;
-      selectedOne = selectedUnitUnits[i].name;
+      leftUnitUnitIdx = i;
       toggle = true;
     }
     if (toggle) {
@@ -103,8 +100,9 @@ class _tDistanceBodyState extends State<tDistanceBody> {
         x = '0';
       }
       controllerTwo.text = (double.parse(x) * //double from feild 1 times
-              selectedUnitUnits[one].numOfBases / //double from spinner 1 base divided by
-              selectedUnitUnits[two].numOfBases)
+              selectedUnitUnits[leftUnitUnitIdx]
+                  .numOfBases / //double from spinner 1 base divided by
+              selectedUnitUnits[rightUnitUnitIdx].numOfBases)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
@@ -136,9 +134,9 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                   tfOne,
                   CustomButtomSpinnerModalString(
                     getListDistanceNames(),
-                    onPressed: oneChanged,
-                    selected: selectedOne,
-                    spinIdx: one,
+                    onPressed: leftUnitUnitChanged,
+                    selected: selectedUnitUnits[leftUnitUnitIdx].name,
+                    spinIdx: leftUnitUnitIdx,
                   ),
                 ])),
             Spacer(),
@@ -154,9 +152,9 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                   tfTwo,
                   CustomButtomSpinnerModalString(
                     getListDistanceNames(),
-                    onPressed: twoChanged,
-                    selected: selectedOne,
-                    spinIdx: two,
+                    onPressed: rightUnitUnitChanged,
+                    selected: selectedUnitUnits[rightUnitUnitIdx].name,
+                    spinIdx: rightUnitUnitIdx,
                   ),
                 ])),
           ]))
