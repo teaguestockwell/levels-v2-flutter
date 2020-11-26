@@ -53,6 +53,7 @@ class _CargoCardState extends State<CargoCard> {
         this.widget.air.fs1,
         this.widget.air.weight1,
         this.widget.air.simplemom,
+        onPressed: removeCargoID,
         nwf: configCargo,
       );
       this.widget.configIndexes.add(configCargo.id);
