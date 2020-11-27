@@ -62,18 +62,24 @@ class CustomTextFieldNumSize extends StatefulWidget {
   final TextEditingController t;
   final int maxSize;
   final bool decimal;
-  CustomTextFieldNumSize(this.t,this.maxSize,{this.decimal=true});
+  StringCallBack onChange;
+  CustomTextFieldNumSize(this.t,this.maxSize,{this.decimal=true, this.onChange});
   @override
   _CustomTextFieldNumSizeState createState() => _CustomTextFieldNumSizeState();
 }
 
 class _CustomTextFieldNumSizeState extends State<CustomTextFieldNumSize> {
+
+  change(String x){
+    this.widget.onChange?.call(x);
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
         height: Const.pickerHeight*1.7,
         width: Const.pickerWidth,
         child: TextField(
+            onChanged: change,
             maxLength: this.widget.maxSize,
             keyboardType: TextInputType.numberWithOptions(decimal: this.widget.decimal),
             textAlign: TextAlign.center,
@@ -84,7 +90,8 @@ class _CustomTextFieldNumSizeState extends State<CustomTextFieldNumSize> {
 
 class CustomTextFieldTextMax extends StatefulWidget {
   TextEditingController t;
-  CustomTextFieldTextMax(this.t);
+  StringCallBack onChange;
+  CustomTextFieldTextMax(this.t,this.onChange);
 
   @override
   _CustomTextFieldTextMaxState createState() => _CustomTextFieldTextMaxState();
@@ -96,6 +103,7 @@ class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
     return Container(
         height: Const.pickerHeight*1.7,
         child: TextField(
+          onChanged: this.widget.onChange,
           maxLength: 45,
             keyboardType: TextInputType.name,
             textAlign: TextAlign.center,
@@ -106,6 +114,7 @@ class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
 
 typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
+typedef void StringCallBack(String x);
 
 class CustomButton extends StatelessWidget {
   final String text;

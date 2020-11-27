@@ -15,6 +15,7 @@ class CargoUI extends StatefulWidget {/// interates the data model NameWeightFS 
   simpleMom;
   NameWeightFS nwf;
   IntCallBackIntPara onPressed;
+  TextEditingController tcName, tcWeight, tcFS, tcQty;
 
   CargoUI(this.fs0,this.fs1,this.weight1,this.simpleMom,{this.nwf, this.onPressed}){
     if(this.nwf == null){this.nwf = NameWeightFS();}
@@ -38,9 +39,23 @@ class _CargoUIState extends State<CargoUI> {
     this.widget.onPressed(this.widget.nwf.id);
   }
 
+  void rebuild(){setState(() {});}
+
+  nameChange(var newName){
+    if(this.widget.nwf.name == newName){return null;}
+    this.widget.nwf.name=newName;  rebuild();
+  }
+
+  qtyChange(var newQty){
+    if(this.widget.nwf.qty == newQty){return null;}
+    this.widget.nwf.qty = newQty; rebuild();
+  }
+
   Widget buildInput(){
     tcName.text = this.widget.nwf.name;
-    tcName.addListener(() {this.widget.nwf.name = tcName.text; setState((){}); ps();});
+    tcName.selection = TextSelection.fromPosition(TextPosition(offset: tcName.text.length));
+    //tcName.addListener(() {this.widget.nwf.name = tcName.text; setState((){}); ps();});
+
     
     tcWeight.text = this.widget.nwf.weight;
     tcWeight.addListener(() {this.widget.nwf.weight = tcWeight.text; ps();});
@@ -49,17 +64,18 @@ class _CargoUIState extends State<CargoUI> {
     tcFS.addListener(() {this.widget.nwf.fs = tcFS.text; ps();});
     
     tcQty.text = this.widget.nwf.qty;
-    tcQty.addListener(() {this.widget.nwf.qty = tcQty.text; setState((){}); ps();});
+    tcQty.selection = TextSelection.fromPosition(TextPosition(offset: tcQty.text.length));
+    //tcQty.addListener(() {this.widget.nwf.qty = tcQty.text; setState((){}); ps();});
 
     if(this.widget.ope == false){return Container();}
       var ret = Column(children: [
-      RowCenter(CustomTextFieldTextMax(tcName)),
+      RowCenter(CustomTextFieldTextMax(tcName, nameChange)),
       Divider(thickness:Const.divThickness),
       Row2.height(Text('Weight'), CustomTextFieldNumSize(tcWeight,8),Const.pickerHeight*1.7),
       Divider(thickness:Const.divThickness),
       Row2.height(Text('Fuselage Station'), CustomTextFieldNumSize(tcFS,8),Const.pickerHeight*1.7),
       Divider(thickness:Const.divThickness),
-      Row2.height(Text('Qty'), CustomTextFieldNumSize(tcQty,6,decimal: false,),Const.pickerHeight*1.7),
+      Row2.height(Text('Qty'), CustomTextFieldNumSize(tcQty,6,decimal: false, onChange: qtyChange),Const.pickerHeight*1.7),
       Divider(thickness: Const.divThickness),
       RowCenterOne(CustomButton('Remove',onPressed: (){this.widget.onPressed(this.widget.nwf.id);},))
     ],);

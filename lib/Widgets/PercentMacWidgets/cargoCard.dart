@@ -12,7 +12,6 @@ class CargoCard extends StatefulWidget {
   Aircraft air;
   Config selected;
   CustomButtomSpinnerModalString configSpin;
-  int configSpinIdx;
   var configIndexes = List<int>();
   var cargo = LinkedHashMap<int, CargoUI>();
   var cargoList = List<Widget>();
@@ -25,11 +24,13 @@ class _CargoCardState extends State<CargoCard> {
   @override
   initState() {
     //getCargo();
-    this.widget.configSpinIdx = 0;
     this.widget.selected = this.widget.air.configs[0];
-    this.widget.configSpin =
-        CustomButtomSpinnerModalString(_getConfigStrings());
+    this.widget.configSpin = CustomButtomSpinnerModalString(_getConfigStrings(), onPressed: configChange,);
     super.initState();
+  }
+
+  void configChange(int i){
+    this.widget.selected = this.widget.air.configs[i];
   }
 
   List<String> _getConfigStrings() {
@@ -40,32 +41,32 @@ class _CargoCardState extends State<CargoCard> {
     return ret;
   }
 
-  //implemt button within cargo ui for this method
   void removeCargoID(int id) {
     this.widget.cargo.remove(id);
     print('removing '+id.toString());
     setState(() {});
   }
 
-  addConfig() {
+  void addConfig() {
     print('Updating ' + this.widget.selected.name + ' to contain: ');
     removeConfig();
-    for (NameWeightFS configCargo in this.widget.selected.nwfList) {
-      this.widget.cargo[configCargo.id] = CargoUI(
+    for (NameWeightFS x in this.widget.selected.nwfList) {
+      var y = NameWeightFS(name:x.name, weight: x.weight, fs: x.fs, mom: x.mom,simplemom: x.simplemom, qty: x.qty);
+        this.widget.cargo[y.id] = CargoUI(
         this.widget.air.fs0,
         this.widget.air.fs1,
         this.widget.air.weight1,
         this.widget.air.simplemom,
         onPressed: removeCargoID,
-        nwf: configCargo,
+        nwf: y,
       );
-      this.widget.configIndexes.add(configCargo.id);
+      this.widget.configIndexes.add(y.id);
     }
     this.widget.configIndexes.forEach((element) {print(element.toString());});
     setState(() {});
   }
 
-  removeConfig() {
+  void removeConfig() {
     for (int idx in this.widget.configIndexes) {
       try {
         this.widget.cargo.removeWhere((key, value) => key == idx);
