@@ -158,6 +158,20 @@ class NameWeightFS {
     print(this.toString());
   }
 
+  ///used to create copy of another object, but assign it a new id
+  NameWeightFS.copyNewID(
+    NameWeightFS old
+  ){
+    this.name = old.name;
+    this.weight = old.weight;
+    this.fs = old.fs;
+    this.mom = old.mom;
+    this.simplemom = old.simplemom;
+    this.qty = old.qty;
+    this.id = P.getUniqueIdx();
+    print('Copying '+old.id.toString()+' to create '+this.id.toString());
+  }
+
   @override
   String toString() {
     return ("name: " +

@@ -69,32 +69,20 @@ class _CargoCardState extends State<CargoCard> {
 
   ///remove old config then add new NWFS and CargoUI for each config in selectedSpinnerConfig
   void updateConfig() {
-
     //before adding new config remove the old one
     removeConfig();
     for (NameWeightFS oldSelectedConfigNWFS in this.widget.selectedSpinnerConfig.nwfList){
-
-      var newNWFS = NameWeightFS(
-         name:oldSelectedConfigNWFS.name,
-         weight: oldSelectedConfigNWFS.weight,
-         fs: oldSelectedConfigNWFS.fs,
-         mom: oldSelectedConfigNWFS.mom,
-         simplemom: oldSelectedConfigNWFS.simplemom,
-         qty: oldSelectedConfigNWFS.qty
-         );
-
       var newCargoUI = CargoUI(
         this.widget.air.fs0,
         this.widget.air.fs1,
         this.widget.air.weight1,
         this.widget.air.simplemom,
         onPressed: removeCargoID,
-        nwf: newNWFS,
+        nwf: NameWeightFS.copyNewID(oldSelectedConfigNWFS)
       );
-         
-      this.widget.cargo[newNWFS.id] = newCargoUI;
-      this.widget.importedConfigIDs.add(newNWFS.id);
-      print('Importing to cargo & importedConfigID '+newNWFS.toString());
+      this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
+      this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
+      print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
     }
     setState(() {});
   }
