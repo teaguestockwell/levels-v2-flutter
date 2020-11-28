@@ -8,31 +8,47 @@ import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+///modalspinner to select config, buttons to
+///update or delete confi, and lazy loading of 
+///cargoUI
 class CargoCard extends StatefulWidget {
-  Aircraft air;
-  Config selected;
+  ///contains config info for child widgets
+  final Aircraft air; 
+  Config selectedSpinnerConfig;
+  ///modal spinner that changes this.selectedSpinnerConfig
   CustomButtomSpinnerModalString configSpin;
-  var configIndexes = List<int>();
+  //list that contains active NWFS ids
+  var importedConfigIDs = List<int>();
+  ///key is NWFS.id, value is CargoUI
   var cargo = LinkedHashMap<int, CargoUI>();
-  var cargoList = List<Widget>();
+  ///this.cargo.values.toListOfWidgets
+  var cargoList = List<Widget>(); 
   CargoCard(this.air);
   @override
   _CargoCardState createState() => _CargoCardState();
 }
 
 class _CargoCardState extends State<CargoCard> {
+
   @override
   initState() {
-    //getCargo();
-    this.widget.selected = this.widget.air.configs[0];
-    this.widget.configSpin = CustomButtomSpinnerModalString(_getConfigStrings(), onPressed: configChange,);
+    this.widget.selectedSpinnerConfig = this.widget.air.configs[0];
+    this.widget.configSpin = CustomButtomSpinnerModalString(
+      _getConfigStrings(), 
+      onPressed: configChange,
+      spinIdx: 0,selected: this.widget.air.configs[0].name,
+    );
     super.initState();
   }
 
-  void configChange(int i){
-    this.widget.selected = this.widget.air.configs[i];
+  ///pass to config spinner
+  void configChange(int indexOfNewConfig){
+    this.widget.selectedSpinnerConfig = this.widget.air.configs[indexOfNewConfig];
   }
 
+  ///build and return a list of strings containing the name of 
+  ///each config in the selected aircraft
+  ///passed to config spin
   List<String> _getConfigStrings() {
     var ret = List<String>();
     for (int i = 0; i < this.widget.air.configs.length; i++) {
@@ -40,54 +56,76 @@ class _CargoCardState extends State<CargoCard> {
     }
     return ret;
   }
-
+  
+  ///passed to onPressed of CargoUI
+  ///@id NWFS.id as key to this.widget.cargo
+  ///removes CargoUI from this.widget.cargo, then try to remove from configID
   void removeCargoID(int id) {
+    print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
-    print('removing '+id.toString());
+    this.widget.importedConfigIDs.removeWhere((element) => element == id);
     setState(() {});
   }
 
-  void addConfig() {
-    print('Updating ' + this.widget.selected.name + ' to contain: ');
+  ///remove old config then add new NWFS and CargoUI for each config in selectedSpinnerConfig
+  void updateConfig() {
+
+    //before adding new config remove the old one
     removeConfig();
-    for (NameWeightFS x in this.widget.selected.nwfList) {
-      var y = NameWeightFS(name:x.name, weight: x.weight, fs: x.fs, mom: x.mom,simplemom: x.simplemom, qty: x.qty);
-        this.widget.cargo[y.id] = CargoUI(
+    for (NameWeightFS oldSelectedConfigNWFS in this.widget.selectedSpinnerConfig.nwfList){
+
+      var newNWFS = NameWeightFS(
+         name:oldSelectedConfigNWFS.name,
+         weight: oldSelectedConfigNWFS.weight,
+         fs: oldSelectedConfigNWFS.fs,
+         mom: oldSelectedConfigNWFS.mom,
+         simplemom: oldSelectedConfigNWFS.simplemom,
+         qty: oldSelectedConfigNWFS.qty
+         );
+
+      var newCargoUI = CargoUI(
         this.widget.air.fs0,
         this.widget.air.fs1,
         this.widget.air.weight1,
         this.widget.air.simplemom,
         onPressed: removeCargoID,
-        nwf: y,
+        nwf: newNWFS,
       );
-      this.widget.configIndexes.add(y.id);
+         
+      this.widget.cargo[newNWFS.id] = newCargoUI;
+      this.widget.importedConfigIDs.add(newNWFS.id);
+      print('Importing to cargo & importedConfigID '+newNWFS.toString());
     }
-    this.widget.configIndexes.forEach((element) {print(element.toString());});
     setState(() {});
   }
 
+  ///for each id in this.widget.configIDs, remove from this.widget.cargo,
+  ///then clear this.widget.configIDs, and setState
   void removeConfig() {
-    for (int idx in this.widget.configIndexes) {
+    for (int id in this.widget.importedConfigIDs) {
       try {
-        this.widget.cargo.removeWhere((key, value) => key == idx);
-      } catch (Exception) {print('could not remove idx: ' + idx.toString());}
+        print('removing: '+this.widget.cargo[id].nwf.toString());
+        this.widget.cargo.removeWhere((key, value) => key == id);
+      } catch (Exception) {print('could not remove idx: ' + id.toString());}
     }
-    this.widget.configIndexes.clear();
+    this.widget.importedConfigIDs.clear();
     setState(() {});
   }
 
+  ///clear cargo & importedConfigIds, then set state 
   void removeAll(){
     this.widget.cargo.clear();
-    this.widget.configIndexes.clear();
+    this.widget.importedConfigIDs.clear();
     setState(() {});
   }
 
+  ///call each build to update cargolist for
+  ///with all cargo.vaues
   void getCargo() {
-    var ret = List<Widget>();
-    this.widget.cargo.forEach((key, value) {
-      ret.add(value);
+    this.widget.cargoList.clear();
+    this.widget.cargo.forEach((key, value){
+      this.widget.cargoList.add(value);
     });
-    this.widget.cargoList = ret;
   }
 
   void printCargo(){
@@ -95,27 +133,42 @@ class _CargoCardState extends State<CargoCard> {
   }
 
   Widget build(BuildContext context) {
-    getCargo();
-    printCargo();
+    getCargo(); //call me every build
+    print('building cargoCard');
+    //printCargo();
     return CardAllwaysOpen(
-        'Cargo',
-        Column(children: <Widget>[
-          Row2(Text('Select Config'), this.widget.configSpin),
-          Divider(thickness: Const.divThickness,),
+      'Cargo',
+      Column(
+        children: <Widget>[
           Row2(
-              CustomButton('Update Config', onPressed: () => {addConfig()}),
-              CustomButton(
-                'Remove All',
-                onPressed: () => {removeAll()},
-              )),
-              //recycle viewer goes here. Dont render CargoUI that is not on screen
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: this.widget.cargoList.length,
-                itemBuilder: (BuildContext context,int index){ 
-                  return this.widget.cargoList[index];}
-              ),
-        ]));
+            Text('Select Config'),
+             this.widget.configSpin
+          ),
+
+          Divider(thickness: Const.divThickness,),
+
+          Row2(
+            CustomButton(
+              'Update Config',
+               onPressed: () => {updateConfig()}
+            ),
+            CustomButton(
+              'Remove All',
+              onPressed: () => {removeAll()},
+            )
+          ),
+
+          //recycle viewer goes here. Dont render CargoUI that is not on screen
+          ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: this.widget.cargoList.length,
+            itemBuilder: (BuildContext context,int i){ 
+              return this.widget.cargoList[i];
+            }
+          ),
+        ]
+      )
+    );
   }
 }
