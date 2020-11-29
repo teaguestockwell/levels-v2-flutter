@@ -252,16 +252,12 @@ class P {
   static int idx=0;
   ///Given a string try to parse into double. If fail make toast with error.
   static double p(String s) {
-    double p, z = 0.0;
-    p = double.tryParse(s);
-    if (p != null) {
-      return p;
+    double p = 0.0;
+    try{
+    p = double.parse(s);
+    return p;
     }
-    Fluttertoast.showToast(
-      msg: s + " is not a number. Assigning value 0.",
-      gravity: ToastGravity.CENTER,
-    );
-    return z;
+    catch (Exeption){throw Exception(s + ' is not a num');}
   }
   static int getUniqueIdx(){
     idx++;

@@ -1,10 +1,10 @@
-async general doc read
+generalDoc / init loading animation
 
-clever img loading animation
+I accept / MDS loading animation
 
-general,mds loading animations
+website for help button
 
-input more cargo configs to firebase 
+topbar help button
 
 refractor
     padd all rows equaly / add padding dynamicly to first and last index of CCcard
@@ -14,12 +14,22 @@ CargoUI
     lighter color
 
 CargoCard
-    valid function with user notifcation error msg auto open error card and hilight error
-    make colum a ListView in CargoCard && make ListView a Column on percentmac screen for cargo card view recycling 
+    validate CargoUIs + error msg + auto open invalid CargoUI + highlight error
 
 PercentMac
-    add cargo into calc.
+    add CargoCard into calc.
 
+//   copyDoc(){
+// // get the data from 'name@xxx.com'
+// glossaryall.doc('C-17A-ER').get().then((doc) {
+//     if (doc.exists) {
+//         var data = doc.data();
+//         // saves the data to 'name'
+//         glossaryall.doc("C-17A-NON-ER").set(data);
+//     }
+// });
+//   }
+// }
 
 
 
