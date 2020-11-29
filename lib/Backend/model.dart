@@ -1,5 +1,3 @@
-import 'package:fluttertoast/fluttertoast.dart';
-
 class Aircraft {
   final String name,
       fs0,

@@ -4,8 +4,8 @@ import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import '../Backend/model.dart';
 
 class PerMacScreen extends StatefulWidget {
@@ -41,12 +41,8 @@ class _PerMacScreenState extends State<PerMacScreen>
     }
     if (!chartcCard.valid) {
       ret = false;
-      Fluttertoast.showToast(
-        msg: 'Invalid Chart C',
-        timeInSecForIosWeb: 3,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER,
-        webPosition: "center",
+      SnackBar(
+        content: Text('Invalid Chart C'),
       );
     }
     //cargo card goes here
@@ -59,13 +55,11 @@ class _PerMacScreenState extends State<PerMacScreen>
       nwf.addAll(tankCard.getNameWeightFS());
       nwf.addAll(chartcCard.getNameWeightFS());
       print(nwf);
-      Fluttertoast.showToast(
-        msg: NameWeightFS.getPerMac(
-            this.widget.air.lemac, this.widget.air.mac, nwf),
-        timeInSecForIosWeb: 3,
-        toastLength: Toast.LENGTH_LONG,
-        gravity: ToastGravity.CENTER,
-        webPosition: "center",
+      SnackBar(
+        content:Text( 
+          NameWeightFS.getPerMac(
+            this.widget.air.lemac, this.widget.air.mac, nwf)
+        ),
       );
     }
   }

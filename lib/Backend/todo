@@ -17,7 +17,8 @@ CargoCard
     validate CargoUIs + error msg + auto open invalid CargoUI + highlight error
 
 PercentMac
-    add CargoCard into calc.
+    add CargoCard into calc
+    implement snackbars
 
 //   copyDoc(){
 // // get the data from 'name@xxx.com'
