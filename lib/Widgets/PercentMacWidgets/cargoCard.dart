@@ -13,17 +13,28 @@ import 'package:flutter/material.dart';
 ///cargoUI
 class CargoCard extends StatefulWidget {
   ///contains config info for child widgets
-  final Aircraft air; 
+  final Aircraft air;
+
   Config selectedSpinnerConfig;
+  NameWeightFS selectedSpinnerCargo;
+
   ///modal spinner that changes this.selectedSpinnerConfig
   CustomButtomSpinnerModalString configSpin;
-  //list that contains active NWFS ids
+
+  ///modal spinner that changes this.selectedSpinnerCargo
+  CustomButtomSpinnerModalString cargoSpin;
+
+  ///list that contains active NWFS ids
   var importedConfigIDs = List<int>();
+
   ///key is NWFS.id, value is CargoUI
   var cargo = LinkedHashMap<int, CargoUI>();
+
   ///this.cargo.values.toListOfWidgets
   var cargoList = List<Widget>(); 
+
   CargoCard(this.air);
+
   @override
   _CargoCardState createState() => _CargoCardState();
 }
@@ -36,8 +47,18 @@ class _CargoCardState extends State<CargoCard> {
     this.widget.configSpin = CustomButtomSpinnerModalString(
       _getConfigStrings(), 
       onPressed: configChange,
-      spinIdx: 0,selected: this.widget.air.configs[0].name,
+      spinIdx: 0,
+      selected: this.widget.air.configs[0].name,
     );
+
+    this.widget.selectedSpinnerCargo = this.widget.air.addaCargo[0];
+    this.widget.cargoSpin = CustomButtomSpinnerModalString(
+      _getCargoStrings(),
+      onPressed: cargoChange,
+      spinIdx: 0,
+      selected: this.widget.air.addaCargo[0].name,
+    );
+
     super.initState();
   }
 
@@ -46,13 +67,27 @@ class _CargoCardState extends State<CargoCard> {
     this.widget.selectedSpinnerConfig = this.widget.air.configs[indexOfNewConfig];
   }
 
+  ///pass to cargo spiiner
+  void cargoChange(int indexOfNewCargo){
+    this.widget.selectedSpinnerCargo = this.widget.air.addaCargo[indexOfNewCargo];
+  }
+
   ///build and return a list of strings containing the name of 
-  ///each config in the selected aircraft
-  ///passed to config spin
+  ///each config in aircraft, then pass to config spin
   List<String> _getConfigStrings() {
     var ret = List<String>();
     for (int i = 0; i < this.widget.air.configs.length; i++) {
       ret.add(this.widget.air.configs[i].name);
+    }
+    return ret;
+  }
+
+  ///build and return a list of strings containing the 
+  ///name of each nwfs in aircraft, then pass to cargospinn
+  List<String> _getCargoStrings(){
+    var ret = List<String>();
+    for (int i=0; i<this.widget.air.addaCargo.length; i++){
+      ret.add(this.widget.air.addaCargo[i].name);
     }
     return ret;
   }
@@ -72,13 +107,17 @@ class _CargoCardState extends State<CargoCard> {
     //before adding new config remove the old one
     removeConfig();
     for (NameWeightFS oldSelectedConfigNWFS in this.widget.selectedSpinnerConfig.nwfList){
+     
+      var newNWFS = NameWeightFS.copyNewID(oldSelectedConfigNWFS);
+      newNWFS.name += ' '+this.widget.selectedSpinnerConfig.name;
+      
       var newCargoUI = CargoUI(
         this.widget.air.fs0,
         this.widget.air.fs1,
         this.widget.air.weight1,
         this.widget.air.simplemom,
         onPressed: removeCargoID,
-        nwf: NameWeightFS.copyNewID(oldSelectedConfigNWFS)
+        nwf: newNWFS
       );
       this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
       this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
@@ -120,6 +159,21 @@ class _CargoCardState extends State<CargoCard> {
     this.widget.cargo.forEach((key, value) {print(value.nwf.toString());});
   }
 
+  void addCargo(){
+    var newCargoUI = CargoUI(
+        this.widget.air.fs0,
+        this.widget.air.fs1,
+        this.widget.air.weight1,
+        this.widget.air.simplemom,
+        onPressed: removeCargoID,
+        nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo)
+      );
+
+    this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
+    print('Adding cargo '+newCargoUI.nwf.toString());
+    setState(() {});
+  }
+
   Widget build(BuildContext context) {
     getCargo(); //call me every build
     print('building cargoCard');
@@ -128,6 +182,7 @@ class _CargoCardState extends State<CargoCard> {
       'Cargo',
       Column(
         children: <Widget>[
+
           Row2(
             Text('Select Config'),
              this.widget.configSpin
@@ -136,13 +191,24 @@ class _CargoCardState extends State<CargoCard> {
           Divider(thickness: Const.divThickness,),
 
           Row2(
+            Text('Select Cargo'),
+             this.widget.cargoSpin
+             ),
+
+          Divider(thickness: Const.divThickness,),
+
+          Row3(
             CustomButton(
               'Update Config',
-               onPressed: () => {updateConfig()}
+               onPressed: updateConfig
+            ),
+            CustomButton(
+              'Add Cargo',
+              onPressed: addCargo
             ),
             CustomButton(
               'Remove All',
-              onPressed: () => {removeAll()},
+              onPressed: removeAll
             )
           ),
 

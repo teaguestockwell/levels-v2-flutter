@@ -60,7 +60,12 @@ class Row3 extends StatelessWidget {
             margin: EdgeInsets.all(10),
             child: Column(children: [
               Spacer(),
-              Row(children: [one, Spacer(), two, Spacer(), three]),
+              Row(children: [
+                Flexible(flex: 10,child:one), 
+                Spacer(), 
+                Flexible(flex: 10,child:two), 
+                Spacer(), 
+                Flexible(flex: 10,child:three)]),
               Spacer()
             ])));
   }
