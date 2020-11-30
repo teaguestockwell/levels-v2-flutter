@@ -22,7 +22,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
 
   List<Widget> getGlossCards() {
     var ret = List<Widget>();
-    ret.add(aircraftCard(this.widget.air.name));
+    ret.add(AircraftCard(this.widget.air.name));
     for (int i = 0; i < this.widget.air.titles.length; i++) {
       ret.add(CCards(this.widget.air.titles.elementAt(i),
           RowCenterText(this.widget.air.bodys.elementAt(i))));

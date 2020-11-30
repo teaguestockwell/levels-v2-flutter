@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
@@ -33,12 +34,8 @@ class _DurationLookupState extends State<DurationLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Row2.padding(
-          0,
-          5.0,
-          0,
-          0,
+    return CCards('Duration',Column(children: [
+      Row2(
           Text('Date Time One'),
           CustomButton(
             df.format(one),
@@ -48,11 +45,11 @@ class _DurationLookupState extends State<DurationLookup> {
                   theme: DatePickerTheme(
                       backgroundColor: Colors.black,
                       itemStyle: TextStyle(
-                          color: Colors.white60,
+                          color: Const.textColor,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: Const.maxTextSize),
                       doneStyle:
-                          TextStyle(color: Colors.white60, fontSize: 18)),
+                          TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
                   onChanged: changeOne,
                   currentTime: one,
                   locale: LocaleType.en);
@@ -71,16 +68,16 @@ class _DurationLookupState extends State<DurationLookup> {
                       itemStyle: TextStyle(
                           color: Colors.white60,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: Const.maxTextSize),
                       doneStyle:
-                          TextStyle(color: Colors.white60, fontSize: 18)),
+                          TextStyle(color: Colors.white60, fontSize: Const.maxTextSize)),
                   onChanged: changeTwo,
                   currentTime: two,
                   locale: LocaleType.en);
             },
           )),
       Divider(thickness: Const.divThickness,),
-      Row2.padding(0, 0, 0, 5.0, Text('Duration hhhhh:mm:ss'), ConstText(getDiff()))
-    ]);
+      Row2(Text('Duration hhhhh:mm:ss'), ConstText(getDiff()))
+    ]));
   }
 }

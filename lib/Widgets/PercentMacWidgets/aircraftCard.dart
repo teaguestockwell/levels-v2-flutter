@@ -4,9 +4,9 @@ import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 
-class aircraftCard extends StatelessWidget {
+class AircraftCard extends StatelessWidget {
   final String name;
-  aircraftCard(this.name);
+  AircraftCard(this.name);
   @override
   Widget build(BuildContext context) {
     return CardAllwaysOpen(

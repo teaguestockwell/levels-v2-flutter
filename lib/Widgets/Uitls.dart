@@ -14,56 +14,15 @@ class AlignPadding extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(padd),
           child: chil,
-        ));
+        )
+    );
   }
 }
 
-class Icon extends StatefulWidget {
-  final Icon ico;
-  final Alignment alin;
-  Icon(this.ico, this.alin);
-  @override
-  _IconState createState() => _IconState();
-}
-
-class _IconState extends State<Icon> {
-  @override
-  Widget build(BuildContext context) {
-    return AlignPadding(
-        10,
-        this.widget.alin,
-        IconButton(
-          onPressed: null,
-          icon: this.widget.ico,
-        ));
-  }
-}
-
-class ListElement extends StatelessWidget {
-  String name;
-  ListElement(this.name);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-        child: Text(
-          name,
-          style: TextStyle(color: Colors.white70, fontSize: 18),
-        ));
-  }
-}
-
-class Distance extends StatelessWidget {
-  // base is a meter
+class Distance {
   double numOfBases;
   String name;
   Distance(this.name, this.numOfBases);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.fromLTRB(0, 3, 0, 0),
-        child: Text(name, style: TextStyle(color: Colors.white60)));
-  }
 }
 
 class Unit {

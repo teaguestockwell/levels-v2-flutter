@@ -69,7 +69,7 @@ class _CargoUIState extends State<CargoUI> {
 
     if(this.widget.ope == false){return Container();}
       var ret = Column(children: [
-      RowCenter(CustomTextFieldTextMax(tcName, nameChange)),
+      Padding(padding: EdgeInsets.fromLTRB(0,5,0,0),child:RowCenter(CustomTextFieldTextMax(tcName, nameChange))),
       Divider(thickness:Const.divThickness),
       Row2.height(Text('Weight'), CustomTextFieldNumSize(tcWeight,8),Const.pickerHeight*1.7),
       Divider(thickness:Const.divThickness),
@@ -77,7 +77,7 @@ class _CargoUIState extends State<CargoUI> {
       Divider(thickness:Const.divThickness),
       Row2.height(Text('Qty'), CustomTextFieldNumSize(tcQty,6,decimal: false, onChange: qtyChange),Const.pickerHeight*1.7),
       Divider(thickness: Const.divThickness),
-      RowCenterOne(CustomButton('Remove',onPressed: (){this.widget.onPressed(this.widget.nwf.id);},))
+      Padding(padding: EdgeInsets.fromLTRB(0,0,0,5),child:RowCenterOne(CustomButton('Remove',onPressed: (){this.widget.onPressed(this.widget.nwf.id);},)))
     ],);
     return ret;
   }
@@ -104,14 +104,14 @@ class _CargoUIState extends State<CargoUI> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.fromLTRB(2,5,2,5),
+        padding: EdgeInsets.all(Const.cardP),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
-                color: Colors.white10,
+                color: Const.cargoUIColor,
                 shape: Border(
                     top: BorderSide(
-                  color: Colors.white10,
+                  color: Const.cargoUIColor,
                   width: 22,
                 )),
                 child: Column(

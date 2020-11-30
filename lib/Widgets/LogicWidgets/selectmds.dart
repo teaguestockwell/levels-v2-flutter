@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -35,7 +36,7 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return CCards('Aircraft',Column(children: [
       Padding(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Row2(Text('MDS'), this.widget.mdsSpin)),
@@ -56,6 +57,6 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
               },
             ),
           ))
-    ]);
+    ]));
   }
 }

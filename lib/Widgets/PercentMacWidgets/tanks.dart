@@ -99,7 +99,7 @@ class _TankRowState extends State<TankRow> {
             context: context,
             builder: (BuildContext context) {
               return Container(
-                height: 200,
+                height: Const.modalSpinHeight,
                 color: Colors.black,
                 child: Center(
                   child: Column(
@@ -107,7 +107,7 @@ class _TankRowState extends State<TankRow> {
                     mainAxisSize: MainAxisSize.min,
                     children: <Widget>[
                       Container(
-                          height: 200,
+                          height: Const.modalSpinHeight,
                           child: CupertinoPicker(
                             scrollController: FixedExtentScrollController(
                                 initialItem: this.widget.spinIdx),

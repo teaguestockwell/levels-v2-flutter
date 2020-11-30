@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,17 +16,17 @@ class PreInsp extends StatefulWidget {
 class _PreInspState extends State<PreInsp> {
   
   var f = DateFormat('yyyy MM dd HH:mm');
-  var number = 48;
-  var acompDate = DateTime.now().subtract(Duration(hours: 48));
+  var number = 144;
+  var acompDate = DateTime.now().subtract(Duration(hours: 144));
   var acomp = DateFormat('yyyy MM dd HH:mm')
-      .format(DateTime.now().subtract(Duration(hours: 48)))
+      .format(DateTime.now().subtract(Duration(hours: 144)))
       .toString();
   var expireAt =
       DateFormat('yyyy MM dd HH:mm').format(DateTime.now()).toString();
   
   initState(){
     var stringList = List<String>();
-    for(int i=1;i<=48;i++){
+    for(int i=1;i<=144;i++){
       stringList.add(i.toString());
     }
     this.widget.buttonDurration = CustomButtomSpinnerModalString(stringList,onPressed: lenChange,);
@@ -45,7 +46,7 @@ class _PreInspState extends State<PreInsp> {
   lenChange(int n) {
     print(n);
     setState(() {
-      number = 48 - n;
+      number = 144 - n;
       expireAt = f.format(acompDate.add(Duration(hours: number))).toString();
       print(
           '\n duration change: \n achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acomp \n duration: $number');
@@ -56,13 +57,9 @@ class _PreInspState extends State<PreInsp> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return CCards('Pre/Insp Expire',Column(
       children: [
-        Row2.padding(
-            0,
-            5.0,
-            0,
-            0,
+        Row2(
             Text('Acomplished At'),
             CustomButton(
               acomp,
@@ -72,11 +69,11 @@ class _PreInspState extends State<PreInsp> {
                     theme: DatePickerTheme(
                         backgroundColor: Colors.black,
                         itemStyle: TextStyle(
-                            color: Colors.white60,
+                            color: Const.textColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                            fontSize: Const.maxTextSize),
                         doneStyle:
-                            TextStyle(color: Colors.white60, fontSize: 18)),
+                            TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
                     onChanged: timeChange,
                     currentTime: acompDate,
                     locale: LocaleType.en);
@@ -87,12 +84,11 @@ class _PreInspState extends State<PreInsp> {
             Text('Hours Until Expire'),
             this.widget.buttonDurration),
         Divider(thickness: Const.divThickness,),
-        Row2.padding(
-          0, 0, 0, 5.0, 
+        Row2(
           Text('Expires At'), 
           ConstText(expireAt)
           )
       ],
-    );
+    ));
   }
 }

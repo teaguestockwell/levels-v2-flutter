@@ -46,7 +46,7 @@ class _BottomNavState extends State<BottomNav> {
 
   void onTabTapped(int index) {
     this._pageController.animateToPage(index,
-        duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds: Const.animationDuration), curve: Curves.easeInOut);
   }
 
   @override

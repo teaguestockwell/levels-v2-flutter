@@ -1,5 +1,5 @@
 import 'package:five_level_one/Widgets/PercentMacWidgets/Tanks.dart';
-import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftcard.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftCard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
@@ -25,9 +25,11 @@ class _PerMacScreenState extends State<PerMacScreen>
   TanksCard tankCard;
   ChartCRow chartcCard;
   CargoCard cargoCard;
+  AircraftCard aircraftCard;
 
   @override
   void initState() {
+    aircraftCard = AircraftCard(this.widget.air.name);
     tankCard = TanksCard(this.widget.air);
     chartcCard = ChartCRow(this.widget.air);
     cargoCard = CargoCard(this.widget.air);
@@ -72,7 +74,7 @@ class _PerMacScreenState extends State<PerMacScreen>
         child: SingleChildScrollView(
           controller: sc,
           child: Column(children: [
-            aircraftCard(this.widget.air.name),
+            aircraftCard,
             tankCard,
             chartcCard,
             cargoCard,

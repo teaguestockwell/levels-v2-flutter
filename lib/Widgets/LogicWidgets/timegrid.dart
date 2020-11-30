@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/Uitls.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
@@ -38,7 +39,7 @@ class _TimeGrid extends State<TimeGrid> {
     var zJJJ = DateFormat('DDD').format(znow).toString();
     var zHHMMSS = DateFormat('HH:mm:ss').format(znow).toString();
 
-    return AlignPadding(
+    return CCards('Now', AlignPadding(
         2.0,
         Alignment.center,
         Table(
@@ -152,6 +153,6 @@ class _TimeGrid extends State<TimeGrid> {
                       textAlign: TextAlign.center,
                     )))
               ]),
-            ]));
+            ])));
   }
 }

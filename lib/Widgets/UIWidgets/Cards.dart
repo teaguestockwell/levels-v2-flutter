@@ -1,19 +1,42 @@
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../Uitls.dart';
 
 class CCards extends StatefulWidget {
   final String title;
-  final Widget child;
+  Widget child;
   bool open;
 
+  ///starts open
   CCards(this.title, this.child) {
     this.open = true;
+    addPadding();
   }
+  //starts closed
   CCards.C(this.title, this.child) {
     this.open = false;
+    addPadding();
   }
+
+void addPadding(){
+  //wraps first and last widets in padding.
+  if(child is Column){
+    Column childp = child;
+    if(childp.children.length > 1){
+      Widget first = childp.children.first;
+      Widget last = childp.children.last;
+      childp.children.removeAt(0);
+      childp.children.removeAt(childp.children.length-1);
+      var firstP = Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0), child: first);
+      var lastP = Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: last,);
+      childp.children.insert(0, firstP);
+      childp.children.insert(childp.children.length, lastP);
+      child =childp;
+    }
+  }
+}
+
   @override
   _CCardsState createState() => _CCardsState();
 }
@@ -47,7 +70,7 @@ class _CCardsState extends State<CCards> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.fromLTRB(2,5,2,5),
+        padding: EdgeInsets.all(Const.cardP),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
@@ -70,14 +93,31 @@ class _CCardsState extends State<CCards> {
 }
 
 class CardAllwaysOpen extends StatelessWidget {
-  CardAllwaysOpen(this.title, this.chil);
-  final Widget chil;
+  Widget chil;
   final String title;
-
+  CardAllwaysOpen(this.title, this.chil){
+    //wraps first and last widets in padding.
+    if(chil is Column){
+      Column childp = chil;
+      if(childp.children.length > 1){
+        Widget first = childp.children.first;
+        Widget last = childp.children.last;
+        childp.children.removeAt(0);
+        childp.children.removeAt(childp.children.length-1);
+        var firstP = Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0), child: first);
+        var lastP = Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: last,);
+        childp.children.insert(0, firstP);
+        childp.children.insert(childp.children.length, lastP);
+        chil =childp;
+        print('padding added');
+      }
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(2),
+        padding: EdgeInsets.all(Const.cardP),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
@@ -97,5 +137,3 @@ class CardAllwaysOpen extends StatelessWidget {
                 ))));
   }
 }
-
-//stless

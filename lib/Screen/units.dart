@@ -10,12 +10,12 @@ import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
   var widgets = <Widget>[
-    CCards('Now', TimeGrid()),
-    CCards('Pre/Insp Expire', PreInsp()),
-    CCards('Julian Lookup', JJJLookup()),
-    CCards('YYYY MM DD Lookup', YYYYMMDDLookup2()),
-    CCards('Duration', DurationLookup()),
-    CCards('Unit Conversion', tDistanceBody()),
+    TimeGrid(),
+    PreInsp(),
+    JJJLookup(),
+    YYYYMMDDLookup2(),
+    DurationLookup(),
+    tDistanceBody(),
   ];
 
   final sc = ScrollController();

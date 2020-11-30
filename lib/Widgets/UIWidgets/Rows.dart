@@ -3,116 +3,66 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../Uitls.dart';
 
 class Row2 extends StatelessWidget {
   final Widget one, two;
   double height;
-  double l, t, r, b;
-  Row2.padding(this.l, this.t, this.r, this.b, this.one, this.two);
-  Row2.height(this.one,this.two,this.height){
-    this.l = 0;
-    this.t = 0;
-    this.r = 0;
-    this.b = 0;
-  }
-  Row2(this.one, this.two) {
-    this.l = 0;
-    this.t = 0;
-    this.r = 0;
-    this.b = 0;
-  }
+  Row2.height(this.one,this.two,this.height);
+  Row2(this.one, this.two);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        // key: UniqueKey(),
-        padding: EdgeInsets.fromLTRB(l, t, r, b),
-        child: Container(
-            height: this.height??Const.pickerHeight,
-            margin: EdgeInsets.all(10),
-            child: Column(children: [
+    return Container(
+        height: this.height??Const.pickerHeight,
+        margin: EdgeInsets.all(Const.rowInset),
+        child: Center(
+          child:Row(
+            children:[
+              one,
               Spacer(),
-              Row(children: [one, Spacer(), two]),
-              Spacer()
-            ])));
+              two
+            ]
+          ),
+        )
+      );
   }
 }
 
 class Row3 extends StatelessWidget {
   final Widget one, two, three;
-  double l, t, r, b;
-  Row3.padding(this.l, this.t, this.r, this.b, this.one, this.two, this.three);
-  Row3(this.one, this.two, this.three) {
-    this.l = 0;
-    this.t = 0;
-    this.r = 0;
-    this.b = 0;
-  }
+  Row3(this.one, this.two, this.three);
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        // key: UniqueKey(),
-        padding: EdgeInsets.fromLTRB(l, t, r, b),
-        child: Container(
+    return Container(
             height: Const.rowHeight,
-            margin: EdgeInsets.all(10),
-            child: Column(children: [
-              Spacer(),
-              Row(children: [
-                Flexible(flex: 10,child:one), 
-                Spacer(), 
-                Flexible(flex: 10,child:two), 
-                Spacer(), 
-                Flexible(flex: 10,child:three)]),
-              Spacer()
-            ])));
+            margin: EdgeInsets.all(Const.rowInset),
+            child: Center(
+              child:Row(
+                children: [
+                  Flexible(flex: 10,child:one), 
+                  Spacer(), 
+                  Flexible(flex: 10,child:two), 
+                  Spacer(), 
+                  Flexible(flex: 10,child:three)
+                ]
+              ),
+            )
+        );
   }
 }
 
 class RowCenterOne extends StatelessWidget {
   Widget w;
-  double l, t, r, b;
-  RowCenterOne(
-    this.w, {
-    this.l = 0,
-    this.t = 0,
-    this.r = 0,
-    this.b = 0,
-  });
+  RowCenterOne(this.w);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(l, t, r, b),
-      child: Container(
-        height: 30,
-        margin: EdgeInsets.all(10),
-        child: Column(
-          children: [
-            Spacer(),
-            Row(
-              children: [Spacer(), w, Spacer()],
-            ),
-            Spacer()
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class RowOneLeft extends StatelessWidget {
-  final Widget one;
-  RowOneLeft(this.one);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[this.one, Spacer()],
-        ));
+    return Container(
+        height: Const.rowHeight,
+        margin: EdgeInsets.all(Const.rowInset),
+        child: Center(child: w ),
+      );
   }
 }
 
@@ -122,7 +72,7 @@ class RowCenter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlignPadding(10.0, Alignment.center, this.w);
+    return AlignPadding(Const.rowInset, Alignment.center, this.w);
   }
 }
 
@@ -134,44 +84,20 @@ class RowCenterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlignPadding(
-        10.0,
-        Alignment.center,
-        SelectableLinkify(
-          text: w,
-          options: LinkifyOptions(humanize: false),
-          onOpen: (link) async {
+      Const.rowInset,
+      Alignment.center,
+      SelectableLinkify(
+        text: w,
+        options: LinkifyOptions(humanize: false),
+        onOpen: (link) async {
             if (await canLaunch(link.url)) {
               await launch(link.url);
             } else {
               throw 'Could not launch $link';
             }
-          },
-        ));
-  }
-}
-
-class RowLeftText extends StatelessWidget {
-  final String w;
-
-  RowLeftText(this.w);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlignPadding(10.0, Alignment.centerLeft, Text(w));
-  }
-}
-
-class RowTwo extends StatelessWidget {
-  ///@return a row containing center, padded, and space between two param widgets
-  final Widget one, two;
-  RowTwo(this.one, this.two);
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: Row(
-          children: <Widget>[this.one, Spacer(), this.two],
-        ));
+        }
+      )
+    );
   }
 }
 
@@ -180,19 +106,15 @@ class ConstText extends StatelessWidget {
   ConstText(this.text);
   @override
   Widget build(BuildContext context) {
-    var text = Text(
-                this.text,
-                 textAlign: TextAlign.center
-              );
     return Container(
-            width: Const.pickerWidth,
-            height: Const.pickerHeight,
-            child: Center(
-              child: Text(
-                this.text,
-                textAlign: TextAlign.center,
-              )
-             )
+      width: Const.pickerWidth,
+      height: Const.pickerHeight,
+      child: Center(
+        child: Text(
+          this.text,
+          textAlign: TextAlign.center,
+        )
+      )
     );
   }
 }

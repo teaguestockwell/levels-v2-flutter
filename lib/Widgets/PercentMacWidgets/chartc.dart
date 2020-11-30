@@ -76,11 +76,7 @@ var re = InputDec.re;
         "Chart C",
         Column(
           children: [
-            Row2.padding(
-                0,
-                5,
-                0,
-                0,
+            Row2(
                 Text("Basic Weight"),
                 Container(
                     width: Const.pickerWidth,
@@ -99,11 +95,7 @@ var re = InputDec.re;
                       decoration: w,
                     ))),
             Divider(thickness: Const.divThickness,),
-            Row2.padding(
-                0,
-                0,
-                0,
-                5,
+            Row2(
                 Text("Basic Moment"),
                 Container(
                     width: Const.pickerWidth,

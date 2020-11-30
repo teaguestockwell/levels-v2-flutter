@@ -27,34 +27,33 @@ class _HomePageState extends State<HomePage> {
 
   press() {
     FirebaseFirestore.instance
-        .collection('mds')
-        .doc(selectedMdsBody.mdsSpin.selected)
-        .get()
-        .then((v) => setState(() {
-              air = Aircraft(
-                v.get('name'),
-                v.get('fs0'),
-                v.get('fs1'),
-                v.get('mom0'),
-                v.get('mom1'),
-                v.get('weight0'),
-                v.get('weight1'),
-                v.get('simplemom'),
-                v.get('lemac'),
-                v.get('mac'),
-                v.get('tanknames'),
-                v.get('tankmoms'),
-                v.get('tankweights'),
-                v.get('titles'),
-                v.get('bodys'),
-                v.get('cargonames'),
-                v.get('cargoweights'),
-                v.get('cargomoms'),
-                v.get('configs')
-              );
-
-              body = BottomNav(air);
-            }));
+    .collection('mds')
+    .doc(selectedMdsBody.mdsSpin.selected)
+    .get()
+    .then((v) => setState(() {
+          air = Aircraft(
+            v.get('name'),
+            v.get('fs0'),
+            v.get('fs1'),
+            v.get('mom0'),
+            v.get('mom1'),
+            v.get('weight0'),
+            v.get('weight1'),
+            v.get('simplemom'),
+            v.get('lemac'),
+            v.get('mac'),
+            v.get('tanknames'),
+            v.get('tankmoms'),
+            v.get('tankweights'),
+            v.get('titles'),
+            v.get('bodys'),
+            v.get('cargonames'),
+            v.get('cargoweights'),
+            v.get('cargomoms'),
+            v.get('configs')
+          );
+          body = BottomNav(air);
+    }));
   }
 
  
@@ -74,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                 Image(image: AssetImage('assets/0.png')),
                 CardAllwaysOpen(
                     gen.welcometitle, RowCenterText(gen.welcomebody)),
-                CardAllwaysOpen('Aircraft', selectedMdsBody),
+                selectedMdsBody,
                 // CCards('Now', TimeGrid())
               ]);
             }));

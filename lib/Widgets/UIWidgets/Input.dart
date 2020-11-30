@@ -224,7 +224,9 @@ class _CustomButtomSpinnerModalStringState
           child: Text(
             x,
             style: TextStyle(color: Colors.white70, fontSize: 22),
-          )));
+          )
+      )
+      );
       print(x);
     }
     return ret;
@@ -239,7 +241,7 @@ class _CustomButtomSpinnerModalStringState
           context: context,
           builder: (BuildContext context) {
             return Container(
-              height: 210,
+              height: Const.modalSpinHeight,
               color: Colors.black,
               child: Center(
                 child: Column(
@@ -247,7 +249,7 @@ class _CustomButtomSpinnerModalStringState
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                        height: 210,
+                        height: Const.modalSpinHeight,
                         child: Center(
                             child: CupertinoPicker(
                           scrollController: FixedExtentScrollController(
@@ -255,7 +257,9 @@ class _CustomButtomSpinnerModalStringState
                           children: _getSpinnerWidgets(),
                           onSelectedItemChanged: _spin,
                           itemExtent: 35,
-                        ))),
+                        )
+                      )
+                    ),
                   ],
                 ),
               ),

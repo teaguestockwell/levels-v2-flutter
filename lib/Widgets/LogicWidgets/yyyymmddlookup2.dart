@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -67,13 +68,9 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return CCards('YYYY MM DD Lookup',Column(
       children: [
-        Row2.padding(
-            0,
-            5,
-            0,
-            0,
+        Row2(
             Text('YYYY'),
             CustomButtomSpinnerModalString(
               getStringYear(),
@@ -95,9 +92,8 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
         Divider(
           thickness: Const.divThickness,
         ),
-        Row2.padding(
-            0, 0, 0, 5.0, Text('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
+        Row2(Text('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],
-    );
+    ));
   }
 }

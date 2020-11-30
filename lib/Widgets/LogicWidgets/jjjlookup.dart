@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
@@ -23,13 +24,9 @@ class _JJJLookupState extends State<JJJLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return CCards('Julian Lookup', Column(
       children: [
-        Row2.padding(
-            0,
-            5.0,
-            0,
-            0,
+        Row2(
             Text('YYYY MM DD'),
             CustomButton(
               dfYMD.format(dateAcomp),
@@ -39,20 +36,19 @@ class _JJJLookupState extends State<JJJLookup> {
                     theme: DatePickerTheme(
                         backgroundColor: Colors.black,
                         itemStyle: TextStyle(
-                            color: Colors.white60,
+                            color: Const.textColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                            fontSize: Const.maxTextSize),
                         doneStyle:
-                            TextStyle(color: Colors.white60, fontSize: 18)),
+                            TextStyle(color: Colors.white60, fontSize: Const.maxTextSize)),
                     onChanged: timeChange,
                     currentTime: dateAcomp,
                     locale: LocaleType.en);
               },
             )),
         Divider(thickness: Const.divThickness,),
-        Row2.padding(
-            0, 0, 0, 5.0, Text('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
+        Row2(Text('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],
-    );
+    ));
   }
 }

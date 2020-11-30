@@ -1,4 +1,5 @@
 import 'package:five_level_one/Backend/cont.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -111,7 +112,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
+    return CCards('Unit Conversion',Column(children: [
       RowCenter(Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           width: Const.pickerWidth,
@@ -146,7 +147,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
             Spacer(),
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white60),
+                    border: Border.all(color: Colors.white30),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,
@@ -158,6 +159,6 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                   ),
                 ])),
           ]))
-    ]);
+    ]));
   }
 }
