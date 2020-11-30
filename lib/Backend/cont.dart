@@ -11,7 +11,7 @@ class Const {
   rowInset = 10.0,
   modalSpinHeight = 210,
   maxTextSize=22,
-  cardP = 3;
+  cardP = 4;
 
   static const int 
     animationDuration = 100;

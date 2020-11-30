@@ -70,7 +70,12 @@ class _CCardsState extends State<CCards> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(Const.cardP),
+        padding: EdgeInsets.fromLTRB(
+          Const.cardP,
+          Const.cardP,
+          Const.cardP,
+          0.0
+          ),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
@@ -117,7 +122,12 @@ class CardAllwaysOpen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(Const.cardP),
+        padding: EdgeInsets.fromLTRB(
+          Const.cardP,
+          Const.cardP,
+          Const.cardP,
+          0.0
+          ),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
