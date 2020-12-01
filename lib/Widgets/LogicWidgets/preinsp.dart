@@ -57,7 +57,7 @@ class _PreInspState extends State<PreInsp> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards('Pre/Insp Expire',Column(
+    return Column(
       children: [
         Row2(
             Tex('Acomplished At'),
@@ -89,6 +89,6 @@ class _PreInspState extends State<PreInsp> {
           ConstText(expireAt)
           )
       ],
-    ));
+    );
   }
 }

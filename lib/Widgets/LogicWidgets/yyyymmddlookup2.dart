@@ -68,7 +68,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards('YYYY MM DD Lookup',Column(
+    return Column(
       children: [
         Row2(
             Tex('YYYY'),
@@ -94,6 +94,6 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
         ),
         Row2(Tex('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],
-    ));
+    );
   }
 }

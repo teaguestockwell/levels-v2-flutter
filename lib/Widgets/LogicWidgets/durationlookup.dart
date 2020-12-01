@@ -34,7 +34,7 @@ class _DurationLookupState extends State<DurationLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards('Duration',Column(children: [
+    return Column(children: [
       Row2(
           Tex('Date Time One'),
           CustomButton(
@@ -78,6 +78,6 @@ class _DurationLookupState extends State<DurationLookup> {
           )),
       Divider(thickness: Const.divThickness,),
       Row2(Tex('Duration hhhhh:mm:ss'), ConstText(getDiff()))
-    ]));
+    ]);
   }
 }

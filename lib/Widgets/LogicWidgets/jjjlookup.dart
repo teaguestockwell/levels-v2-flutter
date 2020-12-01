@@ -24,7 +24,7 @@ class _JJJLookupState extends State<JJJLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards('Julian Lookup', Column(
+    return Column(
       children: [
         Row2(
             Tex('YYYY MM DD'),
@@ -49,6 +49,6 @@ class _JJJLookupState extends State<JJJLookup> {
         Divider(thickness: Const.divThickness,),
         Row2(Tex('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],
-    ));
+    );
   }
 }

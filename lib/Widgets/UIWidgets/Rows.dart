@@ -37,20 +37,20 @@ class Row3 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-            height: Const.rowHeight,
-            margin: EdgeInsets.all(Const.rowInset),
-            child: Center(
-              child:Row(
-                children: [
-                  Flexible(flex: 10,child:one), 
-                  Spacer(), 
-                  Flexible(flex: 10,child:two), 
-                  Spacer(), 
-                  Flexible(flex: 10,child:three)
-                ]
-              ),
-            )
-        );
+      height: Const.rowHeight,
+      margin: EdgeInsets.all(Const.rowInset),
+      child: Row(
+        children: [
+          Spacer(),
+          Expanded(flex: 10,child:one), 
+          Spacer(), 
+          Expanded(flex: 10,child:two), 
+          Spacer(), 
+          Expanded(flex: 10,child:three),
+          Spacer(),
+        ]
+      ),
+    );
   }
 }
 

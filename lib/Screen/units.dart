@@ -5,18 +5,17 @@ import 'package:five_level_one/Widgets/LogicWidgets/timegrid.dart';
 import 'package:five_level_one/Widgets/LogicWidgets/unitconversion.dart';
 import 'package:five_level_one/Widgets/LogicWidgets/yyyymmddlookup2.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
-import 'package:five_level_one/Widgets/UIWidgets/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
   var widgets = <Widget>[
     CCards('Now',TimeGrid()),
-    PreInsp(),
-    JJJLookup(),
-    YYYYMMDDLookup2(),
-    DurationLookup(),
-    tDistanceBody(),
+    CCards('Pre/Insp Expire', PreInsp()),
+    CCards('Julian Lookup',JJJLookup()),
+    CCards('YYYY MM DD Lookup',YYYYMMDDLookup2()),
+    CCards('Duration',DurationLookup()),
+    CCards('Unit Conversion',tDistanceBody()),
   ];
 
   final sc = ScrollController();
