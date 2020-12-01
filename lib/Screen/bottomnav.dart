@@ -3,6 +3,7 @@ import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Screen/glossary.dart';
 import 'package:five_level_one/Screen/percentmac.dart';
 import 'package:five_level_one/Screen/units.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
@@ -63,7 +64,7 @@ class _BottomNavState extends State<BottomNav> {
           backgroundColor: Const.background,
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
-            title: Text(titleArr[_pageIndex]),
+            title: Tex(titleArr[_pageIndex]),
           ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: true,

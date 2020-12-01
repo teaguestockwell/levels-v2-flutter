@@ -141,9 +141,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
                   ),
                 ])),
             Spacer(),
-            Text('=',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white60)),
+            Tex('=',),
             Spacer(),
             Container(
                 decoration: BoxDecoration(

@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/CargoUI.dart';
@@ -32,6 +33,8 @@ class CargoCard extends StatefulWidget {
 
   ///this.cargo.values.toListOfWidgets
   var cargoList = List<Widget>(); 
+
+  final _autoSizeGroup = AutoSizeGroup();
 
   CargoCard(this.air);
 
@@ -184,14 +187,14 @@ class _CargoCardState extends State<CargoCard> {
         children: <Widget>[
 
           Row2(
-            Text('Select Config'),
-             this.widget.configSpin
+            Tex('Select Config'),
+             this.widget.configSpin,
           ),
 
           Divider(thickness: Const.divThickness,),
 
           Row2(
-            Text('Select Cargo'),
+            Tex('Select Cargo'),
              this.widget.cargoSpin
              ),
 
@@ -200,14 +203,17 @@ class _CargoCardState extends State<CargoCard> {
           Row3(
             CustomButton(
               'Update Config',
-               onPressed: updateConfig
+               onPressed: updateConfig,
+               autoSizeGroup: this.widget._autoSizeGroup,
             ),
             CustomButton(
               'Add Cargo',
+              autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: addCargo
             ),
             CustomButton(
               'Remove All',
+              autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: removeAll
             )
           ),

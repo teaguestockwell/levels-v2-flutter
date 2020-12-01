@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
@@ -75,14 +76,15 @@ class _TankRowState extends State<TankRow> {
 
   getTankWidgetsForSpinner() {
     List<Widget> list = [];
+    final asg = AutoSizeGroup();
     for (int i = 0; i < this.widget.t.nameWeightFSs.length; i++) {
       list.add(
         Padding(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child:
-        Text(
+        Tex(
         this.widget.t.nameWeightFSs[i].weight,
-        style: TextStyle(color: Colors.white70, fontSize: 22),
+        autoSizeGroup: asg,
       )));
     }
     return list;
@@ -91,7 +93,7 @@ class _TankRowState extends State<TankRow> {
   @override
   Widget build(BuildContext context) {
     return Row2(
-      Text(this.widget.t.name),
+      Tex(this.widget.t.name),
       CustomButton(
         this.widget.selected.weight,
         onPressed: () {

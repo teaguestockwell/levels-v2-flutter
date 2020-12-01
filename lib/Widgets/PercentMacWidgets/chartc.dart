@@ -77,7 +77,7 @@ var re = InputDec.re;
         Column(
           children: [
             Row2(
-                Text("Basic Weight"),
+                Tex("Basic Weight"),
                 Container(
                     width: Const.pickerWidth,
                     height: Const.pickerHeight,
@@ -96,7 +96,7 @@ var re = InputDec.re;
                     ))),
             Divider(thickness: Const.divThickness,),
             Row2(
-                Text("Basic Moment"),
+                Tex("Basic Moment"),
                 Container(
                     width: Const.pickerWidth,
                     height: Const.pickerHeight,

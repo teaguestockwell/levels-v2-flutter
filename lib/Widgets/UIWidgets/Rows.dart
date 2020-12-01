@@ -4,6 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Uitls.dart';
+import 'package:auto_size_text/auto_size_text.dart';
+
 
 class Row2 extends StatelessWidget {
   final Widget one, two;
@@ -87,6 +89,8 @@ class RowCenterText extends StatelessWidget {
       Const.rowInset,
       Alignment.center,
       SelectableLinkify(
+        showCursor: true,
+        style: TextStyle(color: Const.textColor, fontSize: Const.maxTextSize/1.3),
         text: w,
         options: LinkifyOptions(humanize: false),
         onOpen: (link) async {
@@ -110,11 +114,30 @@ class ConstText extends StatelessWidget {
       width: Const.pickerWidth,
       height: Const.pickerHeight,
       child: Center(
-        child: Text(
+        child: Tex(
           this.text,
-          textAlign: TextAlign.center,
         )
       )
+    );
+  }
+}
+///AutoSizing Text
+class Tex extends StatelessWidget {
+  String text;
+  AutoSizeGroup autoSizeGroup;
+  Tex(this.text,{this.autoSizeGroup});
+  @override
+  Widget build(BuildContext context) {
+    return AutoSizeText(
+      text,
+      maxFontSize: Const.maxTextSize,
+      minFontSize: Const.minTextSize,
+      maxLines: 1,
+      group: autoSizeGroup,
+      style: TextStyle(
+        color: Const.textColor,
+        fontWeight: FontWeight.bold,
+      ),
     );
   }
 }

@@ -27,7 +27,7 @@ class _JJJLookupState extends State<JJJLookup> {
     return CCards('Julian Lookup', Column(
       children: [
         Row2(
-            Text('YYYY MM DD'),
+            Tex('YYYY MM DD'),
             CustomButton(
               dfYMD.format(dateAcomp),
               onPressed: () {
@@ -37,17 +37,17 @@ class _JJJLookupState extends State<JJJLookup> {
                         backgroundColor: Colors.black,
                         itemStyle: TextStyle(
                             color: Const.textColor,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: Const.textWeight,
                             fontSize: Const.maxTextSize),
                         doneStyle:
-                            TextStyle(color: Colors.white60, fontSize: Const.maxTextSize)),
+                            TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
                     onChanged: timeChange,
                     currentTime: dateAcomp,
                     locale: LocaleType.en);
               },
             )),
         Divider(thickness: Const.divThickness,),
-        Row2(Text('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
+        Row2(Tex('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],
     ));
   }

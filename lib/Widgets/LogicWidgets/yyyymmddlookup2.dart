@@ -71,7 +71,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
     return CCards('YYYY MM DD Lookup',Column(
       children: [
         Row2(
-            Text('YYYY'),
+            Tex('YYYY'),
             CustomButtomSpinnerModalString(
               getStringYear(),
               onPressed: yearChange,
@@ -82,7 +82,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
           thickness: Const.divThickness,
         ),
         Row2(
-            Text('Julian Day'),
+            Tex('Julian Day'),
             CustomButtomSpinnerModalString(
               getStringDays(),
               onPressed: dayChange,
@@ -92,7 +92,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
         Divider(
           thickness: Const.divThickness,
         ),
-        Row2(Text('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
+        Row2(Tex('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],
     ));
   }

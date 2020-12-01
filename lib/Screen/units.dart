@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
   var widgets = <Widget>[
-    TimeGrid(),
+    CCards('Now',TimeGrid()),
     PreInsp(),
     JJJLookup(),
     YYYYMMDDLookup2(),

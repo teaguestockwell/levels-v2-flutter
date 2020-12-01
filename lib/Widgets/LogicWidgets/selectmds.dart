@@ -37,13 +37,9 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
   @override
   Widget build(BuildContext context) {
     return CCards('Aircraft',Column(children: [
-      Padding(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Row2(Text('MDS'), this.widget.mdsSpin)),
+      Row2(Tex('MDS'), this.widget.mdsSpin),
           Divider(thickness: Const.divThickness,),
-      Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-          child: Row2(
+      Row2(
             CustomButton(
               'I Accept',
               onPressed: () {
@@ -56,7 +52,7 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
                 print('help');
               },
             ),
-          ))
+          )
     ]));
   }
 }

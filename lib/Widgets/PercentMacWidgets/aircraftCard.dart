@@ -11,7 +11,7 @@ class AircraftCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardAllwaysOpen(
           "Aircraft",
-           Row2(Text(this.name), CustomButton('Change MDS', onPressed: (){Phoenix.rebirth(context);},))
+           Row2(Tex(this.name), CustomButton('Change MDS', onPressed: (){Phoenix.rebirth(context);},))
     );
   }
 }

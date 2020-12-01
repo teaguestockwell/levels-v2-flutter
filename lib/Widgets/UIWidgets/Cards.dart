@@ -2,6 +2,7 @@ import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../Uitls.dart';
+import 'Rows.dart';
 
 class CCards extends StatefulWidget {
   final String title;
@@ -89,7 +90,7 @@ class _CCardsState extends State<CCards> {
                   children: [
                     InkWell(
                         child: AlignPadding(
-                            3.0, Alignment.center, Text(this.widget.title)),
+                            3.0, Alignment.center, Tex(this.widget.title)),
                         onTap: toggleChild),
                     chil
                   ],
@@ -140,7 +141,7 @@ class CardAllwaysOpen extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
-                      child: AlignPadding(3.0, Alignment.center, Text(title)),
+                      child: AlignPadding(3.0, Alignment.center, Tex(title)),
                     ),
                     chil
                   ],

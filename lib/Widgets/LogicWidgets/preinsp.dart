@@ -60,7 +60,7 @@ class _PreInspState extends State<PreInsp> {
     return CCards('Pre/Insp Expire',Column(
       children: [
         Row2(
-            Text('Acomplished At'),
+            Tex('Acomplished At'),
             CustomButton(
               acomp,
               onPressed: () {
@@ -70,7 +70,7 @@ class _PreInspState extends State<PreInsp> {
                         backgroundColor: Colors.black,
                         itemStyle: TextStyle(
                             color: Const.textColor,
-                            fontWeight: FontWeight.bold,
+                            fontWeight: Const.textWeight,
                             fontSize: Const.maxTextSize),
                         doneStyle:
                             TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
@@ -81,11 +81,11 @@ class _PreInspState extends State<PreInsp> {
             )),
         Divider(thickness: Const.divThickness,),
         Row2(
-            Text('Hours Until Expire'),
+            Tex('Hours Until Expire'),
             this.widget.buttonDurration),
         Divider(thickness: Const.divThickness,),
         Row2(
-          Text('Expires At'), 
+          Tex('Expires At'), 
           ConstText(expireAt)
           )
       ],

@@ -36,7 +36,7 @@ class _DurationLookupState extends State<DurationLookup> {
   Widget build(BuildContext context) {
     return CCards('Duration',Column(children: [
       Row2(
-          Text('Date Time One'),
+          Tex('Date Time One'),
           CustomButton(
             df.format(one),
             onPressed: () {
@@ -46,7 +46,7 @@ class _DurationLookupState extends State<DurationLookup> {
                       backgroundColor: Colors.black,
                       itemStyle: TextStyle(
                           color: Const.textColor,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: Const.textWeight,
                           fontSize: Const.maxTextSize),
                       doneStyle:
                           TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
@@ -57,7 +57,7 @@ class _DurationLookupState extends State<DurationLookup> {
           )),
       Divider(thickness: Const.divThickness,),
       Row2(
-          Text('Date Time Two'),
+          Tex('Date Time Two'),
           CustomButton(
             df.format(two),
             onPressed: () {
@@ -66,18 +66,18 @@ class _DurationLookupState extends State<DurationLookup> {
                   theme: DatePickerTheme(
                       backgroundColor: Colors.black,
                       itemStyle: TextStyle(
-                          color: Colors.white60,
-                          fontWeight: FontWeight.bold,
+                          color: Const.textColor,
+                          fontWeight: Const.textWeight,
                           fontSize: Const.maxTextSize),
                       doneStyle:
-                          TextStyle(color: Colors.white60, fontSize: Const.maxTextSize)),
+                          TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
                   onChanged: changeTwo,
                   currentTime: two,
                   locale: LocaleType.en);
             },
           )),
       Divider(thickness: Const.divThickness,),
-      Row2(Text('Duration hhhhh:mm:ss'), ConstText(getDiff()))
+      Row2(Tex('Duration hhhhh:mm:ss'), ConstText(getDiff()))
     ]));
   }
 }

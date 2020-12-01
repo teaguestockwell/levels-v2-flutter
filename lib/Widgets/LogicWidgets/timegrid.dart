@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:five_level_one/Widgets/Uitls.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class TimeGrid extends StatefulWidget {
   _TimeGrid createState() => _TimeGrid();
+  final asg = AutoSizeGroup();
 }
 
 class _TimeGrid extends State<TimeGrid> {
@@ -14,11 +17,12 @@ class _TimeGrid extends State<TimeGrid> {
   @override
   void initState() {
     t = Timer.periodic(Duration(seconds: 1), (v) {
+      print('tick');
       setState(() {});
     });
-
     super.initState();
   }
+
 
   @override
   void dispose() {
@@ -39,7 +43,7 @@ class _TimeGrid extends State<TimeGrid> {
     var zJJJ = DateFormat('DDD').format(znow).toString();
     var zHHMMSS = DateFormat('HH:mm:ss').format(znow).toString();
 
-    return CCards('Now', AlignPadding(
+    return  AlignPadding(
         2.0,
         Alignment.center,
         Table(
@@ -56,33 +60,37 @@ class _TimeGrid extends State<TimeGrid> {
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'Zone',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'hh:mm:ss',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                     // textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'JJJ',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'YYYY MM DD',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     )))
               ]),
               TableRow(children: [
@@ -90,33 +98,37 @@ class _TimeGrid extends State<TimeGrid> {
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'Local',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       lHHMMSS,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                     // textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       lJJJ,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       lYYYYMMDD,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     )))
               ]),
               TableRow(children: [
@@ -124,35 +136,39 @@ class _TimeGrid extends State<TimeGrid> {
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       'Zulu',
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       zHHMMSS,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       zJJJ,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
                     Alignment.center,
                     FittedBox(
-                        child: Text(
+                        child: Tex(
                       zYYYYMMDD,
-                      textAlign: TextAlign.center,
+                      autoSizeGroup: this.widget.asg,
+                      //textAlign: TextAlign.center,
                     )))
               ]),
-            ])));
+            ]));
   }
 }

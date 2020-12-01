@@ -1,9 +1,11 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../Uitls.dart';
+import 'Rows.dart';
 
 class CustomTextField extends StatefulWidget {
   TextEditingController c;
@@ -119,7 +121,8 @@ typedef void StringCallBack(String x);
 class CustomButton extends StatelessWidget {
   final String text;
   final IntCallBack onPressed;
-  CustomButton(this.text, {this.onPressed});
+  var autoSizeGroup = AutoSizeGroup();
+  CustomButton(this.text, {this.onPressed,this.autoSizeGroup});
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +138,7 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child:FlatButton(
           onPressed: onPressed,
-          child: Text(this.text),
+          child: Tex(this.text,autoSizeGroup: this.autoSizeGroup),
           ),
     )
     );
@@ -218,12 +221,13 @@ class _CustomButtomSpinnerModalStringState
 
   List<Widget> _getSpinnerWidgets() {
     var ret = List<Widget>();
+    final asg = AutoSizeGroup();
     for (String x in this.widget.stringList) {
       ret.add(Padding(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Text(
+          child: Tex(
             x,
-            style: TextStyle(color: Colors.white70, fontSize: 22),
+            autoSizeGroup: asg,
           )
       )
       );

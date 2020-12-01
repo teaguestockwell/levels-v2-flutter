@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    body = Text('Loading');
+    body = Center(child: Tex('Loading'));
     init();
     super.initState();
   }

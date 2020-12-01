@@ -3,6 +3,7 @@ import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftCard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
+import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -44,7 +45,7 @@ class _PerMacScreenState extends State<PerMacScreen>
     if (!chartcCard.valid) {
       ret = false;
       SnackBar(
-        content: Text('Invalid Chart C'),
+        content: Tex('Invalid Chart C'),
       );
     }
     //cargo card goes here
@@ -58,7 +59,7 @@ class _PerMacScreenState extends State<PerMacScreen>
       nwf.addAll(chartcCard.getNameWeightFS());
       print(nwf);
       SnackBar(
-        content:Text( 
+        content:Tex( 
           NameWeightFS.getPerMac(
             this.widget.air.lemac, this.widget.air.mac, nwf)
         ),

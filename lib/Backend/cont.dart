@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Const {
@@ -11,7 +12,14 @@ class Const {
   rowInset = 10.0,
   modalSpinHeight = 210,
   maxTextSize=22,
+  minTextSize =10,
   cardP = 4;
+
+  static final 
+   asg = AutoSizeGroup();
+
+  static const
+    textWeight = FontWeight.bold;
 
   static const int 
     animationDuration = 100;
@@ -25,7 +33,7 @@ class Const {
       bottombarcolor = Colors.white10,
       timeGridLinescolor = Colors.white60,
       buttonColor = Colors.white10,
-      textColor = Colors.white70,
+      textColor = Color.fromRGBO(255,255,255,0.88),
       cargoUIColor = Color.fromRGBO(255,255,255,0.07);
 }
  
