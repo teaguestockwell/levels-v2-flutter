@@ -6,7 +6,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(Phoenix(child: HomePage()));
+  runApp(Phoenix(child: Home2()));
 }
 
 

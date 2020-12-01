@@ -235,8 +235,11 @@ class NameWeightFS {
 
 class General {
   String csvAllMds, welcometitle, welcomebody;
+  List<String> mdsNames;
 
-  General(this.csvAllMds, this.welcometitle, this.welcomebody);
+  General(this.csvAllMds, this.welcometitle, this.welcomebody){
+    mdsNames = csvAllMds.split(',');
+  }
 }
 
 class Glossary {
