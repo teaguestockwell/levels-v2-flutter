@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:five_level_one/Widgets/LogicWidgets/selectmds.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
+import 'package:five_level_one/Widgets/UIWidgets/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -20,12 +21,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    body = Center(child: Tex('Loading'));
+    body = Loading();
+    //Center(child: Tex('Loading'));
     init();
     super.initState();
   }
 
   press() {
+    body = Loading(); setState(() {
+      
+    });
     FirebaseFirestore.instance
     .collection('mds')
     .doc(selectedMdsBody.mdsSpin.selected)

@@ -124,19 +124,22 @@ class ConstText extends StatelessWidget {
 ///AutoSizing Text
 class Tex extends StatelessWidget {
   String text;
+  int maxLine;
   AutoSizeGroup autoSizeGroup;
-  Tex(this.text,{this.autoSizeGroup});
+  Tex(this.text,{this.autoSizeGroup,this.maxLine=1});
   @override
   Widget build(BuildContext context) {
     return AutoSizeText(
       text,
       maxFontSize: Const.maxTextSize,
       minFontSize: Const.minTextSize,
-      maxLines: 1,
+      maxLines: maxLine,
       group: autoSizeGroup,
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: Const.textColor,
         fontWeight: FontWeight.bold,
+        
       ),
     );
   }
