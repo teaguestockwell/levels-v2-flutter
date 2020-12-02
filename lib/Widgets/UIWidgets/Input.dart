@@ -192,10 +192,12 @@ class InputDec {
 class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;
-  List<String> stringList;
-  IntCallBackIntPara onPressed;
-  CustomButtomSpinnerModalString(this.stringList,
-      {this.spinIdx, this.onPressed,this.selected});
+  var timesPressed =0;
+  var spinnerWidgets = List<Widget>();
+  final List<String> stringList;
+  final IntCallBackIntPara onPressed;
+
+  CustomButtomSpinnerModalString(this.stringList,{this.spinIdx, this.onPressed,this.selected});
   @override
   _CustomButtomSpinnerModalStringState createState() =>
       _CustomButtomSpinnerModalStringState();
@@ -210,6 +212,23 @@ class _CustomButtomSpinnerModalStringState
     super.initState();
   }
 
+   _getSpinnerWidgets() {
+    final asg = AutoSizeGroup();
+    this.widget.spinnerWidgets.clear();
+    for (String x in this.widget.stringList) {
+      this.widget.spinnerWidgets.add(
+        Padding(
+          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
+          child: Tex(
+            x,
+            autoSizeGroup: asg,
+          )
+        )
+      );
+      print(x);
+    }
+  }
+
   void _spin(int newIdx) {
     this.widget.spinIdx = newIdx;
     this.widget.selected = this.widget.stringList[newIdx];
@@ -219,58 +238,46 @@ class _CustomButtomSpinnerModalStringState
     setState(() {});
   }
 
-  List<Widget> _getSpinnerWidgets() {
-    var ret = List<Widget>();
-    final asg = AutoSizeGroup();
-    for (String x in this.widget.stringList) {
-      ret.add(Padding(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Tex(
-            x,
-            autoSizeGroup: asg,
-          )
-      )
-      );
-      print(x);
-    }
-    return ret;
+  press(){
+    //build children only on first press
+    if(this.widget.timesPressed==0){_getSpinnerWidgets();}
+    this.widget.timesPressed++;
+    showModalBottomSheet<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return Container(
+          height: Const.modalSpinHeight,
+          color: Colors.black,
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Container(
+                    height: Const.modalSpinHeight,
+                    child: Center(
+                        child: CupertinoPicker(
+                      scrollController: FixedExtentScrollController(
+                        initialItem: this.widget.spinIdx),
+                      children: this.widget.spinnerWidgets,
+                      onSelectedItemChanged: _spin,
+                      itemExtent: 35,
+                    )
+                  )
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
       this.widget.selected,
-      onPressed: () {
-        showModalBottomSheet<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return Container(
-              height: Const.modalSpinHeight,
-              color: Colors.black,
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Container(
-                        height: Const.modalSpinHeight,
-                        child: Center(
-                            child: CupertinoPicker(
-                          scrollController: FixedExtentScrollController(
-                              initialItem: this.widget.spinIdx),
-                          children: _getSpinnerWidgets(),
-                          onSelectedItemChanged: _spin,
-                          itemExtent: 35,
-                        )
-                      )
-                    ),
-                  ],
-                ),
-              ),
-            );
-          },
-        );
-      },
+      onPressed: press,
     );
   }
 }

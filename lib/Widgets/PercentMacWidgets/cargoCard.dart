@@ -204,16 +204,16 @@ class _CargoCardState extends State<CargoCard> {
             CustomButton(
               'Update Config',
                onPressed: updateConfig,
-               autoSizeGroup: this.widget._autoSizeGroup,
+               //autoSizeGroup: this.widget._autoSizeGroup,
             ),
             CustomButton(
               'Add Cargo',
-              autoSizeGroup: this.widget._autoSizeGroup,
+              //autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: addCargo
             ),
             CustomButton(
               'Remove All',
-              autoSizeGroup: this.widget._autoSizeGroup,
+              //autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: removeAll
             )
           ),

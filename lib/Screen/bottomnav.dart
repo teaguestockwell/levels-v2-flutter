@@ -8,7 +8,12 @@ import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
   final Aircraft air;
-  BottomNav(this.air);
+  var tabPages =List<Widget>();
+  BottomNav(this.air){
+    tabPages.add(Units());
+    tabPages.add(PerMacScreen(air));
+    tabPages.add(GlossaryScreen(air));
+  }
 
   @override
   _BottomNavState createState() => new _BottomNavState();
@@ -17,21 +22,14 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _pageIndex = 0;
   PageController _pageController;
-  var tabPages = List<Widget>();
   var titleArr = ['Units', '%MAC', 'Glossary'];
 
   @override
   void initState() {
-    initTabPages();
     _pageController = PageController(initialPage: _pageIndex);
     super.initState();
   }
 
-  void initTabPages() {
-    tabPages.add(Units());
-    tabPages.add(PerMacScreen(this.widget.air));
-    tabPages.add(GlossaryScreen(this.widget.air));
-  }
 
   @override
   void dispose() {
@@ -91,7 +89,7 @@ class _BottomNavState extends State<BottomNav> {
             ],
           ),
           body: PageView(
-            children: tabPages,
+            children: this.widget.tabPages,
             onPageChanged: onPageChanged,
             controller: _pageController,
           ),

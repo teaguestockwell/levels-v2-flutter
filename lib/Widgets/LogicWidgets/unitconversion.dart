@@ -57,6 +57,8 @@ class _tDistanceBodyState extends State<tDistanceBody> {
     setState(() {
       leftUnitUnitIdx = 0;
       rightUnitUnitIdx = 0;
+      toggle = true;
+      controllerOne.text = '';
       selectedUnitUnits = Unit(n).list;
       unitIdx = n;
       unitName = Unit.units[n];
