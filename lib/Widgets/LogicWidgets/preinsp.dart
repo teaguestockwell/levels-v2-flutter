@@ -1,5 +1,4 @@
 import 'package:five_level_one/Backend/cont.dart';
-import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,46 +13,54 @@ class PreInsp extends StatefulWidget {
 }
 
 class _PreInspState extends State<PreInsp> {
-  
-  var f = DateFormat('yyyy MM dd HH:mm');
-  var number = 144;
-  var acompDate = DateTime.now().subtract(Duration(hours: 144));
-  var acomp = DateFormat('yyyy MM dd HH:mm')
-      .format(DateTime.now().subtract(Duration(hours: 144)))
-      .toString();
+  final startHour = 48;
+  final numHours = 144;
+  final f = DateFormat('yyyy MM dd HH:mm');
+  int duration = 48;
+  DateTime acompDate;
+  String acompString;
   var expireAt =
       DateFormat('yyyy MM dd HH:mm').format(DateTime.now()).toString();
-  
-  initState(){
+
+  initState() {
+    acompDate = DateTime.now().subtract(Duration(hours: startHour));
+
+    acompString = DateFormat('yyyy MM dd HH:mm')
+        .format(DateTime.now().subtract(Duration(hours: startHour)))
+        .toString();
+
     var stringList = List<String>();
-    for(int i=1;i<=144;i++){
+    for (int i = 1; i <= numHours; i++) {
       stringList.add(i.toString());
     }
-    this.widget.buttonDurration = CustomButtomSpinnerModalString(stringList,onPressed: lenChange,);
+    this.widget.buttonDurration = CustomButtomSpinnerModalString(
+      stringList,
+      onPressed: lenChange,
+      spinIdx: startHour - 1,
+    );
+
     super.initState();
   }
 
   timeChange(var date) {
     setState(() {
       acompDate = date;
-      acomp = f.format(acompDate).toString();
-      expireAt = f.format(acompDate.add(Duration(hours: number))).toString();
-      print(
-          '\n duration change: \n achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acomp \n duration: $number');
+      acompString = f.format(acompDate).toString();
+      expireAt = f.format(acompDate.add(Duration(hours: duration))).toString();
     });
   }
 
   lenChange(int n) {
-    print(n);
     setState(() {
-      number = 144 - n;
-      expireAt = f.format(acompDate.add(Duration(hours: number))).toString();
-      print(
-          '\n duration change: \n achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acomp \n duration: $number');
+      duration = this.widget.buttonDurration.spinIdx + 1;
+      expireAt = f.format(acompDate.add(Duration(hours: duration))).toString();
     });
   }
 
-
+  void p() {
+    print(
+        'achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acompString \n duration: $duration');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,32 +69,42 @@ class _PreInspState extends State<PreInsp> {
         Row2(
             Tex('Acomplished At'),
             CustomButton(
-              acomp,
+              acompString,
               onPressed: () {
-                DatePicker.showDateTimePicker(context,
-                    showTitleActions: false,
-                    theme: DatePickerTheme(
-                        backgroundColor: Colors.black,
-                        itemStyle: TextStyle(
-                            color: Const.textColor,
-                            fontWeight: Const.textWeight,
-                            fontSize: Const.maxTextSize),
-                        doneStyle:
-                            TextStyle(color: Const.textColor, fontSize: Const.maxTextSize)),
-                    onChanged: timeChange,
-                    currentTime: acompDate,
-                    locale: LocaleType.en);
+                DatePicker.showDateTimePicker(
+                  context,
+                  onChanged: timeChange,
+                  currentTime: acompDate,
+                  locale: LocaleType.en,
+                  showTitleActions: false,
+                  theme: DatePickerTheme(
+                    backgroundColor: Colors.black,
+                    itemStyle: TextStyle(
+                      color: Const.textColor,
+                      fontWeight: Const.textWeight,
+                      fontSize: Const.maxTextSize
+                    ),
+                    doneStyle: TextStyle(
+                      color: Const.textColor,
+                      fontSize: Const.maxTextSize
+                    )
+                  ),
+                );
               },
-            )),
-        Divider(thickness: Const.divThickness,),
-        Row2(
-            Tex('Hours Until Expire'),
-            this.widget.buttonDurration),
-        Divider(thickness: Const.divThickness,),
-        Row2(
-          Tex('Expires At'), 
-          ConstText(expireAt)
-          )
+            )
+        ),
+
+        Divider(
+          thickness: Const.divThickness,
+        ),
+
+        Row2(Tex('Hours Until Expire'), this.widget.buttonDurration),
+        
+        Divider(
+          thickness: Const.divThickness,
+        ),
+        
+        Row2(Tex('Expires At'), ConstText(expireAt))
       ],
     );
   }

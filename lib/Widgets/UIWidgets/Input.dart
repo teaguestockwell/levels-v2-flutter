@@ -3,6 +3,8 @@ import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:intl/intl.dart';
 
 import '../Uitls.dart';
 import 'Rows.dart';
@@ -117,6 +119,7 @@ class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
 typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
 typedef void StringCallBack(String x);
+typedef void DateCallBack(DateTime);
 
 class CustomButton extends StatelessWidget {
   final String text;
@@ -281,3 +284,92 @@ class _CustomButtomSpinnerModalStringState
     );
   }
 }
+
+class CustomButtonDatePicker extends StatelessWidget {
+  String buttText;
+  DateCallBack onChange;
+  DateTime currentTime;
+  CustomButtonDatePicker(
+    {
+      @required this.buttText,
+      @required this.onChange,
+      @required this.currentTime,
+    }
+  );
+  @override
+  Widget build(BuildContext context) {
+    return 
+    CustomButton(
+      buttText,
+      onPressed: () {
+        DatePicker.showDatePicker(
+          context,
+          showTitleActions: false,
+          onChanged: this.onChange,
+          currentTime: this.currentTime,
+          locale: LocaleType.en,
+          theme: DatePickerTheme(
+            backgroundColor: Colors.black,
+            itemStyle: TextStyle(
+              color: Const.textColor,
+              fontWeight: Const.textWeight,
+              fontSize: Const.maxTextSize
+            ),
+            doneStyle: TextStyle(
+            color: Const.textColor,
+              fontSize: Const.maxTextSize
+            )
+          ), 
+        );
+      },
+    );
+  }
+}
+
+class CustomButtonDateTimePicker extends StatelessWidget {
+  String buttText;
+  ///use (DateTime)=>{your code here}
+  DateCallBack onChange;
+  DateTime currentTime;
+  ///default yyyy MM dd
+  DateFormat dateFormat;
+  CustomButtonDateTimePicker(
+    {
+      @required this.buttText,
+      @required this.onChange,
+      @required this.currentTime,
+      this.dateFormat,
+    }
+  ){
+    this.dateFormat = DateFormat('yyyy MM dd HH:mm');
+  }
+  @override
+  Widget build(BuildContext context) {
+    return 
+    CustomButton(
+      buttText,
+      onPressed: () {
+        DatePicker.showDateTimePicker(
+          context,
+          showTitleActions: false,
+          onChanged: this.onChange,
+          currentTime: this.currentTime,
+          locale: LocaleType.en,
+          theme: DatePickerTheme(
+            backgroundColor: Colors.black,
+            itemStyle: TextStyle(
+              color: Const.textColor,
+              fontWeight: Const.textWeight,
+              fontSize: Const.maxTextSize
+            ),
+            doneStyle: TextStyle(
+            color: Const.textColor,
+              fontSize: Const.maxTextSize
+            )
+          ), 
+        );
+      },
+    );
+  }
+}
+
