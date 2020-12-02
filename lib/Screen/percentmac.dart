@@ -11,8 +11,17 @@ import '../Backend/model.dart';
 
 class PerMacScreen extends StatefulWidget {
   Aircraft air;
+  TanksCard tankCard;
+  ChartCRow chartcCard;
+  CargoCard cargoCard;
+  AircraftCard aircraftCard;
 
-  PerMacScreen(this.air);
+  PerMacScreen(this.air){
+    aircraftCard = AircraftCard(air.name);
+    tankCard = TanksCard(air);
+    chartcCard = ChartCRow(air);
+    cargoCard = CargoCard(air);
+  }
   @override
   _PerMacScreenState createState() => _PerMacScreenState();
 }
@@ -23,26 +32,20 @@ class _PerMacScreenState extends State<PerMacScreen>
   bool get wantKeepAlive => true;
 
   final sc = ScrollController();
-  TanksCard tankCard;
-  ChartCRow chartcCard;
-  CargoCard cargoCard;
-  AircraftCard aircraftCard;
+  
 
   @override
   void initState() {
-    aircraftCard = AircraftCard(this.widget.air.name);
-    tankCard = TanksCard(this.widget.air);
-    chartcCard = ChartCRow(this.widget.air);
-    cargoCard = CargoCard(this.widget.air);
+    
     super.initState();
   }
 
   bool validate() {
     bool ret = true;
-    if (!tankCard.valid) {
+    if (!this.widget.tankCard.valid) {
       ret = false;
     }
-    if (!chartcCard.valid) {
+    if (!this.widget.chartcCard.valid) {
       ret = false;
       SnackBar(
         content: Tex('Invalid Chart C'),
@@ -55,8 +58,8 @@ class _PerMacScreenState extends State<PerMacScreen>
   getMac() {
     if (validate()) {
       var nwf = List<NameWeightFS>();
-      nwf.addAll(tankCard.getNameWeightFS());
-      nwf.addAll(chartcCard.getNameWeightFS());
+      nwf.addAll(this.widget.tankCard.getNameWeightFS());
+      nwf.addAll(this.widget.chartcCard.getNameWeightFS());
       print(nwf);
       SnackBar(
         content:Tex( 
@@ -75,10 +78,10 @@ class _PerMacScreenState extends State<PerMacScreen>
         child: SingleChildScrollView(
           controller: sc,
           child: Column(children: [
-            aircraftCard,
-            tankCard,
-            chartcCard,
-            cargoCard,
+            this.widget.aircraftCard,
+            this.widget.tankCard,
+            this.widget.chartcCard,
+            this.widget.cargoCard,
             CustomButton('get mac', onPressed: () {
               getMac();
           }),

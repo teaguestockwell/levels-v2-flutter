@@ -9,7 +9,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
-  var widgets = <Widget>[
+  List<Widget> widgets;
+  
+  Units(){
+    widgets = <Widget>[
     CCards('Now',TimeGrid()),
     CCards('Pre/Insp Expire', PreInsp()),
     CCards('Julian Lookup',JJJLookup()),
@@ -17,6 +20,8 @@ class Units extends StatelessWidget {
     CCards('Duration',DurationLookup()),
     CCards('Unit Conversion',tDistanceBody()),
   ];
+  }
+  
 
   final sc = ScrollController();
 

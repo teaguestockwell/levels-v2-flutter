@@ -8,17 +8,26 @@ import '../Backend/model.dart';
 class GlossaryScreen extends StatefulWidget {
   Aircraft air;
   List<Widget> cards;
-  GlossaryScreen(this.air);
+  GlossaryScreen(this.air){
+    this.cards = getGlossCards();
+  }
+
+  List<Widget> getGlossCards() {
+    var ret = List<Widget>();
+    ret.add(AircraftCard(air.name));
+    for (int i = 0; i < air.titles.length; i++) {
+      ret.add(CCards(air.titles.elementAt(i),
+          RowCenterText(air.bodys.elementAt(i))));
+    }
+    return ret;
+  }
+
   @override
   _GlossaryScreenState createState() => _GlossaryScreenState();
 }
 
 class _GlossaryScreenState extends State<GlossaryScreen> {
   final sc = ScrollController();
-  initState(){
-    this.widget.cards = getGlossCards();
-    super.initState();
-  }
 
   List<Widget> getGlossCards() {
     var ret = List<Widget>();
