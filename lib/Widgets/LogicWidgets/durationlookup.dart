@@ -15,7 +15,15 @@ class _DurationLookupState extends State<DurationLookup> {
   final df = DateFormat('yyyy MM dd HH:mm');
 
   String getDiff() {
-    return one.difference(two).abs().toString().substring(0, 8);
+    //round to nearest min
+    int sec = one.difference(two).inSeconds;
+    if(sec %60 !=0){
+      int rem = sec%60;
+      if(rem >=30){while(sec%60!=0){sec++;}}
+      while(sec%60!=0){sec--;}
+    }
+
+    return Duration(seconds: sec).abs().toString().substring(0, 12);
   }
 
   @override
