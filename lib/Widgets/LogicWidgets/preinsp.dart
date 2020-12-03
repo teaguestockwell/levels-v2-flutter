@@ -3,7 +3,6 @@ import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
 
 class PreInsp extends StatefulWidget {
@@ -67,31 +66,12 @@ class _PreInspState extends State<PreInsp> {
     return Column(
       children: [
         Row2(
-            Tex('Acomplished At'),
-            CustomButton(
-              acompString,
-              onPressed: () {
-                DatePicker.showDateTimePicker(
-                  context,
-                  onChanged: timeChange,
-                  currentTime: acompDate,
-                  locale: LocaleType.en,
-                  showTitleActions: false,
-                  theme: DatePickerTheme(
-                    backgroundColor: Colors.black,
-                    itemStyle: TextStyle(
-                      color: Const.textColor,
-                      fontWeight: Const.textWeight,
-                      fontSize: Const.maxTextSize
-                    ),
-                    doneStyle: TextStyle(
-                      color: Const.textColor,
-                      fontSize: Const.maxTextSize
-                    )
-                  ),
-                );
-              },
-            )
+          Tex('Acomplished At'),
+          CustomButtonDateTimePicker(
+            buttText: acompString,
+            onChange: timeChange,
+            currentTime: acompDate,
+           )
         ),
 
         Divider(
@@ -103,7 +83,7 @@ class _PreInspState extends State<PreInsp> {
         Divider(
           thickness: Const.divThickness,
         ),
-        
+
         Row2(Tex('Expires At'), ConstText(expireAt))
       ],
     );

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
-import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:five_level_one/Widgets/Uitls.dart';
 import 'package:flutter/widgets.dart';
