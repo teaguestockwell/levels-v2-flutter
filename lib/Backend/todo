@@ -2,13 +2,11 @@ website for help button
 
 topbar help button
 
-refractor
-    import modal spiner into tanks
-CargoUI
+max width for cards
 
 CargoCard
     validate CargoUIs + error msg + auto open invalid CargoUI + highlight error
-
+    import bottons inside modal spinners
 PercentMac
     add CargoCard into calc
     implement snackbars
