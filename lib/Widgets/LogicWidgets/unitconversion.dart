@@ -130,7 +130,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
           child: Row(children: [
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white60),
+                    border: Border.all(color: Const.borderColor),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
@@ -146,7 +146,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
             Spacer(),
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Colors.white30),
+                    border: Border.all(color: Const.borderColor),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,

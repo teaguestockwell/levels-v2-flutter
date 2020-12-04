@@ -10,13 +10,32 @@ import '../Uitls.dart';
 import 'Rows.dart';
 
 class CustomTextField extends StatefulWidget {
-  TextEditingController c;
+  var c = TextEditingController();
   CustomTextField(this.c);
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
+  InputDecoration dec;
+  @override
+  initstate(){
+    dec = InputDec.wi;
+    this.widget.c.addListener((){ 
+      print(this.widget.c.text);
+      if(double.tryParse(this.widget.c.text) is double){
+        if(double.parse(this.widget.c.text)>2000){
+          setState(() {
+            print('met');
+            dec = InputDec.re;
+          });
+        }
+      }
+    });
+      
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return //Flexible(child:
@@ -25,7 +44,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
             width: Const.pickerWidth,
             child: TextField(
               controller: this.widget.c,
-              decoration: InputDec.wi,
+              decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: <TextInputFormatter>[
                 DecimalTextInputFormatter()
@@ -155,7 +174,7 @@ class InputDec {
         const Radius.circular(5.0),
       ),
       borderSide: BorderSide(
-        color: Colors.white70,
+        color: Const.borderColor,
         width: 1.0,
       ),
     ),
@@ -176,7 +195,7 @@ class InputDec {
         const Radius.circular(5.0),
       ),
       borderSide: BorderSide(
-        color: Colors.white70,
+        color: Const.errorBorderColor,
         width: 1.0,
       ),
     ),
@@ -185,7 +204,7 @@ class InputDec {
         const Radius.circular(5.0),
       ),
       borderSide: BorderSide(
-        color: Colors.white70,
+        color: Const.errorBorderColor,
         width: 1.0,
       ),
     ),
@@ -195,6 +214,7 @@ class InputDec {
 class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;
+  final asg = AutoSizeGroup();
   var timesPressed =0;
   var spinnerWidgets = List<Widget>();
   final List<String> stringList;
@@ -216,7 +236,7 @@ class _CustomButtomSpinnerModalStringState
   }
 
    _getSpinnerWidgets() {
-    final asg = AutoSizeGroup();
+    
     this.widget.spinnerWidgets.clear();
     for (String x in this.widget.stringList) {
       this.widget.spinnerWidgets.add(
@@ -224,7 +244,7 @@ class _CustomButtomSpinnerModalStringState
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Tex(
             x,
-            autoSizeGroup: asg,
+            autoSizeGroup: this.widget.asg,
           )
         )
       );
@@ -250,7 +270,7 @@ class _CustomButtomSpinnerModalStringState
       builder: (BuildContext context) {
         return Container(
           height: Const.modalSpinHeight,
-          color: Colors.black,
+          color: Const.modalPickerColor,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -309,7 +329,7 @@ class CustomButtonDatePicker extends StatelessWidget {
           currentTime: this.currentTime,
           locale: LocaleType.en,
           theme: DatePickerTheme(
-            backgroundColor: Colors.black,
+            backgroundColor: Const.modalPickerColor,
             itemStyle: TextStyle(
               color: Const.textColor,
               fontWeight: Const.textWeight,
@@ -356,7 +376,7 @@ class CustomButtonDateTimePicker extends StatelessWidget {
           currentTime: this.currentTime,
           locale: LocaleType.en,
           theme: DatePickerTheme(
-            backgroundColor: Colors.black,
+            backgroundColor: Const.modalPickerColor,
             itemStyle: TextStyle(
               color: Const.textColor,
               fontWeight: Const.textWeight,

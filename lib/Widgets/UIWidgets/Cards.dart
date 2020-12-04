@@ -70,7 +70,9 @@ class _CCardsState extends State<CCards> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Max(
+      w: Const.maxCardWidth,
+      child:Padding(
         padding: EdgeInsets.fromLTRB(
           Const.cardP,
           Const.cardP,
@@ -80,10 +82,10 @@ class _CCardsState extends State<CCards> {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
-                color: Colors.white10,
+                color: Const.cardColor,
                 shape: Border(
                     top: BorderSide(
-                  color: Colors.white10,
+                  color: Const.cardColor,
                   width: 22,
                 )),
                 child: Column(
@@ -94,7 +96,7 @@ class _CCardsState extends State<CCards> {
                         onTap: toggleChild),
                     chil
                   ],
-                ))));
+                )))));
   }
 }
 
@@ -122,7 +124,7 @@ class CardAllwaysOpen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Max(w:Const.maxCardWidth,child:Padding(
         padding: EdgeInsets.fromLTRB(
           Const.cardP,
           Const.cardP,
@@ -132,10 +134,10 @@ class CardAllwaysOpen extends StatelessWidget {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
-                color: Colors.white10,
+                color: Const.cardColor,
                 shape: Border(
                     top: BorderSide(
-                  color: Colors.white10,
+                  color: Const.cardColor,
                   width: 22,
                 )),
                 child: Column(
@@ -145,6 +147,6 @@ class CardAllwaysOpen extends StatelessWidget {
                     ),
                     chil
                   ],
-                ))));
+                )))));
   }
 }

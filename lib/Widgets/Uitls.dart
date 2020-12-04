@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,6 +18,21 @@ class AlignPadding extends StatelessWidget {
           child: chil,
         )
     );
+  }
+}
+
+class Max extends StatelessWidget {
+  double w,h;
+  Widget child;
+  Max({
+    @required this.child, 
+    this.w = double.infinity,
+    this.h = double.infinity,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return child;
   }
 }
 

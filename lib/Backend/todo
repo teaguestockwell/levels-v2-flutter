@@ -2,7 +2,12 @@ website for help button
 
 topbar help button
 
-max width for cards
+text input widgets that accept min max with validate functions
+
+max width for cards -- edit Max Widget
+
+ChartC Card
+  refrector with build text input widgets 
 
 CargoCard
     validate CargoUIs + error msg + auto open invalid CargoUI + highlight error

@@ -16,7 +16,6 @@ class _TimeGrid extends State<TimeGrid> {
   @override
   void initState() {
     t = Timer.periodic(Duration(seconds: 1), (v) {
-      print('tick');
       setState(() {});
     });
     super.initState();

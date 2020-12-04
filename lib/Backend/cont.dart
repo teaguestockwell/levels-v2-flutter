@@ -13,7 +13,8 @@ class Const {
   modalSpinHeight = 210,
   maxTextSize=22,
   minTextSize =10,
-  cardP = 4;
+  cardP = 4,
+  maxCardWidth = 1000;
 
   static final 
    asg = AutoSizeGroup();
@@ -28,12 +29,14 @@ class Const {
       navBarSelected = Colors.white70,
       navBarDeselected = Colors.white30,
       back = Colors.black,
-      car = Colors.white30,
+      cardColor = Colors.white10,
       background = Colors.black,
       bottombarcolor = Colors.white10,
       timeGridLinescolor = Colors.white60,
       buttonColor = Colors.white10,
       textColor = Color.fromRGBO(255,255,255,0.88),
-      cargoUIColor = Color.fromRGBO(255,255,255,0.07);
+      cargoUIColor = Color.fromRGBO(255,255,255,0.07),
+      modalPickerColor= Color.fromRGBO(55,55,55,1),
+      borderColor = Colors.white30,
+      errorBorderColor = Colors.red;
 }
- 

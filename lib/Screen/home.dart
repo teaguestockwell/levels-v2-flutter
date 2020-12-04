@@ -75,7 +75,7 @@ class _Home2State extends State<Home2> {
 
     var sc = ScrollController();
     var ret = CupertinoScrollbar(isAlwaysShown: true,controller: sc, child:ListView(controller: sc, children: [
-      Image.asset('assets/0.png'),
+      CardAllwaysOpen('FIVE LEVEL', Image.asset('assets/0.png')),
       CardAllwaysOpen(ds.get('welcometitle'), RowCenterText(ds.get('welcomebody'))),
       CardAllwaysOpen(
         'Aircraft',
