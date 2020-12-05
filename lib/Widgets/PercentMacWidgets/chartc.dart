@@ -113,6 +113,23 @@ var re = InputDec.re;
                       textAlign: TextAlign.center,
                       decoration: m,
                     ))),
+            Row2(
+              Tex('Test colors'),
+              ValidatedText(
+                intDecimalString: 0,
+                validateFunctionRetBoolParaString: (text){
+                  if (int.tryParse(text) != null){
+                    int intText = int.parse(text);
+                    if(intText<= 500 && intText>= 100){
+                      return true;
+                    }
+                  }
+                  return false;
+                },
+                onChange: (text){print('text changed: '+text);},
+                notifyValidationStatusRetVoidParaBool: (valid){print('validation changed: '+ valid.toString());},
+                )
+            ),
           ],
         ));
   }

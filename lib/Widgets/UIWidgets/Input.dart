@@ -22,15 +22,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
   initstate(){
     dec = InputDec.wi;
     this.widget.c.addListener((){ 
-      print(this.widget.c.text);
-      if(double.tryParse(this.widget.c.text) is double){
-        if(double.parse(this.widget.c.text)>2000){
-          setState(() {
-            print('met');
-            dec = InputDec.re;
-          });
-        }
-      }
+      
     });
       
     super.initState();
@@ -38,19 +30,135 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-    return //Flexible(child:
-        Container(
+    return 
+      Container(
+        height: Const.pickerHeight,
+        width: Const.pickerWidth,
+        child: TextField(
+          controller: this.widget.c,
+          decoration: dec,
+          keyboardType: TextInputType.numberWithOptions(decimal: true),
+          inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+          textAlign: TextAlign.center,
+        )
+      );
+  }
+}
+
+
+typedef void FunctionRetVoidParaDynamic(dynamic);
+typedef bool FunctionRetBoolParaDynamic(dynamic);
+typedef void FunctionRetVoidParaBool(bool);
+
+class ValidatedText extends StatefulWidget {
+  ///0 = int, 1 = decimal 2 = string
+  int intDecimalString;
+  bool valid = false;
+  String text='';
+  ///para isValid
+  FunctionRetVoidParaBool notifyValidationStatusRetVoidParaBool;
+  ///para new text
+  FunctionRetVoidParaDynamic onChange;
+  ///para text ret is valid?
+  FunctionRetBoolParaDynamic validateFunctionRetBoolParaString;
+  
+  TextEditingController _c = TextEditingController();
+  ValidatedText({
+    this.intDecimalString=1,
+    this.onChange,
+    this.notifyValidationStatusRetVoidParaBool,
+    @required this.validateFunctionRetBoolParaString,
+  });
+
+  @override
+  _ValidatedTextState createState() => _ValidatedTextState();
+}
+
+class _ValidatedTextState extends State<ValidatedText> {
+  InputDecoration dec;
+  Widget ret;
+
+  @override
+  void initState() {
+    dec = InputDec.re;
+    addListner();
+    ret = getIntDoubleString(this.widget.intDecimalString);
+    super.initState();
+  }
+
+  void addListner(){
+    this.widget._c.addListener((){ 
+
+      //validate the text and set outline to red or white
+      String text = this.widget._c.text;
+      if(this.widget.validateFunctionRetBoolParaString(text)){
+        this.widget.valid=true;
+        setState(() {
+          print('setting border white');
+          dec = InputDec.wi;
+        });
+      }
+      else{
+        this.widget.valid=false;
+        setState(() {
+          print('setting border red');
+          dec = InputDec.re;
+        });
+      }
+
+      //notify valid and on change if not null
+      this.widget?.onChange(text); 
+      this.widget?.notifyValidationStatusRetVoidParaBool(this.widget.valid);
+    });
+  }
+
+  Widget getIntDoubleString(int type){
+    switch (type){
+      case 0: //ints only
+        return 
+          Container(
             height: Const.pickerHeight,
             width: Const.pickerWidth,
             child: TextField(
-              controller: this.widget.c,
+              controller: this.widget._c,
+              decoration: dec,
+              keyboardType: TextInputType.numberWithOptions(decimal: false),
+              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+              textAlign: TextAlign.center,
+            )
+          );
+      case 1: //doubles only
+        return 
+          Container(
+            height: Const.pickerHeight,
+            width: Const.pickerWidth,
+            child: TextField(
+              controller: this.widget._c,
               decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: <TextInputFormatter>[
-                DecimalTextInputFormatter()
-              ],
+              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
               textAlign: TextAlign.center,
-            ));
+            )
+          );
+      case 2: //all chars
+        return 
+          Container(
+            height: Const.pickerHeight,
+            width: Const.pickerWidth,
+            child: TextField(
+              controller: this.widget._c,
+              decoration: dec,
+              keyboardType: TextInputType.text,
+              textAlign: TextAlign.center,
+            )
+          );
+      default: throw (type.toString() + ' is not 0, 1, or 2');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return getIntDoubleString(this.widget.intDecimalString);
   }
 }
 

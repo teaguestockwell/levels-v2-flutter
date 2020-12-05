@@ -2,7 +2,7 @@ website for help button
 
 topbar help button
 
-text input widgets that accept min max with validate functions
+Validated Text input decoration to show color when not in focus 
 
 max width for cards -- edit Max Widget
 
