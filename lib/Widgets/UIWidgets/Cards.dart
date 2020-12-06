@@ -117,7 +117,6 @@ class CardAllwaysOpen extends StatelessWidget {
         childp.children.insert(0, firstP);
         childp.children.insert(childp.children.length, lastP);
         chil =childp;
-        print('padding added');
       }
     }
   }

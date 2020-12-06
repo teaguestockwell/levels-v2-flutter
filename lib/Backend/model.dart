@@ -8,7 +8,8 @@ class Aircraft {
       weight1,
       simplemom,
       lemac,
-      mac;
+      mac,
+      cargomaxweight;
 
   final List<dynamic> tanknames,
       tankmoms,
@@ -39,6 +40,7 @@ class Aircraft {
     this.simplemom,
     this.lemac,
     this.mac,
+    this.cargomaxweight,
     this.tanknames,
     this.tankmoms,
     this.tankweights,

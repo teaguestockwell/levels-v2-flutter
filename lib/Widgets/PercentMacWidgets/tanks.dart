@@ -8,12 +8,17 @@ import '../../Backend/model.dart';
 
 class TanksCard extends StatefulWidget {
   final Aircraft air;
-  final tankRows = List<Widget>();
+  var tankRows = List<Widget>();
+  var tankNSWF = List<TankRow>();
+
   final bool valid = true;
 
   TanksCard(this.air){
     for (Tank t in air.tanks) {
-      tankRows.add(TankRow(t));
+      var tank = TankRow(t);
+      tankRows.add(tank);
+      tankNSWF.add(tank);
+
       tankRows.add(Divider(color: Const.divColor,thickness: Const.divThickness,),);
     }
     tankRows.removeAt(tankRows.length - 1);
@@ -21,12 +26,7 @@ class TanksCard extends StatefulWidget {
 
   List<NameWeightFS> getNameWeightFS() {
     var ret = List<NameWeightFS>();
-
-    for (var t in tankRows) {
-      if (t is TankRow) {
-        ret.add(t.selected);
-      }
-    }
+    tankNSWF.forEach((t) {ret.add(t.selected);});
     return ret;
   }
 
@@ -54,7 +54,7 @@ class TankRow extends StatefulWidget {
 
     spin = CustomButtomSpinnerModalString(
       _getTankStringssForSpinner(),
-      onPressed: (int i)=>{selected = t.nameWeightFSs[i]},
+      onPressed: (int i){selected = t.nameWeightFSs[i]; print(selected.toString());},
     );
 
   }

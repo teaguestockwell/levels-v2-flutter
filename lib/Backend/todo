@@ -2,12 +2,11 @@ website for help button
 
 topbar help button
 
-Validated Text input decoration to show color when not in focus 
 
 max width for cards -- edit Max Widget
 
-ChartC Card
-  refrector with build text input widgets 
+Tanks   
+  unmix TanksRows with divs
 
 CargoCard
     validate CargoUIs + error msg + auto open invalid CargoUI + highlight error

@@ -1,7 +1,7 @@
 import 'package:five_level_one/Widgets/PercentMacWidgets/Tanks.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftCard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
-import 'package:five_level_one/Widgets/PercentMacWidgets/chartc.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/chartcCard.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,14 +12,14 @@ import '../Backend/model.dart';
 class PerMacScreen extends StatefulWidget {
   Aircraft air;
   TanksCard tankCard;
-  ChartCRow chartcCard;
+  ChartCCard chartcCard;
   CargoCard cargoCard;
   AircraftCard aircraftCard;
 
   PerMacScreen(this.air){
     aircraftCard = AircraftCard(air.name);
     tankCard = TanksCard(air);
-    chartcCard = ChartCRow(air);
+    chartcCard = ChartCCard(this.air);
     cargoCard = CargoCard(air);
   }
   @override
@@ -45,7 +45,7 @@ class _PerMacScreenState extends State<PerMacScreen>
     if (!this.widget.tankCard.valid) {
       ret = false;
     }
-    if (!this.widget.chartcCard.valid) {
+    if (!this.widget.chartcCard.getValid()) {
       ret = false;
       SnackBar(
         content: Tex('Invalid Chart C'),
@@ -59,7 +59,7 @@ class _PerMacScreenState extends State<PerMacScreen>
     if (validate()) {
       var nwf = List<NameWeightFS>();
       nwf.addAll(this.widget.tankCard.getNameWeightFS());
-      nwf.addAll(this.widget.chartcCard.getNameWeightFS());
+      nwf.add(this.widget.chartcCard.getNWFS());
       print(nwf);
       SnackBar(
         content:Tex( 

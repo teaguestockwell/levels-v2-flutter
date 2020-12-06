@@ -44,6 +44,7 @@ class _Home2State extends State<Home2> {
           v.get('simplemom'),
           v.get('lemac'),
           v.get('mac'),
+          v.get('cargomaxweight'),
           v.get('tanknames'),
           v.get('tankmoms'),
           v.get('tankweights'),
