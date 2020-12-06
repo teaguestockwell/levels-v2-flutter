@@ -14,7 +14,7 @@ class TanksCard extends StatefulWidget {
   TanksCard(this.air){
     for (Tank t in air.tanks) {
       tankRows.add(TankRow(t));
-      tankRows.add(Divider(thickness: Const.divThickness,),);
+      tankRows.add(Divider(color: Const.divColor,thickness: Const.divThickness,),);
     }
     tankRows.removeAt(tankRows.length - 1);
   }

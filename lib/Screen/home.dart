@@ -82,7 +82,7 @@ class _Home2State extends State<Home2> {
         Column(
           children: [
             Row2(Tex('MDS'), this.widget.airSpin),
-            Divider(thickness: Const.divThickness),
+            Divider(color: Const.divColor, thickness: Const.divThickness),
             Row2(
               CustomButton('I Accept',onPressed: accept),
               CustomButton('Help',onPressed: help),
@@ -121,7 +121,7 @@ class _Home2State extends State<Home2> {
       theme: ThemeData.dark(),
       home: Scaffold(
         body: body,
-        backgroundColor: Colors.black,
+        backgroundColor: Const.background
       )
     );
   }

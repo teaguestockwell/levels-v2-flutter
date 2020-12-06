@@ -94,7 +94,7 @@ var re = InputDec.re;
                       textAlign: TextAlign.center,
                       decoration: w,
                     ))),
-            Divider(thickness: Const.divThickness,),
+            Divider(color: Const.divColor,thickness: Const.divThickness,),
             Row2(
                 Tex("Basic Moment"),
                 Container(
@@ -116,8 +116,8 @@ var re = InputDec.re;
             Row2(
               Tex('Test colors'),
               ValidatedText(
-                intDecimalString: 0,
-                validateFunctionRetBoolParaString: (text){
+                inputType: 0,
+                validateText: (text){
                   if (int.tryParse(text) != null){
                     int intText = int.parse(text);
                     if(intText<= 500 && intText>= 100){
@@ -127,7 +127,7 @@ var re = InputDec.re;
                   return false;
                 },
                 onChange: (text){print('text changed: '+text);},
-                notifyValidationStatusRetVoidParaBool: (valid){print('validation changed: '+ valid.toString());},
+                notifyIsValid: (valid){print('validation changed: '+ valid.toString());},
                 )
             ),
           ],

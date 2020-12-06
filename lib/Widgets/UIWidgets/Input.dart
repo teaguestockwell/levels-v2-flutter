@@ -46,28 +46,31 @@ class _CustomTextFieldState extends State<CustomTextField> {
 }
 
 
-typedef void FunctionRetVoidParaDynamic(dynamic);
-typedef bool FunctionRetBoolParaDynamic(dynamic);
-typedef void FunctionRetVoidParaBool(bool);
+typedef void OnTextChange(String text);
+typedef bool ValidateText(String text);
+typedef void NotifyValid(bool valid);
 
 class ValidatedText extends StatefulWidget {
-  ///0 = int, 1 = decimal 2 = string
-  int intDecimalString;
+  ///select input type 0=int, 1=double, 2=string
+  int inputType;
+  ///updated when changed, also see bool void notifyIsValid(bool valid)
   bool valid = false;
+  ///updated when text is changed
   String text='';
-  ///para isValid
-  FunctionRetVoidParaBool notifyValidationStatusRetVoidParaBool;
-  ///para new text
-  FunctionRetVoidParaDynamic onChange;
-  ///para text ret is valid?
-  FunctionRetBoolParaDynamic validateFunctionRetBoolParaString;
-  
+  ///called when text is changed
+  NotifyValid notifyIsValid = (_){}; 
+  ///called when text is changed
+  OnTextChange onChange = (_){}; 
+  ///called when text is changed, changes border around text
+  ValidateText validateText = (_){return true;};
+
   TextEditingController _c = TextEditingController();
+
   ValidatedText({
-    this.intDecimalString=1,
+    this.inputType=1,
     this.onChange,
-    this.notifyValidationStatusRetVoidParaBool,
-    @required this.validateFunctionRetBoolParaString,
+    this.notifyIsValid,
+    this.validateText,
   });
 
   @override
@@ -75,57 +78,55 @@ class ValidatedText extends StatefulWidget {
 }
 
 class _ValidatedTextState extends State<ValidatedText> {
-  InputDecoration dec;
+  InputDecoration dec = InputDec.re;
   Widget ret;
 
   @override
   void initState() {
-    dec = InputDec.re;
-    addListner();
-    ret = getIntDoubleString(this.widget.intDecimalString);
+    _addListner();
+    ret = _getCustomTextFeild(this.widget.inputType);
     super.initState();
   }
 
-  void addListner(){
+  void _addListner(){
     this.widget._c.addListener((){ 
 
       //validate the text and set outline to red or white
       String text = this.widget._c.text;
-      if(this.widget.validateFunctionRetBoolParaString(text)){
+      if(this.widget.validateText(text)){
         this.widget.valid=true;
         setState(() {
-          print('setting border white');
           dec = InputDec.wi;
         });
       }
       else{
         this.widget.valid=false;
         setState(() {
-          print('setting border red');
           dec = InputDec.re;
         });
       }
 
       //notify valid and on change if not null
       this.widget?.onChange(text); 
-      this.widget?.notifyValidationStatusRetVoidParaBool(this.widget.valid);
+      this.widget?.notifyIsValid(this.widget.valid);
     });
   }
 
-  Widget getIntDoubleString(int type){
+
+  Widget _getCustomTextFeild(int type){
     switch (type){
       case 0: //ints only
         return 
           Container(
             height: Const.pickerHeight,
             width: Const.pickerWidth,
-            child: TextField(
-              controller: this.widget._c,
-              decoration: dec,
-              keyboardType: TextInputType.numberWithOptions(decimal: false),
-              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
-              textAlign: TextAlign.center,
-            )
+              child: TextField(
+                controller: this.widget._c,
+                decoration: dec,
+                keyboardType: TextInputType.numberWithOptions(decimal: false),
+                inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+                textAlign: TextAlign.center,
+              )
           );
       case 1: //doubles only
         return 
@@ -158,7 +159,7 @@ class _ValidatedTextState extends State<ValidatedText> {
 
   @override
   Widget build(BuildContext context) {
-    return getIntDoubleString(this.widget.intDecimalString);
+    return _getCustomTextFeild(this.widget.inputType);
   }
 }
 
@@ -276,46 +277,54 @@ class CustomButton extends StatelessWidget {
 }
 
 class InputDec {
-  static InputDecoration wi = InputDecoration(
-    border: OutlineInputBorder(
+  static final OutlineInputBorder _wi = OutlineInputBorder(
       borderRadius: const BorderRadius.all(
         const Radius.circular(5.0),
       ),
       borderSide: BorderSide(
-        color: Const.borderColor,
-        width: 1.0,
+        color: Const.focusedBorderColor,
+        width: Const.divThickness,
       ),
-    ),
-    focusedBorder: OutlineInputBorder(
+    );
+
+    static final OutlineInputBorder _wiNF = OutlineInputBorder(
       borderRadius: const BorderRadius.all(
         const Radius.circular(5.0),
       ),
       borderSide: BorderSide(
-        color: Colors.white70,
-        width: 1.0,
+        color: Const.nonfocusedBoderColors,
+        width: Const.divThickness,
       ),
-    ),
+    );
+
+  static final OutlineInputBorder _re = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.focusedErrorBorderColor,
+        width: Const.divThickness,
+      ),
+    );
+
+    static final OutlineInputBorder _reNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.nonfocusedErrorBoderColor,
+        width: Const.divThickness,
+      ),
+    );
+
+  static final InputDecoration wi = InputDecoration(
+    enabledBorder: _wiNF,
+    focusedBorder: _wi,
   );
 
-  static InputDecoration re = InputDecoration(
-    border: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Const.errorBorderColor,
-        width: 1.0,
-      ),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: const BorderRadius.all(
-        const Radius.circular(5.0),
-      ),
-      borderSide: BorderSide(
-        color: Const.errorBorderColor,
-        width: 1.0,
-      ),
-    ),
+  static final InputDecoration re = InputDecoration(
+    enabledBorder: _reNF,
+    focusedBorder: _re,
   );
 }
 

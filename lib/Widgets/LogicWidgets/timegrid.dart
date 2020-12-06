@@ -47,11 +47,11 @@ class _TimeGrid extends State<TimeGrid> {
         Table(
             border: TableBorder(
                 horizontalInside: BorderSide(
-                    color: Const.timeGridLinescolor,
-                    width: Const.timeGridDivSize),
+                    color: Const.divColor,
+                    width: Const.divThickness),
                 verticalInside: BorderSide(
-                    color: Const.timeGridLinescolor,
-                    width: Const.timeGridDivSize)),
+                    color: Const.divColor,
+                    width: Const.divThickness)),
             children: [
               TableRow(children: [
                 AlignPadding(

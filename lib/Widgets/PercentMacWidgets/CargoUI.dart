@@ -70,13 +70,13 @@ class _CargoUIState extends State<CargoUI> {
     if(this.widget.ope == false){return Container();}
       var ret = Column(children: [
       Padding(padding: EdgeInsets.fromLTRB(0,5,0,0),child:RowCenter(CustomTextFieldTextMax(tcName, nameChange))),
-      Divider(thickness:Const.divThickness),
+      Divider(color: Const.divColor,thickness:Const.divThickness),
       Row2.height(Tex('Weight'), CustomTextFieldNumSize(tcWeight,8),Const.pickerHeight*1.7),
-      Divider(thickness:Const.divThickness),
+      Divider(color: Const.divColor,thickness:Const.divThickness),
       Row2.height(Tex('Fuselage Station'), CustomTextFieldNumSize(tcFS,8),Const.pickerHeight*1.7),
-      Divider(thickness:Const.divThickness),
+      Divider(color: Const.divColor,thickness:Const.divThickness),
       Row2.height(Tex('Qty'), CustomTextFieldNumSize(tcQty,6,decimal: false, onChange: qtyChange),Const.pickerHeight*1.7),
-      Divider(thickness: Const.divThickness),
+      Divider(color: Const.divColor,thickness: Const.divThickness),
       Padding(padding: EdgeInsets.fromLTRB(0,0,0,5),child:RowCenterOne(CustomButton('Remove',onPressed: (){this.widget.onPressed(this.widget.nwf.id);},)))
     ],);
     return ret;

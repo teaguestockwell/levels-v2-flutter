@@ -1,12 +1,11 @@
 import 'dart:math';
-import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AlignPadding extends StatelessWidget {
   final Alignment ali;
   final double padd;
-  final Widget chil;
+  Widget chil;
   AlignPadding(this.padd, this.ali, this.chil);
 
   @override

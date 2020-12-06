@@ -124,13 +124,13 @@ class _tDistanceBodyState extends State<tDistanceBody> {
             selected: unitName,
             spinIdx: unitIdx,
           ))),
-      //Divider(thickness: Const.divThickness,),
+      //Divider(color: Const.divColor,thickness: Const.divThickness,),
       Padding(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(children: [
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Const.borderColor),
+                    border: Border.all(color: Const.divColor, width: Const.divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
@@ -146,7 +146,7 @@ class _tDistanceBodyState extends State<tDistanceBody> {
             Spacer(),
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Const.borderColor),
+                    border: Border.all(color: Const.divColor, width: Const.divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,

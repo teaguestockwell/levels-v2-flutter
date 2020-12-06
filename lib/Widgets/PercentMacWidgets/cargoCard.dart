@@ -191,14 +191,14 @@ class _CargoCardState extends State<CargoCard> {
              this.widget.configSpin,
           ),
 
-          Divider(thickness: Const.divThickness,),
+          Divider(color: Const.divColor,thickness: Const.divThickness,),
 
           Row2(
             Tex('Select Cargo'),
              this.widget.cargoSpin
              ),
 
-          Divider(thickness: Const.divThickness,),
+          Divider(color: Const.divColor,thickness: Const.divThickness,),
 
           Row3(
             CustomButton(

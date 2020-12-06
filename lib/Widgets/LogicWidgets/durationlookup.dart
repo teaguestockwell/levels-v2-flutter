@@ -39,7 +39,7 @@ class _DurationLookupState extends State<DurationLookup> {
           )
         ),
 
-        Divider(thickness: Const.divThickness,),
+        Divider(color: Const.divColor,thickness: Const.divThickness,),
 
         Row2(
           Tex('Date Time Two'),
@@ -50,7 +50,7 @@ class _DurationLookupState extends State<DurationLookup> {
           )
         ),
       
-        Divider(thickness: Const.divThickness,),
+        Divider(color: Const.divColor,thickness: Const.divThickness,),
 
         Row2(Tex('Duration hhhhh:mm:ss'), ConstText(getDiff()))
       ]

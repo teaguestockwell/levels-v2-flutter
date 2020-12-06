@@ -38,7 +38,7 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
   Widget build(BuildContext context) {
     return CCards('Aircraft',Column(children: [
       Row2(Tex('MDS'), this.widget.mdsSpin),
-          Divider(thickness: Const.divThickness,),
+          Divider(color: Const.divColor,thickness: Const.divThickness,),
       Row2(
             CustomButton(
               'I Accept',

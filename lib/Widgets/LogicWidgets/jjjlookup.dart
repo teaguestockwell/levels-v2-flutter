@@ -33,7 +33,7 @@ class _JJJLookupState extends State<JJJLookup> {
           )
         ),
 
-        Divider(thickness: Const.divThickness,),
+        Divider(color: Const.divColor,thickness: Const.divThickness,),
 
         Row2(Tex('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],

@@ -74,13 +74,13 @@ class _PreInspState extends State<PreInsp> {
            )
         ),
 
-        Divider(
+        Divider(color: Const.divColor,
           thickness: Const.divThickness,
         ),
 
         Row2(Tex('Hours Until Expire'), this.widget.buttonDurration),
         
-        Divider(
+        Divider(color: Const.divColor,
           thickness: Const.divThickness,
         ),
 

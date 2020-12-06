@@ -79,7 +79,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
               spinIdx: 2060 - year,
               selected: year.toString(),
             )),
-        Divider(
+        Divider(color: Const.divColor,
           thickness: Const.divThickness,
         ),
         Row2(
@@ -90,7 +90,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
               spinIdx: daysInyea - jjj,
               selected: jjj.toString(),
             )),
-        Divider(
+        Divider(color: Const.divColor,
           thickness: Const.divThickness,
         ),
         Row2(Tex('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))

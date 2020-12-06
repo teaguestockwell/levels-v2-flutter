@@ -28,15 +28,21 @@ class Const {
   static const Color topBot = Colors.black87,
       navBarSelected = Colors.white70,
       navBarDeselected = Colors.white30,
-      back = Colors.black,
-      cardColor = Colors.white10,
-      background = Colors.black,
       bottombarcolor = Colors.white10,
-      timeGridLinescolor = Colors.white60,
+      background = Colors.black,
+
+      cardColor = Colors.white10,
       buttonColor = Colors.white10,
-      textColor = Color.fromRGBO(255,255,255,0.88),
       cargoUIColor = Color.fromRGBO(255,255,255,0.07),
+
+      divColor = Colors.white30,
+      focusedBorderColor = Color.fromRGBO(255,255,255,0.88),
+      nonfocusedBoderColors = Colors.white30,
+      
+      textColor = Color.fromRGBO(255,255,255,0.88),
+
       modalPickerColor= Color.fromRGBO(55,55,55,1),
-      borderColor = Colors.white30,
-      errorBorderColor = Colors.red;
+      
+      focusedErrorBorderColor = Color.fromRGBO(253, 11, 30, 1),
+     nonfocusedErrorBoderColor = Color.fromRGBO(254,112, 123, 1);
 }
