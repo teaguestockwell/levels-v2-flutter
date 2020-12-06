@@ -51,6 +51,8 @@ typedef bool ValidateText(String text);
 typedef void NotifyValid(bool valid);
 
 class ValidatedText extends StatefulWidget {
+  ///
+  int maxChars;
   ///select input type 0=int, 1=double, 2=string
   int inputType;
   ///updated when changed, also see bool void notifyIsValid(bool valid)
@@ -71,6 +73,7 @@ class ValidatedText extends StatefulWidget {
     this.onChange,
     this.notifyIsValid,
     this.validateText,
+    this.maxChars=12
   });
 
   @override
@@ -124,7 +127,10 @@ class _ValidatedTextState extends State<ValidatedText> {
                 controller: this.widget._c,
                 decoration: dec,
                 keyboardType: TextInputType.numberWithOptions(decimal: false),
-                inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+                inputFormatters: [
+                  DecimalTextInputFormatter(),
+                  LengthLimitingTextInputFormatter(this.widget.maxChars),
+                  ],
                 textAlign: TextAlign.center,
               )
           );
@@ -137,7 +143,10 @@ class _ValidatedTextState extends State<ValidatedText> {
               controller: this.widget._c,
               decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
-              inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
+              inputFormatters: [
+                DecimalTextInputFormatter(),
+                LengthLimitingTextInputFormatter(this.widget.maxChars),
+                ],
               textAlign: TextAlign.center,
             )
           );
@@ -151,6 +160,9 @@ class _ValidatedTextState extends State<ValidatedText> {
               decoration: dec,
               keyboardType: TextInputType.text,
               textAlign: TextAlign.center,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(this.widget.maxChars),
+              ],
             )
           );
       default: throw (type.toString() + ' is not 0, 1, or 2');
