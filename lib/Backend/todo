@@ -9,7 +9,7 @@ test sql flight for preperation to rehost firbase and deploy to P1
 rewrite models
 
 Tanks   
-  unmix TanksRows with divs
+  total fuel vs per tank toggle
 
 CargoCard
     import bottons inside modal spinners

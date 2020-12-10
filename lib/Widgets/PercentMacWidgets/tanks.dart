@@ -8,29 +8,18 @@ import '../../Backend/model.dart';
 
 class TanksCard extends StatefulWidget {
   final Aircraft air;
+  final bool valid = true;
   var tankRows = List<Widget>();
   var tankNSWF = List<TankRow>();
-
-  final bool valid = true;
-
-  TanksCard(this.air){
-    for (Tank t in air.tanks) {
-      var tank = TankRow(t);
-      tankRows.add(tank);
-      tankNSWF.add(tank);
-
-      tankRows.add(Divider(color: Const.divColor,thickness: Const.divThickness,),);
-    }
-    tankRows.removeAt(tankRows.length - 1);
-  }
-
+  
   List<NameWeightFS> getNameWeightFS() {
     var ret = List<NameWeightFS>();
     tankNSWF.forEach((t) {ret.add(t.selected);});
     return ret;
   }
 
-  
+  TanksCard(this.air);
+
   @override
   _TanksCardState createState() => _TanksCardState();
 }
@@ -38,6 +27,18 @@ class TanksCard extends StatefulWidget {
 class _TanksCardState extends State<TanksCard>
 with AutomaticKeepAliveClientMixin<TanksCard> {
   @override bool get wantKeepAlive => true;
+
+  @override
+  void initState() {
+    for (Tank t in this.widget.air.tanks) {
+      var tank = TankRow(t);
+      this.widget.tankRows.add(tank);
+      this.widget.tankNSWF.add(tank);
+      this.widget.tankRows.add(Divider(color: Const.divColor,thickness: Const.divThickness,),);
+    }
+    this.widget.tankRows.removeAt(this.widget.tankRows.length - 1);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
