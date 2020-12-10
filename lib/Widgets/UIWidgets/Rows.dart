@@ -4,8 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../Uitls.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-
 
 class Row2 extends StatelessWidget {
   final Widget one, two;
@@ -90,7 +88,7 @@ class RowCenterText extends StatelessWidget {
       Alignment.center,
       SelectableLinkify(
         showCursor: true,
-        style: TextStyle(color: Const.textColor, fontSize: Const.maxTextSize/1.3),
+        style: TextStyle(color: Const.textColor, fontSize: Const.textSize, fontWeight: FontWeight.normal),
         text: w,
         options: LinkifyOptions(humanize: false),
         onOpen: (link) async {
@@ -116,6 +114,7 @@ class ConstText extends StatelessWidget {
       child: Center(
         child: Tex(
           this.text,
+          fontWeight: FontWeight.normal,
         )
       )
     );
@@ -123,25 +122,45 @@ class ConstText extends StatelessWidget {
 }
 ///AutoSizing Text
 class Tex extends StatelessWidget {
-  String text;
-  int maxLine;
-  AutoSizeGroup autoSizeGroup;
-  Tex(this.text,{this.autoSizeGroup,this.maxLine=1});
+  final String text;
+  final int maxLine;
+  ///=Const.textSizeCardTitle
+  double size;
+  ///= bold
+  FontWeight fontWeight;
+  Tex(this.text,{this.maxLine=1,this.size,this.fontWeight}){
+    if(this.size==null){this.size=Const.textSizeCardTitle;}
+    if(this.fontWeight==null){this.fontWeight=FontWeight.bold;}
+    }
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText(
-      text,
-      maxFontSize: Const.maxTextSize,
-      minFontSize: Const.minTextSize,
-      maxLines: maxLine,
-      group: autoSizeGroup,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: Const.textColor,
-        fontWeight: FontWeight.bold,
+    
+
+    return Text(
+      this.text,
+       maxLines: maxLine,
+       style: TextStyle(
+         color: Const.textColor,
+        fontSize: size,
+        fontWeight: fontWeight
+        ),
+        textAlign: TextAlign.center,
+        );
+    
+    
+    // AutoSizeText(
+    //   text,
+    //   maxFontSize: Const.maxTextSize,
+    //   minFontSize: Const.minTextSize,
+    //   maxLines: maxLine,
+    //   group: autoSizeGroup,
+    //   textAlign: TextAlign.center,
+    //   style: TextStyle(
+    //     color: Const.textColor,
+    //     fontWeight: FontWeight.bold,
         
-      ),
-    );
+    //   ),
+    // );
   }
 }
 

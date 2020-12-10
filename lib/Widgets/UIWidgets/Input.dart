@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -264,8 +263,7 @@ typedef void DateCallBack(DateTime);
 class CustomButton extends StatelessWidget {
   final String text;
   final IntCallBack onPressed;
-  var autoSizeGroup = AutoSizeGroup();
-  CustomButton(this.text, {this.onPressed,this.autoSizeGroup});
+  CustomButton(this.text, {this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -281,7 +279,7 @@ class CustomButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         child:FlatButton(
           onPressed: onPressed,
-          child: Tex(this.text,autoSizeGroup: this.autoSizeGroup),
+          child: Tex(this.text,fontWeight: FontWeight.normal,),
           ),
     )
     );
@@ -343,7 +341,6 @@ class InputDec {
 class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;
-  final asg = AutoSizeGroup();
   var timesPressed =0;
   var spinnerWidgets = List<Widget>();
   final List<String> stringList;
@@ -373,7 +370,8 @@ class _CustomButtomSpinnerModalStringState
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Tex(
             x,
-            autoSizeGroup: this.widget.asg,
+            size: Const.textSizeModalSpinner,
+            fontWeight: Const.fwSpinner,
           )
         )
       );
@@ -461,12 +459,12 @@ class CustomButtonDatePicker extends StatelessWidget {
             backgroundColor: Const.modalPickerColor,
             itemStyle: TextStyle(
               color: Const.textColor,
-              fontWeight: Const.textWeight,
-              fontSize: Const.maxTextSize
+              fontWeight: Const.fwSpinner,
+              fontSize: Const.textSizeModalSpinner
             ),
             doneStyle: TextStyle(
             color: Const.textColor,
-              fontSize: Const.maxTextSize
+              fontSize: Const.textSize
             )
           ), 
         );
@@ -508,12 +506,13 @@ class CustomButtonDateTimePicker extends StatelessWidget {
             backgroundColor: Const.modalPickerColor,
             itemStyle: TextStyle(
               color: Const.textColor,
-              fontWeight: Const.textWeight,
-              fontSize: Const.maxTextSize
+              fontWeight: Const.fwSpinner,
+              fontSize: Const.textSizeModalSpinner
             ),
             doneStyle: TextStyle(
-            color: Const.textColor,
-              fontSize: Const.maxTextSize
+              color: Const.textColor,
+              fontWeight: Const.fwSpinner,
+              fontSize: Const.textSizeModalSpinner
             )
           ), 
         );

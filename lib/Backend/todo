@@ -2,15 +2,21 @@ website for help button
 
 topbar help button
 
-
 max width for cards -- edit Max Widget
+
+test sql flight for preperation to rehost firbase and deploy to P1
+
+rewrite models
 
 Tanks   
   unmix TanksRows with divs
 
 CargoCard
-    validate CargoUIs + error msg + auto open invalid CargoUI + highlight error
     import bottons inside modal spinners
+
+CargoUI
+  add new textfeild for input validation
+
 PercentMac
     add CargoCard into calc
     implement snackbars

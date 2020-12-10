@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 
 class Const {
@@ -11,16 +10,15 @@ class Const {
   divThickness=1.5,
   rowInset = 10.0,
   modalSpinHeight = 210,
-  maxTextSize=22,
-  minTextSize =10,
   cardP = 4,
-  maxCardWidth = 1000;
+  maxCardWidth = 1000,
+
+  textSizeCardTitle = 14,
+  textSizeModalSpinner = 22,
+  textSize = 16;
 
   static final 
-   asg = AutoSizeGroup();
-
-  static const
-    textWeight = FontWeight.bold;
+  fwSpinner=FontWeight.normal;
 
   static const int 
     animationDuration = 100;

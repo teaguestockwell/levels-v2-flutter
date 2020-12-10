@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/CargoUI.dart';
@@ -33,8 +32,6 @@ class CargoCard extends StatefulWidget {
 
   ///this.cargo.values.toListOfWidgets
   var cargoList = List<Widget>(); 
-
-  final _autoSizeGroup = AutoSizeGroup();
 
   CargoCard(this.air);
 

@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:five_level_one/Widgets/Uitls.dart';
@@ -8,7 +7,6 @@ import 'package:intl/intl.dart';
 
 class TimeGrid extends StatefulWidget {
   _TimeGrid createState() => _TimeGrid();
-  final asg = AutoSizeGroup();
 }
 
 class _TimeGrid extends State<TimeGrid> {
@@ -60,8 +58,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'Zone',
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
@@ -69,8 +65,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'hh:mm:ss',
-                      autoSizeGroup: this.widget.asg,
-                     // textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
@@ -78,8 +72,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'JJJ',
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
@@ -87,8 +79,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'YYYY MM DD',
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
                     )))
               ]),
               TableRow(children: [
@@ -98,8 +88,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'Local',
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
@@ -107,8 +95,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       lHHMMSS,
-                      autoSizeGroup: this.widget.asg,
-                     // textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
                     5,
@@ -116,8 +103,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       lJJJ,
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
                     5,
@@ -125,8 +111,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       lYYYYMMDD,
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     )))
               ]),
               TableRow(children: [
@@ -136,8 +121,6 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       'Zulu',
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
                     ))),
                 AlignPadding(
                     5,
@@ -145,8 +128,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       zHHMMSS,
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
                     5,
@@ -154,8 +136,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       zJJJ,
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
                     5,
@@ -163,8 +144,7 @@ class _TimeGrid extends State<TimeGrid> {
                     FittedBox(
                         child: Tex(
                       zYYYYMMDD,
-                      autoSizeGroup: this.widget.asg,
-                      //textAlign: TextAlign.center,
+                      fontWeight: FontWeight.normal,
                     )))
               ]),
             ]));

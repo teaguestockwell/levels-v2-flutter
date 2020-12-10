@@ -123,7 +123,7 @@ class _CargoUIState extends State<CargoUI> {
                   children: [
                     InkWell(
                         child: AlignPadding(
-                            3.0, Alignment.center, Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name)),
+                            3.0, Alignment.center, Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,)),
                         onTap: toggle,),
                     buildInput()
                   ],

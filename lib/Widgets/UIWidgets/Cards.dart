@@ -92,7 +92,7 @@ class _CCardsState extends State<CCards> {
                   children: [
                     InkWell(
                         child: AlignPadding(
-                            3.0, Alignment.center, Tex(this.widget.title)),
+                            3.0, Alignment.center, Tex(this.widget.title,fontWeight: FontWeight.normal,)),
                         onTap: toggleChild),
                     chil
                   ],
@@ -142,7 +142,7 @@ class CardAllwaysOpen extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
-                      child: AlignPadding(3.0, Alignment.center, Tex(title)),
+                      child: AlignPadding(3.0, Alignment.center, Tex(title, fontWeight: FontWeight.normal,)),
                     ),
                     chil
                   ],
