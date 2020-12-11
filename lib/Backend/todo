@@ -6,115 +6,13 @@ max width for cards -- edit Max Widget
 
 test sql flight for preperation to rehost firbase and deploy to P1
 
-rewrite models
-
-Tanks   
-  total fuel vs per tank toggle
-
-CargoCard
-    import bottons inside modal spinners
-
-CargoUI
-  add new textfeild for input validation
+rewrite models for sql
 
 PercentMac
-    add CargoCard into calc
-    implement snackbars
+ add CargoCard into calc
 
-//   copyDoc(){
-// // get the data from 'name@xxx.com'
-// glossaryall.doc('C-17A-ER').get().then((doc) {
-//     if (doc.exists) {
-//         var data = doc.data();
-//         // saves the data to 'name'
-//         glossaryall.doc("C-17A-NON-ER").set(data);
-//     }
-// });
-//   }
-// }
+ CargoCard
+  import bottons inside modal spinners
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  Widget body;
-  SelectMDSBody selectedMdsBody;
-  Aircraft air;
-
-  @override
-  void initState() {
-    body = Loading();
-    //Center(child: Tex('Loading'));
-    init();
-    super.initState();
-  }
-
-  press() {
-    body = Loading(); setState(() {
-      
-    });
-    FirebaseFirestore.instance
-    .collection('mds')
-    .doc(selectedMdsBody.mdsSpin.selected)
-    .get()
-    .then((v) => setState(() {
-          air = Aircraft(
-            v.get('name'),
-            v.get('fs0'),
-            v.get('fs1'),
-            v.get('mom0'),
-            v.get('mom1'),
-            v.get('weight0'),
-            v.get('weight1'),
-            v.get('simplemom'),
-            v.get('lemac'),
-            v.get('mac'),
-            v.get('tanknames'),
-            v.get('tankmoms'),
-            v.get('tankweights'),
-            v.get('titles'),
-            v.get('bodys'),
-            v.get('cargonames'),
-            v.get('cargoweights'),
-            v.get('cargomoms'),
-            v.get('configs')
-          );
-          body = BottomNav(air);
-    }));
-  }
-
- 
-
-  init() {
-    FirebaseFirestore.instance
-        .collection('general')
-        .doc('general')
-        .get()
-        .then((value) => setState(() {
-              var gen = General(value.get('allmds'), value.get('welcometitle'),
-                  value.get('welcomebody'));
-
-              selectedMdsBody = SelectMDSBody(gen.csvAllMds, onPressed: press);
-
-              body = ListView(children: <Widget>[
-                Image(image: AssetImage('assets/0.png')),
-                CardAllwaysOpen(
-                    gen.welcometitle, RowCenterText(gen.welcomebody)),
-                selectedMdsBody,
-                // CCards('Now', TimeGrid())
-              ]);
-            }));
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        theme: ThemeData.dark(),
-        home: Scaffold(
-          body: body,
-          backgroundColor: Colors.black,
-        ));
-  }
-}
+  Tanks   
+   total fuel vs per tank toggle

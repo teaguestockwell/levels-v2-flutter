@@ -18,7 +18,7 @@ class CustomTextField extends StatefulWidget {
 class _CustomTextFieldState extends State<CustomTextField> {
   InputDecoration dec;
   @override
-  initstate(){
+  initState(){
     dec = InputDec.wi;
     this.widget.c.addListener((){ 
       
@@ -50,7 +50,8 @@ typedef bool ValidateText(String text);
 typedef void NotifyValid(bool valid);
 
 class ValidatedText extends StatefulWidget {
-  ///
+  ///=Const.pickerwidth
+  double width;
   int maxChars;
   ///select input type 0=int, 1=double, 2=string
   int inputType;
@@ -58,6 +59,7 @@ class ValidatedText extends StatefulWidget {
   bool valid = false;
   ///updated when text is changed
   String text='';
+  String initText;
   ///called when text is changed
   NotifyValid notifyIsValid = (_){}; 
   ///called when text is changed
@@ -65,36 +67,47 @@ class ValidatedText extends StatefulWidget {
   ///called when text is changed, changes border around text
   ValidateText validateText = (_){return true;};
 
-  TextEditingController _c = TextEditingController();
+ // TextEditingController _c = TextEditingController();
 
   ValidatedText({
     this.inputType=1,
     this.onChange,
     this.notifyIsValid,
     this.validateText,
-    this.maxChars=12
-  });
+    this.maxChars=12,
+    this.initText,
+    this.width,
+  }){
+    if(initText!=null){text=initText;}
+    if(width==null){width = Const.pickerWidth;}
+    valid = validateText(text);
+
+   }
 
   @override
   _ValidatedTextState createState() => _ValidatedTextState();
 }
 
 class _ValidatedTextState extends State<ValidatedText> {
-  InputDecoration dec = InputDec.re;
+  InputDecoration dec;
   Widget ret;
+  TextEditingController c = TextEditingController();
 
   @override
   void initState() {
+    c.text = this.widget.text;
+
+    if(this.widget.valid){dec = InputDec.wi;}
+    else{dec = InputDec.re;}
     _addListner();
     ret = _getCustomTextFeild(this.widget.inputType);
     super.initState();
   }
 
   void _addListner(){
-    this.widget._c.addListener((){ 
-
+    c.addListener((){ 
       //validate the text and set outline to red or white
-      String text = this.widget._c.text;
+      String text = c.text;
       if(this.widget.validateText(text)){
         this.widget.valid=true;
         setState(() {
@@ -109,8 +122,9 @@ class _ValidatedTextState extends State<ValidatedText> {
       }
 
       //notify valid and on change if not null
-      this.widget?.onChange(text); 
-      this.widget?.notifyIsValid(this.widget.valid);
+      this.widget.onChange?.call(text); 
+      this.widget.notifyIsValid?.call(this.widget.valid);
+      this.widget.text = text;
     });
   }
 
@@ -121,9 +135,9 @@ class _ValidatedTextState extends State<ValidatedText> {
         return 
           Container(
             height: Const.pickerHeight,
-            width: Const.pickerWidth,
+            width: this.widget.width,
               child: TextField(
-                controller: this.widget._c,
+                controller: c,
                 decoration: dec,
                 keyboardType: TextInputType.numberWithOptions(decimal: false),
                 inputFormatters: [
@@ -137,9 +151,9 @@ class _ValidatedTextState extends State<ValidatedText> {
         return 
           Container(
             height: Const.pickerHeight,
-            width: Const.pickerWidth,
+            width: this.widget.width,
             child: TextField(
-              controller: this.widget._c,
+              controller: c,
               decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
               inputFormatters: [
@@ -153,9 +167,9 @@ class _ValidatedTextState extends State<ValidatedText> {
         return 
           Container(
             height: Const.pickerHeight,
-            width: Const.pickerWidth,
+            width: this.widget.width,
             child: TextField(
-              controller: this.widget._c,
+              controller: c,
               decoration: dec,
               keyboardType: TextInputType.text,
               textAlign: TextAlign.center,
@@ -166,6 +180,11 @@ class _ValidatedTextState extends State<ValidatedText> {
           );
       default: throw (type.toString() + ' is not 0, 1, or 2');
     }
+  }
+  @override
+  void dispose() {
+    c.dispose();
+    super.dispose();
   }
 
   @override
@@ -372,10 +391,11 @@ class _CustomButtomSpinnerModalStringState
             x,
             size: Const.textSizeModalSpinner,
             fontWeight: Const.fwSpinner,
+            color: Const.textColor,
           )
         )
       );
-      print(x);
+      //print(x);
     }
   }
 

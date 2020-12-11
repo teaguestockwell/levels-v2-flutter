@@ -21,8 +21,8 @@ class Loading extends StatelessWidget {
           Image.asset('assets/jet.png'),
           width: 300.0,
           height: 300.0, dividers: 6,
-          onEnd: (int i){print(i.toString());},
-          onUpdate: (int i){print(i.toString());},
+          onEnd: (_){},
+          onUpdate: (_){},
           spinResistance: 0.2,
         )
       ),

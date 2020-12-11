@@ -124,11 +124,12 @@ class ConstText extends StatelessWidget {
 class Tex extends StatelessWidget {
   final String text;
   final int maxLine;
+  Color color = Const.textColor; 
   ///=Const.textSizeCardTitle
   double size;
   ///= bold
   FontWeight fontWeight;
-  Tex(this.text,{this.maxLine=1,this.size,this.fontWeight}){
+  Tex(this.text,{this.maxLine=1,this.size,this.fontWeight, this.color}){
     if(this.size==null){this.size=Const.textSizeCardTitle;}
     if(this.fontWeight==null){this.fontWeight=FontWeight.bold;}
     }
@@ -140,7 +141,7 @@ class Tex extends StatelessWidget {
       this.text,
        maxLines: maxLine,
        style: TextStyle(
-         color: Const.textColor,
+         color: color,
         fontSize: size,
         fontWeight: fontWeight
         ),

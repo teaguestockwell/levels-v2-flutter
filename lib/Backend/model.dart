@@ -115,7 +115,7 @@ class Config{
   Config(String csv,this.simplemom){
     var nameWeightMomentQtyList = csv.split(';');
     this.name=nameWeightMomentQtyList[0];
-    print(name);
+    //print(name);
 
     for(int i=1;i<nameWeightMomentQtyList.length;i++){
       String nwmqAtIndex = nameWeightMomentQtyList[i];
@@ -155,7 +155,7 @@ class NameWeightFS {
       this.qty = '1',
       }) {
     this.id = P.getUniqueIdx();
-    print(this.toString());
+    //print(this.toString());
   }
 
   ///used to create copy of another object, but assign it a new id
@@ -169,7 +169,6 @@ class NameWeightFS {
     this.simplemom = old.simplemom;
     this.qty = old.qty;
     this.id = P.getUniqueIdx();
-    print('Copying '+old.id.toString()+' to create '+this.id.toString());
   }
 
   @override
@@ -199,7 +198,13 @@ class NameWeightFS {
     if (fs.isNotEmpty) {
       return fs;
     }
-    return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
+
+    //canot get fs if nsfs is invalid
+    try{
+      return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
+    } catch(_){}
+
+    return 'NaN';
   }
 
   bool valid(String fs0, String fs1, String weight1,){
@@ -260,7 +265,7 @@ class P {
     p = double.parse(s);
     return p;
     }
-    catch (Exeption){throw Exception(s + ' is not a num');}
+    catch (Exeption){throw Exception();}
   }
   static int getUniqueIdx(){
     idx++;

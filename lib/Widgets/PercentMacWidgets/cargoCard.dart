@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:five_level_one/Backend/cont.dart';
 import 'package:five_level_one/Backend/model.dart';
-import 'package:five_level_one/Widgets/PercentMacWidgets/CargoUI.dart';
+import 'package:five_level_one/Widgets/PercentMacWidgets/validatedCargoUI.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
@@ -28,7 +28,7 @@ class CargoCard extends StatefulWidget {
   var importedConfigIDs = List<int>();
 
   ///key is NWFS.id, value is CargoUI
-  var cargo = LinkedHashMap<int, CargoUI>();
+  var cargo = LinkedHashMap<int, ValidatedCargoUI>();
 
   ///this.cargo.values.toListOfWidgets
   var cargoList = List<Widget>(); 
@@ -96,7 +96,7 @@ class _CargoCardState extends State<CargoCard> {
   ///@id NWFS.id as key to this.widget.cargo
   ///removes CargoUI from this.widget.cargo, then try to remove from configID
   void removeCargoID(int id) {
-    print('removing '+this.widget.cargo[id].nwf.toString());
+    //print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
     this.widget.importedConfigIDs.removeWhere((element) => element == id);
     setState(() {});
@@ -111,17 +111,19 @@ class _CargoCardState extends State<CargoCard> {
       var newNWFS = NameWeightFS.copyNewID(oldSelectedConfigNWFS);
       newNWFS.name += ' '+this.widget.selectedSpinnerConfig.name;
       
-      var newCargoUI = CargoUI(
-        this.widget.air.fs0,
-        this.widget.air.fs1,
-        this.widget.air.weight1,
-        this.widget.air.simplemom,
+      ValidatedCargoUI newCargoUI = ValidatedCargoUI.fromAddA(
+        key: UniqueKey(),
+        fs0: this.widget.air.fs0,
+        fs1: this.widget.air.fs1,
+        cargomaxweight: this.widget.air.cargomaxweight,
         onPressed: removeCargoID,
-        nwf: newNWFS
+        nwf: newNWFS, 
+        
       );
+
       this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
       this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
-      print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
+      //print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
     }
     setState(() {});
   }
@@ -130,13 +132,12 @@ class _CargoCardState extends State<CargoCard> {
   ///then clear this.widget.configIDs, and setState
   void removeConfig() {
     for (int id in this.widget.importedConfigIDs) {
-      try {
-        print('removing: '+this.widget.cargo[id].nwf.toString());
-        this.widget.cargo.removeWhere((key, value) => key == id);
-      } catch (Exception) {print('could not remove idx: ' + id.toString());}
+      //dont call to string right here because nwf may be invlaid
+      this.widget.cargo.remove(id);
     }
     this.widget.importedConfigIDs.clear();
-    setState(() {});
+    setState(() {
+    });
   }
 
   ///clear cargo & importedConfigIds, then set state 
@@ -160,24 +161,22 @@ class _CargoCardState extends State<CargoCard> {
   }
 
   void addCargo(){
-    var newCargoUI = CargoUI(
-        this.widget.air.fs0,
-        this.widget.air.fs1,
-        this.widget.air.weight1,
-        this.widget.air.simplemom,
-        onPressed: removeCargoID,
-        nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo)
+    var newCargoUI = ValidatedCargoUI.fromAddA(
+      fs0: this.widget.air.fs0,
+      fs1: this.widget.air.fs1,
+      cargomaxweight: this.widget.air.cargomaxweight,
+      onPressed: removeCargoID,
+      nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo)
       );
 
     this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
-    print('Adding cargo '+newCargoUI.nwf.toString());
+    //print('Adding cargo '+newCargoUI.nwf.toString());
     setState(() {});
   }
 
   Widget build(BuildContext context) {
     getCargo(); //call me every build
-    print('building cargoCard');
-    //printCargo();
+    printCargo();
     return CardAllwaysOpen(
       'Cargo',
       Column(
@@ -201,16 +200,13 @@ class _CargoCardState extends State<CargoCard> {
             CustomButton(
               'Update Config',
                onPressed: updateConfig,
-               //autoSizeGroup: this.widget._autoSizeGroup,
             ),
             CustomButton(
               'Add Cargo',
-              //autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: addCargo
             ),
             CustomButton(
               'Remove All',
-              //autoSizeGroup: this.widget._autoSizeGroup,
               onPressed: removeAll
             )
           ),

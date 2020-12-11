@@ -8,6 +8,3 @@ void main() async {
   await Firebase.initializeApp();
   runApp(Phoenix(child: Home2()));
 }
-
-
-
