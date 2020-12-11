@@ -10,6 +10,7 @@ rewrite models for sql
 
 PercentMac
  add CargoCard into calc
+ show work widget
 
  CargoCard
   import bottons inside modal spinners

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:five_level_one/Widgets/PercentMacWidgets/Tanks.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/aircraftCard.dart';
 import 'package:five_level_one/Widgets/PercentMacWidgets/cargocard.dart';
@@ -15,12 +17,31 @@ class PerMacScreen extends StatefulWidget {
   ChartCCard chartcCard;
   CargoCard cargoCard;
   AircraftCard aircraftCard;
+  bool valid;
+  var childValid = LinkedHashMap<int,bool>();
+
+  ///passed as a callback to chartc and cargo
+  ///tanks are allways valid
+  void validateChild(int id, bool valid){
+    childValid[id] = valid;
+    checkValidation();
+  }
+
+  ///checks child validations updates this.valid
+  void checkValidation(){
+    var ret = true;
+    childValid.forEach((_,childValid) {
+      if(!childValid){ret = false;}
+     });
+   valid = ret;
+   print('permac '+valid.toString());
+  }
 
   PerMacScreen(this.air){
     aircraftCard = AircraftCard(air.name);
     tankCard = TanksCard(air);
     chartcCard = ChartCCard(this.air);
-    cargoCard = CargoCard(air);
+    cargoCard = CargoCard(air,validateChild);
   }
   @override
   _PerMacScreenState createState() => _PerMacScreenState();

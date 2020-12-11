@@ -1,7 +1,10 @@
+import 'dart:collection';
+
 import 'package:five_level_one/Backend/model.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Cards.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Input.dart';
 import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
+import 'package:five_level_one/Widgets/Uitls.dart';
 import 'package:flutter/material.dart';
 
 class ChartCCard extends StatelessWidget {
@@ -10,9 +13,10 @@ class ChartCCard extends StatelessWidget {
   bool _validMoment = false;
   String _stringWeight = '0';
   String _stringMom = '0';
-
-  String invalidMessage='Invalid Chart C';
   Aircraft air;
+  NotifyCargoValid onValidationChange;
+  var childrenValid = LinkedHashMap<int,bool>();
+  
 
   ChartCCard(this.air);
 
@@ -30,11 +34,23 @@ class ChartCCard extends StatelessWidget {
     throw Exception('getNWFS was called on invalid Chart C');
   }
 
+  getThisValid(){
+    childrenValid.
+  }
+
+
+
   /// is the nwfs valid for this acft?
   bool getValid(){
     if(_validMoment && _validWeight){return true;}
     return false;
   }
+
+  /// 0= weight, 1=moment
+  void updateValidChildren(int id, bool valid){
+    this.childrenValid[id] =  valid;
+  }
+
 
   bool _validateWeight(String weight){
     if(
@@ -44,9 +60,9 @@ class ChartCCard extends StatelessWidget {
       &&
       double.parse(weight) <= double.parse(air.weight1)
     ){ 
-      _validWeight= true; return true;
+      updateValidChildren(0,true); return true;
     }
-     _validWeight= false; return false;
+      updateValidChildren(0,false); return false;
   } 
 
   bool _validateMoment(String mom){
@@ -57,9 +73,9 @@ class ChartCCard extends StatelessWidget {
       &&
       double.parse(mom) <= double.parse(air.mom1)
     ){ 
-      _validMoment= true; return true;
+     updateValidChildren(1,true); return true;
     }
-    _validMoment= false; return false;
+   updateValidChildren(1,false); return false;
   }
 
   @override

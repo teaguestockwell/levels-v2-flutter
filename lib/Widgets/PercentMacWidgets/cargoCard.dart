@@ -8,15 +8,22 @@ import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../Uitls.dart';
+
 ///modalspinner to select config, buttons to
 ///update or delete confi, and lazy loading of 
 ///cargoUI
 class CargoCard extends StatefulWidget {
   ///contains config info for child widgets
   final Aircraft air;
+  bool valid;
 
   Config selectedSpinnerConfig;
   NameWeightFS selectedSpinnerCargo;
+
+  ///notify permac screen of validation id=1
+  NotifyCargoValid onValidationChange;
+  
 
   ///modal spinner that changes this.selectedSpinnerConfig
   CustomButtomSpinnerModalString configSpin;
@@ -30,10 +37,22 @@ class CargoCard extends StatefulWidget {
   ///key is NWFS.id, value is CargoUI
   var cargo = LinkedHashMap<int, ValidatedCargoUI>();
 
+  //key is nwfs.id, value is bool of validated cargo ui
+  var cargoIsValid = HashMap<int,bool>();
+
   ///this.cargo.values.toListOfWidgets
   var cargoList = List<Widget>(); 
 
-  CargoCard(this.air);
+  //only call this after cargoUI valid notification = true;
+  List<NameWeightFS>  getNWfs(){
+    var ret = List<NameWeightFS>();
+    cargo.forEach((_,cargoUI){
+      ret.add(cargoUI.nwf);
+    });
+    return ret;
+  }
+
+  CargoCard(this.air,this.onValidationChange);
 
   @override
   _CargoCardState createState() => _CargoCardState();
@@ -60,6 +79,26 @@ class _CargoCardState extends State<CargoCard> {
     );
 
     super.initState();
+  }
+
+  ///passed to the onValidChangelistener of validatedCargoUI 
+  ///takes nwfs.id as key to modifiy valid of cargo is valid
+  void cargoUIValidationChanged(int nwfID, bool valid){
+    this.widget.cargoIsValid[nwfID] = valid;
+    checkValidation();
+  }
+
+  void checkValidation(){
+  var ret = true;
+    this.widget.cargoIsValid.forEach((key, value){
+      if(value==false || value == null){ret=false;}
+    });
+  this.widget.valid = ret;
+
+  //call back to nofiy permacscreen goes here
+  this.widget.onValidationChange(1,ret);
+  print(this.widget.valid);
+  print(this.widget.cargoIsValid.toString());
   }
 
   ///pass to config spinner
@@ -98,7 +137,9 @@ class _CargoCardState extends State<CargoCard> {
   void removeCargoID(int id) {
     //print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
-    this.widget.importedConfigIDs.removeWhere((element) => element == id);
+    this.widget.importedConfigIDs.remove(id);
+    this.widget.cargoIsValid.remove(id);
+    checkValidation();
     setState(() {});
   }
 
@@ -118,13 +159,14 @@ class _CargoCardState extends State<CargoCard> {
         cargomaxweight: this.widget.air.cargomaxweight,
         onPressed: removeCargoID,
         nwf: newNWFS, 
-        
+        notifyValid: cargoUIValidationChanged,
       );
 
       this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
       this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
       //print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
     }
+    checkValidation();
     setState(() {});
   }
 
@@ -134,7 +176,9 @@ class _CargoCardState extends State<CargoCard> {
     for (int id in this.widget.importedConfigIDs) {
       //dont call to string right here because nwf may be invlaid
       this.widget.cargo.remove(id);
+      this.widget.cargoIsValid.remove(id);
     }
+    checkValidation();
     this.widget.importedConfigIDs.clear();
     setState(() {
     });
@@ -144,6 +188,8 @@ class _CargoCardState extends State<CargoCard> {
   void removeAll(){
     this.widget.cargo.clear();
     this.widget.importedConfigIDs.clear();
+    this.widget.cargoIsValid.clear();
+    checkValidation();
     setState(() {});
   }
 
@@ -166,15 +212,19 @@ class _CargoCardState extends State<CargoCard> {
       fs1: this.widget.air.fs1,
       cargomaxweight: this.widget.air.cargomaxweight,
       onPressed: removeCargoID,
-      nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo)
+      nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo), 
+      key: UniqueKey(),
+      notifyValid: cargoUIValidationChanged,
       );
 
     this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
+    checkValidation();
     //print('Adding cargo '+newCargoUI.nwf.toString());
     setState(() {});
   }
 
   Widget build(BuildContext context) {
+    checkValidation();
     getCargo(); //call me every build
     printCargo();
     return CardAllwaysOpen(

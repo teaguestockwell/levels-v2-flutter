@@ -5,6 +5,8 @@ import 'package:five_level_one/Widgets/UIWidgets/Rows.dart';
 import 'package:flutter/material.dart';
 import '../Uitls.dart';
 
+
+
 class ValidatedCargoUI extends StatefulWidget {/// interates the data model NameWeightFS with UI elements for input, and error checking
   var ope = false;
   var calculated = false;
@@ -19,14 +21,16 @@ class ValidatedCargoUI extends StatefulWidget {/// interates the data model Name
   Widget opened,closed;
   Key key;
 
-  ValidatedCargoUI({@required this.fs0, @required this.fs1, @required this.cargomaxweight, @required this.simpleMom, @required this.onPressed}){
+  NotifyCargoValid notifyValid;
+
+  ValidatedCargoUI({@required this.fs0, @required this.fs1, @required this.cargomaxweight, @required this.simpleMom, @required this.onPressed, @required this.key, @required this.notifyValid}){
     this.nwf = NameWeightFS();
     this.nwf.simplemom = this.simpleMom;
     this.calculated = false;
   }
 
   ///caculates fs
-  ValidatedCargoUI.fromAddA({@required this.fs0, @required this.fs1, @required this.cargomaxweight, @required this.nwf, @required this.onPressed, this.key})
+  ValidatedCargoUI.fromAddA({@required this.fs0, @required this.fs1, @required this.cargomaxweight, @required this.nwf, @required this.onPressed, @required this.key, @required this.notifyValid})
   : super(key:key)
   {
     this.simpleMom = this.nwf.simplemom; 
@@ -157,6 +161,7 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   }
 
   bool validateCargoUI(){
+    var ret;
     if(
       this.widget.nameVT.valid
       &&
@@ -165,8 +170,12 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
       this.widget.fsVT.valid
       &&
       this.widget.qtyVT.valid
-    ){return true;}
-    return false;
+    ){ret = true;}
+    else{ret = false;}
+
+    //if function is not null, update listner
+    this.widget.notifyValid?.call(this.widget.nwf.id,ret);
+    return ret;
   }
 
   void removePress(){

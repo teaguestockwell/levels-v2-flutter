@@ -2,6 +2,15 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+typedef void NotifyCargoValid(int nwfID, bool valid);
+typedef void OnTextChange(String text);
+typedef bool ValidateText(String text);
+typedef void NotifyValid(bool valid);
+typedef void IntCallBack();
+typedef void IntCallBackIntPara(int i);
+typedef void StringCallBack(String x);
+typedef void DateCallBack(DateTime);
+
 class AlignPadding extends StatelessWidget {
   final Alignment ali;
   final double padd;

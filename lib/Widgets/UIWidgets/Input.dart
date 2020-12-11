@@ -45,9 +45,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 }
 
 
-typedef void OnTextChange(String text);
-typedef bool ValidateText(String text);
-typedef void NotifyValid(bool valid);
+
 
 class ValidatedText extends StatefulWidget {
   ///=Const.pickerwidth
@@ -274,10 +272,7 @@ class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
   }
 }
 
-typedef void IntCallBack();
-typedef void IntCallBackIntPara(int i);
-typedef void StringCallBack(String x);
-typedef void DateCallBack(DateTime);
+
 
 class CustomButton extends StatelessWidget {
   final String text;
