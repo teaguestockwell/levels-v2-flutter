@@ -191,16 +191,18 @@ class NameWeightFS {
     if (mom.isNotEmpty) {
       return mom;
     }
-    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toStringAsFixed(1);
+    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
   }
 
   String getFS() {
     if (fs.isNotEmpty) {
+      print('non calc fs');
       return fs;
     }
 
     //canot get fs if nsfs is invalid
     try{
+      print('clcfs');
       return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
     } catch(_){}
 
@@ -235,6 +237,7 @@ class NameWeightFS {
     }
     print(
         'lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
+        print(totMom.toString()+' '+ totWeight.toString());
     perMacD = 100.0 * ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
     return perMacD.toStringAsFixed(2);
   }

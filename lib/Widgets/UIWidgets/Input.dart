@@ -106,6 +106,9 @@ class _ValidatedTextState extends State<ValidatedText> {
     c.addListener((){ 
       //validate the text and set outline to red or white
       String text = c.text;
+      this.widget.text = text;
+      this.widget.onChange?.call(text); 
+      this.widget.notifyIsValid?.call(this.widget.valid);
       if(this.widget.validateText(text)){
         this.widget.valid=true;
         setState(() {
@@ -120,9 +123,9 @@ class _ValidatedTextState extends State<ValidatedText> {
       }
 
       //notify valid and on change if not null
-      this.widget.onChange?.call(text); 
-      this.widget.notifyIsValid?.call(this.widget.valid);
-      this.widget.text = text;
+      
+      
+      
     });
   }
 

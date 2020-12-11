@@ -29,11 +29,22 @@ class PerMacScreen extends StatefulWidget {
   ///checks child validations updates this.valid
   void checkValidation(){
     var ret = true;
+    print(childValid.toString());
     childValid.forEach((_,childValid) {
       if(!childValid){ret = false;}
      });
    valid = ret;
-   print('permac '+valid.toString());
+   //print('permac '+valid.toString());
+   if(ret){getPerMac();}
+  }
+
+  getPerMac(){
+    var nwfs = List<NameWeightFS>();
+    nwfs.addAll(cargoCard.getNWfs());
+    nwfs.add(chartcCard.getNWFS());
+
+    print(nwfs.toString());
+    print(NameWeightFS.getPerMac(air.lemac, air.mac, nwfs));
   }
 
   PerMacScreen(this.air){

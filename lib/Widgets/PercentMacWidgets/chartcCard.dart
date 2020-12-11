@@ -16,13 +16,14 @@ class ChartCCard extends StatelessWidget {
   Aircraft air;
   NotifyCargoValid onValidationChange;
   var childrenValid = LinkedHashMap<int,bool>();
+  bool valid;
   
 
   ChartCCard(this.air, this.onValidationChange);
 
   /// do not call this before checking bool getValid()
   NameWeightFS getNWFS(){
-    if(getThisValid()){
+    if(valid){
       return
       NameWeightFS(
         name: 'Basic Aircraft',
@@ -39,7 +40,7 @@ class ChartCCard extends StatelessWidget {
     childrenValid.forEach((_,value) { 
       if(!value){ret=false;}
     });
-    print('chat c '+ ret.toString());
+    valid = ret;
     onValidationChange(0,ret);
     return ret;
   }

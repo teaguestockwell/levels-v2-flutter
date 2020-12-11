@@ -45,6 +45,7 @@ class CargoCard extends StatefulWidget {
 
   //only call this after cargoUI valid notification = true;
   List<NameWeightFS>  getNWfs(){
+    if(!valid){throw Exception('getNWfs called on invalid CargoCard');}
     var ret = List<NameWeightFS>();
     cargo.forEach((_,cargoUI){
       ret.add(cargoUI.nwf);
