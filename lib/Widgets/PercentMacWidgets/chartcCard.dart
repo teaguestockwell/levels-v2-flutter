@@ -18,11 +18,11 @@ class ChartCCard extends StatelessWidget {
   var childrenValid = LinkedHashMap<int,bool>();
   
 
-  ChartCCard(this.air);
+  ChartCCard(this.air, this.onValidationChange);
 
   /// do not call this before checking bool getValid()
   NameWeightFS getNWFS(){
-    if(getValid()){
+    if(getThisValid()){
       return
       NameWeightFS(
         name: 'Basic Aircraft',
@@ -34,21 +34,20 @@ class ChartCCard extends StatelessWidget {
     throw Exception('getNWFS was called on invalid Chart C');
   }
 
-  getThisValid(){
-    childrenValid.
-  }
-
-
-
-  /// is the nwfs valid for this acft?
-  bool getValid(){
-    if(_validMoment && _validWeight){return true;}
-    return false;
+  bool getThisValid(){
+    bool ret = true;
+    childrenValid.forEach((_,value) { 
+      if(!value){ret=false;}
+    });
+    print('chat c '+ ret.toString());
+    onValidationChange(0,ret);
+    return ret;
   }
 
   /// 0= weight, 1=moment
   void updateValidChildren(int id, bool valid){
     this.childrenValid[id] =  valid;
+    getThisValid();
   }
 
 

@@ -94,11 +94,9 @@ class _CargoCardState extends State<CargoCard> {
       if(value==false || value == null){ret=false;}
     });
   this.widget.valid = ret;
-
+  print('cargo '+ret.toString());
   //call back to nofiy permacscreen goes here
   this.widget.onValidationChange(1,ret);
-  print(this.widget.valid);
-  print(this.widget.cargoIsValid.toString());
   }
 
   ///pass to config spinner
