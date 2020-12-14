@@ -95,3 +95,90 @@ class _HomePageState extends State<HomePage> {
         ));
   }
 }
+
+
+
+
+
+
+class CustomTextFieldNumSize extends StatefulWidget {
+  final TextEditingController t;
+  final int maxSize;
+  final bool decimal;
+  StringCallBack onChange;
+  CustomTextFieldNumSize(this.t,this.maxSize,{this.decimal=true, this.onChange});
+  @override
+  _CustomTextFieldNumSizeState createState() => _CustomTextFieldNumSizeState();
+}
+
+class _CustomTextFieldNumSizeState extends State<CustomTextFieldNumSize> {
+
+  change(String x){
+    this.widget.onChange?.call(x);
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: Const.pickerHeight*1.7,
+        width: Const.pickerWidth,
+        child: TextField(
+            onChanged: change,
+            maxLength: this.widget.maxSize,
+            keyboardType: TextInputType.numberWithOptions(decimal: this.widget.decimal),
+            textAlign: TextAlign.center,
+            controller: this.widget.t,
+            decoration: InputDec.wi));
+  }
+}
+
+class CustomTextFieldTextMax extends StatefulWidget {
+  TextEditingController t;
+  StringCallBack onChange;
+  CustomTextFieldTextMax(this.t,this.onChange);
+
+  @override
+  _CustomTextFieldTextMaxState createState() => _CustomTextFieldTextMaxState();
+}
+
+class _CustomTextFieldTextMaxState extends State<CustomTextFieldTextMax> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: Const.pickerHeight*1.7,
+        child: TextField(
+          onChanged: this.widget.onChange,
+          maxLength: 45,
+            keyboardType: TextInputType.name,
+            textAlign: TextAlign.center,
+            controller: this.widget.t,
+            decoration: InputDec.wi));
+  }
+}
+
+class CustomTextFieldText extends StatefulWidget {
+  TextEditingController t;
+  double width;
+  int maxSize;
+  CustomTextFieldText(this.t) {
+    width = Const.pickerWidth;
+  }
+  CustomTextFieldText.d(this.t) {
+    width = Const.pickerWidth * 2.0;
+  }
+  @override
+  _CustomTextFieldTextState createState() => _CustomTextFieldTextState();
+}
+
+class _CustomTextFieldTextState extends State<CustomTextFieldText> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: Const.pickerHeight,
+        width: this.widget.width,
+        child: TextField(
+            keyboardType: TextInputType.name,
+            textAlign: TextAlign.center,
+            controller: this.widget.t,
+            decoration: InputDec.wi));
+  }
+}

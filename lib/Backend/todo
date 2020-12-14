@@ -8,6 +8,10 @@ test sql flight for preperation to rehost firbase and deploy to P1
 
 rewrite models for sql
 
+refractor input.dart / serpatate widgets into new files
+
+widget that handles error text rebuilding for cargoUI,Cargo, chart c
+
 PercentMac
  add CargoCard into calc
  show work widget

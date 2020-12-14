@@ -44,3 +44,55 @@ class Const {
       focusedErrorBorderColor = Color.fromRGBO(253, 11, 30, 1),
      nonfocusedErrorBoderColor = Color.fromRGBO(254,112, 123, 1);
 }
+
+class InputDec {
+  static final OutlineInputBorder _wi = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.focusedBorderColor,
+        width: Const.divThickness,
+      ),
+    );
+
+    static final OutlineInputBorder _wiNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.nonfocusedBoderColors,
+        width: Const.divThickness,
+      ),
+    );
+
+  static final OutlineInputBorder _re = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.focusedErrorBorderColor,
+        width: Const.divThickness,
+      ),
+    );
+
+    static final OutlineInputBorder _reNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.nonfocusedErrorBoderColor,
+        width: Const.divThickness,
+      ),
+    );
+
+  static final InputDecoration wi = InputDecoration(
+    enabledBorder: _wiNF,
+    focusedBorder: _wi,
+  );
+
+  static final InputDecoration re = InputDecoration(
+    enabledBorder: _reNF,
+    focusedBorder: _re,
+  );
+}

@@ -148,20 +148,6 @@ class Tex extends StatelessWidget {
         textAlign: TextAlign.center,
         );
     
-    
-    // AutoSizeText(
-    //   text,
-    //   maxFontSize: Const.maxTextSize,
-    //   minFontSize: Const.minTextSize,
-    //   maxLines: maxLine,
-    //   group: autoSizeGroup,
-    //   textAlign: TextAlign.center,
-    //   style: TextStyle(
-    //     color: Const.textColor,
-    //     fontWeight: FontWeight.bold,
-        
-    //   ),
-    // );
   }
 }
 
