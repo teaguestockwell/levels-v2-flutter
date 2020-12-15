@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:intl/intl.dart';
-import '../Uitls.dart';
-import 'input/customButton.dart';
+import '../../Uitls.dart';
+import 'customButton.dart';
 
 class CustomButtonDateTimePicker extends StatelessWidget {
   String buttText;
