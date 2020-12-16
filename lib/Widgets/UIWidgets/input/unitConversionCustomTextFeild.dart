@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 
 class CustomTextField extends StatefulWidget {
   var c = TextEditingController();
+
   CustomTextField(this.c);
   @override
   _CustomTextFieldState createState() => _CustomTextFieldState();
@@ -12,20 +13,18 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   InputDecoration dec;
+
   @override
-  initState(){
+  initState() {
     dec = InputDec.wi;
-    this.widget.c.addListener((){ 
-      
-    });
-      
+    this.widget.c.addListener(() {});
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return 
-      Container(
+    return Container(
         height: Const.pickerHeight,
         width: Const.pickerWidth,
         child: TextField(
@@ -34,7 +33,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
           keyboardType: TextInputType.numberWithOptions(decimal: true),
           inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
           textAlign: TextAlign.center,
-        )
-      );
+        ));
   }
 }

@@ -11,20 +11,19 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Const.pickerHeight,
-      width: Const.pickerWidth,
-      decoration: BoxDecoration(
-        color: Const.buttonColor,
-        borderRadius: BorderRadius.circular(8)
-      ),
-
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
-        child:FlatButton(
-          onPressed: onPressed,
-          child: Tex(this.text,fontWeight: FontWeight.normal,),
+        height: Const.pickerHeight,
+        width: Const.pickerWidth,
+        decoration: BoxDecoration(
+            color: Const.buttonColor, borderRadius: BorderRadius.circular(8)),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: FlatButton(
+            onPressed: onPressed,
+            child: Tex(
+              this.text,
+              fontWeight: FontWeight.normal,
+            ),
           ),
-    )
-    );
+        ));
   }
 }

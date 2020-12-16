@@ -8,36 +8,47 @@ class ValidatedText extends StatefulWidget {
   ///=Const.pickerwidth
   double width;
   int maxChars;
+
   ///select input type 0=int, 1=double, 2=string
   int inputType;
+
   ///updated when changed, also see bool void notifyIsValid(bool valid)
   bool valid = false;
-  ///updated when text is changed
-  String text='';
-  String initText;
-  ///called when text is changed
-  NotifyValid notifyIsValid = (_){}; 
-  ///called when text is changed
-  OnTextChange onChange = (_){}; 
-  ///called when text is changed, changes border around text
-  ValidateText validateText = (_){return true;};
 
- // TextEditingController _c = TextEditingController();
+  ///updated when text is changed
+  String text = '';
+  String initText;
+
+  ///called when text is changed
+  NotifyValid notifyIsValid = (_) {};
+
+  ///called when text is changed
+  OnTextChange onChange = (_) {};
+
+  ///called when text is changed, changes border around text
+  ValidateText validateText = (_) {
+    return true;
+  };
+
+  // TextEditingController _c = TextEditingController();
 
   ValidatedText({
-    this.inputType=1,
+    this.inputType = 1,
     this.onChange,
     this.notifyIsValid,
     this.validateText,
-    this.maxChars=12,
+    this.maxChars = 12,
     this.initText,
     this.width,
-  }){
-    if(initText!=null){text=initText;}
-    if(width==null){width = Const.pickerWidth;}
+  }) {
+    if (initText != null) {
+      text = initText;
+    }
+    if (width == null) {
+      width = Const.pickerWidth;
+    }
     valid = validateText(text);
-
-   }
+  }
 
   @override
   _ValidatedTextState createState() => _ValidatedTextState();
@@ -52,62 +63,55 @@ class _ValidatedTextState extends State<ValidatedText> {
   void initState() {
     c.text = this.widget.text;
 
-    if(this.widget.valid){dec = InputDec.wi;}
-    else{dec = InputDec.re;}
+    if (this.widget.valid) {
+      dec = InputDec.wi;
+    } else {
+      dec = InputDec.re;
+    }
     _addListner();
     ret = _getCustomTextFeild(this.widget.inputType);
     super.initState();
   }
 
-  void _addListner(){
-    c.addListener((){ 
+  void _addListner() {
+    c.addListener(() {
       //validate the text and set outline to red or white
       String text = c.text;
       this.widget.text = text;
-      this.widget.onChange?.call(text); 
+      this.widget.onChange?.call(text);
       this.widget.notifyIsValid?.call(this.widget.valid);
-      if(this.widget.validateText(text)){
-        this.widget.valid=true;
+      if (this.widget.validateText(text)) {
+        this.widget.valid = true;
         setState(() {
           dec = InputDec.wi;
         });
-      }
-      else{
-        this.widget.valid=false;
+      } else {
+        this.widget.valid = false;
         setState(() {
           dec = InputDec.re;
         });
       }
-
-      //notify valid and on change if not null
-      
-      
-      
     });
   }
 
-
-  Widget _getCustomTextFeild(int type){
-    switch (type){
+  Widget _getCustomTextFeild(int type) {
+    switch (type) {
       case 0: //ints only
-        return 
-          Container(
+        return Container(
             height: Const.pickerHeight,
             width: this.widget.width,
-              child: TextField(
-                controller: c,
-                decoration: dec,
-                keyboardType: TextInputType.numberWithOptions(decimal: false),
-                inputFormatters: [
-                  DecimalTextInputFormatter(),
-                  LengthLimitingTextInputFormatter(this.widget.maxChars),
-                  ],
-                textAlign: TextAlign.center,
-              )
-          );
+            child: TextField(
+              controller: c,
+              decoration: dec,
+              keyboardType: TextInputType.numberWithOptions(decimal: false),
+              inputFormatters: [
+                DecimalTextInputFormatter(),
+                LengthLimitingTextInputFormatter(this.widget.maxChars),
+              ],
+              textAlign: TextAlign.center,
+            ));
       case 1: //doubles only
-        return 
-          Container(
+        return Container(
             height: Const.pickerHeight,
             width: this.widget.width,
             child: TextField(
@@ -117,13 +121,11 @@ class _ValidatedTextState extends State<ValidatedText> {
               inputFormatters: [
                 DecimalTextInputFormatter(),
                 LengthLimitingTextInputFormatter(this.widget.maxChars),
-                ],
+              ],
               textAlign: TextAlign.center,
-            )
-          );
+            ));
       case 2: //all chars
-        return 
-          Container(
+        return Container(
             height: Const.pickerHeight,
             width: this.widget.width,
             child: TextField(
@@ -134,11 +136,12 @@ class _ValidatedTextState extends State<ValidatedText> {
               inputFormatters: [
                 LengthLimitingTextInputFormatter(this.widget.maxChars),
               ],
-            )
-          );
-      default: throw (type.toString() + ' is not 0, 1, or 2');
+            ));
+      default:
+        throw (type.toString() + ' is not 0, 1, or 2');
     }
   }
+
   @override
   void dispose() {
     c.dispose();

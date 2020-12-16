@@ -9,12 +9,13 @@ import '../Rows.dart';
 class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;
-  var timesPressed =0;
+  var timesPressed = 0;
   var spinnerWidgets = List<Widget>();
   final List<String> stringList;
   final IntCallBackIntPara onPressed;
 
-  CustomButtomSpinnerModalString(this.stringList,{this.spinIdx, this.onPressed,this.selected});
+  CustomButtomSpinnerModalString(this.stringList,
+      {this.spinIdx, this.onPressed, this.selected});
   @override
   _CustomButtomSpinnerModalStringState createState() =>
       _CustomButtomSpinnerModalStringState();
@@ -29,21 +30,17 @@ class _CustomButtomSpinnerModalStringState
     super.initState();
   }
 
-   _getSpinnerWidgets() {
-    
+  _getSpinnerWidgets() {
     this.widget.spinnerWidgets.clear();
     for (String x in this.widget.stringList) {
-      this.widget.spinnerWidgets.add(
-        Padding(
+      this.widget.spinnerWidgets.add(Padding(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           child: Tex(
             x,
             size: Const.textSizeModalSpinner,
             fontWeight: Const.fwSpinner,
             color: Const.textColor,
-          )
-        )
-      );
+          )));
       //print(x);
     }
   }
@@ -57,9 +54,11 @@ class _CustomButtomSpinnerModalStringState
     setState(() {});
   }
 
-  press(){
+  press() {
     //build children only on first press
-    if(this.widget.timesPressed==0){_getSpinnerWidgets();}
+    if (this.widget.timesPressed == 0) {
+      _getSpinnerWidgets();
+    }
     this.widget.timesPressed++;
     showModalBottomSheet<void>(
       context: context,
@@ -77,13 +76,11 @@ class _CustomButtomSpinnerModalStringState
                     child: Center(
                         child: CupertinoPicker(
                       scrollController: FixedExtentScrollController(
-                        initialItem: this.widget.spinIdx),
+                          initialItem: this.widget.spinIdx),
                       children: this.widget.spinnerWidgets,
                       onSelectedItemChanged: _spin,
                       itemExtent: 35,
-                    )
-                  )
-                ),
+                    ))),
               ],
             ),
           ),

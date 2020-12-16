@@ -68,24 +68,21 @@ class _PreInspState extends State<PreInsp> {
     return Column(
       children: [
         Row2(
-          Tex('Acomplished At'),
-          CustomButtonDateTimePicker(
-            buttText: acompString,
-            onChange: timeChange,
-            currentTime: acompDate,
-           )
-        ),
-
-        Divider(color: Const.divColor,
+            Tex('Acomplished At'),
+            CustomButtonDateTimePicker(
+              buttText: acompString,
+              onChange: timeChange,
+              currentTime: acompDate,
+            )),
+        Divider(
+          color: Const.divColor,
           thickness: Const.divThickness,
         ),
-
         Row2(Tex('Hours Until Expire'), this.widget.buttonDurration),
-        
-        Divider(color: Const.divColor,
+        Divider(
+          color: Const.divColor,
           thickness: Const.divThickness,
         ),
-
         Row2(Tex('Expires At'), ConstText(expireAt))
       ],
     );
