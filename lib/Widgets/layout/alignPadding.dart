@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AlignPadding extends StatelessWidget {
   final Alignment ali;
   final double padd;
-  Widget chil;
+  final Widget chil;
   AlignPadding(this.padd, this.ali, this.chil);
 
   @override

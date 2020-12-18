@@ -1,19 +1,17 @@
-
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
 import 'package:five_level_one/widgets/input/unitConversionCustomTextFeild.dart';
 import 'package:five_level_one/widgets/layout/rows/row1.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils.dart';
 
-class tDistanceBody extends StatefulWidget {
+class UnitConversion extends StatefulWidget {
   @override
-  _tDistanceBodyState createState() => _tDistanceBodyState();
+  _UnitConversionState createState() => _UnitConversionState();
 }
 
-class _tDistanceBodyState extends State<tDistanceBody> {
+class _UnitConversionState extends State<UnitConversion> {
   var controllerOne = TextEditingController();
   var controllerTwo = TextEditingController();
   var leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;

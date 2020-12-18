@@ -9,7 +9,7 @@ typedef void NotifyValid(bool valid);
 typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
 typedef void StringCallBack(String x);
-typedef void DateCallBack(DateTime);
+typedef void DateCallBack(DateTime dateTime);
 
 
 class Distance {

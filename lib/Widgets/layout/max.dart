@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Max extends StatelessWidget {
-  double w,h;
-  Widget child;
+  final double w,h;
+  final Widget child;
   Max({
     @required this.child, 
     this.w = double.infinity,

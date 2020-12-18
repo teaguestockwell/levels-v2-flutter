@@ -13,9 +13,6 @@ import 'package:flutter/cupertino.dart';
 import '../../utils.dart';
 
 class ChartCCard extends StatelessWidget {
-
-  bool  _validWeight = false;
-  bool _validMoment = false;
   String _stringWeight = '0';
   String _stringMom = '0';
   Aircraft air;
@@ -94,7 +91,7 @@ class ChartCCard extends StatelessWidget {
             Tex('Basic Weight'),
             ValidatedText(
               inputType: 1,
-              notifyIsValid: (bool isValid){_validWeight = isValid;},
+              notifyIsValid: (_){},
               validateText: _validateWeight,
               onChange: (String weight){_stringWeight = weight;},
             )
@@ -106,7 +103,7 @@ class ChartCCard extends StatelessWidget {
             Tex('Basic Moment'),
             ValidatedText(
               inputType: 1,
-              notifyIsValid: (bool isValid){_validMoment = isValid;},
+              notifyIsValid: (_){},
               validateText: _validateMoment,
               onChange: (String mom){_stringMom = mom;},
             )

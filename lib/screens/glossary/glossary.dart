@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../backend/model.dart';
 
 class GlossaryScreen extends StatelessWidget {
-  Aircraft air;
+  final Aircraft air;
   List<Widget> cards;
   final sc = ScrollController();
   GlossaryScreen(this.air){

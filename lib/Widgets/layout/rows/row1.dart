@@ -3,7 +3,7 @@ import 'package:five_level_one/backend/cont.dart';
 import '../alignPadding.dart';
 
 class RowCenterOne extends StatelessWidget {
-  Widget w;
+  final Widget w;
   RowCenterOne(this.w);
 
   @override
