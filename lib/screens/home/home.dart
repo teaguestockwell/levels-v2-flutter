@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/rowCenterTest.dart';
 import 'package:five_level_one/widgets/display/text.dart';
@@ -13,24 +14,31 @@ import '../../backend/model.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 
-class Home2 extends StatefulWidget {
+class Home extends StatefulWidget {
   var aircrafts = List<Aircraft>();
   CustomButtomSpinnerModalString airSpin;
   BottomNav bn;
   
   @override
-  _Home2State createState() => _Home2State();
+  _HomeState createState() => _HomeState();
 }
 
-class _Home2State extends State<Home2> {
-  Widget body;
+class _HomeState extends State<Home> {
+  Widget body = Loading();
 
   @override
   void initState() {
-   body = Loading();
-   this.widget.aircrafts.clear();
-   FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
    super.initState();
+
+   this.widget.aircrafts.clear();
+   
+    WidgetsBinding.instance
+    .addPostFrameCallback((_){ Firebase.initializeApp().then((_){
+        //execute this function once after first build
+      Firebase.initializeApp().then((_) {
+        FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
+      });
+    });});
   }
 
   void buildAircraft(QuerySnapshot qs){
@@ -69,7 +77,6 @@ class _Home2State extends State<Home2> {
   }
 
   void buildDiclaimer(DocumentSnapshot ds){
-
     this.widget.bn = BottomNav(this.widget.aircrafts[0]);
 
     this.widget.airSpin = CustomButtomSpinnerModalString(

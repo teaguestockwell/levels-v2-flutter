@@ -8,9 +8,9 @@ test sql flight for preperation to rehost firbase and deploy to P1
 
 rewrite models for sql
 
-refractor input.dart / serpatate widgets into new files
+title text red white error checing for cargo and chart c cards
 
-widget that handles error text rebuilding for cargoUI,Cargo, chart c
+dont rebuild app on mds change, setstate of home instead to avoid calling firestore again.
 
 PercentMac
  add CargoCard into calc
