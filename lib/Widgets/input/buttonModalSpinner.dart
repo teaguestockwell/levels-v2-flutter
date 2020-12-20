@@ -2,9 +2,9 @@ import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils.dart';
 import 'customButton.dart';
+
 class CustomButtomSpinnerModalString extends StatefulWidget {
   int spinIdx;
   String selected;

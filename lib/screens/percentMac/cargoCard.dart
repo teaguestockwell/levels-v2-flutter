@@ -4,6 +4,7 @@ import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/screens/percentMac/validatedCargoUI.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
+import 'package:five_level_one/widgets/input/buttonModalSpinnerButton.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
 import 'package:five_level_one/widgets/layout/rows/row2.dart';
@@ -27,10 +28,12 @@ class CargoCard extends StatefulWidget {
   
 
   ///modal spinner that changes this.selectedSpinnerConfig
-  CustomButtomSpinnerModalString configSpin;
+  ButtomSpinnerModalButton configSpin;
 
   ///modal spinner that changes this.selectedSpinnerCargo
-  CustomButtomSpinnerModalString cargoSpin;
+  ButtomSpinnerModalButton cargoSpin;
+
+  ButtomSpinnerModalButton _removeAllSpin;
 
   ///list that contains active NWFS ids
   var importedConfigIDs = List<int>();
@@ -64,23 +67,31 @@ class _CargoCardState extends State<CargoCard> {
 
   @override
   initState() {
+    super.initState();
+
     this.widget.selectedSpinnerConfig = this.widget.air.configs[0];
-    this.widget.configSpin = CustomButtomSpinnerModalString(
-      _getConfigStrings(), 
-      onPressed: configChange,
-      spinIdx: 0,
-      selected: this.widget.air.configs[0].name,
+    this.widget.configSpin = ButtomSpinnerModalButton(
+      stringList: _getConfigStrings(), 
+      modalButtonText: 'Update Config',
+      onPress: updateConfig,
+      onSpin: configChange,
     );
 
     this.widget.selectedSpinnerCargo = this.widget.air.addaCargo[0];
-    this.widget.cargoSpin = CustomButtomSpinnerModalString(
-      _getCargoStrings(),
-      onPressed: cargoChange,
-      spinIdx: 0,
-      selected: this.widget.air.addaCargo[0].name,
+    this.widget.cargoSpin = ButtomSpinnerModalButton(
+      stringList: _getCargoStrings(),
+      modalButtonText: 'Add Cargo',
+      onSpin: cargoChange,
+      onPress: addCargo,
     );
 
-    super.initState();
+    this.widget._removeAllSpin = ButtomSpinnerModalButton(
+      stringList: ['Are You Sure?'],
+      modalButtonText: 'Yes!',
+      onSpin: (_){},
+      onPress: removeAll,
+    );
+
   }
 
   ///passed to the onValidChangelistener of validatedCargoUI 
@@ -246,19 +257,9 @@ class _CargoCardState extends State<CargoCard> {
 
           Divider(color: Const.divColor,thickness: Const.divThickness,),
 
-          Row3(
-            CustomButton(
-              'Update Config',
-               onPressed: updateConfig,
-            ),
-            CustomButton(
-              'Add Cargo',
-              onPressed: addCargo
-            ),
-            CustomButton(
-              'Remove All',
-              onPressed: removeAll
-            )
+          Row2(
+           Tex('Remove All'),
+           this.widget._removeAllSpin
           ),
 
           //recycle viewer goes here. Dont render CargoUI that is not on screen
