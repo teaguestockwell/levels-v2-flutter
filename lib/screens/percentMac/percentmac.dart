@@ -28,21 +28,20 @@ class PerMacScreen extends StatefulWidget {
   ///checks child validations updates this.valid
   void checkValidation(){
     var ret = true;
-    print(childValid.toString());
+    //print(childValid.toString());
     childValid.forEach((_,childValid) {
       if(!childValid){ret = false;}
      });
    valid = ret;
-   //print('permac '+valid.toString());
-   if(ret){getPerMac();}
   }
 
   getPerMac(){
     var nwfs = List<NameWeightFS>();
+    if(valid){
     nwfs.addAll(cargoCard.getNWfs());
+    nwfs.addAll(tankCard.getNameWeightFS());
     nwfs.add(chartcCard.getNWFS());
-
-    print(nwfs.toString());
+    }
     print(NameWeightFS.getPerMac(air.lemac, air.mac, nwfs));
   }
 
@@ -83,7 +82,7 @@ class _PerMacScreenState extends State<PerMacScreen>
             this.widget.tankCard,
             this.widget.chartcCard,
             this.widget.cargoCard,
-            CustomButton('get mac', onPressed: () {}),
+            CustomButton('get mac', onPressed: this.widget.getPerMac),
         ])));
   }
 }

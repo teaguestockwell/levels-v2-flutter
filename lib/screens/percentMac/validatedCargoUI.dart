@@ -54,7 +54,7 @@ class ValidatedCargoUI extends StatefulWidget {/// interates the data model Name
 class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   ///determines to get caculated or non caculated fs
   String _getNWFfs(){
-    if(this.widget.calculated){
+    if(this.widget.nwf.mom.isNotEmpty && this.widget.nwf.fs.isEmpty){
       return this.widget.nwf.getFS();
     }
     return this.widget.nwf.fs;

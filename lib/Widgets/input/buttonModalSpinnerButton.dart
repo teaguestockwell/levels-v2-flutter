@@ -26,7 +26,9 @@ class ButtomSpinnerModalButton extends StatefulWidget {
     @required this.onSpin,
     @required this.onPress,
     @required this.stringList
-  });
+  }){
+    _selected = stringList[spinIdx];
+  }
 
   @override
   _ButtomSpinnerModalButtonState createState() =>
@@ -34,14 +36,7 @@ class ButtomSpinnerModalButton extends StatefulWidget {
 }
 
 class _ButtomSpinnerModalButtonState extends State<ButtomSpinnerModalButton> {
-  
-
-  @override
-  void initState() {
-    this.widget._selected = this.widget.stringList[this.widget.spinIdx];
-    super.initState();
-  }
-
+ 
   _getSpinnerWidgets() {
     this.widget._spinnerWidgets.clear();
     for (String x in this.widget.stringList) {

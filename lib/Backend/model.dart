@@ -177,8 +177,6 @@ class NameWeightFS {
         name +
         " weight: " +
         weight +
-        " mom: " +
-        getMom() +
         " fs: " +
         getFS() +
         ' qty: ' +
@@ -187,26 +185,30 @@ class NameWeightFS {
         id.toString());
   }
 
+  ///total moment
   String getMom() {
-    if (mom.isNotEmpty) {
-      return mom;
-    }
     return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
+  }
+
+  String getTotalMoment(){
+     return ((P.p(fs) * P.p(weight) / P.p(simplemom))*P.p(qty)).toString();
+  }
+
+  String getTotalWeight(){
+    return (P.p(weight)*P.p(qty)).toString();
   }
 
   String getFS() {
     if (fs.isNotEmpty) {
-      print('non calc fs');
       return fs;
     }
 
     //canot get fs if nsfs is invalid
     try{
-      print('clcfs');
-      return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
+      return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
     } catch(_){}
 
-    return 'NaN';
+    return '';
   }
 
   bool valid(String fs0, String fs1, String weight1,){
@@ -221,24 +223,31 @@ class NameWeightFS {
   }
 
   static String getPerMac(String lemac, String mac, List<NameWeightFS> nwfs) {
+
+      nwfs.forEach((x){ 
+        x.fs = x.getFS();
+      print(
+        ' name '+x.name+
+        ' qty '+x.qty+
+        ' totweight '+x.getTotalWeight()+
+        ' fs '+x.fs+
+        ' totmom '+x.getTotalMoment()
+      );
+    });
     double totMom = 0,
         totWeight = 0,
         perMacD = 0,
         simpMom = P.p(nwfs[0].simplemom);
 
-    for (int i = 0; i < nwfs.length; i++) {
-      totMom += P.p(nwfs[i].getMom());
-      totWeight += P.p(nwfs[i].weight);
-      print(nwfs[i].name +
-          ' totMom: ' +
-          totMom.toString() +
-          ' totWeight: ' +
-          totWeight.toString());
-    }
-    print(
-        'lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
-        print(totMom.toString()+' '+ totWeight.toString());
-    perMacD = 100.0 * ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
+    nwfs.forEach((x){
+      totWeight+= P.p(x.getTotalWeight());
+      totMom+= P.p(x.getTotalMoment());
+    });
+
+    print('lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
+    print('totMom '+totMom.toString()+' totWeight '+ totWeight.toString());
+
+    perMacD = 100.0 * (((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac));
     return perMacD.toStringAsFixed(2);
   }
 }
