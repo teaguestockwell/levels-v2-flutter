@@ -38,11 +38,25 @@ class PerMacScreen extends StatefulWidget {
   getPerMac(){
     var nwfs = List<NameWeightFS>();
     if(valid){
-    nwfs.addAll(cargoCard.getNWfs());
+    
+    //check for no cargo
+    if(cargoCard.getNWfs().length>0){
+      nwfs.addAll(cargoCard.getNWfs());
+    }
+    //tanks and chart c allways have non null
     nwfs.addAll(tankCard.getNameWeightFS());
     nwfs.add(chartcCard.getNWFS());
+
+    
+
+    var permac = PerMac(
+    lemacS: air.lemac,
+    macS: air.mac,
+    nwfss: nwfs,
+    );
+
+    permac.printString();
     }
-    print(NameWeightFS.getPerMac(air.lemac, air.mac, nwfs));
   }
 
   PerMacScreen(this.air){

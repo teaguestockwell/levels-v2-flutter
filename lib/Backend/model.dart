@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Aircraft {
   final String name,
       fs0,
@@ -204,11 +206,7 @@ class NameWeightFS {
     }
 
     //canot get fs if nsfs is invalid
-    try{
-      return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
-    } catch(_){}
-
-    return '';
+    return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
   }
 
   bool valid(String fs0, String fs1, String weight1,){
@@ -221,34 +219,76 @@ class NameWeightFS {
     ){return true;}
     return false;
   }
+}
 
-  static String getPerMac(String lemac, String mac, List<NameWeightFS> nwfs) {
+class PerMac{
+  final List<NameWeightFS> nwfss;
+  String totMomAsString;
+  String totWeightAsSting;
+  String simpleMomAsString;
+  String balArmAsString;
+  String lemacAsString;
+  String macAsString;
+  String perMacDecimalAsString;
+  String perMacPercentAsString;
 
-      nwfs.forEach((x){ 
-        x.fs = x.getFS();
-      print(
-        ' name '+x.name+
-        ' qty '+x.qty+
-        ' totweight '+x.getTotalWeight()+
-        ' fs '+x.fs+
-        ' totmom '+x.getTotalMoment()
-      );
-    });
-    double totMom = 0,
-        totWeight = 0,
-        perMacD = 0,
-        simpMom = P.p(nwfs[0].simplemom);
+  PerMac({
+    @required String lemacS,
+    @required String macS,
+    @required this.nwfss,
+    int fractionDigits=2,
+  }){
+    //calculate per mac
+    double perMacDecimal=0;
+    double perMacPercent=0;
+    double totMom=0;
+    double totWeight=0;
+    double balArm=0;
+    double simpMom = P.p(nwfss[0].simplemom);
+    double lemac = P.p(lemacS);
+    double mac = P.p(macS.toString());
 
-    nwfs.forEach((x){
+    nwfss.forEach((x){
+      x.fs = x.getFS();
       totWeight+= P.p(x.getTotalWeight());
       totMom+= P.p(x.getTotalMoment());
     });
 
-    print('lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
-    print('totMom '+totMom.toString()+' totWeight '+ totWeight.toString());
+    balArm = (totMom * simpMom) / totWeight;
+    perMacDecimal = (balArm - lemac) / mac;
+    perMacPercent = perMacDecimal*100;
+    
+    //assign strings
+    totMomAsString = totMom.toStringAsFixed(fractionDigits);
+    totWeightAsSting = totWeight.toStringAsFixed(fractionDigits);
+    simpleMomAsString = simpMom.toStringAsFixed(fractionDigits);
 
-    perMacD = 100.0 * (((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac));
-    return perMacD.toStringAsFixed(2);
+    balArmAsString = balArm.toStringAsFixed(fractionDigits);
+    lemacAsString = lemac.toStringAsFixed(fractionDigits);
+    macAsString = mac.toStringAsFixed(fractionDigits);
+
+    perMacDecimalAsString = perMacDecimal.toStringAsFixed(fractionDigits+2);
+    perMacPercentAsString = perMacPercent.toStringAsFixed(fractionDigits);
+  }
+  
+  void printString(){
+    nwfss.forEach((x) {
+       print(
+        ' name '+x.name+
+        ' qty '+x.qty+
+        ' totweight '+x.getTotalWeight()+
+        ' fs '+x.getFS()+
+        ' totmom '+x.getTotalMoment()
+      );
+    });
+    print('totMom '+totMomAsString);
+    print('totWeight '+totWeightAsSting);
+    print('simpleMom '+simpleMomAsString);
+    print('balArm '+balArmAsString);
+    print('lemac '+lemacAsString);
+    print('mac '+macAsString);
+    print('permac dec '+perMacDecimalAsString);
+    print('permac % '+perMacPercentAsString);
   }
 }
 
