@@ -79,6 +79,6 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
   Widget build(BuildContext context) {
     return CCards(
       'Aircraft, Fuel & Cargo',
-      SingleChildScrollView(scrollDirection: Axis.horizontal, child: getDataTable()));
+      getDataTable());
   }
 }

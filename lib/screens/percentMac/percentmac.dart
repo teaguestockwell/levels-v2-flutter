@@ -67,20 +67,27 @@ class PerMacScreen extends StatefulWidget {
     permac.printString();
 
      showModalBottomSheet<void>(
+      enableDrag: false,
        isScrollControlled: true,
       context: context,
       builder: (_) {
         return Container(
           color: Const.modalPickerColor,
-          height: MediaQuery.of(context).size.height*.8,
-          child: ListView(
+          height: MediaQuery.of(context).size.height*.85,
+          child: 
+          InteractiveViewer(
+            minScale: 0.2,
+        constrained: false,
+        child: 
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AircraftPerMacCard(permac),
               BalArmCard(permac),
               PerMacCard(permac),
             ]
             )
-        );
+        ));
       });
     
   
