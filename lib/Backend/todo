@@ -12,8 +12,9 @@ title text red white error checing for cargo and chart c cards
 
 dont rebuild app on mds change, setstate of home instead to avoid calling firestore again.
 
-PercentMac
- show work widget
+refractor all
 
-  Tanks   
-   total fuel vs per tank toggle
+color?
+
+Tanks   
+    total fuel vs per tank toggle

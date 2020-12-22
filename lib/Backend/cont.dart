@@ -31,6 +31,7 @@ class Const {
 
       cardColor = Colors.white10,
       buttonColor = Colors.white10,
+      buttonColorGetMAC = Color.fromRGBO(255,255,255,0.19),
       cargoUIColor = Color.fromRGBO(255,255,255,0.07),
 
       divColor = Colors.white30,

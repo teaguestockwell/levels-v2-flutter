@@ -2,7 +2,11 @@ import 'dart:collection';
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/screens/percentMac/aricraftPerMacCard.dart';
+import 'package:five_level_one/screens/percentMac/balArmCard.dart';
+import 'package:five_level_one/screens/percentMac/perMacCard.dart';
+import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
+import 'package:five_level_one/widgets/input/getMacButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -69,13 +73,26 @@ class PerMacScreen extends StatefulWidget {
         return Container(
           color: Const.modalPickerColor,
           height: MediaQuery.of(context).size.height*.8,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: AircraftPerMacCard(permac))
+          child: ListView(
+            children: [
+              AircraftPerMacCard(permac),
+              BalArmCard(permac),
+              PerMacCard(permac),
+            ]
+            )
         );
       });
     
   
+    }
+    else{
+      Scaffold.of(context).showSnackBar(SnackBar(
+        backgroundColor: Const.modalPickerColor,
+        content: 
+        Container(
+          height: Const.pickerHeight*2,
+         child:Center(child: 
+        Tex('Invalid Chart C / Cargo', fontWeight: FontWeight.bold,color: Const.nonfocusedErrorBoderColor,)))));
     }
   }
 
@@ -116,7 +133,7 @@ class _PerMacScreenState extends State<PerMacScreen>
             this.widget.tankCard,
             this.widget.chartcCard,
             this.widget.cargoCard,
-            CustomButton('get mac', onPressed: this.widget.getPerMac),
+            GetMacButton('Show MAC%', onPressed: this.widget.getPerMac),
         ])));
   }
 }
