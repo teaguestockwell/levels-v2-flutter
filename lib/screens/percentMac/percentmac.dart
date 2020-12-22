@@ -1,5 +1,7 @@
 import 'dart:collection';
+import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
+import 'package:five_level_one/screens/percentMac/aricraftPerMacCard.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +18,7 @@ class PerMacScreen extends StatefulWidget {
   CargoCard cargoCard;
   AircraftCard aircraftCard;
   bool valid;
+  BuildContext context;
   var childValid = LinkedHashMap<int,bool>();
 
   ///passed as a callback to chartc and cargo
@@ -38,14 +41,16 @@ class PerMacScreen extends StatefulWidget {
   getPerMac(){
     var nwfs = List<NameWeightFS>();
     if(valid){
-    
+
+    nwfs.add(chartcCard.getNWFS());
+    nwfs.addAll(tankCard.getNameWeightFS());
+
     //check for no cargo
     if(cargoCard.getNWfs().length>0){
       nwfs.addAll(cargoCard.getNWfs());
     }
-    //tanks and chart c allways have non null
-    nwfs.addAll(tankCard.getNameWeightFS());
-    nwfs.add(chartcCard.getNWFS());
+    
+    
 
     
 
@@ -56,6 +61,21 @@ class PerMacScreen extends StatefulWidget {
     );
 
     permac.printString();
+
+     showModalBottomSheet<void>(
+       isScrollControlled: true,
+      context: context,
+      builder: (_) {
+        return Container(
+          color: Const.modalPickerColor,
+          height: MediaQuery.of(context).size.height*.8,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: AircraftPerMacCard(permac))
+        );
+      });
+    
+  
     }
   }
 
@@ -79,7 +99,7 @@ class _PerMacScreenState extends State<PerMacScreen>
 
   @override
   void initState() {
-    
+    this.widget.context = context;
     super.initState();
   }
 

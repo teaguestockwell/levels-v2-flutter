@@ -13,11 +13,7 @@ title text red white error checing for cargo and chart c cards
 dont rebuild app on mds change, setstate of home instead to avoid calling firestore again.
 
 PercentMac
- add CargoCard into calc
  show work widget
-
- CargoCard
-  import bottons inside modal spinners
 
   Tanks   
    total fuel vs per tank toggle

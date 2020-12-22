@@ -46,14 +46,17 @@ void addPadding(){
 class _CCardsState extends State<CCards> {
   bool ope;
   Widget chil;
+  Widget title;
 
   @override
   void initState() {
     ope = this.widget.open;
     if (ope) {
       chil = this.widget.child;
+      title = Tex('▲ '+this.widget.title+' ▲',fontWeight: FontWeight.normal,);
     } else {
       chil = Container();
+      title = Tex('▼ '+this.widget.title+' ▼',fontWeight: FontWeight.normal,);
     }
     super.initState();
   }
@@ -63,11 +66,14 @@ class _CCardsState extends State<CCards> {
     setState(() {
       if (ope) {
         chil = this.widget.child;
+        title = Tex('▲ '+this.widget.title+' ▲',fontWeight: FontWeight.normal,);
       } else {
         chil = Container();
-      }
+        title = Tex('▼ '+this.widget.title+' ▼',fontWeight: FontWeight.normal,);
+      } 
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +99,7 @@ class _CCardsState extends State<CCards> {
                   children: [
                     InkWell(
                         child: AlignPadding(
-                            3.0, Alignment.center, Tex(this.widget.title,fontWeight: FontWeight.normal,)),
+                            3.0, Alignment.center, title),
                         onTap: toggleChild),
                     chil
                   ],

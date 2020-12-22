@@ -163,9 +163,15 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
 
   Widget getCardTitle(){
     if(validateCargoUI()){
-      return Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.textColor,);
+      if(this.widget.ope){
+      return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.textColor,);
+      }
+      return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.textColor,);
     }
-    return Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    if(this.widget.ope){
+    return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    }
+    return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
   }
 
   bool validateCargoUI(){

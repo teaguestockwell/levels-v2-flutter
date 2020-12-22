@@ -187,9 +187,18 @@ class NameWeightFS {
         id.toString());
   }
 
-  ///total moment
+  ///total simple moment
   String getMom() {
     return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
+  }
+
+  String getMomAsStringFixes(int fractionDigits){
+    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toStringAsFixed(fractionDigits);
+  }
+
+  ///unsimplified moment as string with faction digits
+  String getUnSimpMomAsStringFixed(int fractionDigits){
+    return (P.p(fs) * P.p(weight)).toStringAsFixed(fractionDigits);
   }
 
   String getTotalMoment(){
@@ -224,6 +233,7 @@ class NameWeightFS {
 class PerMac{
   final List<NameWeightFS> nwfss;
   String totMomAsString;
+  String totUnSimpMomAsString;
   String totWeightAsSting;
   String simpleMomAsString;
   String balArmAsString;
@@ -259,6 +269,7 @@ class PerMac{
     perMacPercent = perMacDecimal*100;
     
     //assign strings
+    totUnSimpMomAsString = (totMom*simpMom).toStringAsFixed(0);
     totMomAsString = totMom.toStringAsFixed(fractionDigits);
     totWeightAsSting = totWeight.toStringAsFixed(fractionDigits);
     simpleMomAsString = simpMom.toStringAsFixed(fractionDigits);
