@@ -128,6 +128,7 @@ class _HomeState extends State<Home> {
  @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
       home: Scaffold(
         body: body,

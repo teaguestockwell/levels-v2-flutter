@@ -80,7 +80,7 @@ class PerMacScreen extends StatefulWidget {
         constrained: false,
         child: 
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AircraftPerMacCard(permac),
               BalArmCard(permac),
