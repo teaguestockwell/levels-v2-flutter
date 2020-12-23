@@ -16,6 +16,8 @@ http-server
 
 open link in your favorite browser
 
+![Screen Shot 2020-12-22 at 18 50 33](https://user-images.githubusercontent.com/71202372/102958744-814aa980-4492-11eb-8420-7692dfcef107.png)
+![Screen Shot 2020-12-22 at 19 32 21](https://user-images.githubusercontent.com/71202372/102958745-827bd680-4492-11eb-908d-df18c108b170.png)
 ![Screen Shot 2020-12-22 at 20 22 54](https://user-images.githubusercontent.com/71202372/102960181-40549400-4496-11eb-8c22-245797438541.png)
 ![Screen Shot 2020-12-22 at 20 23 01](https://user-images.githubusercontent.com/71202372/102960183-40ed2a80-4496-11eb-87a1-0b0b4d932784.png)
 ![Screen Shot 2020-12-22 at 20 23 10](https://user-images.githubusercontent.com/71202372/102960184-40ed2a80-4496-11eb-984f-92550c2a8b8a.png)
