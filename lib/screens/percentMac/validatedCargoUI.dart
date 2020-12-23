@@ -54,7 +54,7 @@ class ValidatedCargoUI extends StatefulWidget {/// interates the data model Name
 class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   ///determines to get caculated or non caculated fs
   String _getNWFfs(){
-    if(this.widget.calculated){
+    if(this.widget.nwf.mom.isNotEmpty && this.widget.nwf.fs.isEmpty){
       return this.widget.nwf.getFS();
     }
     return this.widget.nwf.fs;
@@ -163,9 +163,15 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
 
   Widget getCardTitle(){
     if(validateCargoUI()){
-      return Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.textColor,);
+      if(this.widget.ope){
+      return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.textColor,);
+      }
+      return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.textColor,);
     }
-    return Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    if(this.widget.ope){
+    return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    }
+    return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
   }
 
   bool validateCargoUI(){

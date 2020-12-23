@@ -22,7 +22,7 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _pageIndex = 0;
   PageController _pageController;
-  var titleArr = ['Units', '%MAC', 'Glossary'];
+  var titleArr = ['Units', 'MAC%', 'Glossary'];
 
   @override
   void initState() {
@@ -80,7 +80,7 @@ class _BottomNavState extends State<BottomNav> {
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.flight_land),
-                label: '%MAC',
+                label: 'MAC%',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.receipt),

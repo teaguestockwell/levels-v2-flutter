@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Aircraft {
   final String name,
       fs0,
@@ -177,8 +179,6 @@ class NameWeightFS {
         name +
         " weight: " +
         weight +
-        " mom: " +
-        getMom() +
         " fs: " +
         getFS() +
         ' qty: ' +
@@ -187,26 +187,35 @@ class NameWeightFS {
         id.toString());
   }
 
+  ///total simple moment
   String getMom() {
-    if (mom.isNotEmpty) {
-      return mom;
-    }
     return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
+  }
+
+  String getMomAsStringFixes(int fractionDigits){
+    return (P.p(fs) * P.p(weight) / P.p(simplemom)).toStringAsFixed(fractionDigits);
+  }
+
+  ///unsimplified moment as string with faction digits
+  String getUnSimpMomAsStringFixed(int fractionDigits){
+    return (P.p(fs) * P.p(weight)).toStringAsFixed(fractionDigits);
+  }
+
+  String getTotalMoment(){
+     return ((P.p(fs) * P.p(weight) / P.p(simplemom))*P.p(qty)).toString();
+  }
+
+  String getTotalWeight(){
+    return (P.p(weight)*P.p(qty)).toString();
   }
 
   String getFS() {
     if (fs.isNotEmpty) {
-      print('non calc fs');
       return fs;
     }
 
     //canot get fs if nsfs is invalid
-    try{
-      print('clcfs');
-      return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(1);
-    } catch(_){}
-
-    return 'NaN';
+    return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
   }
 
   bool valid(String fs0, String fs1, String weight1,){
@@ -219,27 +228,78 @@ class NameWeightFS {
     ){return true;}
     return false;
   }
+}
 
-  static String getPerMac(String lemac, String mac, List<NameWeightFS> nwfs) {
-    double totMom = 0,
-        totWeight = 0,
-        perMacD = 0,
-        simpMom = P.p(nwfs[0].simplemom);
+class PerMac{
+  final List<NameWeightFS> nwfss;
+  String totMomAsString;
+  String totUnSimpMomAsString;
+  String totWeightAsSting;
+  String simpleMomAsString;
+  String balArmAsString;
+  String lemacAsString;
+  String macAsString;
+  String perMacDecimalAsString;
+  String perMacPercentAsString;
 
-    for (int i = 0; i < nwfs.length; i++) {
-      totMom += P.p(nwfs[i].getMom());
-      totWeight += P.p(nwfs[i].weight);
-      print(nwfs[i].name +
-          ' totMom: ' +
-          totMom.toString() +
-          ' totWeight: ' +
-          totWeight.toString());
-    }
-    print(
-        'lemac: ' + lemac + ' mac: ' + mac + ' simpMom: ' + simpMom.toString());
-        print(totMom.toString()+' '+ totWeight.toString());
-    perMacD = 100.0 * ((totMom * simpMom / totWeight) - P.p(lemac)) / P.p(mac);
-    return perMacD.toStringAsFixed(2);
+  PerMac({
+    @required String lemacS,
+    @required String macS,
+    @required this.nwfss,
+    int fractionDigits=2,
+  }){
+    //calculate per mac
+    double perMacDecimal=0;
+    double perMacPercent=0;
+    double totMom=0;
+    double totWeight=0;
+    double balArm=0;
+    double simpMom = P.p(nwfss[0].simplemom);
+    double lemac = P.p(lemacS);
+    double mac = P.p(macS.toString());
+
+    nwfss.forEach((x){
+      x.fs = x.getFS();
+      totWeight+= P.p(x.getTotalWeight());
+      totMom+= P.p(x.getTotalMoment());
+    });
+
+    balArm = (totMom * simpMom) / totWeight;
+    perMacDecimal = (balArm - lemac) / mac;
+    perMacPercent = perMacDecimal*100;
+    
+    //assign strings
+    totUnSimpMomAsString = (totMom*simpMom).toStringAsFixed(0);
+    totMomAsString = totMom.toStringAsFixed(fractionDigits);
+    totWeightAsSting = totWeight.toStringAsFixed(fractionDigits);
+    simpleMomAsString = simpMom.toStringAsFixed(fractionDigits);
+
+    balArmAsString = balArm.toStringAsFixed(fractionDigits);
+    lemacAsString = lemac.toStringAsFixed(fractionDigits);
+    macAsString = mac.toStringAsFixed(fractionDigits);
+
+    perMacDecimalAsString = perMacDecimal.toStringAsFixed(fractionDigits+2);
+    perMacPercentAsString = perMacPercent.toStringAsFixed(fractionDigits);
+  }
+  
+  void printString(){
+    nwfss.forEach((x) {
+       print(
+        ' name '+x.name+
+        ' qty '+x.qty+
+        ' totweight '+x.getTotalWeight()+
+        ' fs '+x.getFS()+
+        ' totmom '+x.getTotalMoment()
+      );
+    });
+    print('totMom '+totMomAsString);
+    print('totWeight '+totWeightAsSting);
+    print('simpleMom '+simpleMomAsString);
+    print('balArm '+balArmAsString);
+    print('lemac '+lemacAsString);
+    print('mac '+macAsString);
+    print('permac dec '+perMacDecimalAsString);
+    print('permac % '+perMacPercentAsString);
   }
 }
 

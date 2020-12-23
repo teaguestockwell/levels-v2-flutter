@@ -1,6 +1,12 @@
 import 'dart:collection';
+import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
+import 'package:five_level_one/screens/percentMac/aricraftPerMacCard.dart';
+import 'package:five_level_one/screens/percentMac/balArmCard.dart';
+import 'package:five_level_one/screens/percentMac/perMacCard.dart';
+import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
+import 'package:five_level_one/widgets/input/getMacButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -16,6 +22,7 @@ class PerMacScreen extends StatefulWidget {
   CargoCard cargoCard;
   AircraftCard aircraftCard;
   bool valid;
+  BuildContext context;
   var childValid = LinkedHashMap<int,bool>();
 
   ///passed as a callback to chartc and cargo
@@ -28,22 +35,72 @@ class PerMacScreen extends StatefulWidget {
   ///checks child validations updates this.valid
   void checkValidation(){
     var ret = true;
-    print(childValid.toString());
+    //print(childValid.toString());
     childValid.forEach((_,childValid) {
       if(!childValid){ret = false;}
      });
    valid = ret;
-   //print('permac '+valid.toString());
-   if(ret){getPerMac();}
   }
 
   getPerMac(){
     var nwfs = List<NameWeightFS>();
-    nwfs.addAll(cargoCard.getNWfs());
-    nwfs.add(chartcCard.getNWFS());
+    if(valid){
 
-    print(nwfs.toString());
-    print(NameWeightFS.getPerMac(air.lemac, air.mac, nwfs));
+    nwfs.add(chartcCard.getNWFS());
+    nwfs.addAll(tankCard.getNameWeightFS());
+
+    //check for no cargo
+    if(cargoCard.getNWfs().length>0){
+      nwfs.addAll(cargoCard.getNWfs());
+    }
+    
+    
+
+    
+
+    var permac = PerMac(
+    lemacS: air.lemac,
+    macS: air.mac,
+    nwfss: nwfs,
+    );
+
+    permac.printString();
+
+     showModalBottomSheet<void>(
+      enableDrag: false,
+       isScrollControlled: true,
+      context: context,
+      builder: (_) {
+        return Container(
+          color: Const.modalPickerColor,
+          height: MediaQuery.of(context).size.height*.85,
+          child: 
+          InteractiveViewer(
+            minScale: 0.2,
+        constrained: false,
+        child: 
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              AircraftPerMacCard(permac),
+              BalArmCard(permac),
+              PerMacCard(permac),
+            ]
+            )
+        ));
+      });
+    
+  
+    }
+    else{
+      Scaffold.of(context).showSnackBar(SnackBar(
+        backgroundColor: Const.modalPickerColor,
+        content: 
+        Container(
+          height: Const.pickerHeight*2,
+         child:Center(child: 
+        Tex('Invalid Chart C / Cargo', fontWeight: FontWeight.bold,color: Const.nonfocusedErrorBoderColor,)))));
+    }
   }
 
   PerMacScreen(this.air){
@@ -66,7 +123,7 @@ class _PerMacScreenState extends State<PerMacScreen>
 
   @override
   void initState() {
-    
+    this.widget.context = context;
     super.initState();
   }
 
@@ -83,7 +140,7 @@ class _PerMacScreenState extends State<PerMacScreen>
             this.widget.tankCard,
             this.widget.chartcCard,
             this.widget.cargoCard,
-            CustomButton('get mac', onPressed: () {}),
+            GetMacButton('Show MAC%', onPressed: this.widget.getPerMac),
         ])));
   }
 }

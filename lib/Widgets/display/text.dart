@@ -5,15 +5,13 @@ import 'package:five_level_one/backend/cont.dart';
 class Tex extends StatelessWidget {
   final String text;
   final int maxLine;
+  ///default const.textColor
   Color color = Const.textColor; 
-  ///=Const.textSizeCardTitle
-  double size;
-  ///= bold
-  FontWeight fontWeight;
-  Tex(this.text,{this.maxLine=1,this.size,this.fontWeight, this.color}){
-    if(this.size==null){this.size=Const.textSizeCardTitle;}
-    if(this.fontWeight==null){this.fontWeight=FontWeight.bold;}
-    }
+  ///default = Const.textSizeCardTitle
+  double size = Const.textSizeCardTitle;
+  ///default = bold
+  FontWeight fontWeight=FontWeight.bold;
+  Tex(this.text,{this.maxLine=1,this.size,this.fontWeight, this.color});
   @override
   Widget build(BuildContext context) {
     
