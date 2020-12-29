@@ -65,7 +65,7 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   void initState() {
     super.initState();
     this.widget.nameVT = ValidatedText(
-      initText: getNameTruncated(),
+      initText: this.widget.nwf.name,
       inputType:2, 
       onChange: changeName,
       maxChars: 30,
@@ -98,12 +98,6 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
     );
 
     buildStates();
-  }
-
-  String getNameTruncated(){
-    var ret = this.widget.nwf.name;
-    if(ret.length>30){return ret;}
-    return ret.substring(0,26) + '...';
   }
 
   bool validateName(String x){
@@ -171,14 +165,20 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   Widget getCardTitle(){
     if(validateCargoUI()){
       if(this.widget.ope){
-      return TitleCC(open:true, tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal));
+      return TitleCC(open:true, tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal));
       }
-      return TitleCC(open:false,tex: Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal));
+      return TitleCC(open:false,tex: Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal));
     }
     if(this.widget.ope){
-    return TitleCC(open:true,tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
+    return TitleCC(open:true,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
     }
-    return TitleCC(open:false,tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
+    return TitleCC(open:false,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
+  }
+
+  String getNameTruncated(){
+    var ret = this.widget.nwf.name;
+    if(ret.length<=30){return ret;}
+    return ret.substring(0,27) + '...';
   }
 
   bool validateCargoUI(){
