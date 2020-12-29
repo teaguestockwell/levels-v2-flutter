@@ -25,18 +25,21 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   Widget body = Loading();
+  Image img;
 
   @override
   void initState() {
    super.initState();
-
    this.widget.aircrafts.clear();
+   img = Image.asset('assets/0.png');
    
     WidgetsBinding.instance
     .addPostFrameCallback((_){ Firebase.initializeApp().then((_){
-        //execute this function once after first build
-      Firebase.initializeApp().then((_) {
-        FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
+      //execute this function once after first build
+      precacheImage(img.image, context).then((_){
+        Firebase.initializeApp().then((_) {
+          FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
+        });
       });
     });});
   }
@@ -86,7 +89,7 @@ class _HomeState extends State<Home> {
 
     var sc = ScrollController();
     var ret = CupertinoScrollbar(isAlwaysShown: true,controller: sc, child:ListView(controller: sc, children: [
-      CardAllwaysOpen('FIVE LEVEL', Image.asset('assets/0.png')),
+      CardAllwaysOpen('FIVE LEVEL', img),
       CardAllwaysOpen(ds.get('welcometitle'), RowCenterText(ds.get('welcomebody'))),
       CardAllwaysOpen(
         'Aircraft',
