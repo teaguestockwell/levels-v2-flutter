@@ -31,7 +31,9 @@ class CardAllwaysOpen extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    return Max(w:Const.maxCardWidth,child:Padding(
+    return Max(
+      w: Const.maxCardWidth,
+      child:Padding(
         padding: EdgeInsets.fromLTRB(
           Const.cardP,
           Const.cardP,
@@ -45,13 +47,22 @@ class CardAllwaysOpen extends StatelessWidget {
                 shape: Border(
                     top: BorderSide(
                   color: Const.cardColor,
-                  width: 22,
+                  width: Const.cardTabSize,
                 )),
                 child: Column(
                   children: [
-                    InkWell(
-                      child: AlignPadding(3.0, Alignment.center, Tex(title, fontWeight: FontWeight.normal,)),
-                    ),
+                
+                        AlignPadding(
+                          3.0, Alignment.center, 
+                          Container(
+                          height: Const.cardTabSize,
+                          child:Row(children:[
+                            Spacer(),
+                            Tex(title, fontWeight: FontWeight.normal,),
+                            Spacer()
+                          ])
+                      )), 
+  
                     chil
                   ],
                 )))));

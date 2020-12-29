@@ -53,10 +53,10 @@ class _CCardsState extends State<CCards> {
     ope = this.widget.open;
     if (ope) {
       chil = this.widget.child;
-      title = Tex('▲ '+this.widget.title+' ▲',fontWeight: FontWeight.normal,);
+      title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal)); 
     } else {
       chil = Container();
-      title = Tex('▼ '+this.widget.title+' ▼',fontWeight: FontWeight.normal,);
+      title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
     }
     super.initState();
   }
@@ -66,10 +66,10 @@ class _CCardsState extends State<CCards> {
     setState(() {
       if (ope) {
         chil = this.widget.child;
-        title = Tex('▲ '+this.widget.title+' ▲',fontWeight: FontWeight.normal,);
+        title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
       } else {
         chil = Container();
-        title = Tex('▼ '+this.widget.title+' ▼',fontWeight: FontWeight.normal,);
+        title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
       } 
     });
   }
@@ -93,7 +93,7 @@ class _CCardsState extends State<CCards> {
                 shape: Border(
                     top: BorderSide(
                   color: Const.cardColor,
-                  width: 22,
+                  width: Const.cardTabSize,
                 )),
                 child: Column(
                   children: [
@@ -104,5 +104,35 @@ class _CCardsState extends State<CCards> {
                     chil
                   ],
                 )))));
+  }
+}
+
+///used for cccard titles to create a title row with drop cards
+class TitleCC extends StatelessWidget {
+  final Tex tex;
+  final bool open;
+  TitleCC({@required this.tex, @required this.open});
+  @override
+  Widget build(BuildContext context) {
+    if(open){
+      return Row(children:[
+          Icon(Icons.arrow_drop_up),
+          Spacer(),
+          tex,
+          Spacer(),
+          Icon(Icons.arrow_drop_up),
+        ]
+      );
+    }
+    else{
+      return Row(children:[
+          Icon(Icons.arrow_drop_down),
+          Spacer(),
+          tex,
+          Spacer(),
+          Icon(Icons.arrow_drop_down),
+        ]
+      );
+    }
   }
 }

@@ -1,3 +1,6 @@
+run command to use openGL/canavskit skia
+flutter run -d chrome --release --web-renderer canvaskit
+
 //   copyDoc(){
 // // get the data from 'name@xxx.com'
 // glossaryall.doc('C-17A-ER').get().then((doc) {

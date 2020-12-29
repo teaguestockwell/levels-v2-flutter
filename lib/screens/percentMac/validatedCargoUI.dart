@@ -8,6 +8,7 @@ import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/input/validatedText.dart';
 import 'package:five_level_one/widgets/layout/alignPadding.dart';
+import 'package:five_level_one/widgets/layout/cards/ccard.dart';
 import 'package:five_level_one/widgets/layout/div.dart';
 import 'package:five_level_one/widgets/layout/rows/row1.dart';
 import 'package:five_level_one/widgets/layout/rows/row2.dart';
@@ -67,7 +68,7 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
       initText: this.widget.nwf.name,
       inputType:2, 
       onChange: changeName,
-      maxChars: 35,
+      maxChars: 40,
       validateText: validateName,
       width: double.infinity,
     );
@@ -164,14 +165,14 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   Widget getCardTitle(){
     if(validateCargoUI()){
       if(this.widget.ope){
-      return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.textColor,);
+      return TitleCC(open:true, tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal));
       }
-      return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.textColor,);
+      return TitleCC(open:false,tex: Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal));
     }
     if(this.widget.ope){
-    return Tex('▲ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▲', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    return TitleCC(open:true,tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
     }
-    return Tex('▼ '+this.widget.nwf.qty +' EA '+this.widget.nwf.name+' ▼', fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor,);
+    return TitleCC(open:false,tex:Tex(this.widget.nwf.qty +' EA '+this.widget.nwf.name, fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
   }
 
   bool validateCargoUI(){
@@ -240,7 +241,7 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
                 shape: Border(
                     top: BorderSide(
                   color: Const.cargoUIColor,
-                  width: 22,
+                  width: Const.cardTabSize,
                 )),
                 child: Column(
                   children: [
