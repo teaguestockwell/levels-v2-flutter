@@ -65,10 +65,10 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
   void initState() {
     super.initState();
     this.widget.nameVT = ValidatedText(
-      initText: this.widget.nwf.name,
+      initText: getNameTruncated(),
       inputType:2, 
       onChange: changeName,
-      maxChars: 40,
+      maxChars: 30,
       validateText: validateName,
       width: double.infinity,
     );
@@ -98,6 +98,12 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
     );
 
     buildStates();
+  }
+
+  String getNameTruncated(){
+    var ret = this.widget.nwf.name;
+    if(ret.length>30){return ret;}
+    return ret.substring(0,26) + '...';
   }
 
   bool validateName(String x){
