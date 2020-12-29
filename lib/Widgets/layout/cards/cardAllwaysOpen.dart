@@ -55,14 +55,10 @@ class CardAllwaysOpen extends StatelessWidget {
                         AlignPadding(
                           3.0, Alignment.center, 
                           Container(
-                          height: Const.cardTabSize,
-                          child:Row(children:[
-                            Spacer(),
-                            Tex(title, fontWeight: FontWeight.normal,),
-                            Spacer()
-                          ])
-                      )), 
-  
+                            height: Const.cardTabSize,
+                            child:Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child:Tex(title, fontWeight: FontWeight.normal,),))
+                          )
+                      ), 
                     chil
                   ],
                 )))));
