@@ -24,7 +24,7 @@ class BalArmCard extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return CardAllwaysOpen(
+    return CCards(
       'Balance Arm',
       SingleChildScrollView(scrollDirection: Axis.horizontal, child:
       DataTable(

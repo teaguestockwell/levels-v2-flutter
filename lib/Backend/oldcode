@@ -1,5 +1,5 @@
 run command to use openGL/canavskit skia
-flutter build web --release --dart-define=FLUTTER_WEB_USE_SKIA=true
+flutter build web --web-renderer canvaskit --release
 
 //   copyDoc(){
 // // get the data from 'name@xxx.com'
