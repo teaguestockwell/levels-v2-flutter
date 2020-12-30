@@ -115,24 +115,30 @@ class TitleCC extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if(open){
-      return Row(children:[
+      return 
+      Container(
+        width:  MediaQuery.of(context).size.width/.8,
+        child:Row(children:[
           Icon(Icons.arrow_drop_up),
           Spacer(),
           tex,
           Spacer(),
           Icon(Icons.arrow_drop_up),
         ]
-      );
+      ));
     }
     else{
-      return Row(children:[
+      return 
+      Container(
+        width:  MediaQuery.of(context).size.width/.8,
+        child:Row(children:[
           Icon(Icons.arrow_drop_down),
           Spacer(),
           tex,
           Spacer(),
           Icon(Icons.arrow_drop_down),
         ]
-      );
+      ));
     }
   }
 }

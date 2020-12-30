@@ -43,12 +43,19 @@ class ValidatedText extends StatefulWidget {
     this.width,
   }) {
     if (initText != null) {
-      text = initText;
+
+      text = _getTruncated(initText);
     }
     if (width == null) {
       width = Const.pickerWidth;
     }
     valid = validateText(text);
+  }
+
+  String _getTruncated(String x){
+    var ret = x;
+    if(ret.length<=maxChars){return ret;}
+    return ret.substring(0,maxChars-3) + '...';
   }
 
   @override
