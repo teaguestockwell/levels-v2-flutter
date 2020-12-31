@@ -5,11 +5,13 @@ import 'package:five_level_one/screens/percentMac/percentmac.dart';
 import 'package:five_level_one/screens/units/units.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class BottomNav extends StatefulWidget {
   final Aircraft air;
+  final MoreOp moreOp;
   var tabPages =List<Widget>();
-  BottomNav(this.air){
+  BottomNav(this.air, this.moreOp){
     tabPages.add(Units());
     tabPages.add(PerMacScreen(air));
     tabPages.add(GlossaryScreen(air));
@@ -48,6 +50,16 @@ class _BottomNavState extends State<BottomNav> {
         duration: const Duration(milliseconds: Const.animationDuration), curve: Curves.easeInOut);
   }
 
+  void launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+    }
+  }
+
+  void more(var x){
+    launchURL(this.widget.moreOp.url[x]);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Listener(
@@ -63,6 +75,31 @@ class _BottomNavState extends State<BottomNav> {
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
             title: Tex(titleArr[_pageIndex]),
+            actions: [
+              Padding(
+                padding: EdgeInsets.only(right: 20),
+                child: Theme( //theme wrapper to remove tooltip
+                  data: Theme.of(context).copyWith(
+                    tooltipTheme: TooltipThemeData(decoration: BoxDecoration(color: Colors.transparent))
+                  ),
+                  child:PopupMenuButton(
+                    onSelected: more,
+                    tooltip: '',
+                    color: Const.modalPickerColor,
+                    padding: EdgeInsets.all(Const.rowInset),
+                    icon: Icon(Icons.more_vert),
+                    itemBuilder: (_){
+                      var ret = List<PopupMenuEntry>();
+                      for(int i=0; i<this.widget.moreOp.name.length; i++){
+                        ret.add(
+                          PopupMenuItem(value: i, child: Row(children: [Tex(this.widget.moreOp.name[i])]))
+                        );  
+                      }
+                      return ret;
+                    }
+                )
+              ))
+            ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: true,

@@ -16,6 +16,7 @@ import 'loading.dart';
 
 class Home extends StatefulWidget {
   var aircrafts = List<Aircraft>();
+  MoreOp moreOp;
   CustomButtomSpinnerModalString airSpin;
   BottomNav bn;
   
@@ -80,7 +81,9 @@ class _HomeState extends State<Home> {
   }
 
   void buildDiclaimer(DocumentSnapshot ds){
-    this.widget.bn = BottomNav(this.widget.aircrafts[0]);
+    this.widget.moreOp = MoreOp(name: ds['name'], url: ds['url']);
+    
+    this.widget.bn = BottomNav(this.widget.aircrafts[0], this.widget.moreOp);
 
     this.widget.airSpin = CustomButtomSpinnerModalString(
       getMDSNames(),
@@ -109,7 +112,7 @@ class _HomeState extends State<Home> {
   }
 
   spin(int i){
-    this.widget.bn = BottomNav(this.widget.aircrafts[i]);
+    this.widget.bn = BottomNav(this.widget.aircrafts[i], this.widget.moreOp);
   }
 
   List<String> getMDSNames(){
