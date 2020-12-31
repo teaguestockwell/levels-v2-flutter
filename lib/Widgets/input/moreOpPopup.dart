@@ -24,9 +24,7 @@ class MoreOpPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: 20),
-      child: Theme( //theme wrapper to remove tooltip
+    return Theme( //theme wrapper to remove tooltip
         data: Theme.of(context).copyWith(
           tooltipTheme: TooltipThemeData(decoration: BoxDecoration(color: Colors.transparent))
         ),
@@ -71,7 +69,6 @@ class MoreOpPopup extends StatelessWidget {
             return ret;
           }
         )
-      )
-    );
+      );
   }
 }

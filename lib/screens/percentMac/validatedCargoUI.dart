@@ -170,9 +170,9 @@ class _ValidatedCargoUIState extends State<ValidatedCargoUI> {
       return TitleCC(open:false,tex: Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal));
     }
     if(this.widget.ope){
-    return TitleCC(open:true,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
+    return TitleCC(open:true,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.nonfocusedErrorBoderColor));
     }
-    return TitleCC(open:false,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.focusedErrorBorderColor));
+    return TitleCC(open:false,tex:Tex(this.widget.nwf.qty +' EA '+getNameTruncated(), fontWeight: FontWeight.normal,color: Const.nonfocusedErrorBoderColor));
   }
 
   String getNameTruncated(){
