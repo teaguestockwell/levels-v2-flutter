@@ -81,7 +81,7 @@ class _HomeState extends State<Home> {
   }
 
   void buildDiclaimer(DocumentSnapshot ds){
-    this.widget.moreOp = MoreOp(name: ds['name'], url: ds['url']);
+    this.widget.moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
     
     this.widget.bn = BottomNav(this.widget.aircrafts[0], this.widget.moreOp);
 
