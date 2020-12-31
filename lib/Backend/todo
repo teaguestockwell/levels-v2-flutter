@@ -1,6 +1,5 @@
-website for help button
-
-topbar help button
+run command to use openGL/canavskit skia
+flutter build web --web-renderer canvaskit --release
 
 max width for cards -- edit Max Widget
 
