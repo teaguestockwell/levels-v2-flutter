@@ -4,10 +4,8 @@ import 'package:five_level_one/screens/glossary/glossary.dart';
 import 'package:five_level_one/screens/percentMac/percentmac.dart';
 import 'package:five_level_one/screens/units/units.dart';
 import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/moreOpModalSpin.dart';
+import 'package:five_level_one/widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 class BottomNav extends StatefulWidget {
   final Aircraft air;
   final MoreOp moreOp;
@@ -33,7 +31,6 @@ class _BottomNavState extends State<BottomNav> {
     super.initState();
   }
 
-
   @override
   void dispose() {
     _pageController.dispose();
@@ -51,16 +48,6 @@ class _BottomNavState extends State<BottomNav> {
         duration: const Duration(milliseconds: Const.animationDuration), curve: Curves.easeInOut);
   }
 
-  void launchURL(String url) async {
-  if (await canLaunch(url)) {
-    await launch(url);
-    }
-  }
-
-  void more(var x){
-    launchURL(this.widget.moreOp.url[x]);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Listener(
@@ -76,7 +63,7 @@ class _BottomNavState extends State<BottomNav> {
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
             title: Tex(titleArr[_pageIndex]),
-            actions: [MoreOpModal(this.widget.moreOp)],
+            actions: [MoreOpPopup(this.widget.moreOp)],
           ),
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: true,

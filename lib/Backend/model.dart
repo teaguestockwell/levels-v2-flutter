@@ -337,8 +337,10 @@ class P {
 }
 
 class MoreOp{
-  final List<dynamic> name,url;
+  final List<dynamic> name,url,icon;
   MoreOp({
-    @required this.name, @required this.url
+    @required this.name, 
+    @required this.url,
+    @required this.icon,
   });
 }
