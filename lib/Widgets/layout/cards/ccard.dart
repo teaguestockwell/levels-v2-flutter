@@ -9,6 +9,7 @@ class CCards extends StatefulWidget {
   final String title;
   Widget child;
   bool open;
+  final color = Const.rc();
 
   ///starts open
   CCards(this.title, this.child) {
@@ -53,10 +54,10 @@ class _CCardsState extends State<CCards> {
     ope = this.widget.open;
     if (ope) {
       chil = this.widget.child;
-      title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal)); 
+      title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal, color: this.widget.color)); 
     } else {
       chil = Container();
-      title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
+      title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal,color: this.widget.color,));
     }
     super.initState();
   }
@@ -66,10 +67,10 @@ class _CCardsState extends State<CCards> {
     setState(() {
       if (ope) {
         chil = this.widget.child;
-        title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
+        title = TitleCC(open:true,tex:Tex(this.widget.title,fontWeight: FontWeight.normal, color: this.widget.color));
       } else {
         chil = Container();
-        title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal));
+        title = TitleCC(open:false,tex:Tex(this.widget.title,fontWeight: FontWeight.normal,color: this.widget.color,));
       } 
     });
   }

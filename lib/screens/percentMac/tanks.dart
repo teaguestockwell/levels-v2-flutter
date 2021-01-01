@@ -43,7 +43,7 @@ with AutomaticKeepAliveClientMixin<TanksCard> {
 
   @override
   Widget build(BuildContext context) {
-    return CardAllwaysOpen("Tanks", Column(children: this.widget.tankRows));
+    return CardAllwaysOpen("Tanks", Column(children: this.widget.tankRows), Const.nonfocusedBoderColors);
   }
 }
 

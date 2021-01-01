@@ -92,8 +92,8 @@ class _HomeState extends State<Home> {
 
     var sc = ScrollController();
     var ret = CupertinoScrollbar(isAlwaysShown: true,controller: sc, child:ListView(controller: sc, children: [
-      CardAllwaysOpen('FIVE LEVEL', img),
-      CardAllwaysOpen(ds.get('welcometitle'), RowCenterText(ds.get('welcomebody'))),
+      CardAllwaysOpen('FIVE LEVEL', img, Const.textColor),
+      CardAllwaysOpen(ds.get('welcometitle'), RowCenterText(ds.get('welcomebody')), Const.textColor),
       CardAllwaysOpen(
         'Aircraft',
         Column(
@@ -105,7 +105,8 @@ class _HomeState extends State<Home> {
               CustomButton('Help',onPressed: help),
             )
           ]
-        )
+        ),
+        Const.textColor
       )
     ]));
     setState(() {body =ret;});

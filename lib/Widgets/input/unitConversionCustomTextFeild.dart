@@ -17,7 +17,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   initState() {
-    dec = InputDec.wi;
+    dec = InputDec.div;
     this.widget.c.addListener(() {});
 
     super.initState();
@@ -29,6 +29,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         height: Const.pickerHeight,
         width: Const.pickerWidth,
         child: TextField(
+          cursorColor: Colors.white,
           controller: this.widget.c,
           decoration: dec,
           keyboardType: TextInputType.numberWithOptions(decimal: true),

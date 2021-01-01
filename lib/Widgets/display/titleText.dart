@@ -31,7 +31,7 @@ class TitleTextState extends State<TitleText> {
   @override
   Widget build(BuildContext context) {
     if(_valid){
-      return Tex(this.widget.name,fontWeight: FontWeight.normal);
+      return Tex(this.widget.name,fontWeight: FontWeight.normal, color: Const.nonfocusedBoderColors,);
     }
     else{
       return Tex(this.widget.name,fontWeight: FontWeight.normal, color: Const.nonfocusedErrorBoderColor);

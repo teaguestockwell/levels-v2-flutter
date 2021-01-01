@@ -15,6 +15,7 @@ class RowCenterText extends StatelessWidget {
       Const.rowInset,
       Alignment.center,
       SelectableLinkify(
+        cursorColor: Colors.white,
         showCursor: true,
         style: TextStyle(color: Const.textColor, fontSize: Const.textSize, fontWeight: FontWeight.normal),
         text: w,

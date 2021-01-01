@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 
@@ -36,15 +37,31 @@ class Const {
       cargoUIColor = Color.fromRGBO(255,255,255,0.07),
 
       divColor = Colors.white30,
-      focusedBorderColor = Color.fromRGBO(255,255,255,0.88),
-      nonfocusedBoderColors = Colors.white30,
-      
       textColor = Color.fromRGBO(255,255,255,0.88),
 
       modalPickerColor= Color.fromRGBO(55,55,55,1),
       
-      focusedErrorBorderColor = Color.fromRGBO(253, 11, 30, 1),
-     nonfocusedErrorBoderColor = Color.fromRGBO(254,112, 123, 1);
+      focusedBorderColor = Color.fromRGBO(165,214,167,1),//Color.fromRGBO(255,255,255,0.88),
+      nonfocusedBoderColors = Color.fromRGBO(165,214,167,1), //Colors.white30,
+
+      focusedErrorBorderColor = Color.fromRGBO(244,143,177,1),//Color.fromRGBO(254,112, 123, 1),
+      nonfocusedErrorBoderColor = Color.fromRGBO(244,143,177,1);
+     
+    static const _funColors = <Color>[
+      Color.fromRGBO(179,157,219,1),
+      Color.fromRGBO(144,202,249,1),
+      Color.fromRGBO(244,143,177,1),
+      Color.fromRGBO(165,214,167,1),
+      Color.fromRGBO(255,204,128,1),
+      //Color.fromRGBO(62,98,210,1),
+    ];
+
+    static int next =-1;
+
+    static Color rc(){
+      next++; if(next>_funColors.length-1){next =0;}
+      return _funColors[next];
+    }
 }
 
 class InputDec {
@@ -64,6 +81,26 @@ class InputDec {
       ),
       borderSide: BorderSide(
         color: Const.nonfocusedBoderColors,
+        width: Const.divThickness,
+      ),
+    );
+
+    static final OutlineInputBorder _div = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.divColor,
+        width: Const.divThickness,
+      ),
+    );
+
+    static final OutlineInputBorder _divNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: Const.divColor,
         width: Const.divThickness,
       ),
     );
@@ -97,4 +134,10 @@ class InputDec {
     enabledBorder: _reNF,
     focusedBorder: _re,
   );
+
+  static final InputDecoration div = InputDecoration(
+    enabledBorder: _divNF,
+    focusedBorder: _div,
+  );
+
 }

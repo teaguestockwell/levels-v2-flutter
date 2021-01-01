@@ -109,6 +109,7 @@ class _ValidatedTextState extends State<ValidatedText> {
             height: Const.pickerHeight,
             width: this.widget.width,
             child: TextField(
+              cursorColor: Colors.white,
               controller: c,
               decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: false),
@@ -123,6 +124,7 @@ class _ValidatedTextState extends State<ValidatedText> {
             height: Const.pickerHeight,
             width: this.widget.width,
             child: TextField(
+              cursorColor: Colors.white,
               controller: c,
               decoration: dec,
               keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -137,6 +139,7 @@ class _ValidatedTextState extends State<ValidatedText> {
             height: Const.pickerHeight,
             width: this.widget.width,
             child: TextField(
+              cursorColor: Colors.white,
               controller: c,
               decoration: dec,
               keyboardType: TextInputType.text,

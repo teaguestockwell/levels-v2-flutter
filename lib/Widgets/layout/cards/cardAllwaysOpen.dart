@@ -10,8 +10,9 @@ import '../max.dart';
 
 class CardAllwaysOpen extends StatelessWidget {
   Widget chil;
+  Color color;
   final String title;
-  CardAllwaysOpen(this.title, this.chil){
+  CardAllwaysOpen(this.title, this.chil, this.color){
     //wraps first and last widets in padding.
     if(chil is Column){
       Column childp = chil;
@@ -56,7 +57,7 @@ class CardAllwaysOpen extends StatelessWidget {
                           3.0, Alignment.center, 
                           Container(
                             height: Const.cardTabSize,
-                            child:Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child:Tex(title, fontWeight: FontWeight.normal,),))
+                            child:Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child:Tex(title, fontWeight: FontWeight.normal, color: color,),))
                           )
                       ), 
                     chil

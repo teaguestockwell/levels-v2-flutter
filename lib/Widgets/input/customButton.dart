@@ -6,7 +6,8 @@ import '../../utils.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final IntCallBack onPressed;
-  CustomButton(this.text, {this.onPressed});
+  Color color;
+  CustomButton(this.text, {this.onPressed, this.color}){if(color==null){color=Const.textColor;}}
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class CustomButton extends StatelessWidget {
             onPressed: onPressed,
             child: Tex(
               this.text,
+              color: color,
               fontWeight: FontWeight.normal,
             ),
           ),

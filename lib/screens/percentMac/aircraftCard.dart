@@ -1,3 +1,4 @@
+import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
@@ -12,7 +13,8 @@ class AircraftCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardAllwaysOpen(
           "Aircraft",
-           Row2(Tex(this.name), CustomButton('Change MDS', onPressed: (){Phoenix.rebirth(context);},))
+           Row2(Tex(this.name), CustomButton('Change MDS', onPressed: (){Phoenix.rebirth(context);})),
+           Const.nonfocusedBoderColors,
     );
   }
 }
