@@ -3,13 +3,7 @@ flutter build web --web-renderer canvaskit --release
 
 max width for cards -- edit Max Widget
 
-test sql flight for preperation to rehost firbase and deploy to P1
-
-rewrite models for sql
-
-title text red white error checing for cargo and chart c cards
-
-dont rebuild app on mds change, setstate of home instead to avoid calling firestore again.
+offline persistance with mysql instead of firebase
 
 refractor all
 

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:five_level_one/backend/cont.dart';
 
-///AutoSizing Text
 class Tex extends StatelessWidget {
   final String text;
   final int maxLine;

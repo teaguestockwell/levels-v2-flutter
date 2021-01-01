@@ -3,10 +3,12 @@ import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/screens/percentMac/validatedCargoUI.dart';
 import 'package:five_level_one/widgets/display/text.dart';
+import 'package:five_level_one/widgets/display/titleText.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinnerButton.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
+import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpenTex.dart';
 import 'package:five_level_one/widgets/layout/rows/row2.dart';
 import 'package:five_level_one/widgets/layout/rows/row3.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +20,9 @@ import '../../utils.dart';
 class CargoCard extends StatefulWidget {
   ///contains config info for child widgets
   final Aircraft air;
-  bool valid;
+  bool valid=true;
+
+  final titleText = TitleText('Cargo', initValid: true,);
 
   Config selectedSpinnerConfig;
   NameWeightFS selectedSpinnerCargo;
@@ -57,7 +61,7 @@ class CargoCard extends StatefulWidget {
     return ret;
   }
 
-  CargoCard(this.air,this.onValidationChange);
+  CargoCard(this.air,this.onValidationChange){this.onValidationChange(1,valid);}
 
   @override
   _CargoCardState createState() => _CargoCardState();
@@ -110,6 +114,15 @@ class _CargoCardState extends State<CargoCard> {
   print('cargo '+ret.toString());
   //call back to nofiy permacscreen goes here
   this.widget.onValidationChange(1,ret);
+    if(
+      this.widget.titleText != null &&
+      this.widget.titleText.state != null
+      ){
+        WidgetsBinding.instance.addPostFrameCallback((_){
+          this.widget.titleText.state.setValid(ret);
+      });
+      
+    }
   }
 
   ///pass to config spinner
@@ -238,8 +251,8 @@ class _CargoCardState extends State<CargoCard> {
     checkValidation();
     getCargo(); //call me every build
     printCargo();
-    return CardAllwaysOpen(
-      'Cargo',
+    return CardAllwaysOpenTex(
+      this.widget.titleText,
       Column(
         children: <Widget>[
 

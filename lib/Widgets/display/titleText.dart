@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 class TitleText extends StatefulWidget {
   final String name;
   TitleTextState state;
-  TitleText(this.name);
+  bool initValid;
+  TitleText(this.name,{this.initValid=false});
 
   @override
   TitleTextState createState(){
@@ -15,7 +16,13 @@ class TitleText extends StatefulWidget {
 }
 
 class TitleTextState extends State<TitleText> {
-  bool _valid = false;
+  bool _valid;
+
+  @override
+  void initState() {
+    super.initState();
+    _valid = this.widget.initValid;
+  }
 
   void setValid(bool valid){  
     setState((){this._valid=valid;});
