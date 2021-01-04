@@ -191,14 +191,29 @@ class NameWeightFS {
   String getMom() {
     return (P.p(fs) * P.p(weight) / P.p(simplemom)).toString();
   }
-
+  /// ea simple momment with fraction digits
   String getMomAsStringFixes(int fractionDigits){
     return (P.p(fs) * P.p(weight) / P.p(simplemom)).toStringAsFixed(fractionDigits);
   }
 
-  ///unsimplified moment as string with faction digits
+   /// tot simple momment with fraction digits
+  String getTotSimpMomFixed(int fractionDigits){
+    return (( P.p(fs) * P.p(weight) / P.p(simplemom))*P.p(qty) ).toStringAsFixed(fractionDigits);
+  }
+
+   /// tot simple momment with fraction digits
+  String getTotMomAsStringFixes(int fractionDigits){
+    return ((P.p(fs) * P.p(weight) / P.p(simplemom))*P.p(qty)).toStringAsFixed(fractionDigits);
+  }
+
+  ///ea unsimplified moment as string with faction digits
   String getUnSimpMomAsStringFixed(int fractionDigits){
     return (P.p(fs) * P.p(weight)).toStringAsFixed(fractionDigits);
+  }
+
+  /// tot unsimp mom as string fixed
+   String getTotUnSimpMomAsStringFixed(int fractionDigits){
+    return ((P.p(fs) * P.p(weight)) * P.p(qty)).toStringAsFixed(fractionDigits);
   }
 
   String getTotalMoment(){
@@ -228,6 +243,9 @@ class NameWeightFS {
     ){return true;}
     return false;
   }
+  String getTotWeightFixed(int fractionDigits){
+    return ( P.p(weight) * P.p(qty) ).toStringAsFixed(fractionDigits);
+  }
 }
 
 class PerMac{
@@ -241,6 +259,7 @@ class PerMac{
   String macAsString;
   String perMacDecimalAsString;
   String perMacPercentAsString;
+  String grandTotQty;
 
   PerMac({
     @required String lemacS,
@@ -258,7 +277,11 @@ class PerMac{
     double lemac = P.p(lemacS);
     double mac = P.p(macS.toString());
 
+    //accumulator for grandTotQty
+    int gtq=0;
+
     nwfss.forEach((x){
+      gtq += P.p(x.qty) as int;
       x.fs = x.getFS();
       totWeight+= P.p(x.getTotalWeight());
       totMom+= P.p(x.getTotalMoment());
@@ -280,6 +303,8 @@ class PerMac{
 
     perMacDecimalAsString = perMacDecimal.toStringAsFixed(fractionDigits+2);
     perMacPercentAsString = perMacPercent.toStringAsFixed(fractionDigits);
+
+    grandTotQty = gtq.toString();
   }
   
   void printString(){

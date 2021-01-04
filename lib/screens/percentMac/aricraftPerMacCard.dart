@@ -25,6 +25,9 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
             DataCell(Tex(nwfs.fs)),
             DataCell(Tex(nwfs.getUnSimpMomAsStringFixed(0))),
             DataCell(Tex(nwfs.getMomAsStringFixes(2))),
+            DataCell(Tex(nwfs.getTotWeightFixed(2))),
+            DataCell(Tex(nwfs.getTotUnSimpMomAsStringFixed(0))),
+            DataCell(Tex(nwfs.getTotMomAsStringFixes(2))),
           ]
         )
       );
@@ -40,6 +43,9 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
           DataCell(Tex(' ')),
           DataCell(Tex(' ')),
           DataCell(Tex(' ')),
+          DataCell(Tex(' ')),
+          DataCell(Tex(' ')),
+          DataCell(Tex(' ')),
         ]
       )
     );
@@ -48,12 +54,16 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
     ret.add(
       DataRow(
         cells: [
-          DataCell(Tex('1')),
-          DataCell(Tex('Total (Aircraft + Fuel + Cargo)')),
-          DataCell(Tex(this.widget.permac.totWeightAsSting)),
+          DataCell(Tex(this.widget.permac.grandTotQty)),
+          DataCell(Tex('Grand Total')),
           DataCell(Tex('NA')),
+          DataCell(Tex('NA')),
+          DataCell(Tex('NA')),
+          DataCell(Tex('NA')),
+          DataCell(Tex(this.widget.permac.totWeightAsSting)),
           DataCell(Tex(this.widget.permac.totUnSimpMomAsString)),
           DataCell(Tex(this.widget.permac.totMomAsString)),
+          
         ]
       )
     );
@@ -66,10 +76,14 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
       columns: <DataColumn>[
         DataColumn(label: Tex('Qty')),
         DataColumn(label: Tex('Name')),
-        DataColumn(label: Tex('Weight')),
+        DataColumn(label: Tex('Weight EA')),
         DataColumn(label: Tex('FS')),
-        DataColumn(label: Tex('Mom (FS*Weight)')),
-        DataColumn(label: Tex('Simp Mom')),
+        DataColumn(label: Tex('Mom EA (FS*Weight)')),
+        DataColumn(label: Tex('Simp Mom EA')),
+
+        DataColumn(label: Tex('Weight Total')),
+        DataColumn(label: Tex('Mom Total')),
+        DataColumn(label: Tex('Simp Mom Total')),
       ],
       rows: getRows(),
     );
