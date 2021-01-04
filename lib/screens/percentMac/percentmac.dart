@@ -1,9 +1,11 @@
 import 'dart:collection';
+import 'dart:html';
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/screens/percentMac/aricraftPerMacCard.dart';
 import 'package:five_level_one/screens/percentMac/balArmCard.dart';
 import 'package:five_level_one/screens/percentMac/perMacCard.dart';
+import 'package:five_level_one/screens/percentMac/showWork.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/input/getMacButton.dart';
@@ -46,53 +48,25 @@ class PerMacScreen extends StatefulWidget {
     var nwfs = List<NameWeightFS>();
     if(valid){
 
-    nwfs.add(chartcCard.getNWFS());
-    nwfs.addAll(tankCard.getNameWeightFS());
+      nwfs.add(chartcCard.getNWFS());
+      nwfs.addAll(tankCard.getNameWeightFS());
+      //check for no cargo
+      if(cargoCard.getNWfs().length>0){
+        nwfs.addAll(cargoCard.getNWfs());
+      }
 
-    //check for no cargo
-    if(cargoCard.getNWfs().length>0){
-      nwfs.addAll(cargoCard.getNWfs());
-    }
-    
-    
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context)=> ShowWork(
+            lemac: air.lemac,
+            mac: air.mac,
+            nwfs: nwfs,
+          )
+        )
+      );
 
-    
-
-    var permac = PerMac(
-    lemacS: air.lemac,
-    macS: air.mac,
-    nwfss: nwfs,
-    );
-
-    permac.printString();
-
-     showModalBottomSheet<void>(
-      enableDrag: false,
-       isScrollControlled: true,
-      context: context,
-      builder: (_) {
-        return Container(
-          color: Const.modalPickerColor,
-          height: MediaQuery.of(context).size.height*.85,
-          child: 
-          InteractiveViewer(
-            minScale: 0.2,
-        constrained: false,
-        child: 
-          Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AircraftPerMacCard(permac),
-              BalArmCard(permac),
-              PerMacCard(permac),
-            ]
-            )
-        ));
-      });
-    
-  
-    }
-    else{
+    }else{
       Scaffold.of(context).showSnackBar(SnackBar(
         backgroundColor: Const.modalPickerColor,
         content: 
