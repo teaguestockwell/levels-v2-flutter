@@ -41,19 +41,36 @@ class _MoreOpModalState extends State<MoreOpModal> {
 
    _getSpinnerWidgets() {
     _spinnerWidgets.clear();
-    
-    this.widget.moreOp.name.forEach((name) {
+    for(int i=0; i<this.widget.moreOp.name.length; i++){
+
+      Icon icon = (){
+        try{
+          return Icon(IconData(int.parse(this.widget.moreOp.icon[i]) ,fontFamily: 'MaterialIcons'));
+        }catch(_){
+          return Icon(IconData(59362,fontFamily: 'MaterialIcons'));
+        }
+      }();
+
+      var tex = Tex(
+        this.widget.moreOp.name[i],
+        size: Const.textSizeModalSpinner,
+        fontWeight: Const.fwSpinner,
+        color: Const.textColor,
+      );
+
       _spinnerWidgets.add(
         Center(
-          child: Tex(
-            name,
-            size: Const.textSizeModalSpinner,
-            fontWeight: Const.fwSpinner,
-            color: Const.textColor,
-          )
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+            icon,
+            Padding(padding: EdgeInsets.only(left:8), child: tex),
+          ])
         )
       );
-    });
+
+    }
   }
 
   press() {
@@ -62,7 +79,7 @@ class _MoreOpModalState extends State<MoreOpModal> {
       _getSpinnerWidgets();
       _timesPressed++;
     }
-    _timesPressed++;
+
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -118,14 +135,9 @@ class _MoreOpModalState extends State<MoreOpModal> {
 
   @override
   Widget build(BuildContext context) {
-    return 
-    InkWell(
-      onTap: press,
-      child: Padding(padding: EdgeInsets.only(left: 20, right: 20), 
-        child: Icon(
-          Icons.more_vert
-        )
-      )
+    return CustomButton(
+      'Help',
+      onPressed: press,
     );
   }
 }

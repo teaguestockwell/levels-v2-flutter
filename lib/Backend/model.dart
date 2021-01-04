@@ -281,7 +281,7 @@ class PerMac{
     int gtq=0;
 
     nwfss.forEach((x){
-      gtq += P.p(x.qty) as int;
+      gtq += P.pi(x.qty);
       x.fs = x.getFS();
       totWeight+= P.p(x.getTotalWeight());
       totMom+= P.p(x.getTotalMoment());
@@ -359,7 +359,15 @@ class P {
     idx++;
     return idx-1;
   }
-}
+  static int pi(s){
+    int p = 0;
+    try{
+      p = int.parse(s);
+      return p;
+    }
+    catch (Exeption){throw Exception();}
+  }
+  }
 
 class MoreOp{
   final List<dynamic> name,url,icon;

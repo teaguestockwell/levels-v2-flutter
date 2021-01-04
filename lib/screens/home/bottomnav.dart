@@ -4,6 +4,8 @@ import 'package:five_level_one/screens/glossary/glossary.dart';
 import 'package:five_level_one/screens/percentMac/percentmac.dart';
 import 'package:five_level_one/screens/units/units.dart';
 import 'package:five_level_one/widgets/display/text.dart';
+import 'package:five_level_one/widgets/input/customButton.dart';
+import 'package:five_level_one/widgets/input/leadingMDS.dart';
 import 'package:five_level_one/widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
 class BottomNav extends StatefulWidget {
@@ -61,6 +63,11 @@ class _BottomNavState extends State<BottomNav> {
         child: Scaffold(
           backgroundColor: Const.background,
           appBar: AppBar(
+            leadingWidth: Const.pickerWidth ,
+            leading: LeadingMDS(
+              text: this.widget.air.name,
+              onPressed: (){Navigator.pop(context);},
+            ),
             backgroundColor: Const.bottombarcolor,
             title: Tex(titleArr[_pageIndex]),
             actions: [MoreOpPopup(this.widget.moreOp)],

@@ -1,18 +1,12 @@
 import 'dart:collection';
-import 'dart:html';
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/percentMac/aricraftPerMacCard.dart';
-import 'package:five_level_one/screens/percentMac/balArmCard.dart';
-import 'package:five_level_one/screens/percentMac/perMacCard.dart';
 import 'package:five_level_one/screens/percentMac/showWork.dart';
 import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/customButton.dart';
 import 'package:five_level_one/widgets/input/getMacButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'aircraftCard.dart';
 import 'cargoCard.dart';
 import 'chartcCard.dart';
 import 'tanks.dart';
@@ -22,7 +16,6 @@ class PerMacScreen extends StatefulWidget {
   TanksCard tankCard;
   ChartCCard chartcCard;
   CargoCard cargoCard;
-  AircraftCard aircraftCard;
   bool valid;
   BuildContext context;
   var childValid = LinkedHashMap<int,bool>();
@@ -78,7 +71,6 @@ class PerMacScreen extends StatefulWidget {
   }
 
   PerMacScreen(this.air){
-    aircraftCard = AircraftCard(air.name);
     tankCard = TanksCard(air);
     chartcCard = ChartCCard(this.air, validateChild);
     cargoCard = CargoCard(air,validateChild);
@@ -110,7 +102,6 @@ class _PerMacScreenState extends State<PerMacScreen>
         child: SingleChildScrollView(
           controller: sc,
           child: Column(children: [
-            this.widget.aircraftCard,
             this.widget.tankCard,
             this.widget.chartcCard,
             this.widget.cargoCard,

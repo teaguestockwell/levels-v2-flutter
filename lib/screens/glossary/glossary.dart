@@ -1,4 +1,3 @@
-import 'package:five_level_one/screens/percentMac/aircraftCard.dart';
 import 'package:five_level_one/widgets/display/rowCenterTest.dart';
 import 'package:five_level_one/widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
@@ -15,7 +14,6 @@ class GlossaryScreen extends StatelessWidget {
 
   List<Widget> getGlossCards() {
     var ret = List<Widget>();
-    ret.add(AircraftCard(air.name));
     for (int i = 0; i < air.titles.length; i++) {
       ret.add(CCards(air.titles.elementAt(i),
           RowCenterText(air.bodys.elementAt(i))));

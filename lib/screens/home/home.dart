@@ -5,6 +5,7 @@ import 'package:five_level_one/widgets/display/rowCenterTest.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
 import 'package:five_level_one/widgets/input/customButton.dart';
+import 'package:five_level_one/widgets/input/moreOpModalSpin.dart';
 import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
 import 'package:five_level_one/widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,18 +32,17 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
    super.initState();
-   this.widget.aircrafts.clear();
-   img = Image.asset('assets/0.png');
-   
-    WidgetsBinding.instance
-    .addPostFrameCallback((_){ Firebase.initializeApp().then((_){
-      //execute this function once after first build
-      precacheImage(img.image, context).then((_){
-        Firebase.initializeApp().then((_) {
+   //this.widget.aircrafts.clear();
+   //execute this function once after first build
+    WidgetsBinding.instance.addPostFrameCallback((_){ 
+      Firebase.initializeApp().then((_){
+
+        img = Image.asset('assets/0.png');
+        precacheImage(img.image, context).then((_){
           FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
         });
-      });
-    });});
+      }
+    );});
   }
 
   void buildAircraft(QuerySnapshot qs){
@@ -102,7 +102,7 @@ class _HomeState extends State<Home> {
             Divider(color: Const.divColor, thickness: Const.divThickness),
             Row2(
               CustomButton('I Accept',onPressed: accept),
-              CustomButton('Help',onPressed: help),
+              MoreOpModal(this.widget.moreOp),
             )
           ]
         ),
@@ -125,23 +125,23 @@ class _HomeState extends State<Home> {
   }
 
   void accept(){
-    setState((){body = this.widget.bn;});
-  }
-
-  void help(){
-    print('help');
+     Navigator.push(
+     context,
+     MaterialPageRoute(
+      builder: (context)=> this.widget.bn
+    )
+   );
   }
     
  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: Scaffold(
-        body: body,
-        backgroundColor: Const.background
-      )
+    return Scaffold(
+      body: body,
+      backgroundColor: Const.background
     );
   }
+}
+
+class MoreOpModalSpin {
 }
 

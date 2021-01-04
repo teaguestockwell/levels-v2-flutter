@@ -3,6 +3,7 @@ import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
+//import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
 import '../../utils.dart';
 
 
@@ -20,24 +21,24 @@ class Loading extends StatelessWidget {
       ),
       Spacer(),
 
-      Container(
-        width: 300.0,
-        height: 300.0,
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Const.focusedBorderColor)
-        )
-      ),
-      
-
-      // Container(child:SpinningWheel(
-      //   Image.asset('assets/jet.png'),
+      // Container(
       //   width: 300.0,
-      //   height: 300.0, dividers: 6,
-      //   onEnd: (_){},
-      //   onUpdate: (_){},
-      //   spinResistance: 0.2,
+      //   height: 300.0,
+      //   child: CircularProgressIndicator(
+      //     valueColor: AlwaysStoppedAnimation<Color>(Const.focusedBorderColor)
       //   )
       // ),
+      
+
+      Container(child:SpinningWheel(
+        Image.asset('assets/jet.png'),
+        width: 300.0,
+        height: 300.0, dividers: 6,
+        onEnd: (_){},
+        onUpdate: (_){},
+        spinResistance: 0.2,
+        )
+      ),
     
       Spacer(),
         ]
