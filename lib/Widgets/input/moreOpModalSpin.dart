@@ -65,7 +65,7 @@ class _MoreOpModalState extends State<MoreOpModal> {
             mainAxisSize: MainAxisSize.min,
             children: [
             icon,
-            Padding(padding: EdgeInsets.only(left:8), child: tex),
+            Padding(padding: EdgeInsets.only(left:9), child: tex),
           ])
         )
       );

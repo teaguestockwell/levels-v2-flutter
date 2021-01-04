@@ -57,7 +57,7 @@ class MoreOpPopup extends StatelessWidget {
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right:8),
+                        padding: EdgeInsets.only(right:10),
                         child: icon,
                       ),
                         Tex(text),
