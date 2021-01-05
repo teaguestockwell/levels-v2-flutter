@@ -2,7 +2,6 @@
 
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/utils.dart';
-import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/display/titleText.dart';
 import 'package:flutter/material.dart';
 import '../alignPadding.dart';

@@ -1,0 +1,81 @@
+# Full name of the system.
+system-name:
+
+# Shortname or abbreviation.
+short-name:
+
+# System version or release number.
+version:
+
+# Operational Environments: production, test, research and development, tactical, deployed, or other.
+environment:
+
+# Authorization Status: CtF
+Status: Active
+
+# Assessment Date. Identify the date of last assessment per Continuous ATO (cATO).
+Review-date:
+
+# Security Re-Assess Interval. Period for re-assessment after updates
+Assess-interval:
+
+# Authorization boundary diagram. Include URL.
+System-architecture:
+
+# Confidentiality, Integrity, Availability M,M,M 
+# Classification: ie. UNCLASSIFIED, SECRET//NOFORN, TS/SCI
+# Personally Identifiable Information: Y/N. Assessment team can help data types
+Categorization:
+   Confidentiality: M
+
+   Integrity: M
+   
+   Availability: M
+
+   Classification-Level:
+   
+   PII: None
+
+Data-types:
+      -
+
+
+Deployment-sites:
+   -
+
+Programming-Languages:
+   -
+
+Dependencies:
+   -
+   
+Databases:
+      -
+
+External-Systems:
+      -
+
+Role-Identification:
+   Authorizing-Official:
+      name: Daniel Holtzman
+      title: Authorizing Official
+      org: Air Force Command & Control 
+      email: daniel.holtzman.1@us.af.mil
+      phone: 781-225-1118
+   System-Owner:
+      name: Nic Chaillan
+      title: Air Force Chief Software Officer
+      org: U.S. Air Force
+      email: nicolas.m.chaillan.civ@mail.mil
+      phone: 703-693-4740
+   Chief-Information-Security-Officer:
+      name: Matt Huston
+      title: CISO
+      org: AFLCMC/HNCP
+      email: matthew.huston@afwerx.af.mil
+      phone: 650-933-4121
+   Product-Manager:
+   
+   
+   
+   
