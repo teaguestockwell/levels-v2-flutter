@@ -4,7 +4,7 @@ AMC MX Group Confrence presentation https://www.youtube.com/watch?v=ybnVkH23D60&
 
 To run an old web build that is hosted on the interwebs: https://fivelevel.web.app
 
-To run the latest web build run in terminal:
+<!-- To run the latest web build run in terminal:
 
 npm install --global http-server
 
@@ -14,7 +14,7 @@ cd five_level/build/web
 
 http-server
 
-open link in your favorite browser
+open link in your favorite browser -->
 
 ![Screen Shot 2020-12-22 at 18 50 33](https://user-images.githubusercontent.com/71202372/102958744-814aa980-4492-11eb-8420-7692dfcef107.png)
 ![Screen Shot 2020-12-22 at 19 32 21](https://user-images.githubusercontent.com/71202372/102958745-827bd680-4492-11eb-908d-df18c108b170.png)
