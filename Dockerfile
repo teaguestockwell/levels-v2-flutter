@@ -19,16 +19,17 @@ ENV PATH "$PATH:/flutter/bin"
 RUN flutter channel beta
 RUN flutter upgrade
 RUN flutter config --enable-web
-RUN flutter doctor -v
-
-# Create dir
-WORKDIR /fl
+RUN flutter precache --web
 
 # Copy app flies into container
-COPY . .
+COPY . /fl
+
+WORKDIR /fl
 
 # Get App Dependencies
 RUN flutter pub get
+RUN flutter clean
+RUN flutter doctor
 
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
