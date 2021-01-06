@@ -4,13 +4,9 @@ import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/screens/percentMac/validatedCargoUI.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:five_level_one/widgets/display/titleText.dart';
-import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
 import 'package:five_level_one/widgets/input/buttonModalSpinnerButton.dart';
-import 'package:five_level_one/widgets/input/customButton.dart';
-import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
 import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpenTex.dart';
 import 'package:five_level_one/widgets/layout/rows/row2.dart';
-import 'package:five_level_one/widgets/layout/rows/row3.dart';
 import 'package:flutter/material.dart';
 import '../../utils.dart';
 

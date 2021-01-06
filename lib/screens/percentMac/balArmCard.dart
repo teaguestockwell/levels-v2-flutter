@@ -1,7 +1,6 @@
 import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
 import 'package:five_level_one/widgets/layout/cards/ccard.dart';
 import 'package:flutter/material.dart';
 

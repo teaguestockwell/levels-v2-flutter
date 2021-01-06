@@ -1,5 +1,3 @@
-
-import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/widgets/display/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinning_wheel/flutter_spinning_wheel.dart';
