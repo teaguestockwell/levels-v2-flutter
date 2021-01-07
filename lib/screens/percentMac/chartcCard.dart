@@ -2,15 +2,15 @@
 
 import 'dart:collection';
 
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/display/titleText.dart';
-import 'package:five_level_one/widgets/input/validatedText.dart';
-import 'package:five_level_one/widgets/layout/alignPadding.dart';
-import 'package:five_level_one/widgets/layout/div.dart';
-import 'package:five_level_one/widgets/layout/max.dart';
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/display/titleText.dart';
+import '../../widgets/input/validatedText.dart';
+import '../../widgets/layout/alignPadding.dart';
+import '../../widgets/layout/div.dart';
+import '../../widgets/layout/max.dart';
+import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

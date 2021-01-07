@@ -1,9 +1,9 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/widgets/display/constText.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/buttonDateTimePicker.dart';
-import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import '../../backend/cont.dart';
+import '../../widgets/display/constText.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/input/buttonDateTimePicker.dart';
+import '../../widgets/input/buttonModalSpinner.dart';
+import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';

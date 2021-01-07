@@ -1,11 +1,11 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/glossary/glossary.dart';
-import 'package:five_level_one/screens/percentMac/percentmac.dart';
-import 'package:five_level_one/screens/units/units.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/leadingMDS.dart';
-import 'package:five_level_one/widgets/input/moreOpPopup.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../screens/glossary/glossary.dart';
+import '../../screens/percentMac/percentmac.dart';
+import '../../screens/units/units.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/input/leadingMDS.dart';
+import '../../widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
 class BottomNav extends StatefulWidget {
   final Aircraft air;

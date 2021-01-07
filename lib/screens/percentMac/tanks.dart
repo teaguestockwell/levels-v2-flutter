@@ -1,8 +1,8 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
-import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import '../../backend/cont.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/input/buttonModalSpinner.dart';
+import '../../widgets/layout/cards/cardAllwaysOpen.dart';
+import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../backend/model.dart';

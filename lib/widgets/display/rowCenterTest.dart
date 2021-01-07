@@ -1,5 +1,5 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/widgets/layout/alignPadding.dart';
+import '../../backend/cont.dart';
+import '../../widgets/layout/alignPadding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';
 import 'package:url_launcher/url_launcher.dart';

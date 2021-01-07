@@ -1,9 +1,9 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/percentMac/showWork.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/getMacButton.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../screens/percentMac/showWork.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/input/getMacButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';

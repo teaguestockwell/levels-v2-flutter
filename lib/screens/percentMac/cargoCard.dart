@@ -1,12 +1,12 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/percentMac/validatedCargoUI.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/display/titleText.dart';
-import 'package:five_level_one/widgets/input/buttonModalSpinnerButton.dart';
-import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpenTex.dart';
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../screens/percentMac/validatedCargoUI.dart';
+import '../../widgets/display/text.dart';
+import '../../Widgets/display/titleText.dart';
+import '../../widgets/input/buttonModalSpinnerButton.dart';
+import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
+import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/material.dart';
 import '../../utils.dart';
 

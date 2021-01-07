@@ -1,21 +1,15 @@
-
-
-
-
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/input/customButton.dart';
-import 'package:five_level_one/widgets/input/validatedText.dart';
-import 'package:five_level_one/widgets/layout/alignPadding.dart';
-import 'package:five_level_one/widgets/layout/cards/ccard.dart';
-import 'package:five_level_one/widgets/layout/div.dart';
-import 'package:five_level_one/widgets/layout/rows/row1.dart';
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import '../../Backend/cont.dart';
+import '../../backend/model.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/input/customButton.dart';
+import '../../widgets/input/validatedText.dart';
+import '../../widgets/layout/alignPadding.dart';
+import '../../widgets/layout/cards/ccard.dart';
+import '../../widgets/layout/div.dart';
+import '../../widgets/layout/rows/row1.dart';
+import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/material.dart';
-
 import '../../utils.dart';
-
 class ValidatedCargoUI extends StatefulWidget {/// interates the data model NameWeightFS with UI elements for input, and error checking
   var ope = false;
   var calculated = false;

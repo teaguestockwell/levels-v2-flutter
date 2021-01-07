@@ -1,6 +1,6 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/display/text.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

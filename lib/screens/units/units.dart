@@ -1,7 +1,7 @@
-import 'package:five_level_one/screens/units/preinsp.dart';
-import 'package:five_level_one/screens/units/timegrid.dart';
-import 'package:five_level_one/screens/units/yyyymmddlookup2.dart';
-import 'package:five_level_one/widgets/layout/cards/ccard.dart';
+import '../../screens/units/preinsp.dart';
+import '../../screens/units/timegrid.dart';
+import '../../screens/units/yyyymmddlookup2.dart';
+import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'durationlookup.dart';

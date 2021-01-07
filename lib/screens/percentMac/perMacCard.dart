@@ -1,7 +1,7 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/layout/cards/ccard.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/material.dart';
 
 class PerMacCard extends StatelessWidget {

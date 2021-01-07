@@ -1,5 +1,5 @@
-import 'package:five_level_one/widgets/display/rowCenterTest.dart';
-import 'package:five_level_one/widgets/layout/cards/ccard.dart';
+import '../../widgets/display/rowCenterTest.dart';
+import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../backend/model.dart';

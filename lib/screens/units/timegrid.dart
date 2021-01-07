@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/widgets/display/text.dart';
-import 'package:five_level_one/widgets/layout/alignPadding.dart';
+import '../../backend/cont.dart';
+import '../../widgets/display/text.dart';
+import '../../widgets/layout/alignPadding.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
@@ -18,7 +18,6 @@ class _TimeGrid extends State<TimeGrid> {
     });
     super.initState();
   }
-
 
   @override
   void dispose() {

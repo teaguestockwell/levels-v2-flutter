@@ -1,11 +1,10 @@
 
-
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/utils.dart';
-import 'package:five_level_one/widgets/display/titleText.dart';
+import '../../../Backend/cont.dart';
 import 'package:flutter/material.dart';
+import '../../../utils.dart';
 import '../alignPadding.dart';
 import '../max.dart';
+import '../../../Widgets/display/titleText.dart';
 
 
 
