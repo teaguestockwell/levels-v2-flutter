@@ -1,44 +1,28 @@
-# Multi-stage docker build. First load CentOS and install wget
-FROM debian as wgetsrc
-# # Multistage docker build. First load debian and install dependancies for flutter
-# FROM debian:latest AS build-env
+# Install dependencies
+FROM debian:latest AS build-env
 RUN apt-get update 
 RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback lib32stdc++6 python3 psmisc
 RUN apt-get clean
 
-# Install flutter dep https://flutter.dev/docs/get-started/install/linux
-#RUN yum update all
-#RUN yum install -y bash curl file git mkdir rm unzip which xz-utils zip
-#RUN yum clean all
-
-# Make folder for flutter
-WORKDIR /flut
-
-# Clone the flutter repo
+# Clone the flutter repo from the lastest beta channel
 RUN git clone https://github.com/flutter/flutter.git -b beta --depth 1
 
 # Set flutter path 
-ENV PATH "$PATH:/flut/flutter/bin"
+ENV PATH "$PATH:/flutter/bin"
+
+# Enable flutter web
+RUN flutter channel beta
+RUN flutter upgrade
+RUN flutter config --enable-web
+
+# Show flutter config/get add dependancies
+RUN flutter doctor
 
 # Make folder for project
 WORKDIR /five_level_one
 
 # Copy app flies into container
 COPY . /five_level_one
-
-# Switch to beta channel of flutter
-RUN flutter channel beta
-
-RUN for d in $(ls */); do echo $d; done
-
-# Enable web builds
-RUN flutter config --enable-web
-
-# Get additinal flutter dependancies
-RUN flutter upgrade
-
-# Show flutter config
-RUN flutter doctor
 
 # Get App Dependencies
 RUN flutter pub get
