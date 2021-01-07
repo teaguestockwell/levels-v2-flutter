@@ -19,13 +19,11 @@ RUN flutter config --enable-web
 RUN flutter doctor
 
 # Make folder for project
-WORKDIR /five_level_one
+WORKDIR /app
 
-# Copy app flies into container
-COPY . /five_level_one
+RUN flutter create five_level_one
 
-# Get App Dependencies
-RUN flutter pub get
+WORKDIR /app/five_level_one
 
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
@@ -41,7 +39,7 @@ WORKDIR /build
 
 # Copy build output from first stage 
 #COPY ./build/web/ /usr/share/nginx/html
-COPY --from=0 /five_level_one/build/web /usr/share/nginx/html
+COPY --from=0 /app/five_level_one/build/web /usr/share/nginx/html
 
 # Copy nginx config from first stage --from=0 /fl/nginx.config
 COPY nginx.config /etc/nginx/nginx.conf
