@@ -4,7 +4,13 @@ RUN apt-get update
 RUN apt-get install -y bash curl file git unzip xz-utils zip
 
 # Clone the flutter repo from a specific release
-RUN git clone https://github.com/flutter/flutter.git --branch 1.22.5
+RUN git clone https://github.com/flutter/flutter.git
+
+# cd into flutter 
+WORKDIR /flutter
+
+# Roll flutter to the same commit hash as local dev
+RUN git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
 
 # Set flutter path 
 ENV PATH "$PATH:/flutter/bin"
