@@ -1,4 +1,3 @@
-import 'dart:collection';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/percentMac/validatedCargoUI.dart';
@@ -7,8 +6,9 @@ import '../../Widgets/display/titleText.dart';
 import '../../widgets/input/buttonModalSpinnerButton.dart';
 import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../widgets/layout/rows/row2.dart';
-import 'package:flutter/material.dart';
 import '../../utils.dart';
+import 'dart:collection';
+import 'package:flutter/material.dart';
 
 ///modalspinner to select config, buttons to
 ///update or delete confi, and lazy loading of 

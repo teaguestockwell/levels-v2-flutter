@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'bottomnav.dart';
+import 'loading.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/rowCenterTest.dart';
 import '../../widgets/display/text.dart';
@@ -8,12 +8,12 @@ import '../../widgets/input/customButton.dart';
 import '../../widgets/input/moreOpModalSpin.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
+import '../../backend/model.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../backend/model.dart';
-import 'bottomnav.dart';
-import 'loading.dart';
 
 class Home extends StatefulWidget {
   var aircrafts = List<Aircraft>();

@@ -1,7 +1,3 @@
-
-
-import 'dart:collection';
-
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
@@ -11,10 +7,10 @@ import '../../widgets/layout/alignPadding.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/max.dart';
 import '../../widgets/layout/rows/row2.dart';
+import '../../utils.dart';
+import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../utils.dart';
 
 class ChartCCard extends StatelessWidget {
   String _stringWeight = '0';

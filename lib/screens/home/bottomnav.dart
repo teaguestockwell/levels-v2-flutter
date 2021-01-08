@@ -7,6 +7,7 @@ import '../../widgets/display/text.dart';
 import '../../widgets/input/leadingMDS.dart';
 import '../../widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
+
 class BottomNav extends StatefulWidget {
   final Aircraft air;
   final MoreOp moreOp;
