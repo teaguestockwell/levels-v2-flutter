@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);
 typedef bool ValidateText(String text);
