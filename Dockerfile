@@ -15,15 +15,17 @@ RUN flutter channel beta
 RUN flutter upgrade
 RUN flutter config --enable-web
 
-# Show flutter config/get add dependancies
+# Show flutter config/get dependancies
 RUN flutter doctor
 
 # Make folder for project
 WORKDIR /app
 
-RUN flutter create five_level_one
+COPY . /app
 
-WORKDIR /app/five_level_one
+RUN flutter pub get
+
+RUN flutter doctor
 
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
