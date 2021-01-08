@@ -8,8 +8,8 @@ import '../../widgets/layout/cards/ccard.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row1.dart';
 import '../../widgets/layout/rows/row2.dart';
-import 'package:flutter/material.dart';
 import '../../utils.dart';
+import 'package:flutter/material.dart';
 class ValidatedCargoUI extends StatefulWidget {/// interates the data model NameWeightFS with UI elements for input, and error checking
   var ope = false;
   var calculated = false;

@@ -3,9 +3,9 @@ import '../../widgets/display/text.dart';
 import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
+import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../backend/model.dart';
 
 class TanksCard extends StatefulWidget {
   final Aircraft air;

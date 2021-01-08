@@ -1,8 +1,8 @@
 import '../../widgets/display/rowCenterTest.dart';
 import '../../widgets/layout/cards/ccard.dart';
+import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../backend/model.dart';
 
 class GlossaryScreen extends StatelessWidget {
   final Aircraft air;

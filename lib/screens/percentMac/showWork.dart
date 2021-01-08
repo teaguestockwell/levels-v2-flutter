@@ -1,12 +1,12 @@
+import 'balArmCard.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/home/loading.dart';
 import '../../screens/percentMac/perMacCard.dart';
 import '../../widgets/display/text.dart';
+import 'aricraftPerMacCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'aricraftPerMacCard.dart';
-import 'balArmCard.dart';
 
 class ShowWork extends StatefulWidget {
   final String lemac;

@@ -1,9 +1,9 @@
+import 'customButton.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
+import '../../utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../utils.dart';
-import 'customButton.dart';
 
 class ButtomSpinnerModalButton extends StatefulWidget {
   ///starting spinner index
