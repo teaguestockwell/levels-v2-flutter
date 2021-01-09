@@ -1,11 +1,11 @@
 {
-    "name": "five_level_flutter",
-    "short_name": "five_level_flutter",
+    "name": "Five Level",
+    "short_name": "Five Level",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Aircraft weight and balance",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

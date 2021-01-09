@@ -25,10 +25,8 @@ class TanksCard extends StatefulWidget {
   _TanksCardState createState() => _TanksCardState();
 }
 
-class _TanksCardState extends State<TanksCard>
-with AutomaticKeepAliveClientMixin<TanksCard> {
-  @override bool get wantKeepAlive => true;
-
+class _TanksCardState extends State<TanksCard>{
+  
   @override
   void initState() {
     for (Tank t in this.widget.air.tanks) {
