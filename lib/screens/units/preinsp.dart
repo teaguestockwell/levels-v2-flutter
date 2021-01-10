@@ -2,7 +2,7 @@ import '../../backend/cont.dart';
 import '../../widgets/display/constText.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/buttonDateTimePicker.dart';
-import '../../Widgets/input/buttonModalSpinner.dart';
+import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

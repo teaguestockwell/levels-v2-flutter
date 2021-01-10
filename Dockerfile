@@ -24,6 +24,9 @@ WORKDIR /app
 # Copy context of docker build into /app
 COPY . /app
 
+# Clean
+RUN flutter clean
+
 # Get app packages
 RUN flutter pub get
 
@@ -40,10 +43,8 @@ FROM nginx
 # Run as a unprivileged user
 #USER appuser
 
-WORKDIR /build
-
 # Copy build output from first stage 
-COPY --from=0 /app/five_level_one/build/web /usr/share/nginx/html
+COPY --from=0 /app/build/web /usr/share/nginx/html
 #COPY ./build/web/ /usr/share/nginx/html
 
 # Copy nginx config from first stage --from=0 /fl/nginx.config

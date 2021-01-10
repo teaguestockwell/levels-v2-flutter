@@ -1,5 +1,5 @@
 import '../../widgets/display/titleText.dart';
-import 'package:five_level_one/backend/cont.dart';
+import '../../backend/cont.dart';
 import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
