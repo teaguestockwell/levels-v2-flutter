@@ -41,7 +41,11 @@ class _TanksCardState extends State<TanksCard>{
 
   @override
   Widget build(BuildContext context) {
-    return CardAllwaysOpen("Tanks", Column(children: this.widget.tankRows), Const.nonfocusedBoderColors);
+    return CardAllwaysOpen(
+      title: "Tanks",
+      children: this.widget.tankRows,
+      color: Const.nonfocusedBoderColors,
+      );
   }
 }
 

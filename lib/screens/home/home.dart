@@ -93,20 +93,28 @@ class _HomeState extends State<Home> {
       child: ListView(
         controller: sc, 
         children: [
-          CardAllwaysOpen('FIVE LEVEL', img, Const.textColor),
-          CardAllwaysOpen(ds.get('welcometitle'),
-              RowCenterText(ds.get('welcomebody')), Const.textColor),
           CardAllwaysOpen(
-              'Aircraft',
-              Column(children: [
+            title: 'FIVE LEVEL',
+            children:[img], 
+            color: Const.textColor
+          ),
+          CardAllwaysOpen(
+            title: ds.get('welcometitle'),
+            children: [RowCenterText(ds.get('welcomebody'))],
+            color: Const.textColor
+          ),
+          CardAllwaysOpen(
+              title: 'Aircraft',
+              color: Const.textColor,
+              children: [
                 Row2(Tex('MDS'), airSpin),
                 Divider(color: Const.divColor, thickness: Const.divThickness),
                 Row2(
                   CustomButton('I Accept', onPressed: accept),
                   MoreOpModal(moreOp),
                 )
-              ]),
-              Const.textColor)
+              ],
+          )
         ]));
     setState(() {
       body = ret;
