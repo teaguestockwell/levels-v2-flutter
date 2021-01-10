@@ -9,7 +9,7 @@ class PerMacCard extends StatelessWidget {
   PerMacCard(this.permac);
 
   List<DataRow> getRows(){
-    var ret = List<DataRow>();
+    List<DataRow> ret = [];
      ret.add(DataRow(
       cells:[
           DataCell(Tex(permac.perMacPercentAsString+'% = '+permac.perMacDecimalAsString)),

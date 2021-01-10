@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
   ButtonModalSpinner airSpin;
   MoreOp moreOp;
   BottomNav bn;
-  var aircrafts = List<Aircraft>();
+  List<Aircraft> aircrafts = [];
   Widget body = Loading();
   Image img;
 
@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
   }
 
   List<String> getMDSNames() {
-    var ret = List<String>();
+     List<String> ret = [];
     aircrafts.forEach((air) {
       ret.add(air.name);
     });

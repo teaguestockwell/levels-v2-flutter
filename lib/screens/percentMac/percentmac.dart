@@ -66,7 +66,7 @@ class _PerMacScreenState extends State<PerMacScreen>
                     nwfs: nwfs,
                   )));
     } else {
-      Scaffold.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Const.modalPickerColor,
           content: Container(
               height: Const.pickerHeight * 2,

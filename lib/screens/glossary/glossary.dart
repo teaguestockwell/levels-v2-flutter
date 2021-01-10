@@ -13,7 +13,7 @@ class GlossaryScreen extends StatelessWidget {
   }
 
   List<Widget> getGlossCards() {
-    var ret = List<Widget>();
+    List<Widget> ret = [];
     for (int i = 0; i < air.titles.length; i++) {
       ret.add(CCards(air.titles.elementAt(i),
           RowCenterText(air.bodys.elementAt(i))));

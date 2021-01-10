@@ -21,7 +21,7 @@ class Distance {
 
 class Unit {
 
-  List<Distance> list = List();
+  List<Distance> list = [];
   static final units = ['Length','Mass','Area','Time','Volume','Speed'];
   int unit;
   Unit(this.unit) {

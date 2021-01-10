@@ -35,7 +35,7 @@ class MoreOpPopup extends StatelessWidget {
           padding: EdgeInsets.all(Const.rowInset),
           icon: Icon(Icons.more_vert),
           itemBuilder: (_){
-            var ret = List<PopupMenuEntry>();
+            List<PopupMenuEntry> ret = [];
             for(int i=0; i<moreOp.name.length; i++){
 
               String text = (){

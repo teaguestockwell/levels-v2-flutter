@@ -23,11 +23,11 @@ class Aircraft {
       cargomoms,
       configStrings;
 
-  var tanks = List<Tank>();
+  List<Tank> tanks = [];
 
-  var configs = List<Config>();
+  List<Config> configs = [];
 
-  var addaCargo = List<NameWeightFS>();
+  List<NameWeightFS> addaCargo = [];
 
   ///the dynamicly created list of NameWeightFS consisting of fuel, cargo, basic mom, basic w
 
@@ -87,9 +87,9 @@ class Aircraft {
 class Tank {
   final String name, _weightsCSV, _momCSV, simplemom;
 
-  List<NameWeightFS> nameWeightFSs = List<NameWeightFS>();
+  List<NameWeightFS> nameWeightFSs = [];
 
-  List<String> _weights = List<String>(), _moms = List<String>();
+  List<String> _weights = [], _moms = [];
 
   Tank(
     this.name,
@@ -110,7 +110,7 @@ class Tank {
   }
 }
 class Config{
-  var nwfList = List<NameWeightFS>();
+  List<NameWeightFS> nwfList = [];
   String 
   name,
   simplemom;
