@@ -1,6 +1,7 @@
+import '../../Widgets/input/buttonModalSpinner.dart';
+
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../backend/model.dart';
@@ -48,13 +49,13 @@ class _TanksCardState extends State<TanksCard>{
 class TankRow extends StatefulWidget {
   final Tank t;
   NameWeightFS selected;
-  CustomButtomSpinnerModalString spin;
+  ButtonModalSpinner spin;
   TankRow(this.t){
     selected = t.nameWeightFSs[0]; 
 
-    spin = CustomButtomSpinnerModalString(
-      _getTankStringssForSpinner(),
-      onPressed: (int i){selected = t.nameWeightFSs[i]; print(selected.toString());},
+    spin = ButtonModalSpinner(
+      stringList: _getTankStringssForSpinner(),
+      onSpin: (int i){selected = t.nameWeightFSs[i]; print(selected.toString());},
     );
 
   }

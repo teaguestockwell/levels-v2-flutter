@@ -1,14 +1,13 @@
+import '../../Widgets/input/buttonModalSpinner.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/constText.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class YYYYMMDDLookup2 extends StatefulWidget {
- 
   @override
   _YYYYMMDDLookup2State createState() => _YYYYMMDDLookup2State();
 }
@@ -17,9 +16,8 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
   var year = DateTime.now().year;
   var jjj = int.tryParse(DateFormat('DDD').format(DateTime.now()));
   var dfYMD = DateFormat('yyyy MM dd');
-  var outYMD = DateTime.now();
+  var outYMD = DateTime(2060,12,31);
   int daysInyea = 366;
-
 
   List<String> getStringYear() {
     List<String> ret = [];
@@ -75,24 +73,22 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
       children: [
         Row2(
             Tex('YYYY'),
-            CustomButtomSpinnerModalString(
-              getStringYear(),
-              onPressed: yearChange,
-              spinIdx: 2060 - year,
-              selected: year.toString(),
+            ButtonModalSpinner(
+              stringList: getStringYear(),
+              onSpin: yearChange,
             )),
-        Divider(color: Const.divColor,
+        Divider(
+          color: Const.divColor,
           thickness: Const.divThickness,
         ),
         Row2(
             Tex('Julian Day'),
-            CustomButtomSpinnerModalString(
-              getStringDays(),
-              onPressed: dayChange,
-              spinIdx: daysInyea - jjj,
-              selected: jjj.toString(),
+            ButtonModalSpinner(
+              stringList: getStringDays(),
+              onSpin: dayChange,
             )),
-        Divider(color: Const.divColor,
+        Divider(
+          color: Const.divColor,
           thickness: Const.divThickness,
         ),
         Row2(Tex('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))

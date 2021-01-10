@@ -1,6 +1,8 @@
+
+
+import '../../Widgets/input/buttonModalSpinner.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/input/customButton.dart';
 import '../../widgets/layout/cards/ccard.dart';
 import '../../widgets/layout/rows/row2.dart';
@@ -19,15 +21,21 @@ class SelectMDSBody extends StatefulWidget {
 class _SelectMDSBodyState extends State<SelectMDSBody> {
   List<String> mdss;
   String selectedMDS;
-  CustomButtomSpinnerModalString mdsSpin;
+  ButtonModalSpinner mdsSpin;
 
   @override
   void initState() {
     mdss = this.widget.mdsCSV.split(',');
-    mdsSpin = CustomButtomSpinnerModalString(getMDS());
+    mdsSpin = ButtonModalSpinner(
+      stringList: getMDS(),
+      onSpin: spin,
+      );
     super.initState();
   }
 
+  void spin(int x){
+
+  }
   getMDS() {
     List<String> list = [];
     for (String s in mdss) {

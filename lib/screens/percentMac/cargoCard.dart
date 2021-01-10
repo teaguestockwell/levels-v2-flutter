@@ -256,7 +256,7 @@ class _CargoCardState extends State<CargoCard> {
             thickness: Const.divThickness,
           ),
 
-          Row2(Tex('Select Cargo'), cargoSpin),
+          Row2(Tex('Add Cargo'), cargoSpin),
 
           Divider(
             color: Const.divColor,

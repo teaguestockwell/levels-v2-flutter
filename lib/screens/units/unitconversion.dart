@@ -1,6 +1,7 @@
+import 'package:five_level_one/Widgets/input/buttonModalSpinner.dart';
+
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/input/unitConversionCustomTextFeild.dart';
 import '../../widgets/layout/rows/row1.dart';
 import '../../utils.dart';
@@ -119,11 +120,9 @@ class _UnitConversionState extends State<UnitConversion> {
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
           width: Const.pickerWidth,
           height: Const.pickerHeight,
-          child: CustomButtomSpinnerModalString(
-            Unit.units,
-            onPressed: unitChange,
-            selected: unitName,
-            spinIdx: unitIdx,
+          child: ButtonModalSpinner(
+            stringList: Unit.units,
+            onSpin: unitChange,
           ))),
       //Divider(color: Const.divColor,thickness: Const.divThickness,),
       Padding(
@@ -135,11 +134,9 @@ class _UnitConversionState extends State<UnitConversion> {
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
-                  CustomButtomSpinnerModalString(
-                    getListDistanceNames(),
-                    onPressed: leftUnitUnitChanged,
-                    selected: selectedUnitUnits[leftUnitUnitIdx].name,
-                    spinIdx: leftUnitUnitIdx,
+                  ButtonModalSpinner(
+                    stringList: getListDistanceNames(),
+                    onSpin: leftUnitUnitChanged,
                   ),
                 ])),
             Spacer(),
@@ -151,11 +148,9 @@ class _UnitConversionState extends State<UnitConversion> {
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,
-                  CustomButtomSpinnerModalString(
-                    getListDistanceNames(),
-                    onPressed: rightUnitUnitChanged,
-                    selected: selectedUnitUnits[rightUnitUnitIdx].name,
-                    spinIdx: rightUnitUnitIdx,
+                  ButtonModalSpinner(
+                    stringList: getListDistanceNames(),
+                    onSpin: rightUnitUnitChanged,
                   ),
                 ])),
           ]))

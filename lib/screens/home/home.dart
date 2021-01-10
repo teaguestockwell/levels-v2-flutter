@@ -1,9 +1,10 @@
+import 'package:five_level_one/Widgets/input/buttonModalSpinner.dart';
+
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/rowCenterTest.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/input/customButton.dart';
 import '../../widgets/input/moreOpModalSpin.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
@@ -21,7 +22,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  CustomButtomSpinnerModalString airSpin;
+  ButtonModalSpinner airSpin;
   MoreOp moreOp;
   BottomNav bn;
   var aircrafts = List<Aircraft>();
@@ -84,7 +85,7 @@ class _HomeState extends State<Home> {
   void buildDiclaimer(DocumentSnapshot ds) {
     moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
     bn = BottomNav(aircrafts[0], moreOp);
-    airSpin = CustomButtomSpinnerModalString(getMDSNames(), onPressed: spin);
+    airSpin = ButtonModalSpinner(stringList: getMDSNames(), onSpin: spin);
     var sc = ScrollController();
 
     var ret = CupertinoScrollbar(

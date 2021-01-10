@@ -2,7 +2,7 @@ import '../../backend/cont.dart';
 import '../../widgets/display/constText.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/buttonDateTimePicker.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
+import '../../Widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +14,8 @@ class PreInsp extends StatefulWidget {
 }
 
 class _PreInspState extends State<PreInsp> {
-  CustomButtomSpinnerModalString buttonDurration;
-  final startHour = 48;
+  ButtonModalSpinner buttonDurration;
+  final startHour = 1;
   final numHours = 144;
   final f = DateFormat('yyyy MM dd HH:mm');
   int duration = 48;
@@ -35,10 +35,9 @@ class _PreInspState extends State<PreInsp> {
     for (int i = 1; i <= numHours; i++) {
       stringList.add(i.toString());
     }
-    buttonDurration = CustomButtomSpinnerModalString(
-      stringList,
-      onPressed: lenChange,
-      spinIdx: startHour - 1,
+    buttonDurration = ButtonModalSpinner(
+      stringList: stringList,
+      onSpin: lenChange,
     );
 
     super.initState();
@@ -54,7 +53,7 @@ class _PreInspState extends State<PreInsp> {
 
   lenChange(int n) {
     setState(() {
-      duration = buttonDurration.spinIdx + 1;
+      duration = n + 1;
       expireAt = f.format(acompDate.add(Duration(hours: duration))).toString();
     });
   }

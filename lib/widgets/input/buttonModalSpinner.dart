@@ -5,60 +5,31 @@ import '../../utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CustomButtomSpinnerModalString extends StatefulWidget {
-  int spinIdx;
-  String selected;
-  var timesPressed = 0;
-  var spinnerWidgets = List<Widget>();
+class ButtonModalSpinner extends StatefulWidget {
   final List<String> stringList;
-  final IntCallBackIntPara onPressed;
+  final IntCallBackIntPara onSpin;
 
-  CustomButtomSpinnerModalString(this.stringList,
-      {this.spinIdx, this.onPressed, this.selected});
+  ButtonModalSpinner(
+      {@required this.onSpin,
+      @required this.stringList,
+      });
+
   @override
-  _CustomButtomSpinnerModalStringState createState() =>
-      _CustomButtomSpinnerModalStringState();
+  _ButtonModalSpinnerState createState() =>
+      _ButtonModalSpinnerState();
 }
 
-class _CustomButtomSpinnerModalStringState
-    extends State<CustomButtomSpinnerModalString> {
-  @override
-  void initState() {
-    this.widget.spinIdx ??= 0;
-    this.widget.selected = this.widget.stringList[this.widget.spinIdx];
-    super.initState();
-  }
-
-  _getSpinnerWidgets() {
-    this.widget.spinnerWidgets.clear();
-    for (String x in this.widget.stringList) {
-      this.widget.spinnerWidgets.add(Padding(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Tex(
-            x,
-            size: Const.textSizeModalSpinner,
-            fontWeight: Const.fwSpinner,
-            color: Const.textColor,
-          )));
-      //print(x);
-    }
-  }
+class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
+  int spinIdx = 0;
 
   void _spin(int newIdx) {
-    this.widget.spinIdx = newIdx;
-    this.widget.selected = this.widget.stringList[newIdx];
-
-    this.widget.onPressed?.call(newIdx);
-    //rebuild to change button text
-    setState(() {});
+    this.widget.onSpin(newIdx);
+    setState(() {
+      spinIdx = newIdx;
+    });
   }
 
   press() {
-    //build children only on first press
-    if (this.widget.timesPressed == 0) {
-      _getSpinnerWidgets();
-    }
-    this.widget.timesPressed++;
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -71,15 +42,27 @@ class _CustomButtomSpinnerModalStringState
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                    height: Const.modalSpinHeight,
-                    child: Center(
-                        child: CupertinoPicker(
-                      scrollController: FixedExtentScrollController(
-                          initialItem: this.widget.spinIdx),
-                      children: this.widget.spinnerWidgets,
-                      onSelectedItemChanged: _spin,
-                      itemExtent: 35,
-                    ))),
+                    height: 210,
+                    child: Column(children: [
+                      Flexible(child: Container()),
+                      Flexible(
+                          flex: 9,
+                          child: CupertinoPicker(
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: spinIdx),
+                              onSelectedItemChanged: _spin,
+                              itemExtent: 35,
+                              children: List.generate(
+                                  this.widget.stringList.length, (idx) {
+                                return Center(
+                                    child: Tex(
+                                  this.widget.stringList[idx],
+                                  size: Const.textSizeModalSpinner,
+                                  fontWeight: Const.fwSpinner,
+                                ));
+                              }))),
+                      Flexible(child: Container()),
+                    ])),
               ],
             ),
           ),
@@ -91,8 +74,9 @@ class _CustomButtomSpinnerModalStringState
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      this.widget.selected,
+      this.widget.stringList[spinIdx],
       onPressed: press,
     );
   }
 }
+
