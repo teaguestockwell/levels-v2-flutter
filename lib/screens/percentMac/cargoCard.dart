@@ -17,11 +17,6 @@ class CargoCard extends StatefulWidget {
   ///contains config info for child widgets
   final Aircraft air;
 
-  final titleText = TitleText(
-    'Cargo',
-    initValid: true,
-  );
-
   ///notify permac screen of validation id=1
   final NotifyCargoValid onValidationChange;
 
@@ -109,11 +104,6 @@ class _CargoCardState extends State<CargoCard> {
     print('cargo ' + ret.toString());
     //call back to nofiy permacscreen goes here
     this.widget.onValidationChange(1, ret);
-    if (this.widget.titleText != null && this.widget.titleText.state != null) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        this.widget.titleText.state.setValid(ret);
-      });
-    }
   }
 
   ///pass to config spinner
@@ -244,7 +234,8 @@ class _CargoCardState extends State<CargoCard> {
     getCargo(); //call me every build
     printCargo();
     return CardAllwaysOpenTex(
-        this.widget.titleText,
+        tex: TitleText(name: 'Cargo', valid:valid),
+        chil:
         Column(children: <Widget>[
           Row2(
             Tex('Select Config'),

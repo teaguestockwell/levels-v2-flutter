@@ -1,4 +1,5 @@
 import '../../widgets/display/titleText.dart';
+import 'package:five_level_one/backend/cont.dart';
 import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
@@ -37,7 +38,6 @@ class ChartCCard extends StatefulWidget {
   /// 0= weight, 1=moment
   void updateValidChildren(int id, bool valid) {
     this.childrenValid[id] = valid;
-    getThisValid();
   }
 
   @override
@@ -46,7 +46,20 @@ class ChartCCard extends StatefulWidget {
 
 class _ChartCCardState extends State<ChartCCard> {
   bool valid;
-  Widget body;
+  Column body;
+  int buildId = 0;
+  Widget title;
+
+  final titleValid = Tex(
+    'Chart C valid',
+    fontWeight: FontWeight.normal,
+    color: Const.nonfocusedBoderColors,
+  );
+
+  final titleInvalid = Tex('Chart C inval',
+    fontWeight: FontWeight.normal,
+    color: Const.nonfocusedErrorBoderColor
+  );
 
   @override
   initState() {
@@ -54,6 +67,7 @@ class _ChartCCardState extends State<ChartCCard> {
 
     //init valid
     valid = false;
+    title = titleInvalid;
     this.widget.childrenValid[0] = false;
     this.widget.childrenValid[1] = false;
 
@@ -92,6 +106,7 @@ class _ChartCCardState extends State<ChartCCard> {
         double.parse(weight) >= double.parse(this.widget.air.weight0) &&
         double.parse(weight) <= double.parse(this.widget.air.weight1)) {
       this.widget.updateValidChildren(0, true);
+      updateTitleText();
       return true;
     }
     this.widget.updateValidChildren(0, false);
@@ -104,6 +119,7 @@ class _ChartCCardState extends State<ChartCCard> {
         double.parse(mom) >= double.parse(this.widget.air.mom0) &&
         double.parse(mom) <= double.parse(this.widget.air.mom1)) {
       this.widget.updateValidChildren(1, true);
+      updateTitleText();
       return true;
     }
     this.widget.updateValidChildren(1, false);

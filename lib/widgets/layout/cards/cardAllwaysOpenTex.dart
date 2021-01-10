@@ -5,7 +5,7 @@ import '../../../widgets/display/titleText.dart';
 import 'package:flutter/material.dart';
 
 class CardAllwaysOpenTex extends StatefulWidget {
-  final Widget chil;
+  final Column chil;
   final TitleText tex;
   CardAllwaysOpenTex({@required this.tex, @required this.chil});
   @override
@@ -13,28 +13,28 @@ class CardAllwaysOpenTex extends StatefulWidget {
 }
 
 class _CardAllwaysOpenTexState extends State<CardAllwaysOpenTex> {
-  Widget chil;
-
+  Column childPadd;
   @override
   void initState() {
     super.initState(); //wraps first and last widets in padding.
-    if (chil is Column) {
-      Column childp = chil;
-      if (childp.children.length > 1) {
-        Widget first = childp.children.first;
-        Widget last = childp.children.last;
-        childp.children.removeAt(0);
-        childp.children.removeAt(childp.children.length - 1);
-        var firstP =
-            Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0), child: first);
-        var lastP = Padding(
-          padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-          child: last,
-        );
-        childp.children.insert(0, firstP);
-        childp.children.insert(childp.children.length, lastP);
-        chil = childp;
-      }
+    if (this.widget.chil is Column && this.widget.chil.children.length > 1) {
+      Column childp = this.widget.chil;
+      Widget first = childp.children.first;
+      Widget last = childp.children.last;
+      childp.children.removeAt(0);
+      childp.children.removeAt(childp.children.length - 1);
+      var firstP =
+          Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0), child: first);
+      var lastP = Padding(
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+        child: last,
+      );
+      childp.children.insert(0, firstP);
+      childp.children.insert(childp.children.length, lastP);
+      childPadd = childp;
+    } else {
+      throw Exception(
+          'Card allways open chil must be column && children.length>1');
     }
   }
 
@@ -66,7 +66,7 @@ class _CardAllwaysOpenTexState extends State<CardAllwaysOpenTex> {
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                                   child: this.widget.tex,
                                 )))),
-                        chil
+                        childPadd
                       ],
                     )))));
   }

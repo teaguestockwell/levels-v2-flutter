@@ -14,7 +14,7 @@ class Tex extends StatefulWidget {
   ///default = bold
   final FontWeight fontWeight;
 
-  Tex(this.text, {this.maxLine = 1, this.size, this.fontWeight, this.color});
+  Tex(this.text, {this.maxLine = 1, this.size, this.fontWeight, this.color, }): super(key:UniqueKey());
 
   @override
   _TexState createState() => _TexState();
