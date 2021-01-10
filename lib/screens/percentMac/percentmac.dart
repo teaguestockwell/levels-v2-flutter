@@ -1,6 +1,8 @@
+import 'package:five_level_one/screens/percentMac/tanksCard.dart';
+
 import 'cargoCard.dart';
 import 'chartcCard.dart';
-import 'tanks.dart';
+import 'tanksCard.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/percentMac/showWork.dart';
@@ -25,17 +27,25 @@ class _PerMacScreenState extends State<PerMacScreen>
   @override
   bool get wantKeepAlive => true;
 
-  TanksCard tankCard;
+  TanksCard tanksCard;
   ChartCCard chartcCard;
   CargoCard cargoCard;
   bool valid;
   final childValid = LinkedHashMap<int, bool>();
   final sc = ScrollController();
 
+  /// call back for tanks spiner key = tanks.id, value = nwfs
+  final tanksMap = LinkedHashMap<int, NameWeightFS>();
+
+  void tanksCallback(int tanksID, NameWeightFS fuelNWFS) {
+    tanksMap[tanksID] = fuelNWFS;
+    print(tanksMap.toString());
+  }
+
   @override
   void initState() {
     super.initState();
-    tankCard = TanksCard(this.widget.air);
+    tanksCard = TanksCard(air: this.widget.air, callBack: tanksCallback,);
     chartcCard = ChartCCard(this.widget.air, validateChild);
     cargoCard = CargoCard(this.widget.air, validateChild);
   }
@@ -51,7 +61,7 @@ class _PerMacScreenState extends State<PerMacScreen>
     List<NameWeightFS> nwfs = [];
     if (valid) {
       nwfs.add(chartcCard.getNWFS());
-      nwfs.addAll(tankCard.getNameWeightFS());
+      nwfs.addAll(tanksMap.values);
       //check for no cargo
       if (cargoCard.getNWfs().length > 0) {
         nwfs.addAll(cargoCard.getNWfs());
@@ -100,7 +110,7 @@ class _PerMacScreenState extends State<PerMacScreen>
         child: SingleChildScrollView(
             controller: sc,
             child: Column(children: [
-              tankCard,
+              tanksCard,
               chartcCard,
               cargoCard,
               GetMacButton('Show MAC%', onPressed: getPerMac),
