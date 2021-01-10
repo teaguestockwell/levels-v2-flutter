@@ -9,7 +9,7 @@ class BalArmCard extends StatelessWidget {
   BalArmCard(this.permac);
 
   List<DataRow> getRows(){
-    var ret = List<DataRow>();
+    List<DataRow> ret = [];
      ret.add(DataRow(
       cells:[
         DataCell(Tex(permac.balArmAsString)),

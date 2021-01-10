@@ -9,22 +9,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
-  List<Widget> widgets;
+  final List<Widget> widgets = [];
+  final sc = ScrollController();
   
   Units(){
-    widgets = <Widget>[
-    CCards('Now',TimeGrid()),
-    CCards('Pre/Insp Expire', PreInsp()),
-    CCards('Julian Lookup',JJJLookup()),
-    CCards('YYYY MM DD Lookup',YYYYMMDDLookup2()),
-    CCards('Duration',DurationLookup()),
-    CCards('Unit Conversion',UnitConversion()),
-  ];
+    widgets.addAll([
+      CCards('Now',TimeGrid()),
+      CCards('Pre/Insp Expire', PreInsp()),
+      CCards('Julian Lookup',JJJLookup()),
+      CCards('YYYY MM DD Lookup',YYYYMMDDLookup2()),
+      CCards('Duration',DurationLookup()),
+      CCards('Unit Conversion',UnitConversion()),
+    ]);
   }
   
-
-  final sc = ScrollController();
-
   @override
   Widget build(BuildContext context) {
     return CupertinoScrollbar(

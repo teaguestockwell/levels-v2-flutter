@@ -7,22 +7,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class CustomButtonDateTimePicker extends StatelessWidget {
-  String buttText;
+  final String buttText;
   ///use (DateTime)=>{your code here}
-  DateCallBack onChange;
-  DateTime currentTime;
+  final DateCallBack onChange;
+  final DateTime currentTime;
   ///default yyyy MM dd
-  DateFormat dateFormat;
+  final dateFormat = DateFormat('yyyy MM dd HH:mm');
+  
   CustomButtonDateTimePicker(
     {
       @required this.buttText,
       @required this.onChange,
       @required this.currentTime,
-      this.dateFormat,
     }
-  ){
-    this.dateFormat = DateFormat('yyyy MM dd HH:mm');
-  }
+  );
   @override
   Widget build(BuildContext context) {
     return 

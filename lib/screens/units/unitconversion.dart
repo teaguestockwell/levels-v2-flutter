@@ -16,7 +16,7 @@ class _UnitConversionState extends State<UnitConversion> {
   var controllerTwo = TextEditingController();
   var leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
   CustomTextField tfOne, tfTwo;
-  var selectedUnitUnits = List<Distance>();
+  List<Distance> selectedUnitUnits = [];
   String unitName;
   bool toggle = true;
 
@@ -46,7 +46,7 @@ class _UnitConversionState extends State<UnitConversion> {
   }
 
   List<String> getListDistanceNames() {
-    var ret = List<String>();
+    List<String> ret = [];
     for (Distance d in selectedUnitUnits) {
       ret.add(d.name);
     }

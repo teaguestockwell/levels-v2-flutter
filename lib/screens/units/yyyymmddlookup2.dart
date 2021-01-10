@@ -22,7 +22,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
 
 
   List<String> getStringYear() {
-    var ret = List<String>();
+    List<String> ret = [];
     for (int i = 2060; i > 2000; i--) {
       ret.add(i.toString());
     }
@@ -30,7 +30,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
   }
 
   List<String> getStringDays() {
-    var ret = List<String>();
+    List<String> ret = [];
     for (int i = daysInyea; i > 0; i--) {
       ret.add(i.toString());
     }

@@ -10,11 +10,11 @@ import 'package:flutter/material.dart';
 class TanksCard extends StatefulWidget {
   final Aircraft air;
   final bool valid = true;
-  var tankRows = List<Widget>();
-  var tankNSWF = List<TankRow>();
+  final List<Widget> tankRows = [];
+  final List<TankRow> tankNSWF = [];
   
   List<NameWeightFS> getNameWeightFS() {
-    var ret = List<NameWeightFS>();
+    List<NameWeightFS> ret = [];
     tankNSWF.forEach((t) {ret.add(t.selected);});
     return ret;
   }

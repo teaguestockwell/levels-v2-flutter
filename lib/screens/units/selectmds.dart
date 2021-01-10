@@ -9,10 +9,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SelectMDSBody extends StatefulWidget {
-  String mdsCSV;
-  IntCallBack onPressed;
-  CustomButtomSpinnerModalString mdsSpin;
-  SelectMDSBody(this.mdsCSV, {this.onPressed});
+  final String mdsCSV;
+  final IntCallBack onPressed;
+  SelectMDSBody(this.mdsCSV, {@required this.onPressed});
   @override
   _SelectMDSBodyState createState() => _SelectMDSBodyState();
 }
@@ -20,11 +19,12 @@ class SelectMDSBody extends StatefulWidget {
 class _SelectMDSBodyState extends State<SelectMDSBody> {
   List<String> mdss;
   String selectedMDS;
+  CustomButtomSpinnerModalString mdsSpin;
 
   @override
   void initState() {
     mdss = this.widget.mdsCSV.split(',');
-    this.widget.mdsSpin = CustomButtomSpinnerModalString(getMDS());
+    mdsSpin = CustomButtomSpinnerModalString(getMDS());
     super.initState();
   }
 
@@ -40,7 +40,7 @@ class _SelectMDSBodyState extends State<SelectMDSBody> {
   @override
   Widget build(BuildContext context) {
     return CCards('Aircraft',Column(children: [
-      Row2(Tex('MDS'), this.widget.mdsSpin),
+      Row2(Tex('MDS'), mdsSpin),
           Divider(color: Const.divColor,thickness: Const.divThickness,),
       Row2(
             CustomButton(

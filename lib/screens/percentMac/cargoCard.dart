@@ -11,146 +11,142 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 ///modalspinner to select config, buttons to
-///update or delete confi, and lazy loading of 
+///update or delete confi, and lazy loading of
 ///cargoUI
 class CargoCard extends StatefulWidget {
   ///contains config info for child widgets
   final Aircraft air;
-  bool valid=true;
 
-  final titleText = TitleText('Cargo', initValid: true,);
-
-  Config selectedSpinnerConfig;
-  NameWeightFS selectedSpinnerCargo;
+  final titleText = TitleText(
+    'Cargo',
+    initValid: true,
+  );
 
   ///notify permac screen of validation id=1
-  NotifyCargoValid onValidationChange;
-  
-
-  ///modal spinner that changes this.selectedSpinnerConfig
-  ButtomSpinnerModalButton configSpin;
-
-  ///modal spinner that changes this.selectedSpinnerCargo
-  ButtomSpinnerModalButton cargoSpin;
-
-  ButtomSpinnerModalButton _removeAllSpin;
+  final NotifyCargoValid onValidationChange;
 
   ///list that contains active NWFS ids
-  var importedConfigIDs = List<int>();
+  final List<int> importedConfigIDs = [];
 
   ///key is NWFS.id, value is CargoUI
-  var cargo = LinkedHashMap<int, ValidatedCargoUI>();
+  final cargo = LinkedHashMap<int, ValidatedCargoUI>();
 
   //key is nwfs.id, value is bool of validated cargo ui
-  var cargoIsValid = HashMap<int,bool>();
+  final cargoIsValid = HashMap<int, bool>();
 
   ///this.cargo.values.toListOfWidgets
-  var cargoList = List<Widget>(); 
+  final List<Widget> cargoList = [];
 
   //only call this after cargoUI valid notification = true;
-  List<NameWeightFS>  getNWfs(){
-    if(!valid){throw Exception('getNWfs called on invalid CargoCard');}
-    var ret = List<NameWeightFS>();
-    cargo.forEach((_,cargoUI){
+  List<NameWeightFS> getNWfs() {
+    List<NameWeightFS> ret = [];
+    cargo.forEach((_, cargoUI) {
       ret.add(cargoUI.nwf);
     });
     return ret;
   }
 
-  CargoCard(this.air,this.onValidationChange){this.onValidationChange(1,valid);}
+  CargoCard(this.air, this.onValidationChange);
 
   @override
   _CargoCardState createState() => _CargoCardState();
 }
 
 class _CargoCardState extends State<CargoCard> {
+  bool valid = true;
+
+  ///modal spinner that changes this.selectedSpinnerConfig
+  ButtomSpinnerModalButton configSpin;
+  NameWeightFS selectedSpinnerCargo;
+  ///modal spinner that changes this.selectedSpinnerCargo
+  ButtomSpinnerModalButton cargoSpin;
+  Config selectedSpinnerConfig;
+  ButtomSpinnerModalButton removeAllSpin;
 
   @override
   initState() {
     super.initState();
-
-    this.widget.selectedSpinnerConfig = this.widget.air.configs[0];
-    this.widget.configSpin = ButtomSpinnerModalButton(
-      stringList: _getConfigStrings(), 
+    this.widget.onValidationChange(1, valid);
+    selectedSpinnerConfig = this.widget.air.configs[0];
+    configSpin = ButtomSpinnerModalButton(
+      stringList: _getConfigStrings(),
       modalButtonText: 'Update Config',
       onPress: updateConfig,
       onSpin: configChange,
     );
 
-    this.widget.selectedSpinnerCargo = this.widget.air.addaCargo[0];
-    this.widget.cargoSpin = ButtomSpinnerModalButton(
+    selectedSpinnerCargo = this.widget.air.addaCargo[0];
+    cargoSpin = ButtomSpinnerModalButton(
       stringList: _getCargoStrings(),
       modalButtonText: 'Add Cargo',
       onSpin: cargoChange,
       onPress: addCargo,
     );
 
-    this.widget._removeAllSpin = ButtomSpinnerModalButton(
+    removeAllSpin = ButtomSpinnerModalButton(
       stringList: ['Are You Sure?'],
       modalButtonText: 'Yes!',
-      onSpin: (_){},
+      onSpin: (_) {},
       onPress: removeAll,
     );
-
   }
 
-  ///passed to the onValidChangelistener of validatedCargoUI 
+  ///passed to the onValidChangelistener of validatedCargoUI
   ///takes nwfs.id as key to modifiy valid of cargo is valid
-  void cargoUIValidationChanged(int nwfID, bool valid){
+  void cargoUIValidationChanged(int nwfID, bool valid) {
     this.widget.cargoIsValid[nwfID] = valid;
     checkValidation();
   }
 
-  void checkValidation(){
-  var ret = true;
-    this.widget.cargoIsValid.forEach((key, value){
-      if(value==false || value == null){ret=false;}
+  void checkValidation() {
+    var ret = true;
+    this.widget.cargoIsValid.forEach((key, value) {
+      if (value == false || value == null) {
+        ret = false;
+      }
     });
-  this.widget.valid = ret;
-  print('cargo '+ret.toString());
-  //call back to nofiy permacscreen goes here
-  this.widget.onValidationChange(1,ret);
-    if(
-      this.widget.titleText != null &&
-      this.widget.titleText.state != null
-      ){
-        WidgetsBinding.instance.addPostFrameCallback((_){
-          this.widget.titleText.state.setValid(ret);
+    valid = ret;
+    print('cargo ' + ret.toString());
+    //call back to nofiy permacscreen goes here
+    this.widget.onValidationChange(1, ret);
+    if (this.widget.titleText != null && this.widget.titleText.state != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        this.widget.titleText.state.setValid(ret);
       });
-      
     }
   }
 
   ///pass to config spinner
-  void configChange(int indexOfNewConfig){
-    this.widget.selectedSpinnerConfig = this.widget.air.configs[indexOfNewConfig];
+  void configChange(int indexOfNewConfig) {
+    selectedSpinnerConfig = this.widget.air.configs[indexOfNewConfig];
   }
 
   ///pass to cargo spiiner
-  void cargoChange(int indexOfNewCargo){
-    this.widget.selectedSpinnerCargo = this.widget.air.addaCargo[indexOfNewCargo];
+  void cargoChange(int indexOfNewCargo) {
+    selectedSpinnerCargo =
+        this.widget.air.addaCargo[indexOfNewCargo];
   }
 
-  ///build and return a list of strings containing the name of 
+  ///build and return a list of strings containing the name of
   ///each config in aircraft, then pass to config spin
   List<String> _getConfigStrings() {
-    var ret = List<String>();
+    List<String> ret = [];
     for (int i = 0; i < this.widget.air.configs.length; i++) {
       ret.add(this.widget.air.configs[i].name);
     }
     return ret;
   }
 
-  ///build and return a list of strings containing the 
+  ///build and return a list of strings containing the
   ///name of each nwfs in aircraft, then pass to cargospinn
-  List<String> _getCargoStrings(){
-    var ret = List<String>();
-    for (int i=0; i<this.widget.air.addaCargo.length; i++){
+  List<String> _getCargoStrings() {
+    List<String> ret = [];
+    for (int i = 0; i < this.widget.air.addaCargo.length; i++) {
       ret.add(this.widget.air.addaCargo[i].name);
     }
     return ret;
   }
-  
+
   ///passed to onPressed of CargoUI
   ///@id NWFS.id as key to this.widget.cargo
   ///removes CargoUI from this.widget.cargo, then try to remove from configID
@@ -167,18 +163,17 @@ class _CargoCardState extends State<CargoCard> {
   void updateConfig() {
     //before adding new config remove the old one
     removeConfig();
-    for (NameWeightFS oldSelectedConfigNWFS in this.widget.selectedSpinnerConfig.nwfList){
-     
+    for (NameWeightFS oldSelectedConfigNWFS in selectedSpinnerConfig.nwfList) {
       var newNWFS = NameWeightFS.copyNewID(oldSelectedConfigNWFS);
-      newNWFS.name += ' '+this.widget.selectedSpinnerConfig.name;
-      
+      newNWFS.name += ' ' + selectedSpinnerConfig.name;
+
       ValidatedCargoUI newCargoUI = ValidatedCargoUI.fromAddA(
         key: UniqueKey(),
         fs0: this.widget.air.fs0,
         fs1: this.widget.air.fs1,
         cargomaxweight: this.widget.air.cargomaxweight,
         onPressed: removeCargoID,
-        nwf: newNWFS, 
+        nwf: newNWFS,
         notifyValid: cargoUIValidationChanged,
       );
 
@@ -200,12 +195,11 @@ class _CargoCardState extends State<CargoCard> {
     }
     checkValidation();
     this.widget.importedConfigIDs.clear();
-    setState(() {
-    });
+    setState(() {});
   }
 
-  ///clear cargo & importedConfigIds, then set state 
-  void removeAll(){
+  ///clear cargo & importedConfigIds, then set state
+  void removeAll() {
     this.widget.cargo.clear();
     this.widget.importedConfigIDs.clear();
     this.widget.cargoIsValid.clear();
@@ -217,25 +211,27 @@ class _CargoCardState extends State<CargoCard> {
   ///with all cargo.vaues
   void getCargo() {
     this.widget.cargoList.clear();
-    this.widget.cargo.forEach((key, value){
+    this.widget.cargo.forEach((key, value) {
       this.widget.cargoList.add(value);
     });
   }
 
-  void printCargo(){
-    this.widget.cargo.forEach((key, value) {print(value.nwf.toString());});
+  void printCargo() {
+    this.widget.cargo.forEach((key, value) {
+      print(value.nwf.toString());
+    });
   }
 
-  void addCargo(){
+  void addCargo() {
     var newCargoUI = ValidatedCargoUI.fromAddA(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
       cargomaxweight: this.widget.air.cargomaxweight,
       onPressed: removeCargoID,
-      nwf: NameWeightFS.copyNewID(this.widget.selectedSpinnerCargo), 
+      nwf: NameWeightFS.copyNewID(selectedSpinnerCargo),
       key: UniqueKey(),
       notifyValid: cargoUIValidationChanged,
-      );
+    );
 
     this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
     checkValidation();
@@ -248,40 +244,35 @@ class _CargoCardState extends State<CargoCard> {
     getCargo(); //call me every build
     printCargo();
     return CardAllwaysOpenTex(
-      this.widget.titleText,
-      Column(
-        children: <Widget>[
-
+        this.widget.titleText,
+        Column(children: <Widget>[
           Row2(
             Tex('Select Config'),
-             this.widget.configSpin,
+            configSpin,
           ),
 
-          Divider(color: Const.divColor,thickness: Const.divThickness,),
-
-          Row2(
-            Tex('Select Cargo'),
-             this.widget.cargoSpin
-             ),
-
-          Divider(color: Const.divColor,thickness: Const.divThickness,),
-
-          Row2(
-           Tex('Remove All'),
-           this.widget._removeAllSpin
+          Divider(
+            color: Const.divColor,
+            thickness: Const.divThickness,
           ),
+
+          Row2(Tex('Select Cargo'), cargoSpin),
+
+          Divider(
+            color: Const.divColor,
+            thickness: Const.divThickness,
+          ),
+
+          Row2(Tex('Remove All'), removeAllSpin),
 
           //recycle viewer goes here. Dont render CargoUI that is not on screen
           ListView.builder(
-            physics: NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: this.widget.cargoList.length,
-            itemBuilder: (BuildContext context,int i){ 
-              return this.widget.cargoList[i];
-            }
-          ),
-        ]
-      )
-    );
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: this.widget.cargoList.length,
+              itemBuilder: (BuildContext context, int i) {
+                return this.widget.cargoList[i];
+              }),
+        ]));
   }
 }

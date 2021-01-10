@@ -9,12 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class PreInsp extends StatefulWidget {
-  CustomButtomSpinnerModalString buttonDurration;
   @override
   _PreInspState createState() => _PreInspState();
 }
 
 class _PreInspState extends State<PreInsp> {
+  CustomButtomSpinnerModalString buttonDurration;
   final startHour = 48;
   final numHours = 144;
   final f = DateFormat('yyyy MM dd HH:mm');
@@ -31,11 +31,11 @@ class _PreInspState extends State<PreInsp> {
         .format(DateTime.now().subtract(Duration(hours: startHour)))
         .toString();
 
-    var stringList = List<String>();
+    List<String> stringList = [];
     for (int i = 1; i <= numHours; i++) {
       stringList.add(i.toString());
     }
-    this.widget.buttonDurration = CustomButtomSpinnerModalString(
+    buttonDurration = CustomButtomSpinnerModalString(
       stringList,
       onPressed: lenChange,
       spinIdx: startHour - 1,
@@ -54,7 +54,7 @@ class _PreInspState extends State<PreInsp> {
 
   lenChange(int n) {
     setState(() {
-      duration = this.widget.buttonDurration.spinIdx + 1;
+      duration = buttonDurration.spinIdx + 1;
       expireAt = f.format(acompDate.add(Duration(hours: duration))).toString();
     });
   }
@@ -79,7 +79,7 @@ class _PreInspState extends State<PreInsp> {
           color: Const.divColor,
           thickness: Const.divThickness,
         ),
-        Row2(Tex('Hours Until Expire'), this.widget.buttonDurration),
+        Row2(Tex('Hours Until Expire'), buttonDurration),
         Divider(
           color: Const.divColor,
           thickness: Const.divThickness,

@@ -5,9 +5,9 @@ import '../../backend/cont.dart';
 import '../../utils.dart';
 
 class CustomButtonDatePicker extends StatelessWidget {
-  String buttText;
-  DateCallBack onChange;
-  DateTime currentTime;
+  final String buttText;
+  final DateCallBack onChange;
+  final DateTime currentTime;
   CustomButtonDatePicker(
     {
       @required this.buttText,

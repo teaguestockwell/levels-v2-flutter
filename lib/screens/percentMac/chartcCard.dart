@@ -15,27 +15,22 @@ import 'package:flutter/material.dart';
 class ChartCCard extends StatelessWidget {
   String _stringWeight = '0';
   String _stringMom = '0';
-  Aircraft air;
-  TitleText titleText = TitleText('Chart C');
-  NotifyCargoValid onValidationChange;
-  var childrenValid = LinkedHashMap<int,bool>();
-  bool valid= false;
+  final Aircraft air;
+  final TitleText titleText = TitleText('Chart C');
+  final NotifyCargoValid onValidationChange;
+  final childrenValid = LinkedHashMap<int,bool>();
   
 
   ChartCCard(this.air, this.onValidationChange);
 
   /// do not call this before checking bool getValid()
   NameWeightFS getNWFS(){
-    if(valid){
-      return
-      NameWeightFS(
-        name: 'Basic Aircraft',
-        weight: _stringWeight,
-        mom: _stringMom,
-        simplemom: air.simplemom,
-      );
-    }
-    throw Exception('getNWFS was called on invalid Chart C');
+    return NameWeightFS(
+      name: 'Basic Aircraft',
+      weight: _stringWeight,
+      mom: _stringMom,
+      simplemom: air.simplemom,
+    );
   }
 
   bool getThisValid(){
@@ -43,13 +38,12 @@ class ChartCCard extends StatelessWidget {
     childrenValid.forEach((_,value) { 
       if(!value){ret=false;}
     });
-    valid = ret;
     onValidationChange(0,ret);
     if(
       titleText != null &&
       titleText.state != null
       ){
-      titleText.state.setValid(valid);
+      titleText.state.setValid(ret);
     }
     return ret;
   }
