@@ -1,3 +1,5 @@
+import 'package:five_level_one/utils.dart';
+
 import '../max.dart';
 import '../alignPadding.dart';
 import '../../../backend/cont.dart';
@@ -8,6 +10,7 @@ class CCard extends StatefulWidget {
   final String title;
   final List<Widget> children;
   final bool initOpen;
+  final IntCallBack callBack;
 
   ///nullable, if null default value is Const.rc()
   final Color color;
@@ -16,6 +19,7 @@ class CCard extends StatefulWidget {
       {@required this.title,
       @required this.children,
       @required this.initOpen,
+      this.callBack,
       this.color});
 
   @override
@@ -26,13 +30,23 @@ class _CCardState extends State<CCard> {
   bool open;
   List<Widget> children;
   Color color;
+  String title;
 
   @override
   void initState() {
     super.initState();
+    title = getNameTruncated(this.widget.title);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;
+  }
+
+  String getNameTruncated(String string) {
+    var ret = string;
+    if (ret.length <= 30) {
+      return ret;
+    }
+    return ret.substring(0, 27) + '...';
   }
 
   ///toggles the cards open state
@@ -63,8 +77,19 @@ class _CCardState extends State<CCard> {
                     child: Column(
                       children: [
                         InkWell(
-                            child: AlignPadding(3.0, Alignment.center, TitleCC(open: open,tex: Tex(this.widget.title, color: color,))),
-                            onTap: () => setState((){open = !open;})),
+                            child: AlignPadding(
+                                3.0,
+                                Alignment.center,
+                                TitleCC(
+                                    open: open,
+                                    tex: Tex(
+                                      title,
+                                      color: color,
+                                    ))),
+                            onTap: () => setState(() {
+                                  this.widget.callBack?.call();
+                                  open = !open;
+                                })),
                         Column(children: getActive()),
                       ],
                     )))));
