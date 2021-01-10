@@ -21,7 +21,7 @@ class Tex extends StatefulWidget {
 }
 
 class _TexState extends State<Tex> {
-  var size = Const.textSize;
+  var size = Const.textSizeCardTitle;
   var color = Const.textColor;
   var fontWeight = FontWeight.bold;
 
@@ -29,13 +29,13 @@ class _TexState extends State<Tex> {
   void initState() {
     super.initState();
 
-    if (this.widget.color == null) {
+    if (this.widget.color != null) {
       color = this.widget.color;
     }
-    if (this.widget.size == null) {
+    if (this.widget.size != null) {
       size = this.widget.size;
     }
-    if (this.widget.fontWeight == null) {
+    if (this.widget.fontWeight != null) {
       fontWeight = this.widget.fontWeight;
     }
   }
