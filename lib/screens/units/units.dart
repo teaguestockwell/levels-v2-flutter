@@ -9,24 +9,46 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatelessWidget {
-  final List<Widget> widgets = [];
+  final List<Widget> widgets = [
+    CCard(
+      title: 'Now',
+      children: [TimeGrid()],
+      initOpen: true,
+    ),
+    CCard(
+      title: 'Pre/Insp Expire',
+      children: [PreInsp()],
+      initOpen: true,
+    ),
+    CCard(
+      title: 'Julian Lookup',
+      children: [JJJLookup()],
+      initOpen: true,
+    ),
+    CCard(
+      title: 'YYYY MM DD Lookup',
+      children: [YYYYMMDDLookup2()],
+      initOpen: true,
+    ),
+    CCard(
+      title: 'Duration',
+      children: [DurationLookup()],
+      initOpen: true,
+    ),
+    CCard(
+      title: 'Unit Conversion',
+      children: [UnitConversion()],
+      initOpen: true,
+    ),
+  ];
   final sc = ScrollController();
-  
-  Units(){
-    widgets.addAll([
-      CCards('Now',TimeGrid()),
-      CCards('Pre/Insp Expire', PreInsp()),
-      CCards('Julian Lookup',JJJLookup()),
-      CCards('YYYY MM DD Lookup',YYYYMMDDLookup2()),
-      CCards('Duration',DurationLookup()),
-      CCards('Unit Conversion',UnitConversion()),
-    ]);
-  }
-  
+
+  Units();
+
   @override
   Widget build(BuildContext context) {
     return CupertinoScrollbar(
-      controller: sc,
+        controller: sc,
         isAlwaysShown: true,
         child: ListView.builder(
           controller: sc,

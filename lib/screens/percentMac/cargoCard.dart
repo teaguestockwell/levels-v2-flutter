@@ -1,10 +1,9 @@
+import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/percentMac/validatedCargoUI.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/display/titleText.dart';
 import '../../widgets/input/buttonModalSpinnerButton.dart';
-import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../utils.dart';
 import 'dart:collection';
@@ -53,6 +52,7 @@ class _CargoCardState extends State<CargoCard> {
   ///modal spinner that changes this.selectedSpinnerConfig
   ButtomSpinnerModalButton configSpin;
   NameWeightFS selectedSpinnerCargo;
+
   ///modal spinner that changes this.selectedSpinnerCargo
   ButtomSpinnerModalButton cargoSpin;
   Config selectedSpinnerConfig;
@@ -113,8 +113,7 @@ class _CargoCardState extends State<CargoCard> {
 
   ///pass to cargo spiiner
   void cargoChange(int indexOfNewCargo) {
-    selectedSpinnerCargo =
-        this.widget.air.addaCargo[indexOfNewCargo];
+    selectedSpinnerCargo = this.widget.air.addaCargo[indexOfNewCargo];
   }
 
   ///build and return a list of strings containing the name of
@@ -229,14 +228,22 @@ class _CargoCardState extends State<CargoCard> {
     setState(() {});
   }
 
+  Color getTitleColor() {
+    if (valid) {
+      return Const.nonfocusedBoderColors;
+    }
+    return Const.focusedErrorBorderColor;
+  }
+
   Widget build(BuildContext context) {
     checkValidation();
     getCargo(); //call me every build
     printCargo();
-    return CardAllwaysOpenTex(
-        tex: TitleText(name: 'Cargo', valid:valid),
-        chil:
-        Column(children: <Widget>[
+
+    return CardAllwaysOpen(
+        title: 'Cargo',
+        color: getTitleColor(),
+        children:[
           Row2(
             Tex('Select Config'),
             configSpin,
@@ -264,6 +271,7 @@ class _CargoCardState extends State<CargoCard> {
               itemBuilder: (BuildContext context, int i) {
                 return this.widget.cargoList[i];
               }),
-        ]));
+        ]
+    );
   }
 }

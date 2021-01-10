@@ -1,6 +1,5 @@
-import '../../widgets/display/titleText.dart';
+import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../backend/cont.dart';
-import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validatedText.dart';
@@ -46,7 +45,7 @@ class ChartCCard extends StatefulWidget {
 
 class _ChartCCardState extends State<ChartCCard> {
   bool valid;
-  Column body;
+  List<Widget> body;
   int buildId = 0;
   Widget title;
 
@@ -57,9 +56,7 @@ class _ChartCCardState extends State<ChartCCard> {
   );
 
   final titleInvalid = Tex('Chart C inval',
-    fontWeight: FontWeight.normal,
-    color: Const.nonfocusedErrorBoderColor
-  );
+      fontWeight: FontWeight.normal, color: Const.nonfocusedErrorBoderColor);
 
   @override
   initState() {
@@ -76,7 +73,7 @@ class _ChartCCardState extends State<ChartCCard> {
     this.widget._nwfs.simplemom = this.widget.air.simplemom;
 
     //init the cards body
-    body = Column(children: [
+    body = [
       Row2(
           Tex('Basic Weight'),
           ValidatedText(
@@ -98,7 +95,7 @@ class _ChartCCardState extends State<ChartCCard> {
               this.widget._nwfs.mom = mom;
             },
           )),
-    ]);
+    ];
   }
 
   bool _validateWeight(String weight) {
@@ -136,11 +133,19 @@ class _ChartCCardState extends State<ChartCCard> {
     }
   }
 
+  Color getTitleColor() {
+    if (valid) {
+      return Const.nonfocusedBoderColors;
+    }
+    return Const.nonfocusedErrorBoderColor;
+  }
+
   @override
   Widget build(_) {
-    return CardAllwaysOpenTex(
-      tex: TitleText(name: 'Chart C', valid: valid),
-      chil: body,
+    return CardAllwaysOpen(
+      title: 'Chart C',
+      color: getTitleColor(),
+      children: body,
     );
   }
 }

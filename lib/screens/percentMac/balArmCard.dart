@@ -23,9 +23,10 @@ class BalArmCard extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return CCards(
-      'Balance Arm',
-      SingleChildScrollView(scrollDirection: Axis.horizontal, child:
+    return CCard(
+      title: 'Balance Arm',
+      initOpen: true,
+      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, child:
       DataTable(
         dividerThickness: Const.divThickness,
         columns: [
@@ -37,7 +38,7 @@ class BalArmCard extends StatelessWidget {
         ],
         rows: getRows(),
       )
-      )
+      )]
     );
   }
 }

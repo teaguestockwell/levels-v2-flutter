@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MoreOpPopup extends StatelessWidget {
-  MoreOp moreOp;
+  final MoreOp moreOp;
   MoreOpPopup(this.moreOp);
 
   void launchURL(String url) async {

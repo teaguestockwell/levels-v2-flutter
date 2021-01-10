@@ -3,12 +3,15 @@ import '../../widgets/display/text.dart';
 import '../../utils.dart';
 import 'package:flutter/material.dart';
 
-class CustomButton extends StatelessWidget {
+class CustomButton extends StatefulWidget {
   final String text;
   final IntCallBack onPressed;
-  Color color;
-  CustomButton(this.text, {this.onPressed, this.color}){if(color==null){color=Const.textColor;}}
+  final color;
+  CustomButton(this.text, {this.onPressed, this.color});
+  _CustomButtonState createState() => _CustomButtonState();
+}
 
+class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,10 +22,10 @@ class CustomButton extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: FlatButton(
-            onPressed: onPressed,
+            onPressed: this.widget.onPressed,
             child: Tex(
-              this.text,
-              color: color,
+              this.widget.text,
+              color: this.widget.color ?? Const.textColor,
               fontWeight: FontWeight.normal,
             ),
           ),

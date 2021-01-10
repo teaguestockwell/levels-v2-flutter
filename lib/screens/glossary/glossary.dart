@@ -16,8 +16,12 @@ class GlossaryScreen extends StatelessWidget {
     cards.clear();
     
     for (int i = 0; i < air.titles.length; i++) {
-      cards.add(CCards(
-          air.titles.elementAt(i), RowCenterText(air.bodys.elementAt(i))));
+      cards.add(
+        CCard(
+          title:air.titles.elementAt(i),
+          children: [RowCenterText(air.bodys.elementAt(i))],
+          initOpen: true,
+          ));
     }
   }
 

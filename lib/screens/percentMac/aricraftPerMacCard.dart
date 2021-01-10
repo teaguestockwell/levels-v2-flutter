@@ -91,8 +91,10 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards(
-      'Aircraft, Fuel & Cargo',
-      getDataTable());
+    return CCard(
+      title:'Aircraft, Fuel & Cargo',
+      initOpen: true,
+      children:[getDataTable()]
+    );
   }
 }
