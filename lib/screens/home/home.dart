@@ -16,23 +16,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Home extends StatefulWidget {
-  var aircrafts = List<Aircraft>();
-  MoreOp moreOp;
-  CustomButtomSpinnerModalString airSpin;
-  BottomNav bn;
-  
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  CustomButtomSpinnerModalString airSpin;
+  MoreOp moreOp;
+  BottomNav bn;
+  var aircrafts = List<Aircraft>();
   Widget body = Loading();
   Image img;
 
   @override
   void initState() {
    super.initState();
-   //this.widget.aircrafts.clear();
+   
    //execute this function once after first build
     WidgetsBinding.instance.addPostFrameCallback((_){ 
       Firebase.initializeApp().then((_){
@@ -47,7 +46,7 @@ class _HomeState extends State<Home> {
 
   void buildAircraft(QuerySnapshot qs){
     qs.docs.forEach((v) { 
-      this.widget.aircrafts.add(
+      aircrafts.add(
         Aircraft(
           v.get('name'),
           v.get('fs0'),
@@ -81,11 +80,11 @@ class _HomeState extends State<Home> {
   }
 
   void buildDiclaimer(DocumentSnapshot ds){
-    this.widget.moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
+    moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
     
-    this.widget.bn = BottomNav(this.widget.aircrafts[0], this.widget.moreOp);
+    bn = BottomNav(aircrafts[0], moreOp);
 
-    this.widget.airSpin = CustomButtomSpinnerModalString(
+    airSpin = CustomButtomSpinnerModalString(
       getMDSNames(),
       onPressed: spin
     );
@@ -98,11 +97,11 @@ class _HomeState extends State<Home> {
         'Aircraft',
         Column(
           children: [
-            Row2(Tex('MDS'), this.widget.airSpin),
+            Row2(Tex('MDS'), airSpin),
             Divider(color: Const.divColor, thickness: Const.divThickness),
             Row2(
               CustomButton('I Accept',onPressed: accept),
-              MoreOpModal(this.widget.moreOp),
+              MoreOpModal(moreOp),
             )
           ]
         ),
@@ -113,12 +112,12 @@ class _HomeState extends State<Home> {
   }
 
   spin(int i){
-    this.widget.bn = BottomNav(this.widget.aircrafts[i], this.widget.moreOp);
+    bn = BottomNav(aircrafts[i], moreOp);
   }
 
   List<String> getMDSNames(){
     var ret = List<String>();
-    for(var a in this.widget.aircrafts){
+    for(var a in aircrafts){
       ret.add(a.name);
     }
     return ret;
@@ -128,7 +127,7 @@ class _HomeState extends State<Home> {
      Navigator.push(
      context,
      MaterialPageRoute(
-      builder: (context)=> this.widget.bn
+      builder: (context) => bn
     )
    );
   }
@@ -140,8 +139,5 @@ class _HomeState extends State<Home> {
       backgroundColor: Const.background
     );
   }
-}
-
-class MoreOpModalSpin {
 }
 
