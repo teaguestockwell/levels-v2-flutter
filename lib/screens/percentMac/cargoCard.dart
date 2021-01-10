@@ -2,7 +2,7 @@ import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/percentMac/validatedCargoUI.dart';
 import '../../widgets/display/text.dart';
-import '../../Widgets/display/titleText.dart';
+import '../../widgets/display/titleText.dart';
 import '../../widgets/input/buttonModalSpinnerButton.dart';
 import '../../widgets/layout/cards/cardAllwaysOpenTex.dart';
 import '../../widgets/layout/rows/row2.dart';

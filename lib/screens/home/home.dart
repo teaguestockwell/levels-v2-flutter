@@ -1,5 +1,4 @@
-import 'package:five_level_one/Widgets/input/buttonModalSpinner.dart';
-
+import '../../widgets/input/buttonModalSpinner.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';

@@ -1,5 +1,4 @@
-import '../../Widgets/input/buttonModalSpinner.dart';
-
+import '../../widgets/input/buttonModalSpinner.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';

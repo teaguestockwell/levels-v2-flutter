@@ -1,11 +1,11 @@
 import 'cargoCard.dart';
 import 'chartcCard.dart';
+import 'tanks.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/percentMac/showWork.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/getMacButton.dart';
-import 'tanks.dart';
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

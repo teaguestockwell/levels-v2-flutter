@@ -1,4 +1,4 @@
-import '../../Backend/cont.dart';
+import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/customButton.dart';

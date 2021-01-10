@@ -1,6 +1,6 @@
 import '../max.dart';
 import '../alignPadding.dart';
-import '../../../Backend/cont.dart';
+import '../../../backend/cont.dart';
 import '../../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
 

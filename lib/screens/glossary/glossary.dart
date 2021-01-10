@@ -6,31 +6,31 @@ import 'package:flutter/material.dart';
 
 class GlossaryScreen extends StatelessWidget {
   final Aircraft air;
-  List<Widget> cards;
+  final List<Widget> cards = [];
   final sc = ScrollController();
-  GlossaryScreen(this.air){
-    this.cards = getGlossCards();
+  GlossaryScreen(this.air) {
+    getGlossCards();
   }
 
-  List<Widget> getGlossCards() {
-    List<Widget> ret = [];
+  void getGlossCards() {
+    cards.clear();
+    
     for (int i = 0; i < air.titles.length; i++) {
-      ret.add(CCards(air.titles.elementAt(i),
-          RowCenterText(air.bodys.elementAt(i))));
+      cards.add(CCards(
+          air.titles.elementAt(i), RowCenterText(air.bodys.elementAt(i))));
     }
-    return ret;
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoScrollbar(
-      isAlwaysShown: true,
-      controller: sc, 
-      child:ListView.builder(
-        controller: sc, //ony render on screen widgets-recycle viewer
-        itemCount: cards.length,
-        itemBuilder: (BuildContext context,int index){ 
-            return cards[index];}
-      ));
+        isAlwaysShown: true,
+        controller: sc,
+        child: ListView.builder(
+            controller: sc, //ony render on screen widgets-recycle viewer
+            itemCount: cards.length,
+            itemBuilder: (BuildContext context, int index) {
+              return cards[index];
+            }));
   }
 }

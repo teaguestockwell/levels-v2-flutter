@@ -1,5 +1,3 @@
-
-
 import '../alignPadding.dart';
 import '../max.dart';
 import '../../../Backend/cont.dart';
