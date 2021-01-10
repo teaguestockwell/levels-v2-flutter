@@ -30,24 +30,25 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-   super.initState();
-   
-   //execute this function once after first build
-    WidgetsBinding.instance.addPostFrameCallback((_){ 
-      Firebase.initializeApp().then((_){
+    super.initState();
 
+    //execute this function once after first build
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Firebase.initializeApp().then((_) {
         img = Image.asset('assets/0.png');
-        precacheImage(img.image, context).then((_){
-          FirebaseFirestore.instance.collection('mds').get().then(buildAircraft);
+        precacheImage(img.image, context).then((_) {
+          FirebaseFirestore.instance
+              .collection('mds')
+              .get()
+              .then(buildAircraft);
         });
-      }
-    );});
+      });
+    });
   }
 
-  void buildAircraft(QuerySnapshot qs){
-    qs.docs.forEach((v) { 
-      aircrafts.add(
-        Aircraft(
+  void buildAircraft(QuerySnapshot qs) {
+    qs.docs.forEach((v) {
+      aircrafts.add(Aircraft(
           v.get('name'),
           v.get('fs0'),
           v.get('fs1'),
@@ -67,77 +68,69 @@ class _HomeState extends State<Home> {
           v.get('cargonames'),
           v.get('cargoweights'),
           v.get('cargomoms'),
-          v.get('configs')
-        )
-      );
+          v.get('configs')));
     });
     getDislaimerDoc();
   }
 
-  void getDislaimerDoc(){
-    FirebaseFirestore.instance.collection('general')
-    .doc('general').get().then(buildDiclaimer);
+  void getDislaimerDoc() {
+    FirebaseFirestore.instance
+        .collection('general')
+        .doc('general')
+        .get()
+        .then(buildDiclaimer);
   }
 
-  void buildDiclaimer(DocumentSnapshot ds){
+  void buildDiclaimer(DocumentSnapshot ds) {
     moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
-    
     bn = BottomNav(aircrafts[0], moreOp);
-
-    airSpin = CustomButtomSpinnerModalString(
-      getMDSNames(),
-      onPressed: spin
-    );
-
+    airSpin = CustomButtomSpinnerModalString(getMDSNames(), onPressed: spin);
     var sc = ScrollController();
-    var ret = CupertinoScrollbar(isAlwaysShown: true,controller: sc, child:ListView(controller: sc, children: [
-      CardAllwaysOpen('FIVE LEVEL', img, Const.textColor),
-      CardAllwaysOpen(ds.get('welcometitle'), RowCenterText(ds.get('welcomebody')), Const.textColor),
-      CardAllwaysOpen(
-        'Aircraft',
-        Column(
-          children: [
-            Row2(Tex('MDS'), airSpin),
-            Divider(color: Const.divColor, thickness: Const.divThickness),
-            Row2(
-              CustomButton('I Accept',onPressed: accept),
-              MoreOpModal(moreOp),
-            )
-          ]
-        ),
-        Const.textColor
-      )
-    ]));
-    setState(() {body =ret;});
+
+    var ret = CupertinoScrollbar(
+      isAlwaysShown: true,
+      controller: sc,
+      child: ListView(
+        controller: sc, 
+        children: [
+          CardAllwaysOpen('FIVE LEVEL', img, Const.textColor),
+          CardAllwaysOpen(ds.get('welcometitle'),
+              RowCenterText(ds.get('welcomebody')), Const.textColor),
+          CardAllwaysOpen(
+              'Aircraft',
+              Column(children: [
+                Row2(Tex('MDS'), airSpin),
+                Divider(color: Const.divColor, thickness: Const.divThickness),
+                Row2(
+                  CustomButton('I Accept', onPressed: accept),
+                  MoreOpModal(moreOp),
+                )
+              ]),
+              Const.textColor)
+        ]));
+    setState(() {
+      body = ret;
+    });
   }
 
-  spin(int i){
+  spin(int i) {
     bn = BottomNav(aircrafts[i], moreOp);
   }
 
-  List<String> getMDSNames(){
+  List<String> getMDSNames() {
     var ret = List<String>();
-    for(var a in aircrafts){
-      ret.add(a.name);
-    }
+    aircrafts.forEach((air) {
+      ret.add(air.name);
+    });
     return ret;
   }
 
-  void accept(){
-     Navigator.push(
-     context,
-     MaterialPageRoute(
-      builder: (context) => bn
-    )
-   );
+  void accept() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => bn));
   }
-    
- @override
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: body,
-      backgroundColor: Const.background
-    );
+    return Scaffold(body: body, backgroundColor: Const.background);
   }
 }
-
