@@ -41,12 +41,12 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
       year = 2060 - newyear;
       var boy = DateTime(2060 - newyear, 1, 1, 12, 00);
       if (newyear % 4 == 0) {
-        print('is leap');
+        //print('is leap');
         outYMD = boy.add(Duration(days: jjj));
         jjj += 1;
         daysInyea = 366;
       } else {
-        print('is not leap');
+        //print('is not leap');
         if (daysInyea == 366) {
           outYMD = boy.add(Duration(days: jjj - 2));
           jjj -= 1;
@@ -61,7 +61,7 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
   dayChange(var newjjj) {
     setState(() {
       jjj = daysInyea - newjjj;
-      print(jjj);
+      //print(jjj);
       var boy = DateTime(year, 1, 1, 12, 00);
       outYMD = boy.add(Duration(days: jjj - 1));
     });

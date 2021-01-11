@@ -146,7 +146,7 @@ class _CargoCardState extends State<CargoCard> {
   ///@id NWFS.id as key to this.widget.cargo
   ///removes CargoUI from this.widget.cargo, then try to remove from configID
   void removeCargoID(int id) {
-    //print('removing '+this.widget.cargo[id].nwf.toString());
+    ////print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
     this.widget.importedConfigIDs.remove(id);
     this.widget.cargoIsValid.remove(id);
@@ -180,7 +180,7 @@ class _CargoCardState extends State<CargoCard> {
 
       this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
       this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
-      //print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
+      ////print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
     }
     checkValidation();
     setState(() {});
@@ -219,7 +219,7 @@ class _CargoCardState extends State<CargoCard> {
 
   void printCargo() {
     this.widget.cargo.forEach((key, value) {
-      print(value.nwf.toString());
+      //print(value.nwf.toString());
     });
   }
 
@@ -237,7 +237,7 @@ class _CargoCardState extends State<CargoCard> {
 
     this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
     checkValidation();
-    //print('Adding cargo '+newCargoUI.nwf.toString());
+    ////print('Adding cargo '+newCargoUI.nwf.toString());
     setState(() {});
   }
 

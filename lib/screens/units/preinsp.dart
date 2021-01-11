@@ -59,8 +59,7 @@ class _PreInspState extends State<PreInsp> {
   }
 
   void p() {
-    print(
-        'achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acompString \n duration: $duration');
+    //print('achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acompString \n duration: $duration');
   }
 
   @override

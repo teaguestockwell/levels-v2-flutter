@@ -117,7 +117,7 @@ class Config{
   Config(String csv,this.simplemom){
     var nameWeightMomentQtyList = csv.split(';');
     this.name=nameWeightMomentQtyList[0];
-    //print(name);
+    ////print(name);
 
     for(int i=1;i<nameWeightMomentQtyList.length;i++){
       String nwmqAtIndex = nameWeightMomentQtyList[i];
@@ -157,7 +157,7 @@ class NameWeightFS {
       this.qty = '1',
       }) {
     this.id = P.getUniqueIdx();
-    //print(this.toString());
+    ////print(this.toString());
   }
 
   ///used to create copy of another object, but assign it a new id
@@ -309,22 +309,16 @@ class PerMac{
   
   void printString(){
     nwfss.forEach((x) {
-       print(
-        ' name '+x.name+
-        ' qty '+x.qty+
-        ' totweight '+x.getTotalWeight()+
-        ' fs '+x.getFS()+
-        ' totmom '+x.getTotalMoment()
-      );
+       //print(' name '+x.name+' qty '+x.qty+' totweight '+x.getTotalWeight()+' fs '+x.getFS()+' totmom '+x.getTotalMoment());
     });
-    print('totMom '+totMomAsString);
-    print('totWeight '+totWeightAsSting);
-    print('simpleMom '+simpleMomAsString);
-    print('balArm '+balArmAsString);
-    print('lemac '+lemacAsString);
-    print('mac '+macAsString);
-    print('permac dec '+perMacDecimalAsString);
-    print('permac % '+perMacPercentAsString);
+    //print('totMom '+totMomAsString);
+    //print('totWeight '+totWeightAsSting);
+    //print('simpleMom '+simpleMomAsString);
+    //print('balArm '+balArmAsString);
+    //print('lemac '+lemacAsString);
+    //print('mac '+macAsString);
+    //print('permac dec '+perMacDecimalAsString);
+    //print('permac % '+perMacPercentAsString);
   }
 }
 

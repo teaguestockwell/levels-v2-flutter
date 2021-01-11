@@ -38,7 +38,7 @@ class _PerMacScreenState extends State<PerMacScreen>
 
   void tanksCallback(int tanksID, NameWeightFS fuelNWFS) {
     tanksMap[tanksID] = fuelNWFS;
-    print(tanksMap.toString());
+    //print(tanksMap.toString());
   }
 
   @override
@@ -91,7 +91,7 @@ class _PerMacScreenState extends State<PerMacScreen>
   ///checks child validations updates this.valid
   void checkValidation() {
     var ret = true;
-    //print(childValid.toString());
+    ////print(childValid.toString());
     childValid.forEach((_, childValid) {
       if (!childValid) {
         ret = false;
