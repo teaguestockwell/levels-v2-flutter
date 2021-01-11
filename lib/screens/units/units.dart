@@ -50,12 +50,6 @@ class Units extends StatelessWidget {
     return CupertinoScrollbar(
         controller: sc,
         isAlwaysShown: true,
-        child: ListView.builder(
-          controller: sc,
-          itemCount: widgets.length,
-          itemBuilder: (BuildContext context, int index) {
-            return widgets[index];
-          },
-        ));
+        child: ListView(children: widgets, controller: sc,));
   }
 }
