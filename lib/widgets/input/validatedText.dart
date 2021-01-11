@@ -7,29 +7,26 @@ import '../../utils.dart';
 
 class ValidatedText extends StatefulWidget {
   ///=Const.pickerwidth
-  double width;
-  int maxChars;
+  final double width;
+  final int maxChars;
 
   ///select input type 0=int, 1=double, 2=string
-  int inputType;
+  final int inputType;
 
   ///updated when changed, also see bool void notifyIsValid(bool valid)
-  bool valid = false;
 
   ///updated when text is changed
-  String text = '';
-  String initText;
+
+  final String initText;
 
   ///called when text is changed
-  NotifyValid notifyIsValid = (_) {};
+  final NotifyValid notifyIsValid;
 
   ///called when text is changed
-  OnTextChange onChange = (_) {};
+  final OnTextChange onChange;
 
   ///called when text is changed, changes border around text
-  ValidateText validateText = (_) {
-    return true;
-  };
+  final ValidateText validateText;
 
   // TextEditingController _c = TextEditingController();
 
@@ -41,60 +38,57 @@ class ValidatedText extends StatefulWidget {
     this.maxChars = 12,
     this.initText,
     this.width,
-  }) {
-    if (initText != null) {
-
-      text = _getTruncated(initText);
-    }
-    if (width == null) {
-      width = Const.pickerWidth;
-    }
-    valid = validateText(text);
-  }
-
-  String _getTruncated(String x){
-    var ret = x;
-    if(ret.length<=maxChars){return ret;}
-    return ret.substring(0,maxChars-3) + '...';
-  }
+  });
 
   @override
   _ValidatedTextState createState() => _ValidatedTextState();
 }
 
 class _ValidatedTextState extends State<ValidatedText> {
+  bool valid = false;
   InputDecoration dec;
   Widget ret;
   TextEditingController c = TextEditingController();
 
+  String _getTruncated(String x) {
+    var ret = x;
+    if (ret.length <= this.widget.maxChars) {
+      return ret;
+    }
+    return ret.substring(0, this.widget.maxChars - 3) + '...';
+  }
+
   @override
   void initState() {
-    c.text = this.widget.text;
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // ignore: invalid_use_of_protected_member,invalid_use_of_visible_for_testing_member
+      c.notifyListeners();
+    });
+    c.text = _getTruncated(this.widget.initText ?? '');
 
-    if (this.widget.valid) {
+    if (valid) {
       dec = InputDec.wi;
     } else {
       dec = InputDec.re;
     }
     _addListner();
     ret = _getCustomTextFeild(this.widget.inputType);
-    super.initState();
   }
 
   void _addListner() {
     c.addListener(() {
       //validate the text and set outline to red or white
       String text = c.text;
-      this.widget.text = text;
       this.widget.onChange?.call(text);
-      this.widget.notifyIsValid?.call(this.widget.valid);
+      this.widget.notifyIsValid?.call(valid);
       if (this.widget.validateText(text)) {
-        this.widget.valid = true;
+        valid = true;
         setState(() {
           dec = InputDec.wi;
         });
       } else {
-        this.widget.valid = false;
+        valid = false;
         setState(() {
           dec = InputDec.re;
         });
@@ -107,7 +101,7 @@ class _ValidatedTextState extends State<ValidatedText> {
       case 0: //ints only
         return Container(
             height: Const.pickerHeight,
-            width: this.widget.width,
+            width: this.widget.width ?? Const.pickerWidth,
             child: TextField(
               cursorColor: Colors.white,
               controller: c,
@@ -122,7 +116,7 @@ class _ValidatedTextState extends State<ValidatedText> {
       case 1: //doubles only
         return Container(
             height: Const.pickerHeight,
-            width: this.widget.width,
+            width: this.widget.width ?? Const.pickerWidth,
             child: TextField(
               cursorColor: Colors.white,
               controller: c,
@@ -137,7 +131,7 @@ class _ValidatedTextState extends State<ValidatedText> {
       case 2: //all chars
         return Container(
             height: Const.pickerHeight,
-            width: this.widget.width,
+            width: this.widget.width ?? Const.pickerWidth,
             child: TextField(
               cursorColor: Colors.white,
               controller: c,

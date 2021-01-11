@@ -14,7 +14,7 @@ class AircraftPerMacCard extends StatefulWidget {
 class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
 
   List<DataRow> getRows(){
-    var ret = List<DataRow>();
+    List<DataRow> ret = [];
     this.widget.permac.nwfss.forEach((nwfs){
       ret.add(
         DataRow(
@@ -91,8 +91,10 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
 
   @override
   Widget build(BuildContext context) {
-    return CCards(
-      'Aircraft, Fuel & Cargo',
-      getDataTable());
+    return CCard(
+      title:'Aircraft, Fuel & Cargo',
+      initOpen: true,
+      children:[getDataTable()]
+    );
   }
 }

@@ -16,7 +16,7 @@ class MoreOpModal extends StatefulWidget {
 class _MoreOpModalState extends State<MoreOpModal> {
   int spinIdx =0;
   int _timesPressed = 0;
-  var _spinnerWidgets = List<Widget>();
+  List<Widget> _spinnerWidgets = [];
 
   void _spin(int newIdx) {
     spinIdx = newIdx;
@@ -28,7 +28,7 @@ class _MoreOpModalState extends State<MoreOpModal> {
       await launch(url);
     }
     else{
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Const.modalPickerColor,
         content: 
         Container(

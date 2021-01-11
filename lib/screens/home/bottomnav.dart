@@ -11,12 +11,8 @@ import 'package:flutter/material.dart';
 class BottomNav extends StatefulWidget {
   final Aircraft air;
   final MoreOp moreOp;
-  var tabPages =List<Widget>();
-  BottomNav(this.air, this.moreOp){
-    tabPages.add(Units());
-    tabPages.add(PerMacScreen(air));
-    tabPages.add(GlossaryScreen(air));
-  }
+
+  BottomNav(this.air, this.moreOp);
 
   @override
   _BottomNavState createState() => new _BottomNavState();
@@ -25,12 +21,18 @@ class BottomNav extends StatefulWidget {
 class _BottomNavState extends State<BottomNav> {
   int _pageIndex = 0;
   PageController _pageController;
-  var titleArr = ['Units', 'MAC%', 'Glossary'];
+  List<Widget> tabPages = [];
+  List<String> titleArr = ['Units', 'MAC%', 'Glossary'];
 
   @override
   void initState() {
-    _pageController = PageController(initialPage: _pageIndex);
     super.initState();
+    tabPages.addAll([
+      Units(),
+      PerMacScreen(this.widget.air),
+      GlossaryScreen(this.widget.air)
+    ]);
+    _pageController = PageController(initialPage: _pageIndex);
   }
 
   @override
@@ -47,31 +49,34 @@ class _BottomNavState extends State<BottomNav> {
 
   void onTabTapped(int index) {
     this._pageController.animateToPage(index,
-        duration: const Duration(milliseconds: Const.animationDuration), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds: Const.animationDuration),
+        curve: Curves.easeInOut);
   }
 
   @override
   Widget build(BuildContext context) {
     return Listener(
-        onPointerDown: (_) {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus &&
-              currentFocus.focusedChild != null) {
-            currentFocus.focusedChild.unfocus();
-          }
+      onPointerDown: (_) {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus &&
+            currentFocus.focusedChild != null) {
+              currentFocus.focusedChild.unfocus();
+            }
         },
         child: Scaffold(
           backgroundColor: Const.background,
+
           appBar: AppBar(
-            leadingWidth: Const.pickerWidth ,
-            leading: LeadingMDS(
-              text: this.widget.air.name,
-              onPressed: (){Navigator.pop(context);},
-            ),
             backgroundColor: Const.bottombarcolor,
             title: Tex(titleArr[_pageIndex]),
             actions: [MoreOpPopup(this.widget.moreOp)],
+            leadingWidth: Const.pickerWidth,
+            leading: LeadingMDS(
+              text: this.widget.air.name,
+              onPressed: () {Navigator.pop(context);},
+            ),
           ),
+
           bottomNavigationBar: BottomNavigationBar(
             showSelectedLabels: true,
             showUnselectedLabels: true,
@@ -96,11 +101,13 @@ class _BottomNavState extends State<BottomNav> {
               ),
             ],
           ),
+
           body: PageView(
-            children: this.widget.tabPages,
+            children: tabPages,
             onPageChanged: onPageChanged,
             controller: _pageController,
           ),
-        ));
+        )
+    );
   }
 }

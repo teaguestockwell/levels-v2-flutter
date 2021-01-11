@@ -1,11 +1,10 @@
 import '../../backend/cont.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../../utils.dart';
 
 class CustomTextField extends StatefulWidget {
-  var c = TextEditingController();
+  final TextEditingController c;
 
   CustomTextField(this.c);
   @override
@@ -17,10 +16,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   initState() {
+    super.initState();
     dec = InputDec.div;
     this.widget.c.addListener(() {});
-
-    super.initState();
   }
 
   @override

@@ -2,7 +2,7 @@ import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/alignPadding.dart';
 import 'dart:async';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class TimeGrid extends StatefulWidget {

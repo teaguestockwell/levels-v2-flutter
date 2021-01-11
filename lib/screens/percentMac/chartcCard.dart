@@ -1,170 +1,151 @@
+import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/display/titleText.dart';
 import '../../widgets/input/validatedText.dart';
-import '../../widgets/layout/alignPadding.dart';
 import '../../widgets/layout/div.dart';
-import '../../widgets/layout/max.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../utils.dart';
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ChartCCard extends StatelessWidget {
-  String _stringWeight = '0';
-  String _stringMom = '0';
-  Aircraft air;
-  TitleText titleText = TitleText('Chart C');
-  NotifyCargoValid onValidationChange;
-  var childrenValid = LinkedHashMap<int,bool>();
-  bool valid= false;
-  
+class ChartCCard extends StatefulWidget {
+  final _nwfs = NameWeightFS();
+  final Aircraft air;
+  final NotifyCargoValid onValidationChange;
+  final childrenValid = LinkedHashMap<int, bool>();
 
   ChartCCard(this.air, this.onValidationChange);
 
   /// do not call this before checking bool getValid()
-  NameWeightFS getNWFS(){
-    if(valid){
-      return
-      NameWeightFS(
-        name: 'Basic Aircraft',
-        weight: _stringWeight,
-        mom: _stringMom,
-        simplemom: air.simplemom,
-      );
-    }
-    throw Exception('getNWFS was called on invalid Chart C');
+  NameWeightFS getNWFS() {
+    return this._nwfs;
   }
 
-  bool getThisValid(){
+  bool getThisValid() {
     bool ret = true;
-    childrenValid.forEach((_,value) { 
-      if(!value){ret=false;}
+    childrenValid.forEach((_, value) {
+      if (!value) {
+        ret = false;
+      }
     });
-    valid = ret;
-    onValidationChange(0,ret);
-    if(
-      titleText != null &&
-      titleText.state != null
-      ){
-      titleText.state.setValid(valid);
-    }
+    onValidationChange(0, ret);
     return ret;
   }
 
   /// 0= weight, 1=moment
-  void updateValidChildren(int id, bool valid){
-    this.childrenValid[id] =  valid;
-    getThisValid();
+  void updateValidChildren(int id, bool valid) {
+    this.childrenValid[id] = valid;
   }
 
+  @override
+  _ChartCCardState createState() => _ChartCCardState();
+}
 
-  bool _validateWeight(String weight){
-    if(
-      double.tryParse(weight) != null 
-      &&
-      double.parse(weight) >= double.parse(air.weight0)
-      &&
-      double.parse(weight) <= double.parse(air.weight1)
-    ){ 
-      updateValidChildren(0,true); return true;
+class _ChartCCardState extends State<ChartCCard> {
+  bool valid;
+  List<Widget> body;
+  int buildId = 0;
+  Widget title;
+
+  final titleValid = Tex(
+    'Chart C valid',
+    fontWeight: FontWeight.normal,
+    color: Const.nonfocusedBoderColors,
+  );
+
+  final titleInvalid = Tex('Chart C inval',
+      fontWeight: FontWeight.normal, color: Const.nonfocusedErrorBoderColor);
+
+  @override
+  initState() {
+    super.initState();
+
+    //init valid
+    valid = false;
+    title = titleInvalid;
+    this.widget.childrenValid[0] = false;
+    this.widget.childrenValid[1] = false;
+
+    ///init the basic acft nwfs
+    this.widget._nwfs.name = 'Basic Aircraft';
+    this.widget._nwfs.simplemom = this.widget.air.simplemom;
+
+    //init the cards body
+    body = [
+      Row2(
+          Tex('Basic Weight'),
+          ValidatedText(
+            inputType: 1,
+            notifyIsValid: (_) {},
+            validateText: _validateWeight,
+            onChange: (String weight) {
+              this.widget._nwfs.weight = weight;
+            },
+          )),
+      Div(),
+      Row2(
+          Tex('Basic Moment'),
+          ValidatedText(
+            inputType: 1,
+            notifyIsValid: (_) {},
+            validateText: _validateMoment,
+            onChange: (String mom) {
+              this.widget._nwfs.mom = mom;
+            },
+          )),
+    ];
+  }
+
+  bool _validateWeight(String weight) {
+    if (double.tryParse(weight) != null &&
+        double.parse(weight) >= double.parse(this.widget.air.weight0) &&
+        double.parse(weight) <= double.parse(this.widget.air.weight1)) {
+      this.widget.updateValidChildren(0, true);
+      updateTitleText();
+      return true;
     }
-      updateValidChildren(0,false); return false;
-  } 
+    this.widget.updateValidChildren(0, false);
+    updateTitleText();
+    return false;
+  }
 
-  bool _validateMoment(String mom){
-    if(
-      double.tryParse(mom) != null 
-      &&
-      double.parse(mom) >= double.parse(air.mom0)
-      &&
-      double.parse(mom) <= double.parse(air.mom1)
-    ){ 
-     updateValidChildren(1,true); return true;
+  bool _validateMoment(String mom) {
+    if (double.tryParse(mom) != null &&
+        double.parse(mom) >= double.parse(this.widget.air.mom0) &&
+        double.parse(mom) <= double.parse(this.widget.air.mom1)) {
+      this.widget.updateValidChildren(1, true);
+      updateTitleText();
+      return true;
     }
-   updateValidChildren(1,false); return false;
+    this.widget.updateValidChildren(1, false);
+    updateTitleText();
+    return false;
   }
 
-  Column getCardBody(Column chil){
-      Column childp = chil;
-      if(childp.children.length > 1){
-        Widget first = childp.children.first;
-        Widget last = childp.children.last;
-        childp.children.removeAt(0);
-        childp.children.removeAt(childp.children.length-1);
-        var firstP = Padding(padding: EdgeInsets.fromLTRB(0, 5, 0, 0), child: first);
-        var lastP = Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: last,);
-        childp.children.insert(0, firstP);
-        childp.children.insert(childp.children.length, lastP);
-      }
-    return childp;
+  updateTitleText() {
+    bool newValid = this.widget.getThisValid();
+    if (valid != newValid) {
+      setState(() {
+        valid = newValid;
+      });
+    }
   }
 
-
+  Color getTitleColor() {
+    if (valid) {
+      return Const.nonfocusedBoderColors;
+    }
+    return Const.nonfocusedErrorBoderColor;
+  }
 
   @override
   Widget build(_) {
-    return Max(
-      w: Const.maxCardWidth,
-      child:Padding(
-        padding: EdgeInsets.fromLTRB(
-          Const.cardP,
-          Const.cardP,
-          Const.cardP,
-          0.0
-          ),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Card(
-                color: Const.cardColor,
-                shape: Border(
-                    top: BorderSide(
-                  color: Const.cardColor,
-                  width: Const.cardTabSize,
-                )),
-                child: Column(
-                  children: [
-                
-                        AlignPadding(
-                          3.0, Alignment.center, 
-                          Container(
-                            height: Const.cardTabSize,
-                            child:Center(child: Padding(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: this.titleText))
-                          )
-                      ), 
-                    getCardBody(
-                      Column(
-                        children: [
-
-                          Row2(
-                            Tex('Basic Weight'),
-                            ValidatedText(
-                              inputType: 1,
-                              notifyIsValid: (_){},
-                              validateText: _validateWeight,
-                              onChange: (String weight){_stringWeight = weight;},
-                            )
-                          ),
-
-                          Div(),
-
-                          Row2(
-                            Tex('Basic Moment'),
-                            ValidatedText(
-                              inputType: 1,
-                              notifyIsValid: (_){},
-                              validateText: _validateMoment,
-                              onChange: (String mom){_stringMom = mom;},
-                            )
-                          ),
-                        ]
-                      )
-                    )
-                  ],
-                )))));
-    
-
+    return CardAllwaysOpen(
+      title: 'Chart C',
+      color: getTitleColor(),
+      children: body,
+    );
   }
 }

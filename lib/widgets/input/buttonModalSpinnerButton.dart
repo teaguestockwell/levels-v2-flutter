@@ -6,29 +6,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ButtomSpinnerModalButton extends StatefulWidget {
-  ///starting spinner index
-  int spinIdx;
-  int _timesPressed = 0;
-  String _selected;
-  ///text to show in modal button
-  String modalButtonText;
-  /// List<String> of modal window spinner
   final List<String> stringList;
-  ///supertino spinner spined => this(index)
-  final IntCallBackIntPara onSpin; 
-  ///modal button is pressed this(index)
+  final IntCallBackIntPara onSpin;
   final IntCallBack onPress;
-  var _spinnerWidgets = List<Widget>();
+  final String modalButtonText;
 
-  ButtomSpinnerModalButton({
-    this.spinIdx = 0,
-    this.modalButtonText = '',
-    @required this.onSpin,
-    @required this.onPress,
-    @required this.stringList
-  }){
-    _selected = stringList[spinIdx];
-  }
+  ButtomSpinnerModalButton(
+      {@required this.onSpin,
+      @required this.onPress,
+      @required this.stringList,
+      @required this.modalButtonText});
 
   @override
   _ButtomSpinnerModalButtonState createState() =>
@@ -36,36 +23,21 @@ class ButtomSpinnerModalButton extends StatefulWidget {
 }
 
 class _ButtomSpinnerModalButtonState extends State<ButtomSpinnerModalButton> {
- 
-  _getSpinnerWidgets() {
-    this.widget._spinnerWidgets.clear();
-    for (String x in this.widget.stringList) {
-      this.widget._spinnerWidgets.add(Padding(
-          padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          child: Tex(
-            x,
-            size: Const.textSizeModalSpinner,
-            fontWeight: Const.fwSpinner,
-            color: Const.textColor,
-          )));
-    }
-  }
+  int spinIdx = 0;
 
   void _spin(int newIdx) {
-    this.widget.spinIdx = newIdx;
-    this.widget._selected = this.widget.stringList[newIdx];
+    this.widget.onSpin(newIdx);
+    setState(() {
+      spinIdx = newIdx;
+    });
+  }
 
-    this.widget.onSpin?.call(newIdx);
-    //rebuild to change button text
-    setState(() {});
+  void pressModal() {
+    Navigator.pop(context);
+    this.widget.onPress();
   }
 
   press() {
-    //build children only on first press
-    if (this.widget._timesPressed == 0) {
-      _getSpinnerWidgets();
-    }
-    this.widget._timesPressed++;
     showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
@@ -78,38 +50,32 @@ class _ButtomSpinnerModalButtonState extends State<ButtomSpinnerModalButton> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  height: Const.modalSpinHeight,
-                  child: Column(children: [
-
-                    Flexible(child: Container()),
-                    
-                    Flexible(
-                      flex: 9,
-                      child:
-                      CupertinoPicker(
-                        scrollController: FixedExtentScrollController(
-                          initialItem: this.widget.spinIdx),
-                        children: this.widget._spinnerWidgets,
-                        onSelectedItemChanged: _spin,
-                        itemExtent: 35,
-                      )
-                    ),
-                    
-                    Flexible(child: Container()),
-                    
-                    Flexible(
-                      flex: 3,
-                      child:
-                      CustomButton(this.widget.modalButtonText,
-                      onPressed: (){Navigator.pop(context); this.widget.onPress();},
-                      )
-                    ),
-
-                    Flexible(child: Container()),
-
-                    ]
-                  )
-                ),
+                    height: 210,
+                    child: Column(children: [
+                      Flexible(child: Container()),
+                      Flexible(
+                          flex: 9,
+                          child: CupertinoPicker(
+                              scrollController: FixedExtentScrollController(
+                                  initialItem: spinIdx),
+                              onSelectedItemChanged: _spin,
+                              itemExtent: 35,
+                              children: List.generate(
+                                  this.widget.stringList.length, (idx) {
+                                return Center(
+                                    child: Tex(
+                                  this.widget.stringList[idx],
+                                  size: Const.textSizeModalSpinner,
+                                  fontWeight: Const.fwSpinner,
+                                ));
+                              }))),
+                      Flexible(child: Container()),
+                      CustomButton(
+                        this.widget.modalButtonText,
+                        onPressed: pressModal,
+                      ),
+                      Flexible(child: Container()),
+                    ])),
               ],
             ),
           ),
@@ -121,7 +87,7 @@ class _ButtomSpinnerModalButtonState extends State<ButtomSpinnerModalButton> {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      this.widget._selected,
+      this.widget.stringList[spinIdx],
       onPressed: press,
     );
   }

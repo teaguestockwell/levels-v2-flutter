@@ -9,7 +9,7 @@ class PerMacCard extends StatelessWidget {
   PerMacCard(this.permac);
 
   List<DataRow> getRows(){
-    var ret = List<DataRow>();
+    List<DataRow> ret = [];
      ret.add(DataRow(
       cells:[
           DataCell(Tex(permac.perMacPercentAsString+'% = '+permac.perMacDecimalAsString)),
@@ -25,9 +25,10 @@ class PerMacCard extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
-    return CCards(
-      'Mean Aerodynamic Chord %',
-      SingleChildScrollView(scrollDirection: Axis.horizontal, child:
+    return CCard(
+      title: 'Mean Aerodynamic Chord %',
+      initOpen: true,
+      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, child:
       DataTable(
         dividerThickness: Const.divThickness,
         columns: [
@@ -41,7 +42,7 @@ class PerMacCard extends StatelessWidget {
         ],
         rows: getRows(),
       )
-      )
+      )]
     );
   }
 }
