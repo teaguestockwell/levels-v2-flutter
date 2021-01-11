@@ -2,6 +2,7 @@ import 'dart:collection';
 
 import 'package:five_level_one/Widgets/input/customButton.dart';
 import 'package:five_level_one/Widgets/input/validatedText.dart';
+import 'package:five_level_one/Widgets/layout/alignPadding.dart';
 import 'package:five_level_one/Widgets/layout/rows/row1.dart';
 import 'package:five_level_one/Widgets/layout/rows/row2.dart';
 import 'package:five_level_one/backend/cont.dart';
@@ -23,7 +24,7 @@ class ValidatedCargoUI2 extends StatefulWidget {
 
   ValidatedCargoUI2(
       {@required this.fs0,
-      @required this.reDrawParent, 
+      @required this.reDrawParent,
       @required this.fs1,
       @required this.cargomaxweight,
       @required this.nwf,
@@ -40,10 +41,15 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
   bool valid = false;
   List<Widget> children;
   var childValid = LinkedHashMap<int, bool>();
+  bool ope = false;
 
   @override
   initState() {
     super.initState();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      updateAllValid();
+    });
 
     children = [
       RowCenterOne(ValidatedText(
@@ -97,7 +103,10 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
   void updateValid(int id, bool val) {
     // put new valid into map
     childValid[id] = val;
+    updateAllValid();
+  }
 
+  void updateAllValid() {
     // are all children valid?
     var ret = true;
     childValid.forEach((_, value) {
@@ -185,6 +194,14 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
     return this.widget.nwf.fs;
   }
 
+  String getNameTruncated() {
+    var ret = this.widget.nwf.name;
+    if (ret.length <= 30) {
+      return ret;
+    }
+    return ret.substring(0, 27) + '...';
+  }
+
   Color getColor(bool valid) {
     if (valid) {
       return Const.nonfocusedBoderColors;
@@ -192,16 +209,61 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
     return Const.nonfocusedErrorBoderColor;
   }
 
+  List<Widget> buildInput() {
+    if (ope) {
+      return children;
+    }
+    return [Container()];
+  }
+
+  toggle() {
+    setState(() {
+      ope = !ope;
+    });
+  }
+
+  Widget getCardTitle() {
+    if (ope) {
+      return TitleCC(
+          open: true,
+          tex: Tex(
+            this.widget.nwf.qty + ' EA ' + getNameTruncated(),
+            fontWeight: FontWeight.normal,
+            color: getColor(valid),
+          ));
+    }
+    return TitleCC(
+        open: false,
+        tex: Tex(
+          this.widget.nwf.qty + ' EA ' + getNameTruncated(),
+          fontWeight: FontWeight.normal,
+          color: getColor(valid),
+        ));
+  }
+
   @override
-  Widget build(_) {
-    return CCard(
-      callBack: () {
-        setState(() {});
-      },
-      initOpen: false,
-      title: this.widget.nwf.name,
-      color: getColor(valid),
-      children: [],
-    );
+  Widget build(BuildContext context) {
+    return Padding(
+        padding:
+            EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Card(
+                color: Const.cargoUIColor,
+                shape: Border(
+                    top: BorderSide(
+                  color: Const.cargoUIColor,
+                  width: Const.cardTabSize,
+                )),
+                child: Column(
+                  children: [
+                    InkWell(
+                      child:
+                          AlignPadding(3.0, Alignment.center, getCardTitle()),
+                      onTap: toggle,
+                    ),
+                    Column(children: buildInput())
+                  ],
+                ))));
   }
 }

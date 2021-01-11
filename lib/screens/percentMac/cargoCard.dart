@@ -96,15 +96,21 @@ class _CargoCardState extends State<CargoCard> {
 
   void checkValidation() {
     var ret = true;
+
     this.widget.cargoIsValid.forEach((key, value) {
       if (value == false || value == null) {
         ret = false;
       }
     });
-    valid = ret;
-    print('cargo ' + ret.toString());
-    //call back to nofiy permacscreen goes here
+
+
+    if (valid != ret) {
+      //call back to nofiy permacscreen
     this.widget.onValidationChange(1, ret);
+      setState(() {
+        valid = ret;
+      });
+    }
   }
 
   ///pass to config spinner
@@ -150,8 +156,8 @@ class _CargoCardState extends State<CargoCard> {
   }
 
   // called when a cargo ui expands
-  void reDraw(){
-    setState(() { });
+  void reDraw() {
+    setState(() {});
   }
 
   ///remove old config then add new NWFS and CargoUI for each config in selectedSpinnerConfig
@@ -248,38 +254,34 @@ class _CargoCardState extends State<CargoCard> {
     getCargo(); //call me every build
     printCargo();
 
-    return CardAllwaysOpen(
-        title: 'Cargo',
-        color: getTitleColor(),
-        children:[
-          Row2(
-            Tex('Select Config'),
-            configSpin,
-          ),
+    return CardAllwaysOpen(title: 'Cargo', color: getTitleColor(), children: [
+      Row2(
+        Tex('Select Config'),
+        configSpin,
+      ),
 
-          Divider(
-            color: Const.divColor,
-            thickness: Const.divThickness,
-          ),
+      Divider(
+        color: Const.divColor,
+        thickness: Const.divThickness,
+      ),
 
-          Row2(Tex('Add Cargo'), cargoSpin),
+      Row2(Tex('Add Cargo'), cargoSpin),
 
-          Divider(
-            color: Const.divColor,
-            thickness: Const.divThickness,
-          ),
+      Divider(
+        color: Const.divColor,
+        thickness: Const.divThickness,
+      ),
 
-          Row2(Tex('Remove All'), removeAllSpin),
+      Row2(Tex('Remove All'), removeAllSpin),
 
-          //recycle viewer goes here. Dont render CargoUI that is not on screen
-          ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: this.widget.cargoList.length,
-              itemBuilder: (BuildContext context, int i) {
-                return this.widget.cargoList[i];
-              }),
-        ]
-    );
+      //recycle viewer goes here. Dont render CargoUI that is not on screen
+      ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: this.widget.cargoList.length,
+          itemBuilder: (BuildContext context, int i) {
+            return this.widget.cargoList[i];
+          }),
+    ]);
   }
 }

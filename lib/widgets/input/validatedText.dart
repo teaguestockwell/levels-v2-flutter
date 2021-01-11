@@ -60,8 +60,12 @@ class _ValidatedTextState extends State<ValidatedText> {
 
   @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      // ignore: invalid_use_of_protected_member,invalid_use_of_visible_for_testing_member
+      c.notifyListeners();
+    });
     c.text = _getTruncated(this.widget.initText ?? '');
-
 
     if (valid) {
       dec = InputDec.wi;
@@ -70,7 +74,6 @@ class _ValidatedTextState extends State<ValidatedText> {
     }
     _addListner();
     ret = _getCustomTextFeild(this.widget.inputType);
-    super.initState();
   }
 
   void _addListner() {
