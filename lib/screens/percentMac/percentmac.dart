@@ -1,5 +1,4 @@
-import 'package:five_level_one/screens/percentMac/tanksCard.dart';
-
+import '../../screens/percentMac/tanksCard.dart';
 import 'cargoCard.dart';
 import 'chartcCard.dart';
 import 'tanksCard.dart';

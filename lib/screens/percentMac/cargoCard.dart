@@ -1,5 +1,4 @@
-import 'package:five_level_one/screens/percentMac/validatedCargoUI2.dart';
-
+import '../../screens/percentMac/validatedCargoUI2.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
