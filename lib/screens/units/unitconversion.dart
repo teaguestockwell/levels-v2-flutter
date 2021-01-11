@@ -122,6 +122,7 @@ class _UnitConversionState extends State<UnitConversion> {
           child: ButtonModalSpinner(
             stringList: Unit.units,
             onSpin: unitChange,
+            initIdx: unitIdx,
           ))),
       //Divider(color: Const.divColor,thickness: Const.divThickness,),
       Padding(
