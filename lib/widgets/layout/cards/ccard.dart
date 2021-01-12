@@ -34,18 +34,10 @@ class _CCardState extends State<CCard> {
   @override
   void initState() {
     super.initState();
-    title = getNameTruncated(this.widget.title);
+    title = Util.getTruncated(this.widget.title);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;
-  }
-
-  String getNameTruncated(String string) {
-    var ret = string;
-    if (ret.length <= 30) {
-      return ret;
-    }
-    return ret.substring(0, 27) + '...';
   }
 
   ///toggles the cards open state

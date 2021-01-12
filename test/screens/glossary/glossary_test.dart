@@ -1,5 +1,5 @@
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/glossary/glossary.dart';
+import '../../../lib/backend/model.dart';
+import '../../../lib/screens/glossary/glossary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -8,7 +8,7 @@ class MockAircraft extends Mock implements Aircraft {}
 
 main() {
   testWidgets(
-    'as a user, when i click on glossary, build list of glossary cards',
+    'given aircraft a, when i click on glossary, build list of glossary cards',
      (WidgetTester wt) async {
     //assemble
     final a = MockAircraft();

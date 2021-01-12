@@ -13,6 +13,15 @@ typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, NameWeightFS value);
 
+class Util{
+  static String getTruncated(String s) {
+    if (s.length <= 30) {
+      return s;
+    }
+    return s.substring(0, 27) + '...';
+  }
+}
+
 class Distance {
   double numOfBases;
   String name;

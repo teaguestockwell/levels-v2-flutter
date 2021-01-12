@@ -51,7 +51,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
     });
 
     children = [
-      RowCenterOne(ValidatedText(
+      Row1(ValidatedText(
         initText: this.widget.nwf.name,
         inputType: 2,
         onChange: changeName,
@@ -90,7 +90,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
             validateText: validateQty,
           )),
       Div(),
-      RowCenterOne(CustomButton(
+      Row1(CustomButton(
         'Remove',
         onPressed: () {
           this.widget.onPressed(this.widget.nwf.id);
