@@ -49,26 +49,26 @@ class _HomeState extends State<Home> {
   void buildAircraft(QuerySnapshot qs) {
     qs.docs.forEach((v) {
       aircrafts.add(Aircraft(
-          v.get('name'),
-          v.get('fs0'),
-          v.get('fs1'),
-          v.get('mom0'),
-          v.get('mom1'),
-          v.get('weight0'),
-          v.get('weight1'),
-          v.get('simplemom'),
-          v.get('lemac'),
-          v.get('mac'),
-          v.get('cargomaxweight'),
-          v.get('tanknames'),
-          v.get('tankmoms'),
-          v.get('tankweights'),
-          v.get('titles'),
-          v.get('bodys'),
-          v.get('cargonames'),
-          v.get('cargoweights'),
-          v.get('cargomoms'),
-          v.get('configs')));
+        name:          v.get('name'),
+        fs0:           v.get('fs0'),
+        fs1:           v.get('fs1'),
+        mom0:          v.get('mom0'),
+        mom1:          v.get('mom1'),
+        weight0:       v.get('weight0'),
+        weight1:       v.get('weight1'),
+        simplemom:     v.get('simplemom'),
+        lemac:         v.get('lemac'),
+        mac:           v.get('mac'),
+        cargomaxweight:v.get('cargomaxweight'),
+        tanknames:     v.get('tanknames'),
+        tankmoms:      v.get('tankmoms'),
+        tankweights:   v.get('tankweights'),
+        titles:        v.get('titles'),
+        bodys:         v.get('bodys'),
+        cargonames:    v.get('cargonames'),
+        cargoweights:  v.get('cargoweights'),
+        cargomoms:     v.get('cargomoms'),
+        configstrings: v.get('configs')));
     });
     getDislaimerDoc();
   }

@@ -14,7 +14,6 @@ class GlossaryScreen extends StatelessWidget {
 
   void getGlossCards() {
     cards.clear();
-    
     for (int i = 0; i < air.titles.length; i++) {
       cards.add(
         CCard(

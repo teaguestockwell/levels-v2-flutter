@@ -1,0 +1,11 @@
+{"protocolVersion":"0.1.1","runnerVersion":null,"pid":46733,"type":"start","time":0}
+{"suite":{"id":0,"platform":"vm","path":"/Users/teaguestockwell/Desktop/tSAppDev/Projects/five_level_flutter/test/screens/glossary/glossary_test.dart"},"type":"suite","time":1}
+{"test":{"id":1,"name":"loading /Users/teaguestockwell/Desktop/tSAppDev/Projects/five_level_flutter/test/screens/glossary/glossary_test.dart","suiteID":0,"groupIDs":[],"metadata":{"skip":false,"skipReason":null},"line":null,"column":null,"url":null},"type":"testStart","time":2}
+{"count":1,"type":"allSuites","time":4}
+{"testID":1,"result":"success","skipped":false,"hidden":true,"type":"testDone","time":2813}
+{"group":{"id":2,"suiteID":0,"parentID":null,"name":"","metadata":{"skip":false,"skipReason":null},"testCount":1,"line":null,"column":null,"url":null},"type":"group","time":2819}
+{"test":{"id":3,"name":"as a user, when i click on glossary, build list of glossary cards","suiteID":0,"groupIDs":[2],"metadata":{"skip":false,"skipReason":null},"line":126,"column":5,"url":"package:flutter_test/src/widget_tester.dart","root_line":10,"root_column":3,"root_url":"file:///Users/teaguestockwell/Desktop/tSAppDev/Projects/five_level_flutter/test/screens/glossary/glossary_test.dart"},"type":"testStart","time":2819}
+{"testID":3,"result":"success","skipped":false,"hidden":false,"type":"testDone","time":3922}
+{"success":true,"type":"done","time":3953}
+
+export PATH=/Users/Shared/sonarqube-8.6.0.39681/bin:/Users/teaguestockwell/Desktop/tSAppDev/Libs/sonar/sonarqube-8.6.0.39681/bin
