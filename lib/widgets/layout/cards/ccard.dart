@@ -34,7 +34,7 @@ class _CCardState extends State<CCard> {
   @override
   void initState() {
     super.initState();
-    title = Util.getTruncated(this.widget.title);
+    title = Util.getTruncated(this.widget.title,30);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;

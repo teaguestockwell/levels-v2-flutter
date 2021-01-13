@@ -78,6 +78,7 @@ class _ChartCCardState extends State<ChartCCard> {
           Tex('Basic Weight'),
           ValidatedText(
             inputType: 1,
+            maxChars: 12,
             notifyIsValid: (_) {},
             validateText: _validateWeight,
             onChange: (String weight) {
@@ -88,6 +89,7 @@ class _ChartCCardState extends State<ChartCCard> {
       Row2(
           Tex('Basic Moment'),
           ValidatedText(
+            maxChars: 12,
             inputType: 1,
             notifyIsValid: (_) {},
             validateText: _validateMoment,

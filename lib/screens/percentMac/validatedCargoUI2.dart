@@ -57,12 +57,14 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
         onChange: changeName,
         maxChars: 30,
         validateText: validateName,
-        width: double.infinity,
+        width: double.infinity, 
+        notifyIsValid: (_) {},
       )),
       Div(),
       Row2(
           Tex('Weight'),
           ValidatedText(
+            notifyIsValid: (_) {},
             initText: this.widget.nwf.weight,
             inputType: 1,
             onChange: changeWeight,
@@ -73,6 +75,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       Row2(
           Tex('Fuselage Station'),
           ValidatedText(
+            notifyIsValid: (_) {},
             initText: _getNWFfs(),
             inputType: 1,
             onChange: changeFS,
@@ -83,6 +86,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       Row2(
           Tex('Qty'),
           ValidatedText(
+            notifyIsValid: (_) {},
             initText: this.widget.nwf.qty,
             inputType: 1,
             onChange: changeQty,

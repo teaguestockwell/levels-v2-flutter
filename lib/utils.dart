@@ -14,11 +14,11 @@ typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, NameWeightFS value);
 
 class Util{
-  static String getTruncated(String s) {
-    if (s.length <= 30) {
+  static String getTruncated(String s, int max) {
+    if (s.length <= max) {
       return s;
     }
-    return s.substring(0, 27) + '...';
+    return s.substring(0, max-3) + '...';
   }
 }
 
