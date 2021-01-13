@@ -1,19 +1,23 @@
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
-import '../../widgets/display/text.dart';
-import '../../widgets/input/customButton.dart';
+import '../display/text.dart';
+import 'customButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MoreOpModal extends StatefulWidget {
   final MoreOp moreOp;
-  MoreOpModal(this.moreOp);
+  MoreOpModal(this.moreOp): assert(moreOp != null),
+        assert(moreOp.icon != null),
+        assert(moreOp.name != null),
+        assert(moreOp.url != null);
+
   @override
-  _MoreOpModalState createState() => _MoreOpModalState();
+  MoreOpModalState createState() => MoreOpModalState();
 }
 
-class _MoreOpModalState extends State<MoreOpModal> {
+class MoreOpModalState extends State<MoreOpModal> {
   int spinIdx =0;
   int _timesPressed = 0;
   List<Widget> _spinnerWidgets = [];

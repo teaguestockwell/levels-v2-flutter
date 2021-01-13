@@ -12,13 +12,14 @@ typedef void IntCallBackIntPara(int i);
 typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, NameWeightFS value);
+typedef void UnitChangeCB(var i);
 
-class Util{
+class Util {
   static String getTruncated(String s, int max) {
     if (s.length <= max) {
       return s;
     }
-    return s.substring(0, max-3) + '...';
+    return s.substring(0, max - 3) + '...';
   }
 }
 

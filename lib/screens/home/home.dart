@@ -5,7 +5,7 @@ import '../../backend/cont.dart';
 import '../../widgets/display/rowCenterTest.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/customButton.dart';
-import '../../widgets/input/moreOpModalSpin.dart';
+import '../../widgets/input/moreOpModal.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../backend/model.dart';

@@ -1,7 +1,7 @@
 import '../../widgets/input/buttonModalSpinner.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/input/unitConversionCustomTextFeild.dart';
+import '../../widgets/input/customTextField.dart';
 import '../../widgets/layout/rows/row1.dart';
 import '../../utils.dart';
 import 'package:flutter/material.dart';
@@ -15,27 +15,30 @@ class _UnitConversionState extends State<UnitConversion> {
   var controllerOne = TextEditingController();
   var controllerTwo = TextEditingController();
   var leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
-  CustomTextField tfOne, tfTwo;
+  Widget tfOne, tfTwo;
   List<Distance> selectedUnitUnits = [];
   String unitName;
   bool toggle = true;
 
   @override
   void initState() {
+    super.initState();
+
     controllerOne.addListener(() {
       leftUnitUnitChanged(toggle);
     });
     controllerTwo.addListener(() {
       rightUnitUnitChanged(toggle);
     });
+
     tfOne = CustomTextField(controllerOne);
     tfTwo = CustomTextField(controllerTwo);
+
     selectedUnitUnits = Unit(0).list;
     unitName = Unit.units[0];
     unitIdx = 0;
     leftUnitUnitIdx = 0;
     rightUnitUnitIdx = 0;
-    super.initState();
   }
 
   @override
@@ -53,7 +56,7 @@ class _UnitConversionState extends State<UnitConversion> {
     return ret;
   }
 
-  unitChange(int n) {
+  void unitChange(int n) {
     setState(() {
       leftUnitUnitIdx = 0;
       rightUnitUnitIdx = 0;
