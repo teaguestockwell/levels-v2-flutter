@@ -33,6 +33,15 @@ RUN flutter pub get
 # Echo version
 RUN flutter doctor
 
+# Run tests
+RUN flutter test --machine > tests.output
+
+# Compute coverage (--machine and --coverage cannot be run at once...)
+RUN flutter test --coverage
+
+# Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
+#RUN sonar-scanner
+
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
 
@@ -41,7 +50,7 @@ FROM nginx
 #FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.0.244
 
 # Run as a unprivileged user
-#USER appuser
+USER appuser
 
 # Copy build output from first stage 
 COPY --from=0 /app/build/web /usr/share/nginx/html
