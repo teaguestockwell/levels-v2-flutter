@@ -4,21 +4,21 @@ import 'customButton.dart';
 import '../../backend/cont.dart';
 import '../../utils.dart';
 
-class CustomButtonDatePicker extends StatelessWidget {
+class ButtonDatePicker extends StatelessWidget {
   final String buttText;
   final DateCallBack onChange;
   final DateTime currentTime;
-  CustomButtonDatePicker(
-    {
-      @required this.buttText,
-      @required this.onChange,
-      @required this.currentTime,
-    }
-  );
+  ButtonDatePicker({
+    @required this.buttText,
+    @required this.onChange,
+    @required this.currentTime,
+  })  : assert(buttText != null),
+        assert(onChange != null),
+        assert(currentTime != null);
+
   @override
   Widget build(BuildContext context) {
-    return 
-    CustomButton(
+    return CustomButton(
       buttText,
       onPressed: () {
         DatePicker.showDatePicker(
@@ -28,17 +28,13 @@ class CustomButtonDatePicker extends StatelessWidget {
           currentTime: this.currentTime,
           locale: LocaleType.en,
           theme: DatePickerTheme(
-            backgroundColor: Const.modalPickerColor,
-            itemStyle: TextStyle(
-              color: Const.textColor,
-              fontWeight: Const.fwSpinner,
-              fontSize: Const.textSizeModalSpinner
-            ),
-            doneStyle: TextStyle(
-            color: Const.textColor,
-              fontSize: Const.textSize
-            )
-          ), 
+              backgroundColor: Const.modalPickerColor,
+              itemStyle: TextStyle(
+                  color: Const.textColor,
+                  fontWeight: Const.fwSpinner,
+                  fontSize: Const.textSizeModalSpinner),
+              doneStyle:
+                  TextStyle(color: Const.textColor, fontSize: Const.textSize)),
         );
       },
     );

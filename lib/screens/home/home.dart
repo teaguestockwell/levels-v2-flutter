@@ -2,7 +2,7 @@ import '../../widgets/input/buttonModalSpinner.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';
-import '../../widgets/display/rowCenterTest.dart';
+import '../../widgets/display/rowCenterText.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/customButton.dart';
 import '../../widgets/input/moreOpModal.dart';

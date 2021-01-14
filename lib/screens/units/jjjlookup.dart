@@ -28,7 +28,7 @@ class _JJJLookupState extends State<JJJLookup> {
       children: [
         Row2(
           Tex('YYYY MM DD'),
-          CustomButtonDatePicker(
+          ButtonDatePicker(
             buttText: dfYMD.format(dateAcomp),
             onChange: timeChange,
             currentTime: dateAcomp,

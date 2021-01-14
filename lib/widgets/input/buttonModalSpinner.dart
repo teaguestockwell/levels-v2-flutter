@@ -14,7 +14,11 @@ class ButtonModalSpinner extends StatefulWidget {
     this.initIdx,
     @required this.onSpin,
     @required this.stringList,
-  }) : super(key: UniqueKey());
+  }) 
+  :assert(onSpin!=null),
+   assert(stringList!=null),
+    assert(stringList.isNotEmpty),
+     super(key: UniqueKey());
 
   @override
   _ButtonModalSpinnerState createState() => _ButtonModalSpinnerState();

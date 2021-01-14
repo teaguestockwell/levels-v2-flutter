@@ -6,25 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
-class CustomButtonDateTimePicker extends StatelessWidget {
+class ButtonDateTimePicker extends StatelessWidget {
   final String buttText;
-  ///use (DateTime)=>{your code here}
   final DateCallBack onChange;
   final DateTime currentTime;
-  ///default yyyy MM dd
   final dateFormat = DateFormat('yyyy MM dd HH:mm');
-  
-  CustomButtonDateTimePicker(
-    {
-      @required this.buttText,
-      @required this.onChange,
-      @required this.currentTime,
-    }
-  );
+
+  ButtonDateTimePicker({
+    @required this.buttText,
+    @required this.onChange,
+    @required this.currentTime,
+  })  : assert(buttText != null),
+        assert(onChange != null),
+        assert(currentTime != null);
+        
   @override
   Widget build(BuildContext context) {
-    return 
-    CustomButton(
+    return CustomButton(
       buttText,
       onPressed: () {
         DatePicker.showDateTimePicker(
@@ -34,18 +32,15 @@ class CustomButtonDateTimePicker extends StatelessWidget {
           currentTime: this.currentTime,
           locale: LocaleType.en,
           theme: DatePickerTheme(
-            backgroundColor: Const.modalPickerColor,
-            itemStyle: TextStyle(
-              color: Const.textColor,
-              fontWeight: Const.fwSpinner,
-              fontSize: Const.textSizeModalSpinner
-            ),
-            doneStyle: TextStyle(
-              color: Const.textColor,
-              fontWeight: Const.fwSpinner,
-              fontSize: Const.textSizeModalSpinner
-            )
-          ), 
+              backgroundColor: Const.modalPickerColor,
+              itemStyle: TextStyle(
+                  color: Const.textColor,
+                  fontWeight: Const.fwSpinner,
+                  fontSize: Const.textSizeModalSpinner),
+              doneStyle: TextStyle(
+                  color: Const.textColor,
+                  fontWeight: Const.fwSpinner,
+                  fontSize: Const.textSizeModalSpinner)),
         );
       },
     );

@@ -68,7 +68,7 @@ class _PreInspState extends State<PreInsp> {
       children: [
         Row2(
             Tex('Acomplished At'),
-            CustomButtonDateTimePicker(
+            ButtonDateTimePicker(
               buttText: acompString,
               onChange: timeChange,
               currentTime: acompDate,

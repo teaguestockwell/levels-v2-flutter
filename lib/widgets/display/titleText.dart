@@ -6,7 +6,9 @@ class TitleText extends StatelessWidget {
   final String name;
   final bool valid;
 
-  TitleText({@required this.name, @required this.valid});
+  TitleText({@required this.name, @required this.valid})
+      : assert(name != null),
+        assert(valid != null);
 
   @override
   Widget build(BuildContext context) {

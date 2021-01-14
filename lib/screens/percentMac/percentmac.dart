@@ -112,7 +112,7 @@ class _PerMacScreenState extends State<PerMacScreen>
               tanksCard,
               chartcCard,
               cargoCard,
-              GetMacButton('Show MAC%', onPressed: getPerMac),
+              GetMacButton(text: 'Show MAC%', onPressed: getPerMac),
             ])));
   }
 }

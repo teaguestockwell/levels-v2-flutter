@@ -5,24 +5,29 @@ import '../../utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ButtomSpinnerModalButton extends StatefulWidget {
+class ButtonModalSpinnerButton extends StatefulWidget {
   final List<String> stringList;
   final IntCallBackIntPara onSpin;
   final IntCallBack onPress;
   final String modalButtonText;
 
-  ButtomSpinnerModalButton(
+  ButtonModalSpinnerButton(
       {@required this.onSpin,
       @required this.onPress,
       @required this.stringList,
-      @required this.modalButtonText});
+      @required this.modalButtonText})
+      : assert(onSpin != null),
+        assert(onPress != null),
+        assert(stringList != null),
+        assert(modalButtonText != null),
+        assert(stringList.isNotEmpty);
 
   @override
-  _ButtomSpinnerModalButtonState createState() =>
-      _ButtomSpinnerModalButtonState();
+  _ButtonModalSpinnerButtonState createState() =>
+      _ButtonModalSpinnerButtonState();
 }
 
-class _ButtomSpinnerModalButtonState extends State<ButtomSpinnerModalButton> {
+class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
   int spinIdx = 0;
 
   void _spin(int newIdx) {

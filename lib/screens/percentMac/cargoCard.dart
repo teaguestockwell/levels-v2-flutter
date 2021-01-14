@@ -50,20 +50,20 @@ class _CargoCardState extends State<CargoCard> {
   bool valid = true;
 
   ///modal spinner that changes this.selectedSpinnerConfig
-  ButtomSpinnerModalButton configSpin;
+  ButtonModalSpinnerButton configSpin;
   NameWeightFS selectedSpinnerCargo;
 
   ///modal spinner that changes this.selectedSpinnerCargo
-  ButtomSpinnerModalButton cargoSpin;
+  ButtonModalSpinnerButton cargoSpin;
   Config selectedSpinnerConfig;
-  ButtomSpinnerModalButton removeAllSpin;
+  ButtonModalSpinnerButton removeAllSpin;
 
   @override
   initState() {
     super.initState();
     this.widget.onValidationChange(1, valid);
     selectedSpinnerConfig = this.widget.air.configs[0];
-    configSpin = ButtomSpinnerModalButton(
+    configSpin = ButtonModalSpinnerButton(
       stringList: _getConfigStrings(),
       modalButtonText: 'Update Config',
       onPress: updateConfig,
@@ -71,14 +71,14 @@ class _CargoCardState extends State<CargoCard> {
     );
 
     selectedSpinnerCargo = this.widget.air.addaCargo[0];
-    cargoSpin = ButtomSpinnerModalButton(
+    cargoSpin = ButtonModalSpinnerButton(
       stringList: _getCargoStrings(),
       modalButtonText: 'Add Cargo',
       onSpin: cargoChange,
       onPress: addCargo,
     );
 
-    removeAllSpin = ButtomSpinnerModalButton(
+    removeAllSpin = ButtonModalSpinnerButton(
       stringList: ['Are You Sure?'],
       modalButtonText: 'Yes!',
       onSpin: (_) {},

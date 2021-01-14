@@ -1,4 +1,4 @@
-import '../../widgets/display/rowCenterTest.dart';
+import '../../widgets/display/rowCenterText.dart';
 import '../../widgets/layout/cards/ccard.dart';
 import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';

@@ -34,7 +34,7 @@ class _DurationLookupState extends State<DurationLookup> {
       children: [
         Row2(
           Tex('Date Time One'),
-          CustomButtonDateTimePicker(
+          ButtonDateTimePicker(
             buttText: df.format(one),
             onChange: (var i)=>{setState(() {one = i;})}, 
             currentTime: one,
@@ -45,7 +45,7 @@ class _DurationLookupState extends State<DurationLookup> {
 
         Row2(
           Tex('Date Time Two'),
-          CustomButtonDateTimePicker(
+          ButtonDateTimePicker(
             buttText: df.format(two),
             onChange: (var i)=>{setState(() {two = i;})}, 
             currentTime: one,
