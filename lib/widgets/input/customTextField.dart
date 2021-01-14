@@ -21,7 +21,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         child: TextField(
           cursorColor: Colors.white,
           controller: this.widget.c,
-          maxLength: 12,
+          //maxLength: 12, 
           decoration: dec,
           keyboardType: TextInputType.numberWithOptions(decimal: true),
           inputFormatters: <TextInputFormatter>[DecimalTextInputFormatter()],
