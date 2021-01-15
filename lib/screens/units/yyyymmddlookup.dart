@@ -1,3 +1,5 @@
+import 'package:five_level_one/widgets/layout/div.dart';
+
 import '../../widgets/input/buttonModalSpinner.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/constText.dart';
@@ -7,15 +9,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class YYYYMMDDLookup2 extends StatefulWidget {
+class YYYYMMDDLookup extends StatefulWidget {
   @override
-  _YYYYMMDDLookup2State createState() => _YYYYMMDDLookup2State();
+  _YYYYMMDDLookupState createState() => _YYYYMMDDLookupState();
 }
 
-class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
+class _YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
   var year = DateTime.now().year;
   var jjj = int.tryParse(DateFormat('DDD').format(DateTime.now()));
-  var dfYMD = DateFormat('yyyy MM dd');
+  final dfYMD = DateFormat('yyyy MM dd');
   var outYMD = DateTime(2060,12,31);
   int daysInyea = 366;
 
@@ -35,8 +37,10 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
     return ret;
   }
 
-  yearChange(var newyear) {
-    //Complicated logic that handles day spinner index for leap years
+  yearChange(int newyear) {
+
+    bool isLeap = DateTime(newyear).year
+    //logic that handles day spinner index for leap years
     setState(() {
       year = 2060 - newyear;
       var boy = DateTime(2060 - newyear, 1, 1, 12, 00);
@@ -72,25 +76,19 @@ class _YYYYMMDDLookup2State extends State<YYYYMMDDLookup2> {
     return Column(
       children: [
         Row2(
-            Tex('YYYY'),
-            ButtonModalSpinner(
+          Tex('YYYY'),
+          ButtonModalSpinner(
               stringList: getStringYear(),
               onSpin: yearChange,
             )),
-        Divider(
-          color: Const.divColor,
-          thickness: Const.divThickness,
-        ),
+        Div(),
         Row2(
             Tex('Julian Day'),
             ButtonModalSpinner(
               stringList: getStringDays(),
               onSpin: dayChange,
             )),
-        Divider(
-          color: Const.divColor,
-          thickness: Const.divThickness,
-        ),
+        Div(),
         Row2(Tex('YYYY MM DD'), ConstText(dfYMD.format(outYMD)))
       ],
     );
