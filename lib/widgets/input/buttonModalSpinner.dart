@@ -32,6 +32,7 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   List<Widget> getSpinnerWidgets(List<String> strings) {
     return List.generate(strings.length, (i) {
       return Center(
+        key: Key('spinner'),
           child: Tex(
         strings[i],
         size: Const.textSizeModalSpinner,

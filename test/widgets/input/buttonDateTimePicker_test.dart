@@ -22,7 +22,7 @@ void main() {
     expect(find.text('hi'), findsOneWidget);
   });
 
-  testWidgets('given a ButtonDateTimePicker, when tapped, then it will oped',
+  testWidgets('given a ButtonDateTimePicker, when tapped, then it will open',
       (WidgetTester wt) async {
     //given
     final test = ButtonDateTimePicker(

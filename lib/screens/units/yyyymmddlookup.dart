@@ -58,8 +58,10 @@ class YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
+    return Padding(
+      padding: EdgeInsets.only(top:5),
+       child: Column(
+        children: [
         Row2(
             Tex('YYYY'),
             ButtonModalSpinner(
@@ -77,7 +79,8 @@ class YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
             )),
         Div(),
         Row2(Tex('YYYY MM DD'), ConstText(getYMDString())),
-      ],
+        ],
+      )
     );
   }
 }
