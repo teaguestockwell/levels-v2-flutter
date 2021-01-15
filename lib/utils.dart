@@ -1,4 +1,6 @@
 import 'dart:math';
+import 'package:jiffy/jiffy.dart';
+
 import 'backend/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,6 +23,16 @@ class Util {
     }
     return s.substring(0, max - 3) + '...';
   }
+
+  static int getDaysInYear(int year) {
+    final isLeap = Jiffy({'year': year}).isLeapYear;
+    if (isLeap) {
+      return 366;
+    } else {
+      return 365;
+    }
+  }
+
 }
 
 class Distance {
