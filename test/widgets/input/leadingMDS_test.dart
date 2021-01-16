@@ -1,3 +1,4 @@
+import 'package:five_level_one/backend/cont.dart';
 import 'package:five_level_one/backend/model.dart';
 import 'package:five_level_one/widgets/input/leadingMDS.dart';
 import 'package:flutter/material.dart';
@@ -5,7 +6,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 
 Widget makeWidgetTestable(Widget child) {
-  return MaterialApp(home: Scaffold(body: child));
+  return MaterialApp(
+      home: Scaffold(
+    appBar: AppBar(
+        backgroundColor: Const.bottombarcolor,
+        leadingWidth: Const.pickerWidth,
+        leading: child),
+    body: Container(),
+    backgroundColor: Const.background,
+  ));
 }
 
 class MockMoreOp extends Mock implements MoreOp {}
@@ -20,7 +29,7 @@ void main() {
     when(mockMoreOp.url).thenReturn(null);
     when(mockMoreOp.icon).thenReturn(null);
 
-    final test = LeadingMDS(text: 'hi', onPressed: (_){}, moreOp: mockMoreOp);
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
 
     //when
@@ -39,7 +48,7 @@ void main() {
     when(mockMoreOp.url).thenReturn(null);
     when(mockMoreOp.icon).thenReturn(null);
 
-    final test = LeadingMDS(text: 'hi', onPressed: (_){}, moreOp: mockMoreOp);
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
 
     //when
@@ -50,7 +59,7 @@ void main() {
     expect(find.text('time to wake up'), findsNothing);
   });
 
-  testWidgets('given a moreoppop, when clicked, it will open and create text',
+  testWidgets('given a leading mds, when clicked, it will open and create text',
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
@@ -61,7 +70,7 @@ void main() {
     when(mockMoreOp.url).thenReturn(null);
     when(mockMoreOp.icon).thenReturn(null);
 
-    final test = LeadingMDS(text: 'hi', onPressed: (_){}, moreOp: mockMoreOp);
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
 
     //when
@@ -74,7 +83,8 @@ void main() {
     expect(find.text('time to wake up'), findsOneWidget);
   });
 
-  testWidgets('given a leading mds, when clicked, it will open and create icons',
+  testWidgets(
+      'given a leading mds, when clicked, it will open and create icons',
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
@@ -85,7 +95,7 @@ void main() {
     when(mockMoreOp.url).thenReturn(null);
     when(mockMoreOp.icon).thenReturn(null);
 
-    final test = LeadingMDS(text: 'hi', onPressed: (_){}, moreOp: mockMoreOp);
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
 
     //when
@@ -97,7 +107,27 @@ void main() {
     expect(find.byType(PopupMenuItem), findsNWidgets(2));
   });
 
-  testWidgets('given an open moreoppop, when clicking away, it will disapear',
+  testWidgets('given a leading mds, when open, then it will not overflow',
+      (WidgetTester wt) async {
+    //given
+    final mockMoreOp = MockMoreOp();
+    when(mockMoreOp.name).thenReturn(List.generate(50, (i) => i.toString()));
+    when(mockMoreOp.url).thenReturn(null);
+    when(mockMoreOp.icon).thenReturn(null);
+
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
+    final wrapper = makeWidgetTestable(test);
+
+    //when
+    await wt.pumpWidget(wrapper);
+    await wt.tap(find.byType(Icon));
+    await wt.pump(Duration(seconds: 20));
+
+    //then
+    expect(find.byType(Icon), findsNWidgets(51));
+  });
+
+  testWidgets('given an open leading mds, when clicking away, it will disapear',
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
@@ -108,7 +138,7 @@ void main() {
     when(mockMoreOp.url).thenReturn(null);
     when(mockMoreOp.icon).thenReturn(null);
 
-    final test = LeadingMDS(text: 'hi', onPressed: (_){}, moreOp: mockMoreOp);
+    final test = LeadingMDS(text: 'hi', onPressed: (_) {}, moreOp: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
 
     await wt.pumpWidget(wrapper);

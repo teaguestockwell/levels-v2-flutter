@@ -105,36 +105,30 @@ class _HomeState extends State<Home> {
     moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
     bn = BottomNav(airPages, moreOp, airNames);
 
-    var ret = CupertinoScrollbar(
-        isAlwaysShown: true,
-        controller: sc,
-        child: ListView(controller: sc, children: [
-          CardAllwaysOpen(
-              title: 'FIVE LEVEL', children: [img], color: Const.textColor),
-          CardAllwaysOpen(
-            title: ds.get('welcometitle'),
-            color: Const.textColor,
-            children: [
-              RowCenterText(ds.get('welcomebody')),
-              Div(),
-              Row2(
-                CustomButton('I Accept', onPressed: accept),
-                MoreOpModal(moreOp),
-              )
-            ],
-          ),
-        ]));
+    var ret = Scaffold(
+        backgroundColor: Const.background,
+        body: CupertinoScrollbar(
+            isAlwaysShown: true,
+            controller: sc,
+            child: ListView(controller: sc, children: [
+              CardAllwaysOpen(
+                  title: 'FIVE LEVEL', children: [img], color: Const.textColor),
+              CardAllwaysOpen(
+                title: ds.get('welcometitle'),
+                color: Const.textColor,
+                children: [
+                  RowCenterText(ds.get('welcomebody')),
+                  Div(),
+                  Row2(
+                    CustomButton('I Accept', onPressed: accept),
+                    MoreOpModal(moreOp),
+                  )
+                ],
+              ),
+            ])));
     setState(() {
       body = ret;
     });
-  }
-
-  List<String> getMDSNames() {
-    List<String> ret = [];
-    airs.forEach((air) {
-      ret.add(air.name);
-    });
-    return ret;
   }
 
   void accept() {
@@ -145,6 +139,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: body, backgroundColor: Const.background);
+    return body;
   }
 }

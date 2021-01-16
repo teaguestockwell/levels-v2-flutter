@@ -13,13 +13,11 @@ class BottomNav extends StatefulWidget {
   BottomNav(this.tabPages, this.moreOp, this.airNames);
 
   @override
-  _BottomNavState createState() => _BottomNavState();
+  BottomNavState createState() => BottomNavState();
 }
 
-class _BottomNavState extends State<BottomNav> {
-  int pageIndex = 0;
-  List<String> titleArr = ['Units', 'MAC%', 'Glossary'];
-  double widthFrac;
+class BottomNavState extends State<BottomNav> {
+  int pageIndex = 1;
   PageController pc;
   MoreOp airSelector;
   int airIdx = 0;
@@ -28,10 +26,9 @@ class _BottomNavState extends State<BottomNav> {
   void initState() {
     super.initState();
 
-    print(this.widget.airNames.toString());
-
     airSelector = MoreOp(
-        name: List.generate(this.widget.airNames.length, (i) => this.widget.airNames[i]),
+        name: List.generate(
+            this.widget.airNames.length, (i) => this.widget.airNames[i]),
         url: null,
         icon: null);
   }
@@ -58,6 +55,7 @@ class _BottomNavState extends State<BottomNav> {
   void airChange(int newAir) {
     setState(() {
       airIdx = newAir;
+      pageIndex = 1;
     });
   }
 
@@ -70,8 +68,9 @@ class _BottomNavState extends State<BottomNav> {
       pcAnimate(pageIndex);
     });
 
+    /// apx 1270 is the cutoff width for desktop view
     if (MediaQuery.of(context).size.width / Const.maxCardWidth > 1.8) {
-      pc = PageController(initialPage: 0, viewportFraction: .33);
+      pc = PageController(initialPage: 1, viewportFraction: .33);
       pageIndex = 1;
       return Scaffold(
           backgroundColor: Const.background,
@@ -98,7 +97,7 @@ class _BottomNavState extends State<BottomNav> {
         backgroundColor: Const.background,
         appBar: AppBar(
           backgroundColor: Const.bottombarcolor,
-          title: Tex(titleArr[pageIndex]),
+          title: Tex(['Units', 'MAC%', 'Glossary'].elementAt(airIdx)),
           actions: [MoreOpPopup(this.widget.moreOp)],
           leadingWidth: Const.pickerWidth,
           leading: LeadingMDS(
