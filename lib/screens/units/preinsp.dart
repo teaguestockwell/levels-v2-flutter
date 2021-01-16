@@ -10,12 +10,12 @@ import 'package:intl/intl.dart';
 
 class PreInsp extends StatefulWidget {
   @override
-  _PreInspState createState() => _PreInspState();
+  PreInspState createState() => PreInspState();
 }
 
-class _PreInspState extends State<PreInsp> {
+class PreInspState extends State<PreInsp> {
   ButtonModalSpinner buttonDurration;
-  final startHour = 1;
+  final startHour = 48;
   final numHours = 144;
   final f = DateFormat('yyyy MM dd HH:mm');
   int duration = 48;
@@ -31,13 +31,10 @@ class _PreInspState extends State<PreInsp> {
         .format(DateTime.now().subtract(Duration(hours: startHour)))
         .toString();
 
-    List<String> stringList = [];
-    for (int i = 1; i <= numHours; i++) {
-      stringList.add(i.toString());
-    }
     buttonDurration = ButtonModalSpinner(
-      stringList: stringList,
+      stringList: List.generate(numHours, (i) => (i+1).toString()),
       onSpin: lenChange,
+      initIdx: duration-1,
     );
 
     super.initState();
@@ -58,13 +55,11 @@ class _PreInspState extends State<PreInsp> {
     });
   }
 
-  void p() {
-    //print('achompDate: $acompDate \n expireAt: $expireAt \n acomp: $acompString \n duration: $duration');
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Padding(
+      padding: EdgeInsets.only(top:5),
+      child:Column(
       children: [
         Row2(
             Tex('Acomplished At'),
@@ -84,6 +79,6 @@ class _PreInspState extends State<PreInsp> {
         ),
         Row2(Tex('Expires At'), ConstText(expireAt))
       ],
-    );
+    ));
   }
 }
