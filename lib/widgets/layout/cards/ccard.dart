@@ -1,5 +1,4 @@
 import '../../../utils.dart';
-import '../max.dart';
 import '../alignPadding.dart';
 import '../../../backend/cont.dart';
 import '../../../widgets/display/text.dart';

@@ -1,11 +1,13 @@
-import 'package:five_level_one/widgets/layout/max.dart';
-
+import 'dart:collection';
+import 'package:five_level_one/screens/glossary/glossary.dart';
+import 'package:five_level_one/screens/percentMac/percentmac.dart';
+import 'package:five_level_one/screens/units/units.dart';
+import 'package:five_level_one/widgets/layout/div.dart';
 import '../../widgets/input/buttonModalSpinner.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';
 import '../../widgets/display/rowCenterText.dart';
-import '../../widgets/display/text.dart';
 import '../../widgets/input/customButton.dart';
 import '../../widgets/input/moreOpModal.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
@@ -26,7 +28,9 @@ class _HomeState extends State<Home> {
   ButtonModalSpinner airSpin;
   MoreOp moreOp;
   BottomNav bn;
-  List<Aircraft> aircrafts = [];
+  List<Aircraft> airs = [];
+  var airPages = LinkedHashMap<int, List<Widget>>();
+  List<String> airNames;
   Widget body = Loading();
   Image img;
   final sc = ScrollController();
@@ -57,7 +61,7 @@ class _HomeState extends State<Home> {
 
   void buildAircraft(QuerySnapshot qs) {
     qs.docs.forEach((v) {
-      aircrafts.add(Aircraft(
+      airs.add(Aircraft(
           name: v.get('name'),
           fs0: v.get('fs0'),
           fs1: v.get('fs1'),
@@ -79,6 +83,13 @@ class _HomeState extends State<Home> {
           cargomoms: v.get('cargomoms'),
           configstrings: v.get('configs')));
     });
+
+    for (int i = 0; i < airs.length; i++) {
+      airPages[i] = [Units(), PerMacScreen(airs[i]), GlossaryScreen(airs[i])];
+    }
+
+    airNames = List.generate(airs.length, (i) => airs[i].name);
+
     getDislaimerDoc();
   }
 
@@ -92,8 +103,7 @@ class _HomeState extends State<Home> {
 
   void buildDiclaimer(DocumentSnapshot ds) {
     moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
-    bn = BottomNav(aircrafts[0], moreOp);
-    airSpin = ButtonModalSpinner(stringList: getMDSNames(), onSpin: spin);
+    bn = BottomNav(airPages, moreOp, airNames);
 
     var ret = CupertinoScrollbar(
         isAlwaysShown: true,
@@ -102,41 +112,35 @@ class _HomeState extends State<Home> {
           CardAllwaysOpen(
               title: 'FIVE LEVEL', children: [img], color: Const.textColor),
           CardAllwaysOpen(
-              title: ds.get('welcometitle'),
-              children: [RowCenterText(ds.get('welcomebody'))],
-              color: Const.textColor),
-          CardAllwaysOpen(
-            title: 'Aircraft',
+            title: ds.get('welcometitle'),
             color: Const.textColor,
             children: [
-              Row2(Tex('MDS'), airSpin),
-              Divider(color: Const.divColor, thickness: Const.divThickness),
+              RowCenterText(ds.get('welcomebody')),
+              Div(),
               Row2(
                 CustomButton('I Accept', onPressed: accept),
                 MoreOpModal(moreOp),
               )
             ],
-          )
+          ),
         ]));
     setState(() {
       body = ret;
     });
   }
 
-  spin(int i) {
-    bn = BottomNav(aircrafts[i], moreOp);
-  }
-
   List<String> getMDSNames() {
     List<String> ret = [];
-    aircrafts.forEach((air) {
+    airs.forEach((air) {
       ret.add(air.name);
     });
     return ret;
   }
 
   void accept() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => bn));
+    setState(() {
+      body = bn;
+    });
   }
 
   @override

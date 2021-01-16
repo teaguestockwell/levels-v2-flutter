@@ -1,18 +1,16 @@
+import 'dart:collection';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
-import '../../screens/glossary/glossary.dart';
-import '../../screens/percentMac/percentmac.dart';
-import '../../screens/units/units.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/leadingMDS.dart';
 import '../../widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
 
 class BottomNav extends StatefulWidget {
-  final Aircraft air;
+  final LinkedHashMap<int, List<Widget>> tabPages;
   final MoreOp moreOp;
-
-  BottomNav(this.air, this.moreOp);
+  final List<String> airNames;
+  BottomNav(this.tabPages, this.moreOp, this.airNames);
 
   @override
   _BottomNavState createState() => _BottomNavState();
@@ -20,20 +18,22 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int pageIndex = 0;
-  List<Widget> tabPages;
   List<String> titleArr = ['Units', 'MAC%', 'Glossary'];
   double widthFrac;
   PageController pc;
+  MoreOp airSelector;
+  int airIdx = 0;
 
   @override
   void initState() {
     super.initState();
 
-    tabPages = [
-      Units(),
-      PerMacScreen(this.widget.air),
-      GlossaryScreen(this.widget.air)
-    ];
+    print(this.widget.airNames.toString());
+
+    airSelector = MoreOp(
+        name: List.generate(this.widget.airNames.length, (i) => this.widget.airNames[i]),
+        url: null,
+        icon: null);
   }
 
   @override
@@ -55,6 +55,12 @@ class _BottomNavState extends State<BottomNav> {
     });
   }
 
+  void airChange(int newAir) {
+    setState(() {
+      airIdx = newAir;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (pc != null) {
@@ -71,19 +77,19 @@ class _BottomNavState extends State<BottomNav> {
           backgroundColor: Const.background,
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
-            title: Tex(titleArr[pageIndex]),
+            title: Tex('Five Level'),
             actions: [MoreOpPopup(this.widget.moreOp)],
             leadingWidth: Const.pickerWidth,
             leading: LeadingMDS(
-              text: this.widget.air.name,
-              onPressed: () {
-                Navigator.pop(context);
-              },
+              moreOp: airSelector,
+              text: this.widget.airNames[airIdx],
+              onPressed: airChange,
             ),
           ),
           body: PageView(
+              key: UniqueKey(),
               physics: NeverScrollableScrollPhysics(),
-              children: tabPages,
+              children: this.widget.tabPages[airIdx],
               controller: pc));
     } else {
       pc = PageController(initialPage: pageIndex, viewportFraction: 1);
@@ -96,10 +102,9 @@ class _BottomNavState extends State<BottomNav> {
           actions: [MoreOpPopup(this.widget.moreOp)],
           leadingWidth: Const.pickerWidth,
           leading: LeadingMDS(
-            text: this.widget.air.name,
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            moreOp: airSelector,
+            text: this.widget.airNames[airIdx],
+            onPressed: airChange,
           ),
         ),
         bottomNavigationBar: BottomNavigationBar(
@@ -127,8 +132,9 @@ class _BottomNavState extends State<BottomNav> {
           ],
         ),
         body: PageView(
+            key: UniqueKey(),
             physics: NeverScrollableScrollPhysics(),
-            children: tabPages,
+            children: this.widget.tabPages[airIdx],
             controller: pc),
       );
     }

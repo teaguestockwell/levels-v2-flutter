@@ -1,21 +1,76 @@
+import 'package:five_level_one/backend/cont.dart';
+import 'package:five_level_one/backend/model.dart';
+
 import '../../widgets/display/text.dart';
 import '../../utils.dart';
 import 'package:flutter/material.dart';
 
 class LeadingMDS extends StatelessWidget {
   final String text;
-  final IntCallBack onPressed;
+  final IntCallBackIntPara onPressed;
+  ///null icons, and
+  final MoreOp moreOp;
 
-  LeadingMDS({@required this.text, @required this.onPressed})
+  LeadingMDS(
+      {@required this.text, @required this.onPressed, @required this.moreOp})
       : assert(text != null),
-        assert(onPressed != null);
+        assert(onPressed != null),
+        assert(moreOp != null),
+        assert(moreOp.name != null),
+        assert(moreOp.icon == null),
+        assert(moreOp.url == null);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: 8),
         child: Row(children: [
-          IconButton(icon: Icon(Icons.flight), onPressed: onPressed),
+          Theme(
+              //theme wrapper to remove tooltip
+              data: Theme.of(context).copyWith(
+                  tooltipTheme: TooltipThemeData(
+                      decoration: BoxDecoration(color: Colors.transparent))),
+              child: PopupMenuButton(
+                  onSelected: (var i) {
+                    this.onPressed(i);
+                  },
+                  tooltip: '',
+                  color: Const.modalPickerColor,
+
+                  ///three vertical dots icon
+                  icon: Icon(Icons.flight),
+                  itemBuilder: (_) {
+                    List<PopupMenuEntry> ret = [];
+                    for (int i = 0; i < moreOp.name.length; i++) {
+                      String text = () {
+                        if (moreOp.name[i].length > 24) {
+                          return moreOp.name[i].substring(0, 20) + '...';
+                        }
+                        return moreOp.name[i];
+                      }();
+
+                      Icon icon = () {
+                        try {
+                          return Icon(IconData(int.parse(moreOp.icon[i]),
+                              fontFamily: 'MaterialIcons'));
+                        } catch (_) {
+                          return Icon(
+                              IconData(59223, fontFamily: 'MaterialIcons'));
+                        }
+                      }();
+
+                      ret.add(PopupMenuItem(
+                          value: i,
+                          child: Row(children: [
+                            Padding(
+                              padding: EdgeInsets.only(right: 10),
+                              child: icon,
+                            ),
+                            Tex(text),
+                          ])));
+                    }
+                    return ret;
+                  })),
           Expanded(child: Tex(text)),
         ]));
   }
