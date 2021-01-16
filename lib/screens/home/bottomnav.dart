@@ -15,7 +15,7 @@ class BottomNav extends StatefulWidget {
   BottomNav(this.air, this.moreOp);
 
   @override
-  _BottomNavState createState() => new _BottomNavState();
+  _BottomNavState createState() => _BottomNavState();
 }
 
 class _BottomNavState extends State<BottomNav> {

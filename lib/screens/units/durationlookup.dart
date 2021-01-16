@@ -1,4 +1,4 @@
-import '../../backend/cont.dart';
+import 'package:five_level_one/widgets/layout/div.dart';
 import '../../widgets/display/constText.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/buttonDateTimePicker.dart';
@@ -8,10 +8,10 @@ import 'package:intl/intl.dart';
 
 class DurationLookup extends StatefulWidget {
   @override
-  _DurationLookupState createState() => _DurationLookupState();
+  DurationLookupState createState() => DurationLookupState();
 }
 
-class _DurationLookupState extends State<DurationLookup> {
+class DurationLookupState extends State<DurationLookup> {
   DateTime one = DateTime.now();
   DateTime two = DateTime.now().subtract(Duration(hours: 48));
   final df = DateFormat('yyyy MM dd HH:mm');
@@ -41,7 +41,7 @@ class _DurationLookupState extends State<DurationLookup> {
           )
         ),
 
-        Divider(color: Const.divColor,thickness: Const.divThickness,),
+        Div(),
 
         Row2(
           Tex('Date Time Two'),
@@ -52,7 +52,7 @@ class _DurationLookupState extends State<DurationLookup> {
           )
         ),
       
-        Divider(color: Const.divColor,thickness: Const.divThickness,),
+        Div(),
 
         Row2(Tex('Duration hhhhh:mm:ss'), ConstText(getDiff()))
       ]
