@@ -11,12 +11,24 @@ class TimeGrid extends StatefulWidget {
 
 class _TimeGrid extends State<TimeGrid> {
   Timer t;
+  var now = DateTime.now().toLocal();
+  var znow = DateTime.now().toUtc();
+  final lYYYYMMDD = DateFormat('yyyy MM dd');
+  final lJJJ = DateFormat('DDD');
+  final lHHMMSS = DateFormat('HH:mm:ss');
+  final zYYYYMMDD = DateFormat('yyyy MM dd');
+  final zJJJ = DateFormat('DDD');
+  final zHHMMSS = DateFormat('HH:mm:ss');
+
   @override
   void initState() {
-    t = Timer.periodic(Duration(seconds: 1), (v) {
-      setState(() {});
-    });
     super.initState();
+    t = Timer.periodic(Duration(seconds: 1), (v) {
+      setState(() {
+        now = DateTime.now().toLocal();
+        znow = now.toUtc();
+      });
+    });
   }
 
   @override
@@ -27,28 +39,15 @@ class _TimeGrid extends State<TimeGrid> {
 
   @override
   Widget build(BuildContext context) {
-    var now = DateTime.now();
-    var znow = now.toUtc();
-
-    var lYYYYMMDD = DateFormat('yyyy MM dd').format(now).toString();
-    var lJJJ = DateFormat('DDD').format(now).toString();
-    var lHHMMSS = DateFormat('HH:mm:ss').format(now).toString();
-
-    var zYYYYMMDD = DateFormat('yyyy MM dd').format(znow).toString();
-    var zJJJ = DateFormat('DDD').format(znow).toString();
-    var zHHMMSS = DateFormat('HH:mm:ss').format(znow).toString();
-
-    return  AlignPadding(
+    return AlignPadding(
         2.0,
         Alignment.center,
         Table(
             border: TableBorder(
                 horizontalInside: BorderSide(
-                    color: Const.divColor,
-                    width: Const.divThickness),
+                    color: Const.divColor, width: Const.divThickness),
                 verticalInside: BorderSide(
-                    color: Const.divColor,
-                    width: Const.divThickness)),
+                    color: Const.divColor, width: Const.divThickness)),
             children: [
               TableRow(children: [
                 AlignPadding(
@@ -93,7 +92,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      lHHMMSS,
+                      lHHMMSS.format(now),
                       fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
@@ -101,7 +100,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      lJJJ,
+                      lJJJ.format(now),
                       fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
@@ -109,7 +108,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      lYYYYMMDD,
+                      lYYYYMMDD.format(now),
                       fontWeight: FontWeight.normal,
                     )))
               ]),
@@ -126,7 +125,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      zHHMMSS,
+                      zHHMMSS.format(znow),
                       fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
@@ -134,7 +133,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      zJJJ,
+                      zJJJ.format(znow),
                       fontWeight: FontWeight.normal,
                     ))),
                 AlignPadding(
@@ -142,7 +141,7 @@ class _TimeGrid extends State<TimeGrid> {
                     Alignment.center,
                     FittedBox(
                         child: Tex(
-                      zYYYYMMDD,
+                      zYYYYMMDD.format(znow),
                       fontWeight: FontWeight.normal,
                     )))
               ]),

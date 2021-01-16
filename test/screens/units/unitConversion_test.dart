@@ -111,7 +111,6 @@ void main() {
       //then
       final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
       final l = state1.controllerOne.text;
-      final r = state1.controllerTwo.text;
 
       expect(l, '100');
     }
@@ -134,7 +133,6 @@ void main() {
 
       //then
       final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
-      final l = state1.controllerOne.text;
       final r = state1.controllerTwo.text;
 
       expect(r, '100');
@@ -158,7 +156,6 @@ void main() {
 
       //then
       final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
-      final l = state1.controllerOne.text;
       final r = state1.controllerTwo.text;
 
       expect(r, '100');
