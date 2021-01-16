@@ -8,7 +8,12 @@ import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Units extends StatelessWidget {
+class Units extends StatefulWidget {
+  Units();
+  _UnitsState createState() => _UnitsState();
+}
+
+class _UnitsState extends State<Units> {
   final List<Widget> widgets = [
     CCard(
       title: 'Now',
@@ -43,13 +48,20 @@ class Units extends StatelessWidget {
   ];
   final sc = ScrollController();
 
-  Units();
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoScrollbar(
         controller: sc,
         isAlwaysShown: true,
-        child: ListView(children: widgets, controller: sc,));
+        child: ListView(
+          children: widgets,
+          controller: sc,
+        ));
   }
 }

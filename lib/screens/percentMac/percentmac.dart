@@ -33,6 +33,12 @@ class _PerMacScreenState extends State<PerMacScreen>
   final childValid = LinkedHashMap<int, bool>();
   final sc = ScrollController();
 
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
+  }
+
   /// call back for tanks spiner key = tanks.id, value = nwfs
   final tanksMap = LinkedHashMap<int, NameWeightFS>();
 
@@ -44,7 +50,10 @@ class _PerMacScreenState extends State<PerMacScreen>
   @override
   void initState() {
     super.initState();
-    tanksCard = TanksCard(air: this.widget.air, callBack: tanksCallback,);
+    tanksCard = TanksCard(
+      air: this.widget.air,
+      callBack: tanksCallback,
+    );
     chartcCard = ChartCCard(this.widget.air, validateChild);
     cargoCard = CargoCard(this.widget.air, validateChild);
   }

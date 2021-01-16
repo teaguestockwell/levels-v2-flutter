@@ -11,7 +11,7 @@ class Const {
   rowInset = 10.0,
   modalSpinHeight = 210,
   cardP = 4,
-  maxCardWidth = 1000,
+  maxCardWidth = 700,
   cardTabSize =30,
 
   textSizeCardTitle = 14,

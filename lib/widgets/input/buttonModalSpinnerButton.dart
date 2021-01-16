@@ -29,6 +29,19 @@ class ButtonModalSpinnerButton extends StatefulWidget {
 
 class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
   int spinIdx = 0;
+  FixedExtentScrollController sc;
+
+  @override
+  void initState() {
+    super.initState();
+    sc = FixedExtentScrollController(initialItem: spinIdx);
+  }
+
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
+  }
 
   void _spin(int newIdx) {
     this.widget.onSpin(newIdx);
@@ -61,8 +74,7 @@ class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
                       Flexible(
                           flex: 9,
                           child: CupertinoPicker(
-                              scrollController: FixedExtentScrollController(
-                                  initialItem: spinIdx),
+                              scrollController: sc,
                               onSelectedItemChanged: _spin,
                               itemExtent: 35,
                               children: List.generate(

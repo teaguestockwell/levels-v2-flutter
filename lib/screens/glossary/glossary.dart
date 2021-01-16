@@ -4,23 +4,37 @@ import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class GlossaryScreen extends StatelessWidget {
+class GlossaryScreen extends StatefulWidget {
   final Aircraft air;
-  final List<Widget> cards = [];
+
+  GlossaryScreen(this.air);
+  _GlossaryScreenState createState() => _GlossaryScreenState();
+  }
+
+class _GlossaryScreenState extends State<GlossaryScreen> {
   final sc = ScrollController();
-  GlossaryScreen(this.air) {
+  final List<Widget> cards = [];
+
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
     getGlossCards();
   }
 
   void getGlossCards() {
     cards.clear();
-    for (int i = 0; i < air.titles.length; i++) {
-      cards.add(
-        CCard(
-          title:air.titles.elementAt(i),
-          children: [RowCenterText(air.bodys.elementAt(i))],
-          initOpen: true,
-          ));
+    for (int i = 0; i < this.widget.air.titles.length; i++) {
+      cards.add(CCard(
+        title: this.widget.air.titles.elementAt(i),
+        children: [RowCenterText(this.widget.air.bodys.elementAt(i))],
+        initOpen: true,
+      ));
     }
   }
 

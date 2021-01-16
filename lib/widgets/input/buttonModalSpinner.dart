@@ -14,11 +14,10 @@ class ButtonModalSpinner extends StatefulWidget {
     this.initIdx,
     @required this.onSpin,
     @required this.stringList,
-  }) 
-  :assert(onSpin!=null),
-   assert(stringList!=null),
-    assert(stringList.isNotEmpty),
-     super(key: UniqueKey());
+  })  : assert(onSpin != null),
+        assert(stringList != null),
+        assert(stringList.isNotEmpty),
+        super(key: UniqueKey());
 
   @override
   _ButtonModalSpinnerState createState() => _ButtonModalSpinnerState();
@@ -28,16 +27,17 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   List<Widget> spinnerWidgets;
   int spinIdx;
   String selected;
+  FixedExtentScrollController sc;
 
   List<Widget> getSpinnerWidgets(List<String> strings) {
     return List.generate(strings.length, (i) {
       return Center(
-        key: Key('spinner'),
+          key: Key('spinner'),
           child: Tex(
-        strings[i],
-        size: Const.textSizeModalSpinner,
-        fontWeight: Const.fwSpinner,
-      ));
+            strings[i],
+            size: Const.textSizeModalSpinner,
+            fontWeight: Const.fwSpinner,
+          ));
     });
   }
 
@@ -47,6 +47,13 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
     spinIdx = this.widget.initIdx ?? 0;
     selected = this.widget.stringList[spinIdx];
     spinnerWidgets = getSpinnerWidgets(this.widget.stringList);
+    sc = FixedExtentScrollController(initialItem: spinIdx);
+  }
+
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
   }
 
   void _spin(int newIdx) {
@@ -78,8 +85,7 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
                       Flexible(
                           flex: 9,
                           child: CupertinoPicker(
-                              scrollController: FixedExtentScrollController(
-                                  initialItem: spinIdx),
+                              scrollController: sc,
                               onSelectedItemChanged: _spin,
                               itemExtent: 35,
                               children: spinnerWidgets)),

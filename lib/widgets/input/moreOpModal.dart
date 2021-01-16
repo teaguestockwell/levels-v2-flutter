@@ -8,7 +8,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 class MoreOpModal extends StatefulWidget {
   final MoreOp moreOp;
-  MoreOpModal(this.moreOp): assert(moreOp != null),
+  MoreOpModal(this.moreOp)
+      : assert(moreOp != null),
         assert(moreOp.icon != null),
         assert(moreOp.name != null),
         assert(moreOp.url != null);
@@ -18,40 +19,54 @@ class MoreOpModal extends StatefulWidget {
 }
 
 class MoreOpModalState extends State<MoreOpModal> {
-  int spinIdx =0;
+  int spinIdx = 0;
   int _timesPressed = 0;
   List<Widget> _spinnerWidgets = [];
+  FixedExtentScrollController sc;
+
+  @override
+  void initState() {
+    super.initState();
+    sc = FixedExtentScrollController(initialItem: spinIdx);
+  }
+
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
+  }
 
   void _spin(int newIdx) {
     spinIdx = newIdx;
   }
 
-  void select()async{
+  void select() async {
     String url = Uri.encodeFull(this.widget.moreOp.url[spinIdx]);
     if (await canLaunch(url)) {
       await launch(url);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Const.modalPickerColor,
+          content: Container(
+              height: Const.pickerHeight * 2,
+              child: Center(
+                  child: Tex(
+                'Error, please email tsAppDevelopment@gmail.com',
+                fontWeight: FontWeight.bold,
+                color: Const.nonfocusedErrorBoderColor,
+              )))));
     }
-    else{
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        backgroundColor: Const.modalPickerColor,
-        content: 
-        Container(
-          height: Const.pickerHeight*2,
-         child:Center(child: 
-        Tex('Error, please email tsAppDevelopment@gmail.com', fontWeight: FontWeight.bold,color: Const.nonfocusedErrorBoderColor,)))));
-    }
-
   }
 
-   _getSpinnerWidgets() {
+  _getSpinnerWidgets() {
     _spinnerWidgets.clear();
-    for(int i=0; i<this.widget.moreOp.name.length; i++){
-
-      Icon icon = (){
-        try{
-          return Icon(IconData(int.parse(this.widget.moreOp.icon[i]) ,fontFamily: 'MaterialIcons'));
-        }catch(_){
-          return Icon(IconData(59362,fontFamily: 'MaterialIcons'));
+    for (int i = 0; i < this.widget.moreOp.name.length; i++) {
+      Icon icon = () {
+        try {
+          return Icon(IconData(int.parse(this.widget.moreOp.icon[i]),
+              fontFamily: 'MaterialIcons'));
+        } catch (_) {
+          return Icon(IconData(59362, fontFamily: 'MaterialIcons'));
         }
       }();
 
@@ -62,18 +77,14 @@ class MoreOpModalState extends State<MoreOpModal> {
         color: Const.textColor,
       );
 
-      _spinnerWidgets.add(
-        Center(
+      _spinnerWidgets.add(Center(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
             icon,
-            Padding(padding: EdgeInsets.only(left:9), child: tex),
-          ])
-        )
-      );
-
+            Padding(padding: EdgeInsets.only(left: 9), child: tex),
+          ])));
     }
   }
 
@@ -96,38 +107,29 @@ class MoreOpModalState extends State<MoreOpModal> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                  height: Const.modalSpinHeight,
-                  child: Column(children: [
-
-                    Flexible(child: Container()),
-                    
-                    Flexible(
-                      flex: 9,
-                      child:
-                      CupertinoPicker(
-                        scrollController: FixedExtentScrollController(
-                          initialItem: spinIdx),
-                        children: _spinnerWidgets,
-                        onSelectedItemChanged: _spin,
-                        itemExtent: 35,
-                      )
-                    ),
-                    
-                    Flexible(child: Container()),
-                    
-                    Flexible(
-                      flex: 3,
-                      child:
-                      CustomButton('Select',
-                      onPressed: (){Navigator.pop(context); select();},
-                      )
-                    ),
-
-                    Flexible(child: Container()),
-
-                    ]
-                  )
-                ),
+                    height: Const.modalSpinHeight,
+                    child: Column(children: [
+                      Flexible(child: Container()),
+                      Flexible(
+                          flex: 9,
+                          child: CupertinoPicker(
+                            scrollController: sc,
+                            children: _spinnerWidgets,
+                            onSelectedItemChanged: _spin,
+                            itemExtent: 35,
+                          )),
+                      Flexible(child: Container()),
+                      Flexible(
+                          flex: 3,
+                          child: CustomButton(
+                            'Select',
+                            onPressed: () {
+                              Navigator.pop(context);
+                              select();
+                            },
+                          )),
+                      Flexible(child: Container()),
+                    ])),
               ],
             ),
           ),
@@ -135,7 +137,6 @@ class MoreOpModalState extends State<MoreOpModal> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

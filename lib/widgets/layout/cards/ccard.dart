@@ -34,7 +34,7 @@ class _CCardState extends State<CCard> {
   @override
   void initState() {
     super.initState();
-    title = Util.getTruncated(this.widget.title,30);
+    title = Util.getTruncated(this.widget.title, 30);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;
@@ -51,39 +51,37 @@ class _CCardState extends State<CCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Max(
-        w: Const.maxCardWidth,
-        child: Padding(
-            padding:
-                EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Card(
-                    color: Const.cardColor,
-                    shape: Border(
-                        top: BorderSide(
-                      color: Const.cardColor,
-                      width: Const.cardTabSize,
-                    )),
-                    child: Column(
-                      children: [
-                        InkWell(
-                            child: AlignPadding(
-                                3.0,
-                                Alignment.center,
-                                TitleCC(
-                                    open: open,
-                                    tex: Tex(
-                                      title,
-                                      color: color,
-                                    ))),
-                            onTap: () => setState(() {
-                                  this.widget.callBack?.call();
-                                  open = !open;
-                                })),
-                        Column(children: getActive()),
-                      ],
-                    )))));
+    return Padding(
+        padding:
+            EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Card(
+                color: Const.cardColor,
+                shape: Border(
+                    top: BorderSide(
+                  color: Const.cardColor,
+                  width: Const.cardTabSize,
+                )),
+                child: Column(
+                  children: [
+                    InkWell(
+                        child: AlignPadding(
+                            3.0,
+                            Alignment.center,
+                            TitleCC(
+                                open: open,
+                                tex: Tex(
+                                  title,
+                                  color: color,
+                                ))),
+                        onTap: () => setState(() {
+                              this.widget.callBack?.call();
+                              open = !open;
+                            })),
+                    Column(children: getActive()),
+                  ],
+                ))));
   }
 }
 

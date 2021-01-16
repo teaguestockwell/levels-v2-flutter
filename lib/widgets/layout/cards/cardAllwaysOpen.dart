@@ -14,17 +14,13 @@ class CardAllwaysOpen extends StatelessWidget {
   /// the name displayed at the top of the card
   final String title;
 
-  CardAllwaysOpen({
-    @required this.title,
-    @required this.children,
-    @required this.color
-  });
+  CardAllwaysOpen(
+      {@required this.title, @required this.children, @required this.color});
 
   @override
   Widget build(BuildContext context) {
-    return Max(
-        w: Const.maxCardWidth,
-        child: Padding(
+    return 
+        Padding(
             padding:
                 EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
             child: ClipRRect(
@@ -56,6 +52,7 @@ class CardAllwaysOpen extends StatelessWidget {
                           children: children,
                         )
                       ],
-                    )))));
+                    )))
+    );
   }
 }

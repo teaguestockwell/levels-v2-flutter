@@ -19,95 +19,118 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
-  int _pageIndex = 0;
-  PageController _pageController;
-  List<Widget> tabPages = [];
+  int pageIndex = 0;
+  List<Widget> tabPages;
   List<String> titleArr = ['Units', 'MAC%', 'Glossary'];
+  double widthFrac;
+  PageController pc;
 
   @override
   void initState() {
     super.initState();
-    tabPages.addAll([
+
+    tabPages = [
       Units(),
       PerMacScreen(this.widget.air),
       GlossaryScreen(this.widget.air)
-    ]);
-    _pageController = PageController(initialPage: _pageIndex);
+    ];
   }
 
   @override
   void dispose() {
-    _pageController.dispose();
+    pc.dispose();
     super.dispose();
   }
 
-  void onPageChanged(int page) {
-    setState(() {
-      this._pageIndex = page;
-    });
-  }
-
-  void onTabTapped(int index) {
-    this._pageController.animateToPage(index,
+  void pcAnimate(int i) {
+    pc.animateToPage(i,
         duration: const Duration(milliseconds: Const.animationDuration),
         curve: Curves.easeInOut);
   }
 
+  void onTabTapped(int i) {
+    setState(() {
+      pageIndex = i;
+      pcAnimate(i);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Listener(
-      onPointerDown: (_) {
-        FocusScopeNode currentFocus = FocusScope.of(context);
-        if (!currentFocus.hasPrimaryFocus &&
-            currentFocus.focusedChild != null) {
-              currentFocus.focusedChild.unfocus();
-            }
-        },
-        child: Scaffold(
-          backgroundColor: Const.background,
+    if (pc != null) {
+      pc.dispose();
+    }
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pcAnimate(pageIndex);
+    });
 
+    if (MediaQuery.of(context).size.width / Const.maxCardWidth > 1.8) {
+      pc = PageController(initialPage: 0, viewportFraction: .33);
+      pageIndex = 1;
+      return Scaffold(
+          backgroundColor: Const.background,
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
-            title: Tex(titleArr[_pageIndex]),
+            title: Tex(titleArr[pageIndex]),
             actions: [MoreOpPopup(this.widget.moreOp)],
             leadingWidth: Const.pickerWidth,
             leading: LeadingMDS(
               text: this.widget.air.name,
-              onPressed: () {Navigator.pop(context);},
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ),
-
-          bottomNavigationBar: BottomNavigationBar(
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            currentIndex: _pageIndex,
-            onTap: onTabTapped,
-            backgroundColor: Const.bottombarcolor,
-            selectedItemColor: Const.navBarSelected,
-            unselectedItemColor: Const.navBarDeselected,
-            type: BottomNavigationBarType.fixed,
-            items: <BottomNavigationBarItem>[
-              BottomNavigationBarItem(
-                icon: Icon(Icons.access_alarm),
-                label: 'Units',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.flight_land),
-                label: 'MAC%',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.receipt),
-                label: 'Glossary',
-              ),
-            ],
-          ),
-
           body: PageView(
-            children: tabPages,
-            onPageChanged: onPageChanged,
-            controller: _pageController,
+              physics: NeverScrollableScrollPhysics(),
+              children: tabPages,
+              controller: pc));
+    } else {
+      pc = PageController(initialPage: pageIndex, viewportFraction: 1);
+
+      return Scaffold(
+        backgroundColor: Const.background,
+        appBar: AppBar(
+          backgroundColor: Const.bottombarcolor,
+          title: Tex(titleArr[pageIndex]),
+          actions: [MoreOpPopup(this.widget.moreOp)],
+          leadingWidth: Const.pickerWidth,
+          leading: LeadingMDS(
+            text: this.widget.air.name,
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
-        )
-    );
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          currentIndex: pageIndex,
+          onTap: onTabTapped,
+          backgroundColor: Const.bottombarcolor,
+          selectedItemColor: Const.navBarSelected,
+          unselectedItemColor: Const.navBarDeselected,
+          type: BottomNavigationBarType.fixed,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.access_alarm),
+              label: 'Units',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.flight_land),
+              label: 'MAC%',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.receipt),
+              label: 'Glossary',
+            ),
+          ],
+        ),
+        body: PageView(
+            physics: NeverScrollableScrollPhysics(),
+            children: tabPages,
+            controller: pc),
+      );
+    }
   }
 }
