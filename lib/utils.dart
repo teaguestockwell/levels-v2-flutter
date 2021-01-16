@@ -132,6 +132,16 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return newString == newValue.text ? newValue : oldValue;
   }
 }
+///allows 'decimal,nums,+,-,e' to not lock exponents 
+class DecimalTextInputFormatter2 extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    final regEx = RegExp(r'[0-9.+-e]+$');
+    String newString = regEx.stringMatch(newValue.text) ?? "";
+    return newString == newValue.text ? newValue : oldValue;
+  }
+}
 
 class LoadingMessage {
   static String getText() {

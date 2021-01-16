@@ -8,13 +8,13 @@ import 'package:flutter/material.dart';
 
 class UnitConversion extends StatefulWidget {
   @override
-  _UnitConversionState createState() => _UnitConversionState();
+  UnitConversionState createState() => UnitConversionState();
 }
 
-class _UnitConversionState extends State<UnitConversion> {
-  var controllerOne = TextEditingController();
-  var controllerTwo = TextEditingController();
-  var leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
+class UnitConversionState extends State<UnitConversion> {
+  final controllerOne = TextEditingController();
+  final controllerTwo = TextEditingController();
+  int leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
   Widget tfOne, tfTwo;
   List<Distance> selectedUnitUnits = [];
   String unitName;
@@ -60,18 +60,19 @@ class _UnitConversionState extends State<UnitConversion> {
     setState(() {
       leftUnitUnitIdx = 0;
       rightUnitUnitIdx = 0;
-      toggle = true;
+      toggle = false;
       controllerOne.text = '';
+      toggle = false;
+      controllerTwo.text = '';
       selectedUnitUnits = Unit(n).list;
       unitIdx = n;
       unitName = Unit.units[n];
     });
   }
 
-  ///accepts bool to unlock toggle
+  ///accepts bool or ino unlock toggle and make opisite
   void rightUnitUnitChanged(var i) {
     if (i is int) {
-      //if not bool, try to get the int
       rightUnitUnitIdx = i;
       toggle = true;
     }
@@ -79,7 +80,7 @@ class _UnitConversionState extends State<UnitConversion> {
     if (toggle) {
       toggle = !toggle;
       String x = controllerTwo.text;
-      if (x == '' || x == null) {
+      if (x == '' || x == null || double.tryParse(x)==null) {
         x = '0';
       }
       controllerOne.text = (double.parse(x) * //double from feild 1 times
@@ -92,17 +93,16 @@ class _UnitConversionState extends State<UnitConversion> {
     }
   }
 
-  ///accepts bool to unlock toggle
+  ///accepts bool or ino unlock toggle and make opisite
   void leftUnitUnitChanged(var i) {
     if (i is int) {
-      //if not bool, try to get the int
       leftUnitUnitIdx = i;
       toggle = true;
     }
     if (toggle) {
       toggle = !toggle;
       String x = controllerOne.text;
-      if (x == '' || x == null) {
+      if (x == '' || x == null || double.tryParse(x)==null) {
         x = '0';
       }
       controllerTwo.text = (double.parse(x) * //double from feild 1 times
@@ -127,13 +127,13 @@ class _UnitConversionState extends State<UnitConversion> {
             onSpin: unitChange,
             initIdx: unitIdx,
           ))),
-      //Divider(color: Const.divColor,thickness: Const.divThickness,),
       Padding(
           padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
           child: Row(children: [
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Const.divColor, width: Const.divThickness),
+                    border: Border.all(
+                        color: Const.divColor, width: Const.divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
@@ -143,11 +143,14 @@ class _UnitConversionState extends State<UnitConversion> {
                   ),
                 ])),
             Spacer(),
-            Tex('=',),
+            Tex(
+              '=',
+            ),
             Spacer(),
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(color: Const.divColor, width: Const.divThickness),
+                    border: Border.all(
+                        color: Const.divColor, width: Const.divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,
