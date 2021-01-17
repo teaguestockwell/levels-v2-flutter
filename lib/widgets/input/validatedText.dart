@@ -39,7 +39,7 @@ class ValidatedTextState extends State<ValidatedText> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // ignore: invalid_use_of_protected_member,invalid_use_of_visible_for_testing_member
-      c.notifyListeners();
+      if(c!=null){c.notifyListeners();}
     });
 
     c.text = Util.getTruncated(this.widget.initText, this.widget.maxChars);

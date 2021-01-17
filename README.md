@@ -11,7 +11,7 @@ Flutter commit used to build release
 git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
 
 Docker command used to rm, build, and run img
-docker rm flfimg && docker build . -t flf && docker run -p 8080:8080 --name flfimg flf
+docker rm flfimg && docker build . -t flf && docker run -p 8080:8080 --name flfimg flf && docker exec -it flfimg bash
 
 Docker command used to serve to serve build with nginx to localhost:8080
 docker exec -it flfimg bash

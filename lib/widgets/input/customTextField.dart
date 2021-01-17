@@ -22,6 +22,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   @override
+  void dispose(){
+    this.widget.c.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         height: Const.pickerHeight,

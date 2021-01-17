@@ -9,7 +9,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatefulWidget {
-  Units();
+  final Key key;
+  Units({this.key}): super(key: key);
   _UnitsState createState() => _UnitsState();
 }
 

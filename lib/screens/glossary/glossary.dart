@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class GlossaryScreen extends StatefulWidget {
   final Aircraft air;
 
-  GlossaryScreen(this.air);
+  GlossaryScreen(this.air): super(key: PageStorageKey(UniqueKey()));
   _GlossaryScreenState createState() => _GlossaryScreenState();
   }
 
