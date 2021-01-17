@@ -74,7 +74,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -106,7 +106,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+   final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -158,7 +158,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -193,7 +193,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -247,7 +247,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -326,7 +326,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+   final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);
@@ -495,7 +495,7 @@ void main() {
 
         expect(find.byKey(Key('20')), findsNWidgets(0));
         expect(find.byKey(Key('21')), findsNWidgets(0));
-        expect(find.byKey(Key('22')), findsNWidgets(0));;
+        expect(find.byKey(Key('22')), findsNWidgets(0));
       }
 
       if (i == 2) {
@@ -529,7 +529,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -608,7 +608,7 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages(), moreOp(), airNames()));
+    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);

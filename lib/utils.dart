@@ -15,7 +15,6 @@ typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, NameWeightFS value);
 typedef void UnitChangeCB(var i);
-
 class Util {
   static String getTruncated(String s, int max) {
     if (s.length <= max) {

@@ -384,3 +384,12 @@ class MoreOp {
     @required this.icon,
   });
 }
+
+class HomeModel{
+  final Glossary welcome;
+  final MoreOp moreop;
+  HomeModel({
+    @required this.welcome,
+    @required this.moreop
+  }) : assert(welcome != null), assert(moreop != null);
+}

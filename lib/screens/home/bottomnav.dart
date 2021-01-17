@@ -10,7 +10,11 @@ class BottomNav extends StatefulWidget {
   final LinkedHashMap<int, List<Widget>> tabPages;
   final MoreOp moreOp;
   final List<String> airNames;
-  BottomNav(this.tabPages, this.moreOp, this.airNames);
+  BottomNav(
+      {@required this.tabPages, @required this.moreOp, @required this.airNames})
+      : assert(tabPages != null),
+        assert(moreOp != null),
+        assert(airNames != null);
 
   @override
   BottomNavState createState() => BottomNavState();

@@ -9,7 +9,9 @@ class Loading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       
-      child: Column(
+      child: Scaffold(
+        backgroundColor: Const.background,
+        body: Center(child:Column(
         children: [
         Spacer(),
         Container(height: 100,
@@ -39,7 +41,7 @@ class Loading extends StatelessWidget {
     
       Spacer(),
         ]
-      )
+      )))
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'dart:collection';
+import 'package:five_level_one/backend/services.dart';
 import 'package:five_level_one/screens/glossary/glossary.dart';
 import 'package:five_level_one/screens/percentMac/percentmac.dart';
 import 'package:five_level_one/screens/units/units.dart';
 import 'package:five_level_one/widgets/layout/div.dart';
-import '../../widgets/input/buttonModalSpinner.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';
@@ -13,7 +13,6 @@ import '../../widgets/input/moreOpModal.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../backend/model.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -25,15 +24,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  ButtonModalSpinner airSpin;
-  MoreOp moreOp;
   BottomNav bn;
-  List<Aircraft> airs = [];
-  var airPages = LinkedHashMap<int, List<Widget>>();
-  List<String> airNames;
+  HomeModel homeModel;
   Widget body = Loading();
-  Image img;
+  Image img = Image.asset('assets/0.png');
   final sc = ScrollController();
+  bool didLoad = false;
+  bool didAccept = false;
 
   @override
   void dispose() {
@@ -44,67 +41,57 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-
-    //execute this function once after first build
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Firebase.initializeApp().then((_) {
-        img = Image.asset('assets/0.png');
-        precacheImage(img.image, context).then((_) {
-          FirebaseFirestore.instance
-              .collection('mds')
-              .get()
-              .then(buildAircraft);
-        });
-      });
+      afterFirstBuild();
     });
   }
 
-  void buildAircraft(QuerySnapshot qs) {
-    qs.docs.forEach((v) {
-      airs.add(Aircraft(
-          name: v.get('name'),
-          fs0: v.get('fs0'),
-          fs1: v.get('fs1'),
-          mom0: v.get('mom0'),
-          mom1: v.get('mom1'),
-          weight0: v.get('weight0'),
-          weight1: v.get('weight1'),
-          simplemom: v.get('simplemom'),
-          lemac: v.get('lemac'),
-          mac: v.get('mac'),
-          cargomaxweight: v.get('cargomaxweight'),
-          tanknames: v.get('tanknames'),
-          tankmoms: v.get('tankmoms'),
-          tankweights: v.get('tankweights'),
-          titles: v.get('titles'),
-          bodys: v.get('bodys'),
-          cargonames: v.get('cargonames'),
-          cargoweights: v.get('cargoweights'),
-          cargomoms: v.get('cargomoms'),
-          configstrings: v.get('configs')));
-    });
+  void afterFirstBuild() async {
+    await Firebase.initializeApp();
 
+    //dont await precache
+    precacheImage(img.image, context);
+
+    //pre cach should complete before home is built
+    homeModel = await getHomeModel();
+
+    //state is set and disclaimer is drawn
+    buildDiclaimer(homeModel);
+
+    //after airpages load, accept unlocks
+    getAirs().then((airs) {
+      setBn(airs);
+    });
+  }
+
+  void setBn(List<Aircraft> airs) {
+    var ap = LinkedHashMap<int, List<Widget>>();
+
+    //build air pages
     for (int i = 0; i < airs.length; i++) {
-      airPages[i] = [Units(), PerMacScreen(airs[i]), GlossaryScreen(airs[i])];
+      ap[i] = [Units(), PerMacScreen(airs[i]), GlossaryScreen(airs[i])];
     }
 
-    airNames = List.generate(airs.length, (i) => airs[i].name);
+    //set bn bar
+    bn = BottomNav(
+        tabPages: ap,
+        moreOp: homeModel.moreop,
+        airNames: List.generate(airs.length, (i) => airs[i].name));
+    
+    //set did load to unlock accept button
+    didLoad = true;
 
-    getDislaimerDoc();
+    //if user clicked accept before ap were done building set state
+    if (didAccept) {
+      setState(() {
+        body = bn;
+      });
+    }
   }
 
-  void getDislaimerDoc() {
-    FirebaseFirestore.instance
-        .collection('general')
-        .doc('general')
-        .get()
-        .then(buildDiclaimer);
-  }
+  void setBottomNav(LinkedHashMap<int, List<Widget>> ap) {}
 
-  void buildDiclaimer(DocumentSnapshot ds) {
-    moreOp = MoreOp(name: ds['name'], url: ds['url'], icon: ds['icon']);
-    bn = BottomNav(airPages, moreOp, airNames);
-
+  void buildDiclaimer(HomeModel hm) {
     var ret = Scaffold(
         backgroundColor: Const.background,
         body: CupertinoScrollbar(
@@ -114,27 +101,32 @@ class _HomeState extends State<Home> {
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [img], color: Const.textColor),
               CardAllwaysOpen(
-                title: ds.get('welcometitle'),
-                color: Const.textColor,
-                children: [
-                  RowCenterText(ds.get('welcomebody')),
-                  Div(),
-                  Row2(
-                    CustomButton('I Accept', onPressed: accept),
-                    MoreOpModal(moreOp),
-                  )
-                ],
-              ),
+                  title: hm.welcome.title,
+                  color: Const.textColor,
+                  children: [
+                    RowCenterText(hm.welcome.body),
+                    Div(),
+                    Row2(CustomButton('I Accept', onPressed: accept),
+                        MoreOpModal(hm.moreop))
+                  ])
             ])));
+
     setState(() {
       body = ret;
     });
   }
 
   void accept() {
-    setState(() {
-      body = bn;
-    });
+    if (didLoad) {
+      setState(() {
+        body = bn;
+      });
+    } else {
+      setState(() {
+        didAccept = true;
+        body = Loading();
+      });
+    }
   }
 
   @override
