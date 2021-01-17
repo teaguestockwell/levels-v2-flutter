@@ -1,4 +1,7 @@
 import 'dart:collection';
+import 'package:five_level_one/screens/home/home.dart';
+import 'package:five_level_one/widgets/input/validatedText.dart';
+
 import '../../../lib/backend/model.dart';
 import '../../../lib/screens/home/bottomnav.dart';
 import 'package:flutter/material.dart';
@@ -14,34 +17,43 @@ LinkedHashMap<int, List<Widget>> tabPages() {
   ret[0] = [
     Container(
       key: Key('00'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('01'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('02'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     )
   ];
   ret[1] = [
     Container(
       key: Key('10'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('11'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('12'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     )
   ];
   ret[2] = [
     Container(
       key: Key('20'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('21'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     ),
     Container(
       key: Key('22'),
+      child: ValidatedText(inputType: 0, onChange: (_){}, notifyIsValid: (_){},maxChars: 5,initText: '', validateText: (String x){if(x == '1'){return true;}return false;})
     )
   ];
   return ret;
@@ -240,6 +252,98 @@ void main() {
     expect(find.byKey(Key('20')), findsNWidgets(0));
     expect(find.byKey(Key('21')), findsNWidgets(0));
     expect(find.byKey(Key('22')), findsNWidgets(0));
+  });
+
+  testWidgets(
+      'given a bottom nav on mobile, when changing to desktop, then it will maintain its state',
+      (WidgetTester wt) async {
+    //given
+
+    //set screen size to mobile
+    wt.binding.window.physicalSizeTestValue = Size(
+      1080,
+      1920,
+    );
+    wt.binding.window.devicePixelRatioTestValue = 1.0;
+
+    // resets the screen to its orinal size after the test end
+    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+
+    await wt.pumpWidget(test);
+    await wt.pumpAndSettle();
+
+    expect(find.byKey(Key('00')), findsNWidgets(0));
+    expect(find.byKey(Key('01')), findsNWidgets(1));
+    expect(find.byKey(Key('02')), findsNWidgets(0));
+
+    expect(find.byKey(Key('10')), findsNWidgets(0));
+    expect(find.byKey(Key('11')), findsNWidgets(0));
+    expect(find.byKey(Key('12')), findsNWidgets(0));
+
+    expect(find.byKey(Key('20')), findsNWidgets(0));
+    expect(find.byKey(Key('21')), findsNWidgets(0));
+    expect(find.byKey(Key('22')), findsNWidgets(0));
+
+    await wt.enterText(find.byType(ValidatedText), '1');
+
+    //when
+    wt.binding.window.physicalSizeTestValue = Size(
+      1280,
+      700,
+    );
+    wt.binding.window.devicePixelRatioTestValue = 1.0;
+    await wt.pumpAndSettle();
+
+    //then
+    expect(find.text('1'),findsOneWidget);
+  });
+
+  testWidgets(
+      'given a bottom nav on mobile, when changing to desktop, then it will maintain its state',
+      (WidgetTester wt) async {
+    //given
+
+    //set screen size to mobile
+    wt.binding.window.physicalSizeTestValue = Size(
+      1080,
+      1920,
+    );
+    wt.binding.window.devicePixelRatioTestValue = 1.0;
+
+    // resets the screen to its orinal size after the test end
+    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+
+    await wt.pumpWidget(test);
+    await wt.pumpAndSettle();
+
+    for(int i=0; i<3;i++){
+
+    //switch pages
+    await wt.tap(find.byType(Icon).at(i));
+    await wt.pumpAndSettle();
+
+    //enter text of that page
+    await wt.enterText(find.byType(ValidatedText), i.toString());
+    }
+
+    //when
+    wt.binding.window.physicalSizeTestValue = Size(
+      1280,
+      700,
+    );
+    wt.binding.window.devicePixelRatioTestValue = 1.0;
+    await wt.pumpAndSettle();
+
+    //then
+    expect(find.text('0'),findsOneWidget);
+    expect(find.text('1'),findsOneWidget);
+    expect(find.text('2'),findsOneWidget);
   });
 
   testWidgets(

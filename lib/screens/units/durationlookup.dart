@@ -30,7 +30,9 @@ class DurationLookupState extends State<DurationLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Padding(
+      padding: EdgeInsets.only(top:5),
+      child: Column(
       children: [
         Row2(
           Tex('Date Time One'),
@@ -56,6 +58,6 @@ class DurationLookupState extends State<DurationLookup> {
 
         Row2(Tex('Duration hhhhh:mm:ss'), ConstText(getDiff()))
       ]
-    );
+    ));
   }
 }

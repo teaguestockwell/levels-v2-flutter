@@ -25,7 +25,9 @@ class JJJLookupState extends State<JJJLookup> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Padding(
+      padding: EdgeInsets.only(top:5),
+      child:Column(
       children: [
         row = Row2(
         Tex('YYYY MM DD'),
@@ -40,6 +42,6 @@ class JJJLookupState extends State<JJJLookup> {
         ),
         Row2(Tex('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],
-    );
+    ));
   }
 }

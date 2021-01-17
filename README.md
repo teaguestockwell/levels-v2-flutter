@@ -13,9 +13,6 @@ git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
 Docker command used to rm, build, and run img
 docker rm flfimg && docker build . -t flf && docker run -p 8080:8080 --name flfimg flf && docker exec -it flfimg bash
 
-Docker command used to serve to serve build with nginx to localhost:8080
-docker exec -it flfimg bash
-
 ![Screen Shot 2020-12-22 at 18 50 33](https://user-images.githubusercontent.com/71202372/102958744-814aa980-4492-11eb-8420-7692dfcef107.png)
 ![Screen Shot 2020-12-22 at 19 32 21](https://user-images.githubusercontent.com/71202372/102958745-827bd680-4492-11eb-908d-df18c108b170.png)
 

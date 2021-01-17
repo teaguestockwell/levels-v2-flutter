@@ -34,10 +34,10 @@ RUN flutter pub get
 RUN flutter doctor
 
 # Run tests
-RUN flutter test --machine > tests.output
+#RUN flutter test --machine > tests.output
 
 # Compute coverage (--machine and --coverage cannot be run at once...)
-RUN flutter test --coverage
+#RUN flutter test --coverage
 
 # Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
 #RUN sonar-scanner
