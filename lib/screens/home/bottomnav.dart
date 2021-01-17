@@ -25,6 +25,7 @@ class BottomNavState extends State<BottomNav> {
   PageController pc;
   MoreOp airSelector;
   int airIdx = 0;
+  final bucket = PageStorageBucket();
 
   @override
   void initState() {
@@ -89,11 +90,14 @@ class BottomNavState extends State<BottomNav> {
               onPressed: airChange,
             ),
           ),
-          body: PageView(
-              key: UniqueKey(),
+          body: PageStorage(
+          bucket: bucket,
+          //key: UniqueKey(),
+          child:PageView(
+              //key: UniqueKey(),
               physics: NeverScrollableScrollPhysics(),
               children: this.widget.tabPages[airIdx],
-              controller: pc));
+              controller: pc)));
     } else {
       pc = PageController(initialPage: pageIndex, viewportFraction: 1);
 
@@ -134,12 +138,15 @@ class BottomNavState extends State<BottomNav> {
             ),
           ],
         ),
-        body: PageView(
-            key: UniqueKey(),
+        body: PageStorage(
+          bucket: bucket,
+          //key: UniqueKey(),
+          child:PageView(
+            //key: UniqueKey(),
             physics: NeverScrollableScrollPhysics(),
             children: this.widget.tabPages[airIdx],
             controller: pc),
-      );
+      ));
     }
   }
 }

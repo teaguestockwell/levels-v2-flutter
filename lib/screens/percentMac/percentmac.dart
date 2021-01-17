@@ -15,7 +15,7 @@ import 'package:flutter/widgets.dart';
 class PerMacScreen extends StatefulWidget {
   final Aircraft air;
 
-  PerMacScreen(this.air);
+  PerMacScreen(this.air): super(key: PageStorageKey(UniqueKey()));
 
   @override
   _PerMacScreenState createState() => _PerMacScreenState();
