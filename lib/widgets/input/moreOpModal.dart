@@ -38,6 +38,7 @@ class MoreOpModalState extends State<MoreOpModal> {
 
   void _spin(int newIdx) {
     spinIdx = newIdx;
+    sc = FixedExtentScrollController(initialItem: spinIdx);
   }
 
   void select() async {

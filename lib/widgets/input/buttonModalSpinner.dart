@@ -26,7 +26,6 @@ class ButtonModalSpinner extends StatefulWidget {
 class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   List<Widget> spinnerWidgets;
   int spinIdx;
-  String selected;
   FixedExtentScrollController sc;
 
   List<Widget> getSpinnerWidgets(List<String> strings) {
@@ -45,7 +44,6 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   void initState() {
     super.initState();
     spinIdx = this.widget.initIdx ?? 0;
-    selected = this.widget.stringList[spinIdx];
     spinnerWidgets = getSpinnerWidgets(this.widget.stringList);
     sc = FixedExtentScrollController(initialItem: spinIdx);
   }
@@ -61,7 +59,7 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
     if (this.mounted) {
       setState(() {
         spinIdx = newIdx;
-        selected = this.widget.stringList[newIdx];
+        sc = FixedExtentScrollController(initialItem: spinIdx);
       });
     }
   }
@@ -102,7 +100,7 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      selected,
+      this.widget.stringList[spinIdx],
       onPressed: press,
     );
   }

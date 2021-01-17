@@ -28,13 +28,27 @@ class ButtonModalSpinnerButton extends StatefulWidget {
 }
 
 class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
+   List<Widget> spinnerWidgets;
   int spinIdx = 0;
   FixedExtentScrollController sc;
 
   @override
   void initState() {
     super.initState();
+    spinnerWidgets =getSpinnerWidgets(this.widget.stringList);
     sc = FixedExtentScrollController(initialItem: spinIdx);
+  }
+
+   List<Widget> getSpinnerWidgets(List<String> strings) {
+    return List.generate(strings.length, (i) {
+      return Center(
+          key: Key('spinner'),
+          child: Tex(
+            strings[i],
+            size: Const.textSizeModalSpinner,
+            fontWeight: Const.fwSpinner,
+          ));
+    });
   }
 
   @override
@@ -47,6 +61,7 @@ class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
     this.widget.onSpin(newIdx);
     setState(() {
       spinIdx = newIdx;
+       sc = FixedExtentScrollController(initialItem: spinIdx);
     });
   }
 
@@ -77,15 +92,7 @@ class _ButtonModalSpinnerButtonState extends State<ButtonModalSpinnerButton> {
                               scrollController: sc,
                               onSelectedItemChanged: _spin,
                               itemExtent: 35,
-                              children: List.generate(
-                                  this.widget.stringList.length, (idx) {
-                                return Center(
-                                    child: Tex(
-                                  this.widget.stringList[idx],
-                                  size: Const.textSizeModalSpinner,
-                                  fontWeight: Const.fwSpinner,
-                                ));
-                              }))),
+                              children: spinnerWidgets)),
                       Flexible(child: Container()),
                       CustomButton(
                         this.widget.modalButtonText,
