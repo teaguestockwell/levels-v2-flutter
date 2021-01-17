@@ -1,6 +1,6 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/screens/home/bottomnav.dart';
+import '../../../lib/backend/model.dart';
+import '../../../lib/screens/home/bottomnav.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

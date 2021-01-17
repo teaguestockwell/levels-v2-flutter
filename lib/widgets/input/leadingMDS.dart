@@ -1,5 +1,5 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
+import '../../backend/cont.dart';
+import '../../backend/model.dart';
 
 import '../../widgets/display/text.dart';
 import '../../utils.dart';

@@ -1,4 +1,4 @@
-import 'package:five_level_one/widgets/display/constText.dart';
+import '../../../lib/widgets/display/constText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

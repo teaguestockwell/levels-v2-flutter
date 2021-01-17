@@ -1,5 +1,5 @@
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/input/moreOpModal.dart';
+import '../../../lib/backend/model.dart';
+import '../../../lib/widgets/input/moreOpModal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

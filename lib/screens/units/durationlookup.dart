@@ -1,4 +1,4 @@
-import 'package:five_level_one/widgets/layout/div.dart';
+import '../../widgets/layout/div.dart';
 import '../../widgets/display/constText.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/buttonDateTimePicker.dart';

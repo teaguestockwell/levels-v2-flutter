@@ -1,4 +1,4 @@
-import 'package:five_level_one/screens/units/durationlookup.dart';
+import '../../../lib/screens/units/durationlookup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/intl.dart';

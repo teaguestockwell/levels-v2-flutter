@@ -1,9 +1,9 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/services.dart';
-import 'package:five_level_one/screens/glossary/glossary.dart';
-import 'package:five_level_one/screens/percentMac/percentmac.dart';
-import 'package:five_level_one/screens/units/units.dart';
-import 'package:five_level_one/widgets/layout/div.dart';
+import '../../backend/services.dart';
+import '../../screens/glossary/glossary.dart';
+import '../../screens/percentMac/percentmac.dart';
+import '../../screens/units/units.dart';
+import '../../widgets/layout/div.dart';
 import 'bottomnav.dart';
 import 'loading.dart';
 import '../../backend/cont.dart';

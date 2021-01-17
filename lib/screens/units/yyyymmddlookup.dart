@@ -1,4 +1,4 @@
-import 'package:five_level_one/widgets/layout/div.dart';
+import '../../widgets/layout/div.dart';
 import 'package:jiffy/jiffy.dart';
 import '../../utils.dart';
 import '../../widgets/input/buttonModalSpinner.dart';

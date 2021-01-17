@@ -1,6 +1,6 @@
-import 'package:five_level_one/backend/cont.dart';
-import 'package:five_level_one/backend/model.dart';
-import 'package:five_level_one/widgets/input/leadingMDS.dart';
+import '../../../lib/backend/model.dart';
+import '../../../lib/backend/cont.dart';
+import '../../../lib/widgets/input/leadingMDS.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
