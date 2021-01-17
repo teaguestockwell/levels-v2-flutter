@@ -51,8 +51,14 @@ class MoreOpm extends Mock implements MoreOp {}
 
 MoreOpm moreOp() {
   final ret = MoreOpm();
-  when(ret.icon).thenReturn(['234', '234',]);
-  when(ret.name).thenReturn(['op 1', 'op2', ]);
+  when(ret.icon).thenReturn([
+    '234',
+    '234',
+  ]);
+  when(ret.name).thenReturn([
+    'op 1',
+    'op2',
+  ]);
   when(ret.url).thenReturn(['url1', 'url2']);
   return ret;
 }
@@ -74,7 +80,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -106,7 +113,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-   final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -158,7 +166,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -193,7 +202,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -247,7 +257,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -326,7 +337,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-   final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);
@@ -529,7 +541,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -608,7 +621,8 @@ void main() {
     // resets the screen to its orinal size after the test end
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
-    final test = mkTest(BottomNav(tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+    final test = mkTest(BottomNav(
+        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);
@@ -630,35 +644,34 @@ void main() {
         expect(find.byKey(Key('21')), findsNWidgets(0));
         expect(find.byKey(Key('22')), findsNWidgets(0));
 
-         if (i == 1) {
-        expect(find.byKey(Key('00')), findsNWidgets(0));
-        expect(find.byKey(Key('01')), findsNWidgets(0));
-        expect(find.byKey(Key('02')), findsNWidgets(0));
+        if (i == 1) {
+          expect(find.byKey(Key('00')), findsNWidgets(0));
+          expect(find.byKey(Key('01')), findsNWidgets(0));
+          expect(find.byKey(Key('02')), findsNWidgets(0));
 
-        expect(find.byKey(Key('10')), findsNWidgets(1));
-        expect(find.byKey(Key('11')), findsNWidgets(1));
-        expect(find.byKey(Key('12')), findsNWidgets(1));
+          expect(find.byKey(Key('10')), findsNWidgets(1));
+          expect(find.byKey(Key('11')), findsNWidgets(1));
+          expect(find.byKey(Key('12')), findsNWidgets(1));
 
-        expect(find.byKey(Key('20')), findsNWidgets(0));
-        expect(find.byKey(Key('21')), findsNWidgets(0));
-        expect(find.byKey(Key('22')), findsNWidgets(0));
-      }
+          expect(find.byKey(Key('20')), findsNWidgets(0));
+          expect(find.byKey(Key('21')), findsNWidgets(0));
+          expect(find.byKey(Key('22')), findsNWidgets(0));
+        }
 
-       if (i == 2) {
-        expect(find.byKey(Key('00')), findsNWidgets(0));
-        expect(find.byKey(Key('01')), findsNWidgets(0));
-        expect(find.byKey(Key('02')), findsNWidgets(0));
+        if (i == 2) {
+          expect(find.byKey(Key('00')), findsNWidgets(0));
+          expect(find.byKey(Key('01')), findsNWidgets(0));
+          expect(find.byKey(Key('02')), findsNWidgets(0));
 
-        expect(find.byKey(Key('10')), findsNWidgets(0));
-        expect(find.byKey(Key('11')), findsNWidgets(0));
-        expect(find.byKey(Key('12')), findsNWidgets(0));
+          expect(find.byKey(Key('10')), findsNWidgets(0));
+          expect(find.byKey(Key('11')), findsNWidgets(0));
+          expect(find.byKey(Key('12')), findsNWidgets(0));
 
-        expect(find.byKey(Key('20')), findsNWidgets(1));
-        expect(find.byKey(Key('21')), findsNWidgets(1));
-        expect(find.byKey(Key('22')), findsNWidgets(1));
-      }
+          expect(find.byKey(Key('20')), findsNWidgets(1));
+          expect(find.byKey(Key('21')), findsNWidgets(1));
+          expect(find.byKey(Key('22')), findsNWidgets(1));
+        }
       }
     }
   });
-
 }

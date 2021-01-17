@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'model.dart';
 
-//await Firebase.initializeApp();
 
 Future<HomeModel> getHomeModel() async {
+  await Firebase.initializeApp();
+
   DocumentSnapshot qs = await FirebaseFirestore.instance
       .collection('general')
       .doc('general')

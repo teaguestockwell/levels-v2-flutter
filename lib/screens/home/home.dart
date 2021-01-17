@@ -13,7 +13,6 @@ import '../../widgets/input/moreOpModal.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../../backend/model.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -28,9 +27,9 @@ class _HomeState extends State<Home> {
   HomeModel homeModel;
   Widget body = Loading();
   Image img = Image.asset('assets/0.png');
-  final sc = ScrollController();
   bool didLoad = false;
   bool didAccept = false;
+  final sc = ScrollController();
 
   @override
   void dispose() {
@@ -41,13 +40,14 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       afterFirstBuild();
     });
+
   }
 
   void afterFirstBuild() async {
-    await Firebase.initializeApp();
 
     //dont await precache
     precacheImage(img.image, context);
@@ -62,6 +62,7 @@ class _HomeState extends State<Home> {
     getAirs().then((airs) {
       setBn(airs);
     });
+
   }
 
   void setBn(List<Aircraft> airs) {
@@ -118,9 +119,8 @@ class _HomeState extends State<Home> {
 
   void accept() {
     if (didLoad) {
-      setState(() {
-        body = bn;
-      });
+      setState(() {body = bn;});
+
     } else {
       setState(() {
         didAccept = true;
