@@ -12,6 +12,7 @@ class GlossaryScreen extends StatefulWidget {
   }
 
 class _GlossaryScreenState extends State<GlossaryScreen> {
+
   final sc = ScrollController();
   final List<Widget> cards = [];
 
@@ -40,6 +41,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return CupertinoScrollbar(
         isAlwaysShown: true,
         controller: sc,

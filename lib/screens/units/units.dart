@@ -9,12 +9,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Units extends StatefulWidget {
+  
   final Key key;
-  Units({this.key}): super(key: key);
+  Units({this.key}): super(key: PageStorageKey(UniqueKey()));
   _UnitsState createState() => _UnitsState();
 }
 
-class _UnitsState extends State<Units> {
+class _UnitsState extends State<Units> 
+with AutomaticKeepAliveClientMixin<Units>{
+  @override
+  bool get wantKeepAlive => true;
   final List<Widget> widgets = [
     CCard(
       title: 'Now',
@@ -57,6 +61,7 @@ class _UnitsState extends State<Units> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return CupertinoScrollbar(
         controller: sc,
         isAlwaysShown: true,
