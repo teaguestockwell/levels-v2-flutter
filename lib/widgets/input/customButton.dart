@@ -7,7 +7,7 @@ class CustomButton extends StatefulWidget {
   final String text;
   final IntCallBack onPressed;
   final Color color;
-  CustomButton(this.text, {this.onPressed, this.color}) : assert(text != null);
+  CustomButton(this.text, {this.onPressed, this.color, Key key}): assert(text != null), super(key:key);
   _CustomButtonState createState() => _CustomButtonState();
 }
 

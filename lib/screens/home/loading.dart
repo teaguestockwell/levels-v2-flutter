@@ -1,5 +1,4 @@
 import '../../backend/cont.dart';
-
 import '../../utils.dart';
 import '../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +9,7 @@ class Loading extends StatelessWidget {
     return Center(
       
       child: Scaffold(
+        key: Key('loading'),
         backgroundColor: Const.background,
         body: Center(child:Column(
         children: [

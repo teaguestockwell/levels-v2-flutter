@@ -179,7 +179,7 @@ class NameWeightFS {
         " weight: " +
         weight +
         " fs: " +
-        getFS() +
+        getFsCalculated() +
         ' qty: ' +
         qty +
         ' id: ' +
@@ -227,13 +227,23 @@ class NameWeightFS {
     return (P.p(weight) * P.p(qty)).toString();
   }
 
-  String getFS() {
+  ///This is used to pull fs from mom and weight
+  ///given that mom is simplified moment, when multiplied by mom modifer = raw moment
+  String getFsCalculated() {
     if (fs.isNotEmpty) {
       return fs;
     }
 
     //canot get fs if nsfs is invalid
     return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
+  }
+
+  ///determines to get caculated or non caculated fs
+  String getfs() {
+    if (mom.isNotEmpty && fs.isEmpty) {
+      return getFsCalculated();
+    }
+    return fs;
   }
 
   bool valid(
@@ -290,7 +300,7 @@ class PerMac {
 
     nwfss.forEach((x) {
       gtq += P.pi(x.qty);
-      x.fs = x.getFS();
+      x.fs = x.getFsCalculated();
       totWeight += P.p(x.getTotalWeight());
       totMom += P.p(x.getTotalMoment());
     });

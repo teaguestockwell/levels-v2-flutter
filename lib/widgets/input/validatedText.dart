@@ -47,19 +47,16 @@ class ValidatedTextState extends State<ValidatedText> {
     c.addListener(() {
       //validate the text and set outline to red or white
       String text = c.text;
+
       this.widget.onChange(text);
+      valid = this.widget.validateText(text);
       this.widget.notifyIsValid(valid);
-      if (this.widget.validateText(text)) {
-        valid = true;
-        setState(() {
-          dec = InputDec.wi;
-        });
-      } else {
-        valid = false;
-        setState(() {
-          dec = InputDec.re;
-        });
-      }
+
+      setState(() {
+        if (valid) {dec = InputDec.wi;} 
+        else {dec = InputDec.re;}
+      });
+      
     });
   }
 

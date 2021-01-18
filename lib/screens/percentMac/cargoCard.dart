@@ -1,4 +1,4 @@
-import '../../screens/percentMac/validatedCargoUI2.dart';
+import 'validatedCargoUI.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
@@ -23,7 +23,7 @@ class CargoCard extends StatefulWidget {
   final List<int> importedConfigIDs = [];
 
   ///key is NWFS.id, value is CargoUI
-  final cargo = LinkedHashMap<int, ValidatedCargoUI2>();
+  final cargo = LinkedHashMap<int, ValidatedCargoUI>();
 
   //key is nwfs.id, value is bool of validated cargo ui
   final cargoIsValid = HashMap<int, bool>();
@@ -154,11 +154,6 @@ class _CargoCardState extends State<CargoCard> {
     setState(() {});
   }
 
-  // called when a cargo ui expands
-  void reDraw() {
-    setState(() {});
-  }
-
   ///remove old config then add new NWFS and CargoUI for each config in selectedSpinnerConfig
   void updateConfig() {
     //before adding new config remove the old one
@@ -167,13 +162,11 @@ class _CargoCardState extends State<CargoCard> {
       var newNWFS = NameWeightFS.copyNewID(oldSelectedConfigNWFS);
       newNWFS.name += ' ' + selectedSpinnerConfig.name;
 
-      var newCargoUI = ValidatedCargoUI2(
-        reDrawParent: reDraw,
-        key: UniqueKey(),
+      var newCargoUI = ValidatedCargoUI(
         fs0: this.widget.air.fs0,
         fs1: this.widget.air.fs1,
-        cargomaxweight: this.widget.air.cargomaxweight,
-        onPressed: removeCargoID,
+        cargoMaxWeight: this.widget.air.cargomaxweight,
+        onRemovePressed: removeCargoID,
         nwf: newNWFS,
         notifyValid: cargoUIValidationChanged,
       );
@@ -224,14 +217,12 @@ class _CargoCardState extends State<CargoCard> {
   }
 
   void addCargo() {
-    var newCargoUI = ValidatedCargoUI2(
-      reDrawParent: reDraw,
+    var newCargoUI = ValidatedCargoUI(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
-      cargomaxweight: this.widget.air.cargomaxweight,
-      onPressed: removeCargoID,
+      cargoMaxWeight: this.widget.air.cargomaxweight,
+      onRemovePressed: removeCargoID,
       nwf: NameWeightFS.copyNewID(selectedSpinnerCargo),
-      key: UniqueKey(),
       notifyValid: cargoUIValidationChanged,
     );
 

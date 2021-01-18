@@ -2,10 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'model.dart';
 
+class Services{
 
 Future<HomeModel> getHomeModel() async {
   await Firebase.initializeApp();
-
+  
   DocumentSnapshot qs = await FirebaseFirestore.instance
       .collection('general')
       .doc('general')
@@ -45,4 +46,5 @@ Future<List<Aircraft>> getAirs() async {
         configstrings: v.get('configs')));
   });
   return ret;
+}
 }

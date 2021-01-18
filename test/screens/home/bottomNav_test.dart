@@ -273,15 +273,14 @@ void main() {
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
 
-    for(int i=0; i<3;i++){
 
     //switch pages
-    await wt.tap(find.byType(Icon).at(i));
+    await wt.tap(find.byType(Icon).at(1));
     await wt.pumpAndSettle();
 
     //enter text of that page
-    await wt.enterText(find.byType(ValidatedText), i.toString());
-    }
+    await wt.enterText(find.byType(ValidatedText).first, '1');
+  
 
     //when
     wt.binding.window.physicalSizeTestValue = Size(
@@ -292,9 +291,8 @@ void main() {
     await wt.pumpAndSettle();
 
     //then
-    expect(find.text('0'),findsOneWidget);
     expect(find.text('1'),findsOneWidget);
-    expect(find.text('2'),findsOneWidget);
+
   });
 
   testWidgets(

@@ -12,31 +12,26 @@ import '../../widgets/layout/cards/ccard.dart';
 import '../../widgets/layout/div.dart';
 import 'package:flutter/material.dart';
 
-class ValidatedCargoUI2 extends StatefulWidget {
-  /////determines to get caculated or non caculated fs
-  final String fs0, fs1, cargomaxweight;
+class ValidatedCargoUI extends StatefulWidget {
+  final String fs0, fs1, cargoMaxWeight;
   final NameWeightFS nwf;
-  final IntCallBackIntPara onPressed;
-  final Key key;
+  final IntCallBackIntPara onRemovePressed;
   final NotifyCargoValid notifyValid;
-  final IntCallBack reDrawParent;
 
-  ValidatedCargoUI2(
+  ValidatedCargoUI(
       {@required this.fs0,
-      @required this.reDrawParent,
       @required this.fs1,
-      @required this.cargomaxweight,
+      @required this.cargoMaxWeight,
       @required this.nwf,
-      @required this.onPressed,
-      @required this.key,
+      @required this.onRemovePressed,
       @required this.notifyValid})
-      : super(key: key);
+      : super(key: UniqueKey());
 
   @override
-  _ValidatedCargoUI2State createState() => _ValidatedCargoUI2State();
+  ValidatedCargoUIState createState() => ValidatedCargoUIState();
 }
 
-class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
+class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   bool valid = false;
   List<Widget> children;
   var childValid = LinkedHashMap<int, bool>();
@@ -46,6 +41,13 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
   initState() {
     super.initState();
 
+    //init valid map to refect init state of nwfs
+    childValid[0] = validateName(this.widget.nwf.name);
+    childValid[1] = validateWeight(this.widget.nwf.weight);
+    childValid[2] = validateFS(this.widget.nwf.getfs());
+    childValid[3] = validateQty(this.widget.nwf.qty);
+    
+    //call back because this may set state again 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       updateAllValid();
     });
@@ -58,13 +60,13 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
         maxChars: 30,
         validateText: validateName,
         width: double.infinity, 
-        notifyIsValid: (_) {},
+        notifyIsValid: (v) {updateValid(0, v);},
       )),
       Div(),
       Row2(
           Tex('Weight'),
           ValidatedText(
-            notifyIsValid: (_) {},
+            notifyIsValid: (v) {updateValid(1, v);},
             initText: this.widget.nwf.weight,
             inputType: 1,
             onChange: changeWeight,
@@ -75,8 +77,8 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       Row2(
           Tex('Fuselage Station'),
           ValidatedText(
-            notifyIsValid: (_) {},
-            initText: _getNWFfs(),
+            notifyIsValid: (v) {updateValid(2, v);},
+            initText: this.widget.nwf.getfs(),
             inputType: 1,
             onChange: changeFS,
             maxChars: 8,
@@ -86,7 +88,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       Row2(
           Tex('Qty'),
           ValidatedText(
-            notifyIsValid: (_) {},
+            notifyIsValid: (v) {updateValid(3, v);},
             initText: this.widget.nwf.qty,
             inputType: 1,
             onChange: changeQty,
@@ -97,14 +99,14 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       Row1(CustomButton(
         'Remove',
         onPressed: () {
-          this.widget.onPressed(this.widget.nwf.id);
+          this.widget.onRemovePressed(this.widget.nwf.id);
         },
       )),
     ];
   }
 
+  /// put new value into map of all children
   void updateValid(int id, bool val) {
-    // put new valid into map
     childValid[id] = val;
     updateAllValid();
   }
@@ -118,34 +120,32 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
       }
     });
 
+    //open the card if closed & invalid
+    bool wasOpened =false;
+    if(this.ope == ret){
+      ope = true;
+      wasOpened =true;
+    }
+
     //if valid has chaged:
-    if (this.valid != ret) {
+    if (this.valid != ret || wasOpened) {
       //notify parent: cargocard
       this.widget.notifyValid(this.widget.nwf.id, ret);
-
-      setState(() {
-        this.valid = ret;
-      });
+      setState(() {this.valid = ret;});
     }
   }
 
   bool validateName(String x) {
-    if (x.length >= 1) {
-      updateValid(0, true);
-      return true;
-    }
-    updateValid(0, false);
+    if (x.length >= 1) {return true;}
     return false;
   }
 
   bool validateWeight(String x) {
     if (double.tryParse(x) != null &&
         double.parse(x) > 0 &&
-        double.parse(x) <= double.parse(this.widget.cargomaxweight)) {
-      updateValid(1, true);
+        double.parse(x) <= double.parse(this.widget.cargoMaxWeight)) {
       return true;
     }
-    updateValid(1, false);
     return false;
   }
 
@@ -153,19 +153,15 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
     if (double.tryParse(x) != null &&
         double.parse(x) >= double.parse(this.widget.fs0) &&
         double.parse(x) <= double.parse(this.widget.fs1)) {
-      updateValid(2, true);
       return true;
     }
-    updateValid(2, false);
     return false;
   }
 
   bool validateQty(String x) {
     if (int.tryParse(x) != null && int.parse(x) > 0) {
-      updateValid(3, true);
       return true;
     }
-    updateValid(3, false);
     return false;
   }
 
@@ -187,14 +183,6 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
   void changeQty(String x) {
     this.widget.nwf.qty = x;
     setState(() {});
-  }
-
-  ///determines to get caculated or non caculated fs
-  String _getNWFfs() {
-    if (this.widget.nwf.mom.isNotEmpty && this.widget.nwf.fs.isEmpty) {
-      return this.widget.nwf.getFS();
-    }
-    return this.widget.nwf.fs;
   }
 
   String getNameTruncated() {
@@ -261,6 +249,7 @@ class _ValidatedCargoUI2State extends State<ValidatedCargoUI2> {
                 child: Column(
                   children: [
                     InkWell(
+                      key: Key('tap'),
                       child:
                           AlignPadding(3.0, Alignment.center, getCardTitle()),
                       onTap: toggle,

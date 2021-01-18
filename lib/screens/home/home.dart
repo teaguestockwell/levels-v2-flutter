@@ -18,6 +18,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class Home extends StatefulWidget {
+  final Services services;
+  Home(this.services): assert(services!=null);
   @override
   _HomeState createState() => _HomeState();
 }
@@ -53,17 +55,19 @@ class _HomeState extends State<Home> {
     await precacheImage(img.image, context);
 
     //pre cach should complete before home is built
-    homeModel = await getHomeModel();
+    homeModel = await this.widget.services.getHomeModel();
 
     //state is set and disclaimer is drawn
-    buildDiclaimer(homeModel);
+    buildDiclaimer();
 
     //after airpages load, accept unlocks
-    getAirs().then((airs) {
+    this.widget.services.getAirs().then((airs) {
       setBn(airs);
     });
 
   }
+
+
 
   void setBn(List<Aircraft> airs) {
     var ap = LinkedHashMap<int, List<Widget>>();
@@ -90,10 +94,9 @@ class _HomeState extends State<Home> {
     }
   }
 
-  void setBottomNav(LinkedHashMap<int, List<Widget>> ap) {}
-
-  void buildDiclaimer(HomeModel hm) {
+  void buildDiclaimer() {
     var ret = Scaffold(
+      key:Key('home'),
         backgroundColor: Const.background,
         body: CupertinoScrollbar(
             isAlwaysShown: true,
@@ -104,13 +107,13 @@ class _HomeState extends State<Home> {
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [img], color: Const.textColor),
               CardAllwaysOpen(
-                  title: hm.welcome.title,
+                  title: homeModel.welcome.title,
                   color: Const.textColor,
                   children: [
-                    RowCenterText(hm.welcome.body),
+                    RowCenterText(homeModel.welcome.body),
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
-                        MoreOpModal(hm.moreop))
+                        MoreOpModal(homeModel.moreop))
                   ])
             ]))));
 
