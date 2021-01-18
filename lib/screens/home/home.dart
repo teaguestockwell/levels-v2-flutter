@@ -50,7 +50,7 @@ class _HomeState extends State<Home> {
   void afterFirstBuild() async {
 
     //dont await precache
-    precacheImage(img.image, context);
+    await precacheImage(img.image, context);
 
     //pre cach should complete before home is built
     homeModel = await getHomeModel();
@@ -98,7 +98,9 @@ class _HomeState extends State<Home> {
         body: CupertinoScrollbar(
             isAlwaysShown: true,
             controller: sc,
-            child: ListView(controller: sc, children: [
+            child: SingleChildScrollView( //wrapper to prevent jitters
+            controller: sc,
+            child:Column(children: [
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [img], color: Const.textColor),
               CardAllwaysOpen(
@@ -110,7 +112,7 @@ class _HomeState extends State<Home> {
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(hm.moreop))
                   ])
-            ])));
+            ]))));
 
     setState(() {
       body = ret;

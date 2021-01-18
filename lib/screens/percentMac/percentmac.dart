@@ -115,9 +115,8 @@ class _PerMacScreenState extends State<PerMacScreen>
     return CupertinoScrollbar(
         isAlwaysShown: true,
         controller: sc,
-        child: SingleChildScrollView(
-            controller: sc,
-            child: Column(children: [
+        child: SingleChildScrollView( //wrapper to  prevent jitter on scroll
+          child:Column(children: [
               tanksCard,
               chartcCard,
               cargoCard,
