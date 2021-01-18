@@ -112,10 +112,13 @@ class _PerMacScreenState extends State<PerMacScreen>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return CupertinoScrollbar(
+    return 
+    CupertinoScrollbar(
         isAlwaysShown: true,
         controller: sc,
-        child: SingleChildScrollView( //wrapper to  prevent jitter on scroll
+        child:
+         SingleChildScrollView(
+          controller: sc, //wrapper to  prevent jitter on scroll
           child:Column(children: [
               tanksCard,
               chartcCard,

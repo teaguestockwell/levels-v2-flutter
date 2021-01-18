@@ -1,7 +1,5 @@
 import 'dart:collection';
-import 'package:five_level_one/screens/home/home.dart';
 import 'package:five_level_one/widgets/input/validatedText.dart';
-
 import '../../../lib/backend/model.dart';
 import '../../../lib/screens/home/bottomnav.dart';
 import 'package:flutter/material.dart';
@@ -252,53 +250,6 @@ void main() {
     expect(find.byKey(Key('20')), findsNWidgets(0));
     expect(find.byKey(Key('21')), findsNWidgets(0));
     expect(find.byKey(Key('22')), findsNWidgets(0));
-  });
-
-  testWidgets(
-      'given a bottom nav on mobile, when changing to desktop, then it will maintain its state',
-      (WidgetTester wt) async {
-    //given
-
-    //set screen size to mobile
-    wt.binding.window.physicalSizeTestValue = Size(
-      1080,
-      1920,
-    );
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
-
-    final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
-
-    await wt.pumpWidget(test);
-    await wt.pumpAndSettle();
-
-    expect(find.byKey(Key('00')), findsNWidgets(0));
-    expect(find.byKey(Key('01')), findsNWidgets(1));
-    expect(find.byKey(Key('02')), findsNWidgets(0));
-
-    expect(find.byKey(Key('10')), findsNWidgets(0));
-    expect(find.byKey(Key('11')), findsNWidgets(0));
-    expect(find.byKey(Key('12')), findsNWidgets(0));
-
-    expect(find.byKey(Key('20')), findsNWidgets(0));
-    expect(find.byKey(Key('21')), findsNWidgets(0));
-    expect(find.byKey(Key('22')), findsNWidgets(0));
-
-    await wt.enterText(find.byType(ValidatedText), '1');
-
-    //when
-    wt.binding.window.physicalSizeTestValue = Size(
-      1280,
-      700,
-    );
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    await wt.pumpAndSettle();
-
-    //then
-    expect(find.text('1'),findsOneWidget);
   });
 
   testWidgets(
