@@ -14,19 +14,21 @@ void main() {
     List<Widget> children = [];
 
     //populate children and keys
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
       final key = UniqueKey();
       keys.add(key);
       children.add(Container(
+        height: 500,
         key: key,
       ));
     }
-
-    final test = CardAllwaysOpen(
+    //because cardaa is non scrollable
+    //wrap in scroll container to prenvent overflow in testing
+    final test = SingleChildScrollView(child:CardAllwaysOpen(
       children: children,
       color: Colors.cyan,
       title: 'title',
-    );
+    ));
 
     final wrapper = makeWidgetTestable(test);
 

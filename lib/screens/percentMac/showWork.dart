@@ -17,7 +17,15 @@ class ShowWork extends StatefulWidget {
     @required this.lemac,
     @required this.mac,
     @required this.nwfs,
-  });
+  }): 
+
+  assert(nwfs!=null),
+  assert(nwfs.length > 0),
+  assert(nwfs[0] != null),
+  assert(lemac!= null),
+  assert(lemac.isNotEmpty),
+  assert(mac!=null),
+  assert(mac.isNotEmpty);
 
   @override
   _ShowWorkState createState() => _ShowWorkState();
@@ -33,8 +41,7 @@ class _ShowWorkState extends State<ShowWork> {
     SchedulerBinding.instance.addPostFrameCallback((_) => buildShowWork());
   }
   
-
-  void buildShowWork() async{
+  void buildShowWork() {
 
     var permac = PerMac(
       lemacS: this.widget.lemac,
@@ -55,7 +62,6 @@ class _ShowWorkState extends State<ShowWork> {
     );
 
     setState((){body=ret;});
-
   }
 
   @override

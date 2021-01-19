@@ -14,13 +14,12 @@ class TanksCard extends StatelessWidget {
 
   TanksCard({@required this.air, @required this.callBack});
 
-  List<Widget> getTanks(List<Tank> tanks) {
+  List<Widget> getTanks() {
     List<Widget> ret = [];
-    for (Tank t in tanks) {
-      ret.add(TankRow(tank: t, callBack: callBack));
-      ret.add(Div());
+    for (int i=0; i<air.tanks.length;i++) {
+      ret.add(TankRow(tank: air.tanks[i], callBack: callBack));
+      if(i!=air.tanks.length-1){ret.add(Div());}
     }
-    ret.removeLast();
     return ret;
   }
 
@@ -28,7 +27,7 @@ class TanksCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CardAllwaysOpen(
         title: 'Tanks',
-        children: getTanks(air.tanks),
+        children: getTanks(),
         color: Const.nonfocusedBoderColors);
   }
 }
@@ -39,14 +38,17 @@ class TankRow extends StatelessWidget {
 
   TankRow({@required this.tank, @required this.callBack});
 
-  List<String> getTankWeights(Tank t) {
+  List<String> getTankWeights() {
     List<String> ret = [];
-    t.nameWeightFSs.forEach((nwfs) {
+    tank.nameWeightFSs.forEach((nwfs) {
       ret.add(nwfs.weight);
     });
     return ret;
   }
 
+
+  //0 refers to the first nwfs, since each nwfs.id is unique this.nwfs[0] is used to identify the tank
+  // we are passing the new nwfs of the selected spin to a map stored in permac state
   void spin(int i) {
     this.callBack(tank.nameWeightFSs[0].id, tank.nameWeightFSs[i]);
   }
@@ -58,7 +60,7 @@ class TankRow extends StatelessWidget {
         Tex(this.tank.name),
         ButtonModalSpinner(
           onSpin: spin,
-          stringList: getTankWeights(tank),
+          stringList: getTankWeights(),
         ));
   }
 }
