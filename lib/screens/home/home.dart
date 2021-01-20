@@ -1,7 +1,8 @@
 import 'dart:collection';
+import '../percentMac/perMacScreen.dart';
+
 import '../../backend/services.dart';
 import '../../screens/glossary/glossary.dart';
-import '../../screens/percentMac/percentmac.dart';
 import '../../screens/units/units.dart';
 import '../../widgets/layout/div.dart';
 import 'bottomnav.dart';
