@@ -1,12 +1,15 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
+
 import 'balArmCard.dart';
 import '../../backend/cont.dart';
 import '../../backend/model.dart';
 import '../../screens/home/loading.dart';
 import '../../screens/percentMac/perMacCard.dart';
 import '../../widgets/display/text.dart';
-import 'aricraftPerMacCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'cargoPerMacCard.dart';
 
 class ShowWork extends StatefulWidget {
   final String lemac;
@@ -33,28 +36,34 @@ class ShowWork extends StatefulWidget {
 
 class _ShowWorkState extends State<ShowWork> {
   Widget body = Loading();
+  ScrollController sc;
+  PerMac permac;
 
   @override
   void initState() {
     super.initState();
+
+    permac = PerMac(
+      lemacS: this.widget.lemac,
+      macS: this.widget.mac,
+      nwfss: this.widget.nwfs
+    );
+
     //execute after first build
     SchedulerBinding.instance.addPostFrameCallback((_) => buildShowWork());
   }
   
   void buildShowWork() {
 
-    var permac = PerMac(
-      lemacS: this.widget.lemac,
-      macS: this.widget.mac,
-      nwfss: this.widget.nwfs
-    );
-
-    Widget ret = InteractiveViewer(
-      minScale: 0.01,
-      constrained: false,
-      child: Column(
-        children: [
-          AircraftPerMacCard(permac),
+    Widget ret = CupertinoScrollbar(
+      controller: sc,
+      isAlwaysShown: true,
+      child: ListView(
+        controller: sc,
+        scrollDirection: Axis.vertical,
+        dragStartBehavior: DragStartBehavior.down,
+         children: [
+          CargoPerMacCard(permac),
           BalArmCard(permac),
           PerMacCard(permac),
         ]

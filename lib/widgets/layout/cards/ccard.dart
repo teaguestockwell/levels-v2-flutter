@@ -93,7 +93,7 @@ class TitleCC extends StatelessWidget {
   Widget build(BuildContext context) {
     if (open) {
       return Container(
-          width: MediaQuery.of(context).size.width / .8,
+          width: MediaQuery.of(context).size.width ,
           child: Row(children: [
             Icon(Icons.arrow_drop_up),
             Spacer(),

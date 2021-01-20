@@ -29,7 +29,7 @@ class PerMacCard extends StatelessWidget {
     return CCard(
       title: 'Mean Aerodynamic Chord %',
       initOpen: true,
-      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, child:
+      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, physics: ClampingScrollPhysics(), child:
       DataTable(
         dividerThickness: Const.divThickness,
         columns: [

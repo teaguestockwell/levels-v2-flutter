@@ -26,7 +26,7 @@ class BalArmCard extends StatelessWidget {
     return CCard(
       title: 'Balance Arm',
       initOpen: true,
-      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, child:
+      children: [SingleChildScrollView(scrollDirection: Axis.horizontal, physics: ClampingScrollPhysics(), child:
       DataTable(
         dividerThickness: Const.divThickness,
         columns: [

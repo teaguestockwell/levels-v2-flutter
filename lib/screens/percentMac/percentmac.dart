@@ -68,7 +68,7 @@ class _PerMacScreenState extends State<PerMacScreen>
   getPerMac() {
     List<NameWeightFS> nwfs = [];
     if (valid) {
-      nwfs.add(chartcCard.getNWFS());
+      nwfs.add(chartcCard.nwfs);
       nwfs.addAll(tanksMap.values);
       //check for no cargo
       if (cargoCard.getNWfs().length > 0) {

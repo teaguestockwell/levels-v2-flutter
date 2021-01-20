@@ -4,14 +4,14 @@ import '../../widgets/display/text.dart';
 import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/material.dart';
 
-class AircraftPerMacCard extends StatefulWidget {
+class CargoPerMacCard extends StatefulWidget {
   final PerMac permac;
-  AircraftPerMacCard(this.permac);
+  CargoPerMacCard(this.permac);
   @override
-  _AircraftPerMacCardState createState() => _AircraftPerMacCardState();
+  _CargoPerMacCardState createState() => _CargoPerMacCardState();
 }
 
-class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
+class _CargoPerMacCardState extends State<CargoPerMacCard> {
 
   List<DataRow> getRows(){
     List<DataRow> ret = [];
@@ -94,7 +94,11 @@ class _AircraftPerMacCardState extends State<AircraftPerMacCard> {
     return CCard(
       title:'Aircraft, Fuel & Cargo',
       initOpen: true,
-      children:[getDataTable()]
+      children:[SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        scrollDirection: Axis.horizontal,
+         child:getDataTable()
+        )]
     );
   }
 }

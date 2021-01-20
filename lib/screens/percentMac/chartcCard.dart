@@ -11,18 +11,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChartCCard extends StatefulWidget {
-  final _nwfs = NameWeightFS();
+  final nwfs = NameWeightFS();
   final Aircraft air;
   final NotifyCargoValid onValidationChange;
+  ///the inti state of false of this map is handled by the callback of validated text after drawn
   final childrenValid = LinkedHashMap<int, bool>();
 
   ChartCCard(this.air, this.onValidationChange);
 
-  /// do not call this before checking bool getValid()
-  NameWeightFS getNWFS() {
-    return this._nwfs;
-  }
-
+  //iterates though map and calls back to permac
   bool getThisValid() {
     bool ret = true;
     childrenValid.forEach((_, value) {
@@ -34,43 +31,25 @@ class ChartCCard extends StatefulWidget {
     return ret;
   }
 
-  /// 0= weight, 1=moment
-  void updateValidChildren(int id, bool valid) {
-    this.childrenValid[id] = valid;
-  }
-
   @override
-  _ChartCCardState createState() => _ChartCCardState();
+  ChartCCardState createState() => ChartCCardState();
 }
 
-class _ChartCCardState extends State<ChartCCard> {
-  bool valid;
+class ChartCCardState extends State<ChartCCard> {
+  bool valid = false;
   List<Widget> body;
-  int buildId = 0;
-  Widget title;
-
-  final titleValid = Tex(
-    'Chart C valid',
-    fontWeight: FontWeight.normal,
-    color: Const.nonfocusedBoderColors,
-  );
-
-  final titleInvalid = Tex('Chart C inval',
-      fontWeight: FontWeight.normal, color: Const.nonfocusedErrorBoderColor);
 
   @override
   initState() {
     super.initState();
 
-    //init valid
-    valid = false;
-    title = titleInvalid;
+    //init valididation within map
     this.widget.childrenValid[0] = false;
     this.widget.childrenValid[1] = false;
 
     ///init the basic acft nwfs
-    this.widget._nwfs.name = 'Basic Aircraft';
-    this.widget._nwfs.simplemom = this.widget.air.simplemom;
+    this.widget.nwfs.name = 'Basic Aircraft';
+    this.widget.nwfs.simplemom = this.widget.air.simplemom;
 
     //init the cards body
     body = [
@@ -79,22 +58,24 @@ class _ChartCCardState extends State<ChartCCard> {
           ValidatedText(
             inputType: 1,
             maxChars: 12,
-            notifyIsValid: (_) {},
+            notifyIsValid: (b) {updateValidChildren(0,b);},
             validateText: _validateWeight,
             onChange: (String weight) {
-              this.widget._nwfs.weight = weight;
+              this.widget.nwfs.weight = weight;
             },
           )),
+
       Div(),
+
       Row2(
           Tex('Basic Moment'),
           ValidatedText(
             maxChars: 12,
             inputType: 1,
-            notifyIsValid: (_) {},
+            notifyIsValid: (b) {updateValidChildren(1,b);},
             validateText: _validateMoment,
             onChange: (String mom) {
-              this.widget._nwfs.mom = mom;
+              this.widget.nwfs.mom = mom;
             },
           )),
     ];
@@ -104,12 +85,8 @@ class _ChartCCardState extends State<ChartCCard> {
     if (double.tryParse(weight) != null &&
         double.parse(weight) >= double.parse(this.widget.air.weight0) &&
         double.parse(weight) <= double.parse(this.widget.air.weight1)) {
-      this.widget.updateValidChildren(0, true);
-      updateTitleText();
       return true;
     }
-    this.widget.updateValidChildren(0, false);
-    updateTitleText();
     return false;
   }
 
@@ -117,20 +94,23 @@ class _ChartCCardState extends State<ChartCCard> {
     if (double.tryParse(mom) != null &&
         double.parse(mom) >= double.parse(this.widget.air.mom0) &&
         double.parse(mom) <= double.parse(this.widget.air.mom1)) {
-      this.widget.updateValidChildren(1, true);
-      updateTitleText();
       return true;
     }
-    this.widget.updateValidChildren(1, false);
-    updateTitleText();
     return false;
   }
 
-  updateTitleText() {
+   /// 0= weight, 1=moment
+  void updateValidChildren(int id, bool valid) {
+    //insert validation into map
+    this.widget.childrenValid[id] = valid;
+
+    //iterate though map to see if all children are valid
     bool newValid = this.widget.getThisValid();
-    if (valid != newValid) {
+
+    //if validation has changed, update ti
+    if (this.valid != newValid) {
       setState(() {
-        valid = newValid;
+        this.valid = newValid;
       });
     }
   }
