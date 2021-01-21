@@ -19,17 +19,8 @@ class CargoCard extends StatefulWidget {
   ///notify permac screen of validation id=1
   final NotifyCargoValid onValidationChange;
 
-  ///list that contains active NWFS ids
-  final List<int> importedConfigIDs = [];
-
   ///key is NWFS.id, value is CargoUI
   final cargo = LinkedHashMap<int, ValidatedCargoUI>();
-
-  //key is nwfs.id, value is bool of validated cargo ui
-  final cargoIsValid = HashMap<int, bool>();
-
-  ///this.cargo.values.toListOfWidgets
-  final List<Widget> cargoList = [];
 
   //only call this after cargoUI valid notification = true;
   List<NameWeightFS> getNWfs() {
@@ -58,23 +49,34 @@ class _CargoCardState extends State<CargoCard> {
   Config selectedSpinnerConfig;
   ButtonModalSpinnerButton removeAllSpin;
 
+  ///list that contains active NWFS ids
+  final List<int> importedConfigIDs = [];
+
+  //key is nwfs.id, value is bool of validated cargo ui
+  final cargoIsValid = HashMap<int, bool>();
+
   @override
   initState() {
     super.initState();
+
     this.widget.onValidationChange(1, valid);
     selectedSpinnerConfig = this.widget.air.configs[0];
+
     configSpin = ButtonModalSpinnerButton(
-      stringList: _getConfigStrings(),
+      stringList: List.generate(
+        this.widget.air.configs.length,
+         (i) => this.widget.air.configs[i].name),
       modalButtonText: 'Update Config',
       onPress: updateConfig,
-      onSpin: configChange,
+      onSpin: (i) => selectedSpinnerConfig = this.widget.air.configs[i],
     );
 
     selectedSpinnerCargo = this.widget.air.addaCargo[0];
     cargoSpin = ButtonModalSpinnerButton(
-      stringList: _getCargoStrings(),
+      stringList: List.generate(this.widget.air.addaCargo.length,
+       (i) => this.widget.air.addaCargo[i].name),
       modalButtonText: 'Add Cargo',
-      onSpin: cargoChange,
+      onSpin: (i) => selectedSpinnerCargo = this.widget.air.addaCargo[i],
       onPress: addCargo,
     );
 
@@ -89,14 +91,14 @@ class _CargoCardState extends State<CargoCard> {
   ///passed to the onValidChangelistener of validatedCargoUI
   ///takes nwfs.id as key to modifiy valid of cargo is valid
   void cargoUIValidationChanged(int nwfID, bool valid) {
-    this.widget.cargoIsValid[nwfID] = valid;
+    cargoIsValid[nwfID] = valid;
     checkValidation();
   }
 
   void checkValidation() {
     var ret = true;
 
-    this.widget.cargoIsValid.forEach((key, value) {
+    cargoIsValid.forEach((key, value) {
       if (value == false || value == null) {
         ret = false;
       }
@@ -112,44 +114,14 @@ class _CargoCardState extends State<CargoCard> {
     }
   }
 
-  ///pass to config spinner
-  void configChange(int indexOfNewConfig) {
-    selectedSpinnerConfig = this.widget.air.configs[indexOfNewConfig];
-  }
-
-  ///pass to cargo spiiner
-  void cargoChange(int indexOfNewCargo) {
-    selectedSpinnerCargo = this.widget.air.addaCargo[indexOfNewCargo];
-  }
-
-  ///build and return a list of strings containing the name of
-  ///each config in aircraft, then pass to config spin
-  List<String> _getConfigStrings() {
-    List<String> ret = [];
-    for (int i = 0; i < this.widget.air.configs.length; i++) {
-      ret.add(this.widget.air.configs[i].name);
-    }
-    return ret;
-  }
-
-  ///build and return a list of strings containing the
-  ///name of each nwfs in aircraft, then pass to cargospinn
-  List<String> _getCargoStrings() {
-    List<String> ret = [];
-    for (int i = 0; i < this.widget.air.addaCargo.length; i++) {
-      ret.add(this.widget.air.addaCargo[i].name);
-    }
-    return ret;
-  }
-
   ///passed to onPressed of CargoUI
   ///@id NWFS.id as key to this.widget.cargo
   ///removes CargoUI from this.widget.cargo, then try to remove from configID
   void removeCargoID(int id) {
     ////print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
-    this.widget.importedConfigIDs.remove(id);
-    this.widget.cargoIsValid.remove(id);
+    importedConfigIDs.remove(id);
+    cargoIsValid.remove(id);
     checkValidation();
     setState(() {});
   }
@@ -172,7 +144,7 @@ class _CargoCardState extends State<CargoCard> {
       );
 
       this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
-      this.widget.importedConfigIDs.add(newCargoUI.nwf.id);
+      importedConfigIDs.add(newCargoUI.nwf.id);
       ////print('Importing to cargo & importedConfigID '+newCargoUI.nwf.toString());
     }
     checkValidation();
@@ -182,32 +154,23 @@ class _CargoCardState extends State<CargoCard> {
   ///for each id in this.widget.configIDs, remove from this.widget.cargo,
   ///then clear this.widget.configIDs, and setState
   void removeConfig() {
-    for (int id in this.widget.importedConfigIDs) {
+    for (int id in importedConfigIDs) {
       //dont call to string right here because nwf may be invlaid
       this.widget.cargo.remove(id);
-      this.widget.cargoIsValid.remove(id);
+      cargoIsValid.remove(id);
     }
+    importedConfigIDs.clear();
     checkValidation();
-    this.widget.importedConfigIDs.clear();
     setState(() {});
   }
 
   ///clear cargo & importedConfigIds, then set state
   void removeAll() {
     this.widget.cargo.clear();
-    this.widget.importedConfigIDs.clear();
-    this.widget.cargoIsValid.clear();
+    importedConfigIDs.clear();
+    cargoIsValid.clear();
     checkValidation();
     setState(() {});
-  }
-
-  ///call each build to update cargolist for
-  ///with all cargo.vaues
-  void getCargo() {
-    this.widget.cargoList.clear();
-    this.widget.cargo.forEach((key, value) {
-      this.widget.cargoList.add(value);
-    });
   }
 
   void printCargo() {
@@ -240,10 +203,6 @@ class _CargoCardState extends State<CargoCard> {
   }
 
   Widget build(BuildContext context) {
-    checkValidation();
-    getCargo(); //call me every build
-    printCargo();
-
     return CardAllwaysOpen(title: 'Cargo', color: getTitleColor(), children: [
       Row2(
         Tex('Select Config'),
@@ -268,9 +227,9 @@ class _CargoCardState extends State<CargoCard> {
       ListView.builder(
           physics: NeverScrollableScrollPhysics(),
           shrinkWrap: true,
-          itemCount: this.widget.cargoList.length,
+          itemCount: this.widget.cargo.length,
           itemBuilder: (BuildContext context, int i) {
-            return this.widget.cargoList[i];
+            return this.widget.cargo.values.elementAt(i);
           }),
     ]);
   }
