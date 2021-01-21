@@ -141,6 +141,9 @@ class NameWeightFS {
       /// modifier for simple moment
       name,
       weight,
+
+      ///this is used to temperaly hold simple moment while it is converted to 
+      ///fs with 2 decimal accuracy. this is never used for percent mac caculations directly.
       mom,
 
       ///simple moment
@@ -172,19 +175,19 @@ class NameWeightFS {
     this.id = P.getUniqueIdx();
   }
 
-  @override
-  String toString() {
-    return ("name: " +
-        name +
-        " weight: " +
-        weight +
-        " fs: " +
-        getFsCalculated() +
-        ' qty: ' +
-        qty +
-        ' id: ' +
-        id.toString());
-  }
+  // @override
+  // String toString() {
+  //   return ("name: " +
+  //       name +
+  //       " weight: " +
+  //       weight +
+  //       " fs: " +
+  //       getFsCalculated() +
+  //       ' qty: ' +
+  //       qty +
+  //       ' id: ' +
+  //       id.toString());
+  // }
 
   ///total simple moment
   String getMom() {
@@ -233,7 +236,7 @@ class NameWeightFS {
     if (fs.isNotEmpty) {
       return fs;
     }
-
+    
     //canot get fs if nsfs is invalid
     return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
   }
@@ -300,6 +303,12 @@ class PerMac {
 
     nwfss.forEach((x) {
       gtq += P.pi(x.qty);
+      //this is an important step because it will caculate the fs if it did not get assigned.
+      //for example, if cargo from the add a was imported, but its fs was never changed, its fs
+      // would never be stored in the model. the only fs stored in the model is user edited. All
+      //imports from database are stored as simple mom as they apear in tech data. This is where that 
+      //simple moment is converted to  raw moment with the nwfs simple moment modifier then into fs if
+      //its fs was never assined by the user.
       x.fs = x.getFsCalculated();
       totWeight += P.p(x.getTotalWeight());
       totMom += P.p(x.getTotalMoment());

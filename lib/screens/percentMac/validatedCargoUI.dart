@@ -185,21 +185,6 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
     setState(() {});
   }
 
-  String getNameTruncated() {
-    var ret = this.widget.nwf.name;
-    if (ret.length <= 30) {
-      return ret;
-    }
-    return ret.substring(0, 27) + '...';
-  }
-
-  Color getColor(bool valid) {
-    if (valid) {
-      return Const.nonfocusedBoderColors;
-    }
-    return Const.nonfocusedErrorBoderColor;
-  }
-
   List<Widget> buildInput() {
     if (ope) {
       return children;
@@ -218,17 +203,17 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
       return TitleCC(
           open: true,
           tex: Tex(
-            this.widget.nwf.qty + ' EA ' + getNameTruncated(),
+            this.widget.nwf.qty + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
             fontWeight: FontWeight.normal,
-            color: getColor(valid),
+            color: Util.getValidColor(valid),
           ));
     }
     return TitleCC(
         open: false,
         tex: Tex(
-          this.widget.nwf.qty + ' EA ' + getNameTruncated(),
+          this.widget.nwf.qty + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
           fontWeight: FontWeight.normal,
-          color: getColor(valid),
+          color: Util.getValidColor(valid),
         ));
   }
 

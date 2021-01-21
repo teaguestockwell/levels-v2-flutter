@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:jiffy/jiffy.dart';
-
+import 'backend/cont.dart';
 import 'backend/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,6 +32,12 @@ class Util {
     }
   }
 
+  static Color getValidColor(bool isValid){
+     if (isValid) {
+      return Const.nonfocusedBoderColors;
+    }
+    return Const.nonfocusedErrorBoderColor;
+  }
 }
 
 class Distance {

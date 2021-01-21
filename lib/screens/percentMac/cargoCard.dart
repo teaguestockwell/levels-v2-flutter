@@ -34,10 +34,10 @@ class CargoCard extends StatefulWidget {
   CargoCard(this.air, this.onValidationChange);
 
   @override
-  _CargoCardState createState() => _CargoCardState();
+  CargoCardState createState() => CargoCardState();
 }
 
-class _CargoCardState extends State<CargoCard> {
+class CargoCardState extends State<CargoCard> {
   bool valid = true;
 
   ///modal spinner that changes this.selectedSpinnerConfig
@@ -53,7 +53,7 @@ class _CargoCardState extends State<CargoCard> {
   final List<int> importedConfigIDs = [];
 
   //key is nwfs.id, value is bool of validated cargo ui
-  final cargoIsValid = HashMap<int, bool>();
+  final childrenCargoIsValidMap = HashMap<int, bool>();
 
   @override
   initState() {
@@ -61,6 +61,7 @@ class _CargoCardState extends State<CargoCard> {
 
     this.widget.onValidationChange(1, valid);
     selectedSpinnerConfig = this.widget.air.configs[0];
+    selectedSpinnerCargo = this.widget.air.addaCargo[0];
 
     configSpin = ButtonModalSpinnerButton(
       stringList: List.generate(
@@ -71,7 +72,6 @@ class _CargoCardState extends State<CargoCard> {
       onSpin: (i) => selectedSpinnerConfig = this.widget.air.configs[i],
     );
 
-    selectedSpinnerCargo = this.widget.air.addaCargo[0];
     cargoSpin = ButtonModalSpinnerButton(
       stringList: List.generate(this.widget.air.addaCargo.length,
        (i) => this.widget.air.addaCargo[i].name),
@@ -91,17 +91,15 @@ class _CargoCardState extends State<CargoCard> {
   ///passed to the onValidChangelistener of validatedCargoUI
   ///takes nwfs.id as key to modifiy valid of cargo is valid
   void cargoUIValidationChanged(int nwfID, bool valid) {
-    cargoIsValid[nwfID] = valid;
+    childrenCargoIsValidMap[nwfID] = valid;
     checkValidation();
   }
 
   void checkValidation() {
+    
     var ret = true;
-
-    cargoIsValid.forEach((key, value) {
-      if (value == false || value == null) {
-        ret = false;
-      }
+    childrenCargoIsValidMap.forEach((key, value) {
+      if (!value) {ret = false;}
     });
 
 
@@ -121,7 +119,7 @@ class _CargoCardState extends State<CargoCard> {
     ////print('removing '+this.widget.cargo[id].nwf.toString());
     this.widget.cargo.remove(id);
     importedConfigIDs.remove(id);
-    cargoIsValid.remove(id);
+    childrenCargoIsValidMap.remove(id);
     checkValidation();
     setState(() {});
   }
@@ -157,7 +155,7 @@ class _CargoCardState extends State<CargoCard> {
     for (int id in importedConfigIDs) {
       //dont call to string right here because nwf may be invlaid
       this.widget.cargo.remove(id);
-      cargoIsValid.remove(id);
+      childrenCargoIsValidMap.remove(id);
     }
     importedConfigIDs.clear();
     checkValidation();
@@ -168,7 +166,7 @@ class _CargoCardState extends State<CargoCard> {
   void removeAll() {
     this.widget.cargo.clear();
     importedConfigIDs.clear();
-    cargoIsValid.clear();
+    childrenCargoIsValidMap.clear();
     checkValidation();
     setState(() {});
   }
@@ -195,15 +193,8 @@ class _CargoCardState extends State<CargoCard> {
     setState(() {});
   }
 
-  Color getTitleColor() {
-    if (valid) {
-      return Const.nonfocusedBoderColors;
-    }
-    return Const.focusedErrorBorderColor;
-  }
-
   Widget build(BuildContext context) {
-    return CardAllwaysOpen(title: 'Cargo', color: getTitleColor(), children: [
+    return CardAllwaysOpen(title: 'Cargo', color: Util.getValidColor(valid), children: [
       Row2(
         Tex('Select Config'),
         configSpin,

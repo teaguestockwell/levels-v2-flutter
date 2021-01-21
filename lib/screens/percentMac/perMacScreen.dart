@@ -33,6 +33,7 @@ class PerMacScreenState extends State<PerMacScreen>
   final sc = ScrollController();
   /// call back for tanks spiner key = tanks.id, value = nwfs
   final tanksMap = LinkedHashMap<int, NameWeightFS>();
+ 
 
   @override
   void dispose() {
@@ -85,6 +86,7 @@ class PerMacScreenState extends State<PerMacScreen>
      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Const.modalPickerColor,
           content: Container(
+            key: Key('per mac error'),
               height: Const.pickerHeight * 2,
               child: Center(
                   child: Tex(

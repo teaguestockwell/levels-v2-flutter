@@ -115,18 +115,11 @@ class ChartCCardState extends State<ChartCCard> {
     }
   }
 
-  Color getTitleColor() {
-    if (valid) {
-      return Const.nonfocusedBoderColors;
-    }
-    return Const.nonfocusedErrorBoderColor;
-  }
-
   @override
   Widget build(_) {
     return CardAllwaysOpen(
       title: 'Chart C',
-      color: getTitleColor(),
+      color: Util.getValidColor(valid),
       children: body,
     );
   }
