@@ -1,6 +1,5 @@
 import 'dart:collection';
 import '../percentMac/perMacScreen.dart';
-
 import '../../backend/services.dart';
 import '../../screens/glossary/glossary.dart';
 import '../../screens/units/units.dart';
@@ -75,7 +74,7 @@ class _HomeState extends State<Home> {
 
     //build air pages
     for (int i = 0; i < airs.length; i++) {
-      ap[i] = [Units(), PerMacScreen(airs[i]), GlossaryScreen(airs[i])];
+      ap[i] = [Units(), PerMacScreen(airs[i]), GlossaryScreen(airs[i].glossarys)];
     }
 
     //set bn bar

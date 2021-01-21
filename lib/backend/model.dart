@@ -1,35 +1,65 @@
 import 'package:flutter/material.dart';
 
 class Aircraft {
-  final String name,
-      fs0,
-      fs1,
-      mom0,
-      mom1,
-      weight0,
-      weight1,
-      simplemom,
-      lemac,
-      mac,
-      cargomaxweight;
+  /// the name of the mds ex: C-17A-NON-ER, C-17A-ER
+  /// mds of the same type will have diffrent models if their capabilitys are diffrent,
+  /// for example, the two c17 variants have diffren fuel capacitys, and this changes, 
+  /// the moment of fuel in the wings
+  final String name;
+  /// the minimun fuselage station that cargo can be placed at.
+  final String fs0;
+  /// the maximum fuselage station that cargo can be placed
+  final String fs1;
+  /// the minimum simple momment of the basic long moment of the acft in/lbs
+  final String mom0;
+  /// the maximum simple momment of the basic long moment of the acft in/lbs
+  final String mom1;
+  /// the minumum basic weight of the acft in lbs
+  final String weight0;
+    /// the max basic weight of the acft in lbs
+  final String weight1;
+    /// the simple moment modifier  basic moment * simple moment modifier = basic moment
+  final String simplemom;
+  /// leading edge of mean aerodynamic chord.
+  final String lemac;
+  /// mean aerodynamic width of the wing
+  final String mac;
+  /// 0 < valid cargo > cargo max weight 
+  final String cargomaxweight;
 
-  final List<dynamic> tanknames,
-      tankmoms,
-      tankweights,
-      titles,
-      bodys,
-      cargonames,
-      cargoweights,
-      cargomoms,
-      configstrings;
 
-  List<Tank> tanks = [];
+  final List<NameWeightFS> addaCargo = [];
+  final List<Tank> tanks = [];
+  final List<Config> configs = [];
+  final List<Glossary> glossarys = [];
+  // fields below are used to contruct addaCargo, tanks, and configs
 
-  List<Config> configs = [];
 
-  List<NameWeightFS> addaCargo = [];
+  /// an array of names for each tank
+  final List<dynamic> tanknames;
+  /// an array of csv represeting simple moments for each weight of fuel in a tank
+  /// tanksmoms[0] = tank one; tankone[0] = simple moment
+  final List<dynamic> tankmoms;
+  /// an array of csv represeting weight of fuel in lbs in a each tank
+  /// tanksweights[0] = tank one; tankone[0] = weight
+  final List<dynamic> tankweights;
+  /// a list of titles for the glossary cards
+  final List<dynamic> titles;
+  /// a list of bodys for for each glossary card
+  final List<dynamic> bodys;
+  /// a list of names for each of the cargo items
+  final List<dynamic> cargonames;
+  /// a list of weights for each cargo item
+  final List<dynamic> cargoweights;
+  /// a lsit of simple moment for each cargo item
+  final List<dynamic> cargomoms;
+  /// a list of strings. Each string represents a cargo configuaration.
+  /// each cargo item in a config is delimited by ';' each cargo item
+  /// is delimited by ','
+  ///  where [0] = cargo name, [1] = total cargo weight in lb
+  /// [2] = total simple moment [3] = qty
+  final List<dynamic> configstrings;
 
-  ///the dynamicly created list of NameWeightFS consisting of fuel, cargo, basic mom, basic w
 
   Aircraft({
     @required this.name,
@@ -53,6 +83,7 @@ class Aircraft {
     @required this.cargomoms,
     @required this.configstrings,
   }) {
+
     // create tanks
     for (int i = 0; i < tanknames.length; i++) {
       tanks.add(Tank(
@@ -77,11 +108,26 @@ class Aircraft {
     for (int i = 0; i < configstrings.length; i++) {
       configs.add(Config(configstrings[i], this.simplemom));
     }
+
+    // create glossarys
+    for (int i = 0; i < titles.length; i++) {
+      glossarys.add(Glossary(
+        titles[i],
+        bodys[i]
+      ));
+    }
+
   }
 }
-//}
 
-///Tank is a list of NameWeightMoment
+
+
+
+
+/// Tank builds a list of name weight fs from
+///  weightcsv, momentcsv,  
+///contained under a tank name
+///
 class Tank {
   final String name, _weightsCSV, _momCSV, simplemom;
 
@@ -114,7 +160,6 @@ class Config {
   Config(String csv, this.simplemom) {
     var nameWeightMomentQtyList = csv.split(';');
     this.name = nameWeightMomentQtyList[0];
-    ////print(name);
 
     for (int i = 1; i < nameWeightMomentQtyList.length; i++) {
       String nwmqAtIndex = nameWeightMomentQtyList[i];
@@ -140,19 +185,16 @@ class NameWeightFS {
 
       /// modifier for simple moment
       name,
+      ///lbs
       weight,
-
       ///this is used to temperaly hold simple moment while it is converted to 
       ///fs with 2 decimal accuracy. this is never used for percent mac caculations directly.
       mom,
-
-      ///simple moment
+      ///in from refrence datum
       fs,
       qty;
   int id;
   NameWeightFS({
-    //these are named optinal params
-    //default value is given
     this.name = '',
     this.weight = '',
     this.fs = '',
@@ -161,7 +203,6 @@ class NameWeightFS {
     this.qty = '1',
   }) {
     this.id = P.getUniqueIdx();
-    ////print(this.toString());
   }
 
   ///used to create copy of another object, but assign it a new id
@@ -241,6 +282,10 @@ class NameWeightFS {
     return (P.p(mom) * P.p(simplemom) / P.p(weight)).toStringAsFixed(2);
   }
 
+  String getTotWeightFixed(int fractionDigits) {
+    return (P.p(weight) * P.p(qty)).toStringAsFixed(fractionDigits);
+  }
+
   ///determines to get caculated or non caculated fs
   String getfs() {
     if (mom.isNotEmpty && fs.isEmpty) {
@@ -249,26 +294,9 @@ class NameWeightFS {
     return fs;
   }
 
-  bool valid(
-    String fs0,
-    String fs1,
-    String weight1,
-  ) {
-    if (this.name.isNotEmpty &&
-        P.p(this.qty) > 0 &&
-        P.p(this.weight) < P.p(weight1) &&
-        P.p(this.fs) > P.p(fs0) &&
-        P.p(this.fs) < P.p(fs1)) {
-      return true;
-    }
-    return false;
-  }
-
-  String getTotWeightFixed(int fractionDigits) {
-    return (P.p(weight) * P.p(qty)).toStringAsFixed(fractionDigits);
-  }
 }
 
+///used to store and caculate final variables for percent mac
 class PerMac {
   final List<NameWeightFS> nwfss;
   String totMomAsString;
@@ -333,35 +361,15 @@ class PerMac {
 
     grandTotQty = gtq.toString();
   }
-
-  void printString() {
-    nwfss.forEach((x) {
-      //print(' name '+x.name+' qty '+x.qty+' totweight '+x.getTotalWeight()+' fs '+x.getFS()+' totmom '+x.getTotalMoment());
-    });
-    //print('totMom '+totMomAsString);
-    //print('totWeight '+totWeightAsSting);
-    //print('simpleMom '+simpleMomAsString);
-    //print('balArm '+balArmAsString);
-    //print('lemac '+lemacAsString);
-    //print('mac '+macAsString);
-    //print('permac dec '+perMacDecimalAsString);
-    //print('permac % '+perMacPercentAsString);
-  }
-}
-
-class General {
-  String csvAllMds, welcometitle, welcomebody;
-  List<String> mdsNames;
-
-  General(this.csvAllMds, this.welcometitle, this.welcomebody) {
-    mdsNames = csvAllMds.split(',');
-  }
 }
 
 class Glossary {
   final String title, body;
-
-  Glossary(this.title, this.body);
+  Glossary(this.title, this.body) :
+  assert(title!=null),
+  assert(title.isNotEmpty),
+  assert(body!=null),
+  assert(body.isNotEmpty);
 }
 
 ///Helper class to try parsing doubles.
@@ -395,6 +403,8 @@ class P {
   }
 }
 
+/// used as a model for a more options modal.
+/// the name url and icons are all passed to this modal
 class MoreOp {
   final List<dynamic> name, url, icon;
   MoreOp({
@@ -404,6 +414,7 @@ class MoreOp {
   });
 }
 
+///home screen model
 class HomeModel{
   final Glossary welcome;
   final MoreOp moreop;

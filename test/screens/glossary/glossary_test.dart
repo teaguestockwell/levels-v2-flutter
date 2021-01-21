@@ -2,21 +2,20 @@ import '../../../lib/backend/model.dart';
 import '../../../lib/screens/glossary/glossary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
-class MockAircraft extends Mock implements Aircraft {}
 
 main() {
   testWidgets(
     'given aircraft a, when i click on glossary, build list of glossary cards',
      (WidgetTester wt) async {
     //assemble
-    final a = MockAircraft();
-    when(a.titles).thenReturn(['title 1', 'title 2', 'title 3']);
-    when(a.bodys).thenReturn(['body 1', 'body 2', 'body 3']);
+    final glossarys = [
+      Glossary('title 1', 'body 1'),
+      Glossary('title 2', 'body 2'),
+      Glossary('title 3', 'body 3'),
+    ];
 
     //act
-    await wt.pumpWidget(MaterialApp(home: GlossaryScreen(a)));
+    await wt.pumpWidget(MaterialApp(home: GlossaryScreen(glossarys)));
 
     //expect
     expect(find.text('title 1'), findsOneWidget);
