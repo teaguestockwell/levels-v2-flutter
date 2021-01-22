@@ -1,9 +1,9 @@
+import '../../backend/models/nameWeightFS.dart';
+import '../../backend/models/perMac.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
-
 import 'balArmCard.dart';
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/const.dart';
 import '../../screens/home/loading.dart';
 import '../../screens/percentMac/perMacCard.dart';
 import '../../widgets/display/text.dart';

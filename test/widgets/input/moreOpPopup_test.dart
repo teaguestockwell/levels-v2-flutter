@@ -1,5 +1,5 @@
-import '../../../lib/backend/model.dart';
-import '../../../lib/widgets/input/moreOpPopup.dart';
+import 'package:five_level_one/backend/models/moreOp.dart';
+import 'package:five_level_one/widgets/input/moreOpPopup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';

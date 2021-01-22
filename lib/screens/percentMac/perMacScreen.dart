@@ -1,8 +1,9 @@
+import '../../backend/models/aircraft.dart';
+import '../../backend/models/nameWeightFS.dart';
 import 'tanksCard.dart';
 import 'cargoCard.dart';
 import 'chartcCard.dart';
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/const.dart';
 import 'showWork.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/getMacButton.dart';

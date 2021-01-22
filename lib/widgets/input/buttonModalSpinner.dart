@@ -1,7 +1,7 @@
 import 'customButton.dart';
-import '../../backend/cont.dart';
+import '../../backend/const.dart';
 import '../../widgets/display/text.dart';
-import '../../utils.dart';
+import '../../backend/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

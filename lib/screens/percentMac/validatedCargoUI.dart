@@ -1,12 +1,12 @@
 import 'dart:collection';
+import '../../backend/models/nameWeightFS.dart';
 import '../../widgets/input/customButton.dart';
 import '../../widgets/input/validatedText.dart';
 import '../../widgets/layout/alignPadding.dart';
 import '../../widgets/layout/rows/row1.dart';
 import '../../widgets/layout/rows/row2.dart';
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
-import '../../utils.dart';
+import '../../backend/const.dart';
+import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/cards/ccard.dart';
 import '../../widgets/layout/div.dart';

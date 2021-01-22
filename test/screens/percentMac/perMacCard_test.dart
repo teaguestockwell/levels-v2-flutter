@@ -1,8 +1,8 @@
+import 'package:five_level_one/backend/models/perMac.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/screens/percentMac/perMacCard.dart';
-import '../../../lib/backend/model.dart';
+import 'package:five_level_one/screens/percentMac/perMacCard.dart';
 
 class PerMacMock extends Mock implements PerMac{}
 

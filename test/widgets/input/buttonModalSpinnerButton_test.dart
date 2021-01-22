@@ -1,4 +1,4 @@
-import '../../../lib/widgets/input/buttonModalSpinnerButton.dart';
+import 'package:five_level_one/widgets/input/buttonModalSpinnerButton.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

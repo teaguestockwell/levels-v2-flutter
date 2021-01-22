@@ -1,12 +1,11 @@
 import 'dart:collection';
-
-import '../../../lib/widgets/input/validatedText.dart';
-
-import '../../../lib/screens/percentMac/chartcCard.dart';
+import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/widgets/input/validatedText.dart';
+import 'package:five_level_one/screens/percentMac/chartcCard.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/backend/model.dart';
+
 
 class AircraftMock extends Mock implements Aircraft{}
 

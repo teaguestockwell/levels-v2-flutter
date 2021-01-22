@@ -1,5 +1,5 @@
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/models/moreOp.dart';
+import '../../backend/const.dart';
 import '../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,8 +1,10 @@
 import 'dart:collection';
-import '../../../lib/widgets/layout/div.dart';
-import '../../../lib/screens/percentMac/tanksCard.dart';
+import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/nameWeightFS.dart';
+import 'package:five_level_one/backend/models/tank.dart';
+import 'package:five_level_one/widgets/layout/div.dart';
+import 'package:five_level_one/screens/percentMac/tanksCard.dart';
 import 'package:flutter/material.dart';
-import '../../../lib/backend/model.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,4 +1,4 @@
-import '../../backend/cont.dart';
+import '../../backend/const.dart';
 import 'text.dart';
 import 'package:flutter/material.dart';
 

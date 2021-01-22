@@ -1,4 +1,4 @@
-import '../../../../lib/widgets/layout/cards/cardAllwaysOpen.dart';
+import 'package:five_level_one/widgets/layout/cards/cardAllwaysOpen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

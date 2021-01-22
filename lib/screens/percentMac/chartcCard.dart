@@ -1,10 +1,11 @@
+import '../../backend/models/aircraft.dart';
+import '../../backend/models/nameWeightFS.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
-import '../../backend/model.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validatedText.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row2.dart';
-import '../../utils.dart';
+import '../../backend/utils.dart';
 import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

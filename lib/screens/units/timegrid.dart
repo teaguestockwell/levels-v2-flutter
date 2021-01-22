@@ -1,4 +1,4 @@
-import '../../backend/cont.dart';
+import '../../backend/const.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/alignPadding.dart';
 import 'dart:async';

@@ -1,11 +1,13 @@
 import 'dart:collection';
-import '../../../lib/screens/percentMac/cargoCard.dart';
+import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/config.dart';
+import 'package:five_level_one/backend/models/nameWeightFS.dart';
+import 'package:five_level_one/screens/percentMac/cargoCard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/backend/model.dart';
 import 'package:mockito/mockito.dart';
 
-import 'chartcCard_test.dart';
+//import 'chartcCard_test.dart';
 
 class AirMock extends Mock implements Aircraft{}
 
@@ -69,8 +71,8 @@ List<NameWeightFS> getValidCargo(){
   return ret;
 }
 
-AircraftMock getAirWithInvalidCargosAndValidConfig(){
-  final ret = AircraftMock();
+AirMock getAirWithInvalidCargosAndValidConfig(){
+  final ret = AirMock();
 
   when(ret.addaCargo).thenReturn(getInvalidCargo());
   when(ret.configs).thenReturn(getValidConfig());
@@ -80,8 +82,8 @@ AircraftMock getAirWithInvalidCargosAndValidConfig(){
   return ret;
 }
 
-AircraftMock getAirWithValidCargosAndValidConfig(){
-  final ret = AircraftMock();
+AirMock getAirWithValidCargosAndValidConfig(){
+  final ret = AirMock();
 
   when(ret.addaCargo).thenReturn(getValidCargo());
   when(ret.configs).thenReturn(getValidConfig());
@@ -91,8 +93,8 @@ AircraftMock getAirWithValidCargosAndValidConfig(){
   return ret;
 }
 
-AircraftMock getAirValidCargosAndInvalidConfig(){
-  final ret = AircraftMock();
+AirMock getAirValidCargosAndInvalidConfig(){
+  final ret = AirMock();
 
   when(ret.addaCargo).thenReturn(getValidCargo());
   when(ret.configs).thenReturn(getInvalidConfigs());

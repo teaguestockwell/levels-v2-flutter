@@ -1,5 +1,5 @@
-import '../../../lib/screens/percentMac/validatedCargoUI.dart';
-import '../../../lib/backend/model.dart';
+import 'package:five_level_one/backend/models/nameWeightFS.dart';
+import 'package:five_level_one/screens/percentMac/validatedCargoUI.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

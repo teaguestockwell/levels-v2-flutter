@@ -1,8 +1,8 @@
-import '../../../lib/screens/home/loading.dart';
+import 'package:five_level_one/backend/models/nameWeightFS.dart';
+import 'package:five_level_one/screens/home/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/screens/percentMac/showWork.dart';
-import '../../../lib/backend/model.dart';
+import 'package:five_level_one/screens/percentMac/showWork.dart';
 
 
 List<NameWeightFS> getNWFS(){

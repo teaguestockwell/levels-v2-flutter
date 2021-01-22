@@ -1,6 +1,6 @@
 import 'dart:collection';
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/models/moreOp.dart';
+import '../../backend/const.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/leadingMDS.dart';
 import '../../widgets/input/moreOpPopup.dart';

@@ -1,4 +1,4 @@
-import '../../backend/cont.dart';
+import '../../backend/const.dart';
 import '../layout/alignPadding.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_linkify/flutter_linkify.dart';

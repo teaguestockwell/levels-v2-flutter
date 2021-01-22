@@ -1,11 +1,13 @@
-
-import '../../../lib/screens/percentMac/showWork.dart';
-import '../../../lib/widgets/input/validatedText.dart';
+import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/config.dart';
+import 'package:five_level_one/backend/models/nameWeightFS.dart';
+import 'package:five_level_one/backend/models/tank.dart';
+import 'package:five_level_one/screens/percentMac/showWork.dart';
+import 'package:five_level_one/widgets/input/validatedText.dart';
 import 'package:mockito/mockito.dart';
-import '../../../lib/backend/model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/screens/percentMac/perMacScreen.dart';
+import 'package:five_level_one/screens/percentMac/perMacScreen.dart';
 
 int numTanks = 20;
 int fuelCap = 20000;

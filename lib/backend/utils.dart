@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'package:jiffy/jiffy.dart';
-import 'backend/cont.dart';
-import 'backend/model.dart';
+import 'const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'models/nameWeightFS.dart';
 
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);
@@ -38,7 +38,35 @@ class Util {
     }
     return Const.nonfocusedErrorBoderColor;
   }
+
+  static int idx = 0;
+  ///Given a string try to parse into double. If fail make toast with error.
+  static double parsedouble(String s) {
+    double p = 0.0;
+    try {
+      p = double.parse(s);
+      return p;
+    } catch (Exeption) {
+      throw Exception();
+    }
+  }
+
+  static int getUniqueIdx() {
+    idx++;
+    return idx - 1;
+  }
+
+  static int parseint(s) {
+    int p = 0;
+    try {
+      p = int.parse(s);
+      return p;
+    } catch (Exeption) {
+      throw Exception();
+    }
+  }
 }
+
 
 class Distance {
   double numOfBases;

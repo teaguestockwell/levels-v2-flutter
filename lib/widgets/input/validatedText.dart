@@ -1,8 +1,8 @@
-import '../../backend/cont.dart';
+import '../../backend/const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import '../../utils.dart';
+import '../../backend/utils.dart';
 
 class ValidatedText extends StatefulWidget {
   ///0=int, 1=double, 2=String

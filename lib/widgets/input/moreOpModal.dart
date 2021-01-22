@@ -1,5 +1,5 @@
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/models/moreOp.dart';
+import '../../backend/const.dart';
 import '../display/text.dart';
 import 'customButton.dart';
 import 'package:flutter/cupertino.dart';

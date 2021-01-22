@@ -1,6 +1,6 @@
+import '../../backend/models/glossary.dart';
 import '../../widgets/display/rowCenterText.dart';
 import '../../widgets/layout/cards/ccard.dart';
-import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

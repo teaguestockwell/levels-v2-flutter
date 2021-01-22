@@ -1,8 +1,8 @@
 import 'dart:math';
-import '../../../lib/backend/cont.dart';
-import '../../../lib/screens/units/yYYYMMDDLookup.dart';
-import '../../../lib/utils.dart';
-import '../../../lib/widgets/input/buttonModalSpinner.dart';
+import 'package:five_level_one/backend/const.dart';
+import 'package:five_level_one/backend/utils.dart';
+import 'package:five_level_one/screens/units/yyyymmddlookup.dart';
+import 'package:five_level_one/widgets/input/buttonModalSpinner.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

@@ -1,5 +1,5 @@
-import '../../../lib/backend/model.dart';
-import '../../../lib/screens/glossary/glossary.dart';
+import 'package:five_level_one/backend/models/glossary.dart';
+import 'package:five_level_one/screens/glossary/glossary.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

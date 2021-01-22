@@ -1,7 +1,10 @@
-import '../../../lib/backend/model.dart';
-import '../../../lib/screens/home/home.dart';
+import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/glossary.dart';
+import 'package:five_level_one/backend/models/homeModel.dart';
+import 'package:five_level_one/backend/models/moreOp.dart';
+import 'package:five_level_one/screens/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
-import '../../../lib/backend/services.dart';
+import 'package:five_level_one/backend/services.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 

@@ -1,11 +1,12 @@
+import '../../backend/models/tank.dart';
+import '../../backend/models/aircraft.dart';
 import '../../widgets/input/buttonModalSpinner.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/rows/row2.dart';
-import '../../backend/cont.dart';
-import '../../utils.dart';
+import '../../backend/const.dart';
+import '../../backend/utils.dart';
 import '../../widgets/layout/cards/cardAllwaysOpen.dart';
-import '../../backend/model.dart';
 import 'package:flutter/material.dart';
 
 class TanksCard extends StatelessWidget {

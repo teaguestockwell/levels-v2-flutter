@@ -1,5 +1,5 @@
-import '../../backend/cont.dart';
-import '../../backend/model.dart';
+import '../../backend/models/perMac.dart';
+import '../../backend/const.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/cards/ccard.dart';
 import 'package:flutter/material.dart';

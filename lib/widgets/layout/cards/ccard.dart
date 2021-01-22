@@ -1,6 +1,6 @@
-import '../../../utils.dart';
+import '../../../backend/utils.dart';
 import '../alignPadding.dart';
-import '../../../backend/cont.dart';
+import '../../../backend/const.dart';
 import '../../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
 
