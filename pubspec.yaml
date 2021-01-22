@@ -37,7 +37,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito:
-  fake_async: ^1.1.0
+  
 
 
 # For information on the generic Dart part of this file, see the

@@ -1,5 +1,5 @@
-import '../../backend/const.dart';
 import 'package:flutter/material.dart';
+import '../../backend/const.dart';
 
 class Tex extends StatelessWidget {
   final String text;

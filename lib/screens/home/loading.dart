@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import '../../backend/const.dart';
 import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
-import 'package:flutter/material.dart';
 
 class Loading extends StatelessWidget {
   @override

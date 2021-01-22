@@ -1,8 +1,9 @@
-import '../../../backend/utils.dart';
-import '../alignPadding.dart';
-import '../../../backend/const.dart';
-import '../../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
+
+import '../../../backend/const.dart';
+import '../../../backend/utils.dart';
+import '../../../widgets/display/text.dart';
+import '../align_padding.dart';
 
 class CCard extends StatefulWidget {
   final String title;

@@ -1,10 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'models/aircraft.dart';
 import 'models/glossary.dart';
-import 'models/homeModel.dart';
-import 'models/moreOp.dart';
+import 'models/home_model.dart';
+import 'models/more_op.dart';
 
 class Services{
 

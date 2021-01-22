@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'config.dart';
 import 'glossary.dart';
-import 'nameWeightFS.dart';
+import 'name_weight_fs.dart';
 import 'tank.dart';
 
 class Aircraft {

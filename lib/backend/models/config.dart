@@ -1,5 +1,5 @@
 import '../utils.dart';
-import 'nameWeightFS.dart';
+import 'name_weight_fs.dart';
 
 class Config {
   List<NameWeightFS> nwfList = [];

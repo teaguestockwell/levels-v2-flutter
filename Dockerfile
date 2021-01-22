@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y bash curl file git unzip xz-utils zip
 
 # Clone the flutter repo from a specific release
-RUN git clone https://github.com/flutter/flutter.git
+RUN git clone https://github.com/flutter/flutter.git -b master
 
 # cd into flutter 
 WORKDIR /flutter
@@ -34,10 +34,10 @@ RUN flutter pub get
 RUN flutter doctor
 
 # Run tests
-#RUN flutter test --machine > tests.output
+RUN flutter test --machine > tests.output
 
 # Compute coverage (--machine and --coverage cannot be run at once...)
-#RUN flutter test --coverage
+RUN flutter test --coverage
 
 # Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
 #RUN sonar-scanner
@@ -50,7 +50,7 @@ FROM nginx
 #FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.0.244
 
 # Run as a unprivileged user
-USER appuser
+#USER appuser
 
 # Copy build output from first stage 
 COPY --from=0 /app/build/web /usr/share/nginx/html
@@ -60,7 +60,7 @@ COPY --from=0 /app/build/web /usr/share/nginx/html
 COPY nginx.config /etc/nginx/nginx.conf
 
 # Document the exposed port
-EXPOSE  80
+EXPOSE  8080
 
 # Serve that build
 CMD [ "nginx", "-g", "daemon off;" ]

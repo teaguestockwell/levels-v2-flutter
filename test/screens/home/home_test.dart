@@ -1,7 +1,7 @@
 import 'package:five_level_one/backend/models/aircraft.dart';
 import 'package:five_level_one/backend/models/glossary.dart';
-import 'package:five_level_one/backend/models/homeModel.dart';
-import 'package:five_level_one/backend/models/moreOp.dart';
+import 'package:five_level_one/backend/models/home_model.dart';
+import 'package:five_level_one/backend/models/more_op.dart';
 import 'package:five_level_one/screens/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:five_level_one/backend/services.dart';

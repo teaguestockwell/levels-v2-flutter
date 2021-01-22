@@ -1,9 +1,11 @@
 import 'dart:math';
-import 'package:jiffy/jiffy.dart';
-import 'const.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'models/nameWeightFS.dart';
+import 'package:jiffy/jiffy.dart';
+
+import 'const.dart';
+import 'models/name_weight_fs.dart';
 
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);
@@ -46,7 +48,7 @@ class Util {
     try {
       p = double.parse(s);
       return p;
-    } catch (Exeption) {
+    } catch (e) {
       throw Exception();
     }
   }

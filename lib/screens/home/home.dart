@@ -1,22 +1,22 @@
 import 'dart:collection';
-import '../../backend/models/aircraft.dart';
-import '../../backend/models/homeModel.dart';
-import '../percentMac/perMacScreen.dart';
-import '../../backend/services.dart';
-import '../../screens/glossary/glossary.dart';
-import '../../screens/units/units.dart';
-import '../../widgets/layout/div.dart';
-import 'bottomnav.dart';
-import 'loading.dart';
-import '../../backend/const.dart';
-import '../../widgets/display/rowCenterText.dart';
-import '../../widgets/input/customButton.dart';
-import '../../widgets/input/moreOpModal.dart';
-import '../../widgets/layout/cards/cardAllwaysOpen.dart';
-import '../../widgets/layout/rows/row2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import '../../backend/const.dart';
+import '../../backend/models/aircraft.dart';
+import '../../backend/models/home_model.dart';
+import '../../backend/services.dart';
+import '../../screens/glossary/glossary.dart';
+import '../../screens/units/units.dart';
+import '../../widgets/display/row_center_text.dart';
+import '../../widgets/input/custom_button.dart';
+import '../../widgets/input/more_op_modal.dart';
+import '../../widgets/layout/cards/card_allways_open.dart';
+import '../../widgets/layout/div.dart';
+import '../../widgets/layout/rows/row2.dart';
+import '../percentmac/per_mac_screen.dart';
+import 'bottom_navigation.dart';
+import 'loading.dart';
 
 class Home extends StatefulWidget {
   final Services services;

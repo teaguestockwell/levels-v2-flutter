@@ -1,0 +1,14 @@
+linter:
+  rules:
+    - camel_case_types
+    - camel_case_extensions
+    - library_names
+    - file_names
+    - library_prefixes
+    - non_constant_identifier_names
+    - directives_ordering
+    - curly_braces_in_flow_control_structures
+    - avoid_relative_lib_imports
+    - prefer_relative_imports
+    - avoid_init_to_null
+    - avoid_catches_without_on_clauses

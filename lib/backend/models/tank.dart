@@ -1,4 +1,4 @@
-import 'nameWeightFS.dart';
+import 'name_weight_fs.dart';
 
 /// Tank builds a list of name weight fs from
 ///  weightcsv, momentcsv,  
