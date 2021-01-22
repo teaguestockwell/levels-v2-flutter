@@ -59,15 +59,17 @@ class _ShowWorkState extends State<ShowWork> {
     Widget ret = CupertinoScrollbar(
       controller: sc,
       isAlwaysShown: true,
-      child: ListView(
+      child: SingleChildScrollView(
         controller: sc,
         scrollDirection: Axis.vertical,
         dragStartBehavior: DragStartBehavior.down,
+        child: Column(
          children: [
           CargoPerMacCard(permac),
           BalArmCard(permac),
           PerMacCard(permac),
         ]
+        )
       )
     );
 
