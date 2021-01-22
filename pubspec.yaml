@@ -32,6 +32,7 @@ dependencies:
      git:
        url: https://github.com/espresso3389/flutter_datetime_picker
   jiffy: ^3.0.1
+  http:
 
 dev_dependencies:
   flutter_test:
