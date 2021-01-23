@@ -4,7 +4,7 @@ RUN apt-get update
 RUN apt-get install -y bash curl file git unzip xz-utils zip
 
 # Clone the flutter repo from a specific release
-RUN git clone https://github.com/flutter/flutter.git
+RUN git clone https://github.com/flutter/flutter.git -b master
 
 # cd into flutter 
 WORKDIR /flutter
@@ -33,6 +33,15 @@ RUN flutter pub get
 # Echo version
 RUN flutter doctor
 
+# Run tests
+RUN flutter test --machine > tests.output
+
+# Compute coverage (--machine and --coverage cannot be run at once...)
+RUN flutter test --coverage
+
+# Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
+#RUN sonar-scanner
+
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
 
@@ -51,7 +60,7 @@ COPY --from=0 /app/build/web /usr/share/nginx/html
 COPY nginx.config /etc/nginx/nginx.conf
 
 # Document the exposed port
-EXPOSE  80
+EXPOSE  8080
 
 # Serve that build
 CMD [ "nginx", "-g", "daemon off;" ]

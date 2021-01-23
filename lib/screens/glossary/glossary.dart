@@ -1,28 +1,23 @@
-import '../../widgets/display/rowCenterTest.dart';
-import '../../widgets/layout/cards/ccard.dart';
-import '../../backend/model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../../backend/models/glossary.dart';
+import '../../widgets/display/row_center_text.dart';
+import '../../widgets/layout/cards/ccard.dart';
 
-class GlossaryScreen extends StatelessWidget {
-  final Aircraft air;
-  final List<Widget> cards = [];
-  final sc = ScrollController();
-  GlossaryScreen(this.air) {
-    getGlossCards();
+class GlossaryScreen extends StatefulWidget {
+  final List<Glossary> glossarys;
+
+  GlossaryScreen(this.glossarys): super(key: PageStorageKey(UniqueKey()));
+  _GlossaryScreenState createState() => _GlossaryScreenState();
   }
 
-  void getGlossCards() {
-    cards.clear();
-    
-    for (int i = 0; i < air.titles.length; i++) {
-      cards.add(
-        CCard(
-          title:air.titles.elementAt(i),
-          children: [RowCenterText(air.bodys.elementAt(i))],
-          initOpen: true,
-          ));
-    }
+class _GlossaryScreenState extends State<GlossaryScreen> {
+  final sc = ScrollController();
+
+  @override
+  void dispose() {
+    sc.dispose();
+    super.dispose();
   }
 
   @override
@@ -32,9 +27,12 @@ class GlossaryScreen extends StatelessWidget {
         controller: sc,
         child: ListView.builder(
             controller: sc, //ony render on screen widgets-recycle viewer
-            itemCount: cards.length,
-            itemBuilder: (BuildContext context, int index) {
-              return cards[index];
-            }));
+            itemCount: this.widget.glossarys.length,
+            itemBuilder: (BuildContext context, int i) {
+              return CCard(
+                title: this.widget.glossarys[i].title,
+                children: [RowCenterText(this.widget.glossarys[i].body)],
+                initOpen: true,
+            );}));
   }
 }

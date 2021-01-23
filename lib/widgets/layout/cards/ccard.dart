@@ -1,9 +1,9 @@
-import '../../../utils.dart';
-import '../max.dart';
-import '../alignPadding.dart';
-import '../../../backend/cont.dart';
-import '../../../widgets/display/text.dart';
 import 'package:flutter/material.dart';
+
+import '../../../backend/const.dart';
+import '../../../backend/utils.dart';
+import '../../../widgets/display/text.dart';
+import '../align_padding.dart';
 
 class CCard extends StatefulWidget {
   final String title;
@@ -34,18 +34,10 @@ class _CCardState extends State<CCard> {
   @override
   void initState() {
     super.initState();
-    title = getNameTruncated(this.widget.title);
+    title = Util.getTruncated(this.widget.title, 30);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;
-  }
-
-  String getNameTruncated(String string) {
-    var ret = string;
-    if (ret.length <= 30) {
-      return ret;
-    }
-    return ret.substring(0, 27) + '...';
   }
 
   ///toggles the cards open state
@@ -59,39 +51,37 @@ class _CCardState extends State<CCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Max(
-        w: Const.maxCardWidth,
-        child: Padding(
-            padding:
-                EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(20.0),
-                child: Card(
-                    color: Const.cardColor,
-                    shape: Border(
-                        top: BorderSide(
-                      color: Const.cardColor,
-                      width: Const.cardTabSize,
-                    )),
-                    child: Column(
-                      children: [
-                        InkWell(
-                            child: AlignPadding(
-                                3.0,
-                                Alignment.center,
-                                TitleCC(
-                                    open: open,
-                                    tex: Tex(
-                                      title,
-                                      color: color,
-                                    ))),
-                            onTap: () => setState(() {
-                                  this.widget.callBack?.call();
-                                  open = !open;
-                                })),
-                        Column(children: getActive()),
-                      ],
-                    )))));
+    return Padding(
+        padding:
+            EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+        child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Card(
+                color: Const.cardColor,
+                shape: Border(
+                    top: BorderSide(
+                  color: Const.cardColor,
+                  width: Const.cardTabSize,
+                )),
+                child: Column(
+                  children: [
+                    InkWell(
+                        child: AlignPadding(
+                            3.0,
+                            Alignment.center,
+                            TitleCC(
+                                open: open,
+                                tex: Tex(
+                                  title,
+                                  color: color,
+                                ))),
+                        onTap: () => setState(() {
+                              this.widget.callBack?.call();
+                              open = !open;
+                            })),
+                    Column(children: getActive()),
+                  ],
+                ))));
   }
 }
 
@@ -104,7 +94,7 @@ class TitleCC extends StatelessWidget {
   Widget build(BuildContext context) {
     if (open) {
       return Container(
-          width: MediaQuery.of(context).size.width / .8,
+          width: MediaQuery.of(context).size.width ,
           child: Row(children: [
             Icon(Icons.arrow_drop_up),
             Spacer(),

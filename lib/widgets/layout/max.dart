@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 
+import '../../backend/const.dart';
+
 class Max extends StatelessWidget {
-  final double w,h;
   final Widget child;
   Max({
-    @required this.child, 
-    this.w = double.infinity,
-    this.h = double.infinity,
+    @required this.child,
   });
 
   @override
   Widget build(BuildContext context) {
-    return child;
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Spacer(),
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: Const.maxCardWidth),
+          child: child
+        ),
+        Spacer()
+      ],
+    );
   }
 }

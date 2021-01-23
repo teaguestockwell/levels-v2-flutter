@@ -1,11 +1,12 @@
-import '../alignPadding.dart';
-import '../../../backend/cont.dart';
 import 'package:flutter/material.dart';
 
+import '../../../backend/const.dart';
+import '../align_padding.dart';
 
-class RowCenterOne extends StatelessWidget {
+
+class Row1 extends StatelessWidget {
   final Widget w;
-  RowCenterOne(this.w);
+  Row1(this.w);
 
   @override
   Widget build(BuildContext context) {
