@@ -10,14 +10,12 @@ import 'package:http/http.dart' as http;
 class Services{
 
 Future<HomeModel> getHomeModel() async {
-  await http.get('https://jsonplaceholder.typicode.com/albums/1');
 
-
-  // await Firebase.initializeApp();
-  // DocumentSnapshot qs = await FirebaseFirestore.instance
-  //     .collection('general')
-  //     .doc('general')
-  //     .get();
+  await Firebase.initializeApp();
+  DocumentSnapshot qs = await FirebaseFirestore.instance
+      .collection('general')
+      .doc('general')
+      .get();
 
   return HomeModel(
     welcome: Glossary(qs['welcometitle'], qs['welcomebody']),
@@ -25,15 +23,16 @@ Future<HomeModel> getHomeModel() async {
   );
 }
 
+Future<String> test() async {
+  final response =  await http.get('http://localhost:8080/fl-api/');
+  return response.body;
+}
+
 Future<List<Aircraft>> getAirs() async {
   List<Aircraft> ret = [];
 
-  final response =  await http.get('https://jsonplaceholder.typicode.com/albums/1');
+  QuerySnapshot qs = await FirebaseFirestore.instance.collection('mds').get();
 
-  // QuerySnapshot qs = await FirebaseFirestore.instance.collection('mds').get();
-
-  if(response.statusCode ==200){
-    String airs = jsonDecode(response.body);
 
     //for each air in airs, add air to ret
 

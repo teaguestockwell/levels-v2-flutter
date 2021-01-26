@@ -33,6 +33,7 @@ class _HomeState extends State<Home> {
   bool didLoad = false;
   bool didAccept = false;
   final sc = ScrollController();
+  String apiResponse;
 
   @override
   void dispose() {
@@ -57,7 +58,7 @@ class _HomeState extends State<Home> {
 
     //pre cach should complete before home is built
     homeModel = await this.widget.services.getHomeModel();
-
+    apiResponse = await this.widget.services.test();
     //state is set and disclaimer is drawn
     buildDiclaimer();
 
@@ -114,7 +115,8 @@ class _HomeState extends State<Home> {
                     RowCenterText(homeModel.welcome.body),
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
-                        MoreOpModal(homeModel.moreop))
+                        MoreOpModal(homeModel.moreop)),
+                    Text(apiResponse ?? 'no response'),
                   ])
             ]))));
 
