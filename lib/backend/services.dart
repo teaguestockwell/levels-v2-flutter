@@ -6,6 +6,8 @@ import 'models/glossary.dart';
 import 'models/home_model.dart';
 import 'models/more_op.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io' show Platform;
+import 'dart:convert' as convert;
 
 class Services{
 
@@ -24,8 +26,12 @@ Future<HomeModel> getHomeModel() async {
 }
 
 Future<String> test() async {
-  final response =  await http.get('http://localhost:8080/fl-api/');
-  return response.body;
+  // final env = Platform.environment;
+  // final host = env['HOST'] ?? 'localhost';
+  // final port = env['PORT'] ?? '8080';
+  // final response =  await http.get('http://${host}:${port}/fl-api/aircraft');
+  final response =  await http.get('http://localhost:8080/fl-api/aircraft');
+  return convert.jsonDecode(response.body).toString();
 }
 
 Future<List<Aircraft>> getAirs() async {

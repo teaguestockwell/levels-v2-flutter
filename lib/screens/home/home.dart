@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'package:five_level_one/widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -116,8 +117,12 @@ class _HomeState extends State<Home> {
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(homeModel.moreop)),
-                    Text(apiResponse ?? 'no response'),
-                  ])
+                  ]),
+              CCard(
+                title: 'api reponse',
+                children: [RowCenterText(apiResponse ?? 'no resonse')],
+                initOpen: true,
+              )
             ]))));
 
     setState(() {

@@ -34,10 +34,10 @@ RUN flutter pub get
 RUN flutter doctor
 
 # Run tests
-RUN flutter test --machine > tests.output
+#RUN flutter test --machine > tests.output
 
 # Compute coverage (--machine and --coverage cannot be run at once...)
-RUN flutter test --coverage
+#RUN flutter test --coverage
 
 # Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
 #RUN sonar-scanner
@@ -53,8 +53,8 @@ FROM nginx
 #USER appuser
 
 # Copy build output from first stage 
-COPY --from=0 /app/build/web /usr/share/nginx/html
-#COPY ./build/web/ /usr/share/nginx/html
+#COPY --from=0 /app/build/web /usr/share/nginx/html
+COPY ./build/web/ /usr/share/nginx/html
 
 # Copy nginx config from first stage --from=0 /fl/nginx.config
 COPY nginx.config /etc/nginx/nginx.conf
