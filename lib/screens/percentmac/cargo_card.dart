@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../backend/const.dart';
 import '../../backend/models/aircraft.dart';
 import '../../backend/models/config.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/button_modal_spinner_button.dart';
@@ -25,8 +25,8 @@ class CargoCard extends StatefulWidget {
   final cargo = LinkedHashMap<int, ValidatedCargoUI>();
 
   //only call this after cargoUI valid notification = true;
-  List<NameWeightFS> getNWfs() {
-    List<NameWeightFS> ret = [];
+  List<Cargo> getNWfs() {
+    List<Cargo> ret = [];
     cargo.forEach((_, cargoUI) {
       ret.add(cargoUI.nwf);
     });
@@ -44,7 +44,7 @@ class CargoCardState extends State<CargoCard> {
 
   ///modal spinner that changes this.selectedSpinnerConfig
   ButtonModalSpinnerButton configSpin;
-  NameWeightFS selectedSpinnerCargo;
+  Cargo selectedSpinnerCargo;
 
   ///modal spinner that changes this.selectedSpinnerCargo
   ButtonModalSpinnerButton cargoSpin;
@@ -63,7 +63,7 @@ class CargoCardState extends State<CargoCard> {
 
     this.widget.onValidationChange(1, valid);
     selectedSpinnerConfig = this.widget.air.configs[0];
-    selectedSpinnerCargo = this.widget.air.addaCargo[0];
+    selectedSpinnerCargo = this.widget.air.cargos[0];
 
     configSpin = ButtonModalSpinnerButton(
       stringList: List.generate(
@@ -75,10 +75,10 @@ class CargoCardState extends State<CargoCard> {
     );
 
     cargoSpin = ButtonModalSpinnerButton(
-      stringList: List.generate(this.widget.air.addaCargo.length,
-       (i) => this.widget.air.addaCargo[i].name),
+      stringList: List.generate(this.widget.air.cargos.length,
+       (i) => this.widget.air.cargos[i].name),
       modalButtonText: 'Add Cargo',
-      onSpin: (i) => selectedSpinnerCargo = this.widget.air.addaCargo[i],
+      onSpin: (i) => selectedSpinnerCargo = this.widget.air.cargos[i],
       onPress: addCargo,
     );
 
@@ -130,14 +130,14 @@ class CargoCardState extends State<CargoCard> {
   void updateConfig() {
     //before adding new config remove the old one
     removeConfig();
-    for (NameWeightFS oldSelectedConfigNWFS in selectedSpinnerConfig.nwfList) {
-      var newNWFS = NameWeightFS.copyNewID(oldSelectedConfigNWFS);
+    for (Cargo oldSelectedConfigNWFS in selectedSpinnerConfig.nwfList) {
+      var newNWFS = Cargo.copyNewID(oldSelectedConfigNWFS);
       newNWFS.name += ' ' + selectedSpinnerConfig.name;
 
       var newCargoUI = ValidatedCargoUI(
         fs0: this.widget.air.fs0,
         fs1: this.widget.air.fs1,
-        cargoMaxWeight: this.widget.air.cargomaxweight,
+        cargoMaxWeight: this.widget.air.cargoweight1,
         onRemovePressed: removeCargoID,
         nwf: newNWFS,
         notifyValid: cargoUIValidationChanged,
@@ -183,9 +183,9 @@ class CargoCardState extends State<CargoCard> {
     var newCargoUI = ValidatedCargoUI(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
-      cargoMaxWeight: this.widget.air.cargomaxweight,
+      cargoMaxWeight: this.widget.air.cargoweight1,
       onRemovePressed: removeCargoID,
-      nwf: NameWeightFS.copyNewID(selectedSpinnerCargo),
+      nwf: Cargo.copyNewID(selectedSpinnerCargo),
       notifyValid: cargoUIValidationChanged,
     );
 

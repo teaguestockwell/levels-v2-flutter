@@ -1,8 +1,8 @@
 import '../utils.dart';
-import 'name_weight_fs.dart';
+import 'cargo.dart';
 
 class Config {
-  List<NameWeightFS> nwfList = [];
+  List<Cargo> nwfList = [];
   String name, simplemom;
   Config(String csv, this.simplemom) {
     var nameWeightMomentQtyList = csv.split(';');
@@ -12,7 +12,7 @@ class Config {
       String nwmqAtIndex = nameWeightMomentQtyList[i];
       var nwmqAtIndexList = nwmqAtIndex.split(',');
 
-      this.nwfList.add(NameWeightFS(
+      this.nwfList.add(Cargo(
           name: nwmqAtIndexList[0].trim(),
           weight:
               (Util.parsedouble(nwmqAtIndexList[1].trim()) / Util.parsedouble(nwmqAtIndexList[3].trim()))

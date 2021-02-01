@@ -1,14 +1,14 @@
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/screens/home/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:five_level_one/screens/percentmac/show_work.dart';
 
 
-List<NameWeightFS> getNWFS(){
+List<Cargo> getNWFS(){
   return [
-    NameWeightFS(name: 'plane', weight: '100000', simplemom: '10000', mom: '10000', qty: '1'),
-    NameWeightFS(name: 'cargo', weight: '100', simplemom: '10000', fs: '50', qty: '1'),
+    Cargo(name: 'plane', weight: '100000', simplemom: '10000', mom: '10000', qty: '1'),
+    Cargo(name: 'cargo', weight: '100', simplemom: '10000', fs: '50', qty: '1'),
   ];
 }
 

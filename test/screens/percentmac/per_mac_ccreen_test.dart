@@ -1,6 +1,6 @@
 import 'package:five_level_one/backend/models/aircraft.dart';
 import 'package:five_level_one/backend/models/config.dart';
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/backend/models/tank.dart';
 import 'package:five_level_one/screens/percentmac/show_work.dart';
 import 'package:five_level_one/widgets/input/validated_text.dart';
@@ -33,16 +33,16 @@ AirMock getAir(){
   when(ret.tanks).thenReturn(getTanks());
 
   //cargo dependancies
-  when(ret.addaCargo).thenReturn(getValidCargo());
+  when(ret.cargos).thenReturn(getValidCargo());
   when(ret.configs).thenReturn(getValidConfig());
   when(ret.fs0).thenReturn('80');
   when(ret.fs1).thenReturn('2000');
-  when(ret.cargomaxweight).thenReturn('100000');
+  when(ret.cargoweight1).thenReturn('100000');
 
   //show work dep
   when(ret.lemac).thenReturn('100');
   when(ret.mac).thenReturn('200');
-  when(ret.simplemom).thenReturn('10000');
+  when(ret.mommultiplier).thenReturn('10000');
 
   return ret;
 }
@@ -88,12 +88,12 @@ List<Config> getValidConfig(){
 }
 
 ///valid cargo because there is fs || moment
-List<NameWeightFS> getValidCargo(){
-  List<NameWeightFS> ret = [];
+List<Cargo> getValidCargo(){
+  List<Cargo> ret = [];
 
   for(int i=0; i<100; i++){
     ret.add(
-      NameWeightFS(name: 'cargo', weight: '20', simplemom: '10000', fs: '300') //valid cargo 
+      Cargo(name: 'cargo', weight: '20', simplemom: '10000', fs: '300') //valid cargo 
     );
   }
   return ret;

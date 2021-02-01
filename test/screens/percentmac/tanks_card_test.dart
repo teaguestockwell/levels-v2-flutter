@@ -1,6 +1,6 @@
 import 'dart:collection';
 import 'package:five_level_one/backend/models/aircraft.dart';
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/backend/models/tank.dart';
 import 'package:five_level_one/widgets/layout/div.dart';
 import 'package:five_level_one/screens/percentmac/tanks_card.dart';
@@ -20,9 +20,9 @@ String simpleMom = '10000';
 Tank getTankMock(){
   final ret = TankMock();
 
-  List<NameWeightFS> nwfs = [];
+  List<Cargo> nwfs = [];
   for(int i=0; i<20; i++){
-    final f = NameWeightFS(name: i.toString(), weight: i.toString(), mom: (i/5).toString());
+    final f = Cargo(name: i.toString(), weight: i.toString(), mom: (i/5).toString());
     f.id = i;
     nwfs.add(f);
   }
@@ -126,7 +126,7 @@ void main(){
 
       //given 
       int callbacks = 0;
-      final map = HashMap<int, NameWeightFS>();
+      final map = HashMap<int, Cargo>();
       final tc = TankRow(tank: getTankMock(), callBack: (i,b){map[i] = b; callbacks++;});
       final test = mk(tc);
 

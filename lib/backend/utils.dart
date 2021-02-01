@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'const.dart';
-import 'models/name_weight_fs.dart';
+import 'models/cargo.dart';
 
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);
@@ -15,7 +15,7 @@ typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
 typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
-typedef void NWFSCallBack(int key, NameWeightFS value);
+typedef void NWFSCallBack(int key, Cargo value);
 typedef void UnitChangeCB(var i);
 class Util {
   static String getTruncated(String s, int max) {

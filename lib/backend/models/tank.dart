@@ -1,4 +1,4 @@
-import 'name_weight_fs.dart';
+import 'cargo.dart';
 
 /// Tank builds a list of name weight fs from
 ///  weightcsv, momentcsv,  
@@ -6,7 +6,7 @@ import 'name_weight_fs.dart';
 class Tank {
   final String name, _weightsCSV, _momCSV, simplemom;
 
-  List<NameWeightFS> nameWeightFSs = [];
+  List<Cargo> nameWeightFSs = [];
 
   List<String> _weights = [], _moms = [];
 
@@ -20,7 +20,7 @@ class Tank {
     _moms = _momCSV.split(',');
 
     for (int i = 0; i < _weights.length; i++) {
-      nameWeightFSs.add(NameWeightFS(
+      nameWeightFSs.add(Cargo(
           name: name,
           weight: _weights[i],
           mom: _moms[i],

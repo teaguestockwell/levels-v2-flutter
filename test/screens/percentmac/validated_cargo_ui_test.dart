@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/screens/percentmac/validated_cargo_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,12 +8,12 @@ Widget mk(Widget child){
   return MaterialApp(home:child);
 }
 
- NameWeightFS getEmpty(){
-  return NameWeightFS();
+ Cargo getEmpty(){
+  return Cargo();
 }
 
-NameWeightFS getValid(){
-  return NameWeightFS(
+Cargo getValid(){
+  return Cargo(
     name: 'name',
     weight: '20',
     fs: '1000',
@@ -21,8 +21,8 @@ NameWeightFS getValid(){
   );
 }
 
-NameWeightFS getValidFromChartC(){
-  return NameWeightFS(
+Cargo getValidFromChartC(){
+  return Cargo(
   name: 'name',
   weight: '25',
   fs: '280',
@@ -31,8 +31,8 @@ NameWeightFS getValidFromChartC(){
   simplemom: '10000'
   );
 }
-NameWeightFS getInvalidName(){
-  return NameWeightFS(
+Cargo getInvalidName(){
+  return Cargo(
     name: '',
     weight: '20',
     fs: '1000',
@@ -40,8 +40,8 @@ NameWeightFS getInvalidName(){
   );
 }
 
-NameWeightFS getInvalidWeightS(){
-  return NameWeightFS(
+Cargo getInvalidWeightS(){
+  return Cargo(
     name: 'name',
     weight: '0',
     fs: '1000',
@@ -49,8 +49,8 @@ NameWeightFS getInvalidWeightS(){
   );
 }
 
-NameWeightFS getInvalidWeightL(){
-  return NameWeightFS(
+Cargo getInvalidWeightL(){
+  return Cargo(
     name: 'name',
     weight: '2000000',
     fs: '1000',
@@ -58,8 +58,8 @@ NameWeightFS getInvalidWeightL(){
   );
 }
 
-NameWeightFS getInvalidFSS(){
-  return NameWeightFS(
+Cargo getInvalidFSS(){
+  return Cargo(
     name: 'name',
     weight: '20',
     fs: '0',
@@ -67,8 +67,8 @@ NameWeightFS getInvalidFSS(){
   );
 }
 
-NameWeightFS getInvalidFSL(){
-  return NameWeightFS(
+Cargo getInvalidFSL(){
+  return Cargo(
     name: 'name',
     weight: '20',
     fs: '100000',
@@ -76,8 +76,8 @@ NameWeightFS getInvalidFSL(){
   );
 }
 
-NameWeightFS getInvalidQty(){
-  return NameWeightFS(
+Cargo getInvalidQty(){
+  return Cargo(
     name: 'name',
     weight: '20',
     fs: '1000',
@@ -85,7 +85,7 @@ NameWeightFS getInvalidQty(){
   );
 }
 
-List<NameWeightFS> getAllInvalidNWFS(){
+List<Cargo> getAllInvalidNWFS(){
   return [
     getInvalidFSL(),
     getInvalidFSS(),
@@ -96,7 +96,7 @@ List<NameWeightFS> getAllInvalidNWFS(){
   ];
 }
 
-List<NameWeightFS> getAllValidNWFS(){
+List<Cargo> getAllValidNWFS(){
   return [
     getValid(),
     getValidFromChartC(),

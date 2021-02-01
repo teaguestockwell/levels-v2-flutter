@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../backend/models/aircraft.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validated_text.dart';
@@ -13,7 +13,7 @@ import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row2.dart';
 
 class ChartCCard extends StatefulWidget {
-  final nwfs = NameWeightFS();
+  final nwfs = Cargo();
   final Aircraft air;
   final NotifyCargoValid onValidationChange;
   ///the inti state of false of this map is handled by the callback of validated text after drawn
@@ -51,7 +51,7 @@ class ChartCCardState extends State<ChartCCard> {
 
     ///init the basic acft nwfs
     this.widget.nwfs.name = 'Basic Aircraft';
-    this.widget.nwfs.simplemom = this.widget.air.simplemom;
+    this.widget.nwfs.simplemom = this.widget.air.mommultiplier;
 
     //init the cards body
     body = [

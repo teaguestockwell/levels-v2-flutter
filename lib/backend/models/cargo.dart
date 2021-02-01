@@ -1,7 +1,7 @@
 import '../utils.dart';
 
 /// NameWeightMom hold a String name,weight,fs,moment; of a cargo item;
-class NameWeightFS {
+class Cargo {
   String simplemom,
 
       /// modifier for simple moment
@@ -15,7 +15,7 @@ class NameWeightFS {
       fs,
       qty;
   int id;
-  NameWeightFS({
+  Cargo({
     this.name = '',
     this.weight = '',
     this.fs = '',
@@ -27,7 +27,7 @@ class NameWeightFS {
   }
 
   ///used to create copy of another object, but assign it a new id
-  NameWeightFS.copyNewID(NameWeightFS old) {
+  Cargo.copyNewID(Cargo old) {
     this.name = old.name;
     this.weight = old.weight;
     this.fs = old.fs;

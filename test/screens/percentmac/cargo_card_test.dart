@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:five_level_one/backend/models/aircraft.dart';
 import 'package:five_level_one/backend/models/config.dart';
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/screens/percentmac/cargo_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -48,24 +48,24 @@ List<Config> getInvalidConfigs(){
 }
 
 ///invalid cargo because there is not fs or moment
-List<NameWeightFS> getInvalidCargo(){
-  List<NameWeightFS> ret = [];
+List<Cargo> getInvalidCargo(){
+  List<Cargo> ret = [];
 
   for(int i=0; i<100; i++){
     ret.add(
-      NameWeightFS(name: 'cargo', weight: '20', simplemom: '10000')
+      Cargo(name: 'cargo', weight: '20', simplemom: '10000')
     );
   }
   return ret;
 }
 
 ///valid cargo because there is fs || moment
-List<NameWeightFS> getValidCargo(){
-  List<NameWeightFS> ret = [];
+List<Cargo> getValidCargo(){
+  List<Cargo> ret = [];
 
   for(int i=0; i<100; i++){
     ret.add(
-      NameWeightFS(name: 'cargo', weight: '20', simplemom: '10000', fs: '300') //valid cargo 
+      Cargo(name: 'cargo', weight: '20', simplemom: '10000', fs: '300') //valid cargo 
     );
   }
   return ret;
@@ -74,33 +74,33 @@ List<NameWeightFS> getValidCargo(){
 AirMock getAirWithInvalidCargosAndValidConfig(){
   final ret = AirMock();
 
-  when(ret.addaCargo).thenReturn(getInvalidCargo());
+  when(ret.cargos).thenReturn(getInvalidCargo());
   when(ret.configs).thenReturn(getValidConfig());
   when(ret.fs0).thenReturn('80');
   when(ret.fs1).thenReturn('2000');
-  when(ret.cargomaxweight).thenReturn('100000');
+  when(ret.cargoweight1).thenReturn('100000');
   return ret;
 }
 
 AirMock getAirWithValidCargosAndValidConfig(){
   final ret = AirMock();
 
-  when(ret.addaCargo).thenReturn(getValidCargo());
+  when(ret.cargos).thenReturn(getValidCargo());
   when(ret.configs).thenReturn(getValidConfig());
   when(ret.fs0).thenReturn('80');
   when(ret.fs1).thenReturn('2000');
-  when(ret.cargomaxweight).thenReturn('100000');
+  when(ret.cargoweight1).thenReturn('100000');
   return ret;
 }
 
 AirMock getAirValidCargosAndInvalidConfig(){
   final ret = AirMock();
 
-  when(ret.addaCargo).thenReturn(getValidCargo());
+  when(ret.cargos).thenReturn(getValidCargo());
   when(ret.configs).thenReturn(getInvalidConfigs());
   when(ret.fs0).thenReturn('80');
   when(ret.fs1).thenReturn('2000');
-  when(ret.cargomaxweight).thenReturn('100000');
+  when(ret.cargoweight1).thenReturn('100000');
   return ret;
 }
 
@@ -161,7 +161,7 @@ void main(){
       CargoCardState state0 = wt.state(find.byType(CargoCard));
 
       //then
-      expect(state0.selectedSpinnerCargo, test.air.addaCargo[0]);
+      expect(state0.selectedSpinnerCargo, test.air.cargos[0]);
       expect(state0.selectedSpinnerConfig, test.air.configs[0]);
       expect(state0.childrenCargoIsValidMap.entries.length, 0);
     });
@@ -181,7 +181,7 @@ void main(){
       CargoCardState state0 = wt.state(find.byType(CargoCard));
 
       //then
-      expect(state0.selectedSpinnerCargo, test.air.addaCargo[0]);
+      expect(state0.selectedSpinnerCargo, test.air.cargos[0]);
       expect(state0.selectedSpinnerConfig, test.air.configs[0]);
       expect(state0.childrenCargoIsValidMap.entries.length, 0);
       expect(onChangeMap[1], true);

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../backend/const.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/models/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../home/loading.dart';
@@ -15,7 +15,7 @@ import 'per_mac_card.dart';
 class ShowWork extends StatefulWidget {
   final String lemac;
   final String mac;
-  final List<NameWeightFS> nwfs;
+  final List<Cargo> nwfs;
 
   ShowWork({
     @required this.lemac,

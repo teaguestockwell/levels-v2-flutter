@@ -3,7 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 import '../../backend/const.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/custom_button.dart';
@@ -16,7 +16,7 @@ import '../../widgets/layout/rows/row2.dart';
 
 class ValidatedCargoUI extends StatefulWidget {
   final String fs0, fs1, cargoMaxWeight;
-  final NameWeightFS nwf;
+  final Cargo nwf;
   final IntCallBackIntPara onRemovePressed;
   final NotifyCargoValid notifyValid;
 

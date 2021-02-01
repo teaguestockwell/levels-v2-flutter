@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 import '../utils.dart';
-import 'name_weight_fs.dart';
+import 'cargo.dart';
 
 ///used to store and caculate final variables for percent mac
 class PerMac {
-  final List<NameWeightFS> nwfss;
+  final List<Cargo> nwfss;
   String totMomAsString;
   String totUnSimpMomAsString;
   String totWeightAsSting;
