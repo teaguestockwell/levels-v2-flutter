@@ -67,6 +67,8 @@ class Util {
       throw Exception();
     }
   }
+
+  static String fixed(double x) => x.toStringAsFixed(2);
 }
 
 

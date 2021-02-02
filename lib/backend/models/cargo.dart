@@ -1,118 +1,136 @@
+import 'package:flutter/foundation.dart';
 import '../utils.dart';
 
 /// NameWeightMom hold a String name,weight,fs,moment; of a cargo item;
+enum CargoType {Cargo,ConfigCargo,Nojson}
 class Cargo {
-  String simplemom,
+  //handles this.json baed on type
+  final CargoType type;
+  final dynamic oldjson;
 
-      /// modifier for simple moment
-      name,
-      ///lbs
-      weight,
-      ///this is used to temperaly hold simple moment while it is converted to 
-      ///fs with 2 decimal accuracy. this is never used for percent mac caculations directly.
-      mom,
-      ///in from refrence datum
-      fs,
-      qty;
-  int id;
+  String name;
+  num weight;
+  num fs; 
+  int qty;
+
+  /// db refrence
+  final int aircraftid;
+  final int configid;
+  final int cargoid;
+  final int configcargoid;
+
+  /// ui refrence
+  final int id; 
+
+  /// only to be used when constructing UI object that will not write to db
   Cargo({
     this.name = '',
-    this.weight = '',
-    this.fs = '',
-    this.mom = '',
-    this.simplemom = '0',
-    this.qty = '1',
-  }) {
-    this.id = Util.getUniqueIdx();
-  }
+    this.weight = 0,
+    this.fs = -1,
+    this.qty = 1, 
+  }) : 
+  oldjson = {},
+  id = Util.getUniqueIdx(),
+  aircraftid = -1,
+  configid = -1,
+  cargoid = -1,
+  configcargoid = -1,
+  type = CargoType.Nojson; 
 
-  ///used to create copy of another object, but assign it a new id
-  Cargo.copyNewID(Cargo old) {
-    this.name = old.name;
-    this.weight = old.weight;
-    this.fs = old.fs;
-    this.mom = old.mom;
-    this.simplemom = old.simplemom;
-    this.qty = old.qty;
-    this.id = Util.getUniqueIdx();
-  }
+  /// can be used to write cargo db
+  Cargo.fromJsonCargo(Map<String,dynamic> json):
+    oldjson = json,
+    name = json['name'], // eryething is named
+    weight = json['weight'], // everything has weight
+    fs = json['fs'], // fs is allways non null beacuse db assied -1 as default 
+    qty = 1,
+    aircraftid = json['aircraftid'],
+    cargoid = json['cargoid'],
+    configid = - 1,
+    configcargoid = -1,
+    id = Util.getUniqueIdx(),
+    type = CargoType.Cargo;
 
-  // @override
-  // String toString() {
-  //   return ("name: " +
-  //       name +
-  //       " weight: " +
-  //       weight +
-  //       " fs: " +
-  //       getFsCalculated() +
-  //       ' qty: ' +
-  //       qty +
-  //       ' id: ' +
-  //       id.toString());
-  // }
+  Cargo.fromJsonConfigCargo(Map<String,dynamic> json):
+    oldjson = json,
+    name = json['cargo']['name'],
+    weight = json['cargo']['weight'],
+    fs = json['fs'],
+    qty = json['qty'],
+    id = Util.getUniqueIdx(),
+    aircraftid = json['aircraftid'],
+    configid = json['configid'],
+    cargoid = json['cargoid'],
+    configcargoid = json['configcargoid'],
+    type = CargoType.ConfigCargo;
 
-  ///total simple moment
-  String getMom() {
-    return (Util.parsedouble(fs) * Util.parsedouble(weight) / Util.parsedouble(simplemom)).toString();
-  }
+  Cargo.fromTank({
+    @required this.name,
+    @required this.weight,
+    @required num simplemom,
+    @required num mommultiplier,
+  }) :
+  oldjson = {},
+  fs = (simplemom * mommultiplier) / weight,
+  qty = 1,
+  id = Util.getUniqueIdx(),
+  aircraftid = -1,
+  cargoid = -1,
+  configid =-1,
+  configcargoid =-1,
+  type = CargoType.Nojson; // tanks are modified using csv 
 
-  /// ea simple momment with fraction digits
-  String getMomAsStringFixes(int fractionDigits) {
-    return (Util.parsedouble(fs) * Util.parsedouble(weight) / Util.parsedouble(simplemom))
-        .toStringAsFixed(fractionDigits);
-  }
 
-  /// tot simple momment with fraction digits
-  String getTotSimpMomFixed(int fractionDigits) {
-    return ((Util.parsedouble(fs) * Util.parsedouble(weight) / Util.parsedouble(simplemom)) * Util.parsedouble(qty))
-        .toStringAsFixed(fractionDigits);
-  }
+  Cargo.copyNewId(Cargo old) :
+  oldjson = {}, 
+  name = old.name,
+  weight = old.weight,
+  fs = old.fs,
+  qty = old.qty,
+  id = Util.getUniqueIdx(),
+  aircraftid = -1,
+  cargoid = -1,
+  configid =-1,
+  configcargoid =-1,
+  type = CargoType.Nojson;
 
-  /// tot simple momment with fraction digits
-  String getTotMomAsStringFixes(int fractionDigits) {
-    return ((Util.parsedouble(fs) * Util.parsedouble(weight) / Util.parsedouble(simplemom)) * Util.parsedouble(qty))
-        .toStringAsFixed(fractionDigits);
-  }
+  num get mom => fs * weight;
+  num get momTot => fs * weight * qty;
 
-  ///ea unsimplified moment as string with faction digits
-  String getUnSimpMomAsStringFixed(int fractionDigits) {
-    return (Util.parsedouble(fs) * Util.parsedouble(weight)).toStringAsFixed(fractionDigits);
-  }
+  num simpleMom(num mommultiplier) => this.mom/mommultiplier;
+  num simpleMomTot(num mommultipler) => this.momTot/mommultipler;
 
-  /// tot unsimp mom as string fixed
-  String getTotUnSimpMomAsStringFixed(int fractionDigits) {
-    return ((Util.parsedouble(fs) * Util.parsedouble(weight)) * Util.parsedouble(qty)).toStringAsFixed(fractionDigits);
-  }
+  //weight is a field
+  num get weightTot => weight * qty;
 
-  String getTotalMoment() {
-    return ((Util.parsedouble(fs) * Util.parsedouble(weight) / Util.parsedouble(simplemom)) * Util.parsedouble(qty)).toString();
-  }
-
-  String getTotalWeight() {
-    return (Util.parsedouble(weight) * Util.parsedouble(qty)).toString();
-  }
-
-  ///This is used to pull fs from mom and weight
-  ///given that mom is simplified moment, when multiplied by mom modifer = raw moment
-  String getFsCalculated() {
-    if (fs.isNotEmpty) {
-      return fs;
+  Map<String, dynamic> get json{
+    Map<String, dynamic> ret = {};
+    
+    switch (type) {
+      case CargoType.Cargo: {
+        ret['aircraftid'] = aircraftid;
+        ret['cargoid'] = cargoid;
+        ret['name'] = name;
+        ret['fs'] = fs;
+      }break;
+      case CargoType.ConfigCargo: {
+        ret['configid'] = configid;
+        ret['aircraftid'] = aircraftid;
+        ret['cargoid'] = cargoid;
+        ret['configcargoid'] = configcargoid;
+        ret['fs'] = fs;
+        ret['qty'] = qty;
+        // relation to cargo
+        Map<String,dynamic> cargo = {};
+        cargo['aircraftid'] = aircraftid;
+        cargo['cargoid'] = cargoid;
+        cargo['name'] = name;
+        cargo['weight'] = weight;
+        cargo['fs'] = oldjson['cargo']['fs'];
+      }break;
+      default: throw Exception('.json called on UI Cargo');
     }
     
-    //canot get fs if nsfs is invalid
-    return (Util.parsedouble(mom) * Util.parsedouble(simplemom) / Util.parsedouble(weight)).toStringAsFixed(2);
+    return ret;
   }
-
-  String getTotWeightFixed(int fractionDigits) {
-    return (Util.parsedouble(weight) * Util.parsedouble(qty)).toStringAsFixed(fractionDigits);
-  }
-
-  ///determines to get caculated or non caculated fs
-  String getfs() {
-    if (mom.isNotEmpty && fs.isEmpty) {
-      return getFsCalculated();
-    }
-    return fs;
-  }
-
 }

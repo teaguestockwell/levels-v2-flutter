@@ -6,32 +6,32 @@ import 'tank.dart';
 
 class Aircraft {
   /// pk in pg
-  final int id;
+  final num id;
   /// the name of the mds ex: C-17A-NON-ER, C-17A-ER
   /// mds of the same type will have diffrent models if their capabilitys are diffrent,
   /// for example, the two c17 variants have diffren fuel capacitys, and this changes, 
   /// the moment of fuel in the wings
   final String name;
   /// the minimun fuselage station that cargo can be placed at.
-  final double fs0;
+  final num fs0;
   /// the maximum fuselage station that cargo can be placed
-  final double fs1;
+  final num fs1;
   /// the minimum simple momment of the basic long moment of the acft in/lbs
-  final double mom0;
+  final num mom0;
   /// the maximum simple momment of the basic long moment of the acft in/lbs
-  final double mom1;
+  final num mom1;
   /// the minumum basic weight of the acft in lbs
-  final double weight0;
+  final num weight0;
   /// the max basic weight of the acft in lbs
-  final double weight1;
+  final num weight1;
   /// the simple moment modifier  basic moment * simple moment modifier = basic moment
-  final double mommultiplier;
+  final num mommultiplier;
   /// leading edge of mean aerodynamic chord.
-  final double lemac;
+  final num lemac;
   /// mean aerodynamic width of the wing
-  final double mac;
+  final num mac;
   /// 0 < valid cargo > cargo max weight 
-  final double cargoweight1;
+  final num cargoweight1;
 
   // below is 1-n relationship or models within models
   final List<Cargo> cargos = [];
@@ -40,10 +40,10 @@ class Aircraft {
   final List<Glossary> glossarys = [];
 
   // fields below are used to hold json while contructing addaCargo, tanks, and configs
-  final List<Map<String,dynamic>> cargosJson;
-  final List<Map<String,dynamic>> tanksJson;
-  final List<Map<String,dynamic>> glossarysJson;
-  final List<Map<String,dynamic>> configsJson;
+  final List<dynamic> cargosJson;
+  final List<dynamic> tanksJson;
+  final List<dynamic> glossarysJson;
+  final List<dynamic> configsJson;
 
 
   
@@ -61,14 +61,15 @@ class Aircraft {
     cargoweight1 = json['cargoweight1'],
     lemac = json['lemac'],
     mac = json['mac'],
-    mommultiplier = json['mommultiplier'],
+    mommultiplier = json['mommultiplyer'],
+
     cargosJson = json['cargos'],
     tanksJson = json['tanks'],
     glossarysJson = json['glossarys'],
     configsJson = json['configs']
     {
-      cargosJson.forEach((json) => cargos.add(Cargo.fromJson(json)));
-      tanksJson.forEach((json) => tanks.add(Tank.fromJson(json)));
+      cargosJson.forEach((json) => cargos.add(Cargo.fromJsonCargo(json)));
+      tanksJson.forEach((json) => tanks.add(Tank.fromJson(json, mommultiplier)));
       glossarysJson.forEach((json) => glossarys.add(Glossary.fromJson(json)));
       configsJson.forEach((json) => configs.add(Config.fromJson(json)));
     }
@@ -80,6 +81,7 @@ class Aircraft {
       ret['fs0'] = fs0;
       ret['fs1'] = fs1;
       ret['mom0'] = mom0;
+      ret['mom1'] = mom1;
       ret['weight0'] = weight0;
       ret['weight1'] = weight1;
       ret['cargoweight1'] = cargoweight1;
@@ -102,6 +104,7 @@ class Aircraft {
       var configlist = [];
       configs.forEach((x) => configlist.add(x.json));
       ret['glossarys'] = configlist;
+      return ret;
     }
 
 

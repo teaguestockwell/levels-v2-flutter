@@ -27,7 +27,7 @@ Tank getTankMock(){
     nwfs.add(f);
   }
   when(ret.name).thenReturn('tank');
-  when(ret.nameWeightFSs).thenReturn(nwfs);
+  when(ret.nwfss).thenReturn(nwfs);
   return ret;
 }
 

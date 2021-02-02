@@ -1,30 +1,58 @@
+import 'dart:developer';
+
+import '../utils.dart';
 import 'cargo.dart';
+class Tank{
+  final String name;
+  final int aircraftid;
+  final int tankid;
+  final num mommultiplier;
 
-/// Tank builds a list of name weight fs from
-///  weightcsv, momentcsv,  
-///contained under a tank name
-class Tank {
-  final String name, _weightsCSV, _momCSV, simplemom;
+  final List<Cargo> nwfss = [];
 
-  List<Cargo> nameWeightFSs = [];
+  //csv
+  final String weights;
+  final String simplemoms;
 
-  List<String> _weights = [], _moms = [];
+  //list
+  List<String> weightList;
+  List<String> simplemomsList;
 
-  Tank(
-    this.name,
-    this._weightsCSV,
-    this._momCSV,
-    this.simplemom,
-  ) {
-    _weights = _weightsCSV.split(',');
-    _moms = _momCSV.split(',');
+  Tank.fromJson(Map<String,dynamic> json, this.mommultiplier):
+    name = json['name'],
+    aircraftid = json['aircraftid'],
+    tankid = json['tankid'],
 
-    for (int i = 0; i < _weights.length; i++) {
-      nameWeightFSs.add(Cargo(
-          name: name,
-          weight: _weights[i],
-          mom: _moms[i],
-          simplemom: simplemom));
+    weights = json['weights'],
+    simplemoms = json['simplemoms']{
+
+    weightList = weights.split(',');
+    simplemomsList =simplemoms.split(',');
+
+    assert(weightList.length == simplemomsList.length);
+
+    for(int i=0; i<weightList.length; i++){
+
+      log(json.toString());
+
+      nwfss.add(
+        Cargo.fromTank(
+          name: name, 
+          weight: Util.parsedouble(weightList[i]),
+          simplemom: Util.parsedouble(simplemomsList[i]),
+          mommultiplier: mommultiplier
+        )
+      );
     }
+  }
+
+  Map<String, dynamic> get json {
+    Map<String, dynamic> ret = {};
+    ret['name'] = name;
+    ret['aircraftid'] = aircraftid;
+    ret['tankid'] = tankid;
+    ret['weights'] = weights;
+    ret['simplemoms'] = simplemoms;
+    return ret;
   }
 }
