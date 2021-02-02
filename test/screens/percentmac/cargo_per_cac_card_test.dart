@@ -13,7 +13,7 @@ PerMacMock getPerMac(){
 
   when(ret.nwfss).thenReturn(nwfss);
   when(ret.grandTotQty).thenReturn('grand');
-  when(ret.totMomAsString).thenReturn('tot simp mom');
+  when(ret.totSimpleMomAsString).thenReturn('tot simp mom');
   when(ret.totUnSimpMomAsString).thenReturn('tot un simp mom');
   when(ret.totWeightAsSting).thenReturn('tot weight');
   return ret;

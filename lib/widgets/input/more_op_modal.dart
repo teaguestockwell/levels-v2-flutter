@@ -1,19 +1,18 @@
+import 'package:five_level_one/backend/models/general.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../backend/const.dart';
-import '../../backend/models/more_op.dart';
 import '../display/text.dart';
 import 'custom_button.dart';
 
 class MoreOpModal extends StatefulWidget {
-  final MoreOp moreOp;
-  MoreOpModal(this.moreOp)
-      : assert(moreOp != null),
-        assert(moreOp.icon != null),
-        assert(moreOp.name != null),
-        assert(moreOp.url != null);
+  final General general;
+  MoreOpModal(this.general)
+      : assert(general != null),
+        assert(general.icondatas != null),
+        assert(general.names != null),
+        assert(general.urls != null);
 
   @override
   MoreOpModalState createState() => MoreOpModalState();
@@ -43,7 +42,7 @@ class MoreOpModalState extends State<MoreOpModal> {
   }
 
   void select() async {
-    String url = Uri.encodeFull(this.widget.moreOp.url[spinIdx]);
+    String url = Uri.encodeFull(this.widget.general.urls[spinIdx]);
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -62,10 +61,10 @@ class MoreOpModalState extends State<MoreOpModal> {
 
   _getSpinnerWidgets() {
     _spinnerWidgets.clear();
-    for (int i = 0; i < this.widget.moreOp.name.length; i++) {
+    for (int i = 0; i < this.widget.general.names.length; i++) {
       Icon icon = () {
         try {
-          return Icon(IconData(int.parse(this.widget.moreOp.icon[i]),
+          return Icon(IconData(this.widget.general.icondatas[i],
               fontFamily: 'MaterialIcons'));
         // ignore: avoid_catches_without_on_clauses
         } catch (_) {
@@ -74,7 +73,7 @@ class MoreOpModalState extends State<MoreOpModal> {
       }();
 
       var tex = Tex(
-        this.widget.moreOp.name[i],
+        this.widget.general.names[i],
         size: Const.textSizeModalSpinner,
         fontWeight: Const.fwSpinner,
         color: Const.textColor,

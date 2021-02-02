@@ -44,12 +44,15 @@ class Util {
   static int idx = 0;
   ///Given a string try to parse into double. If fail make toast with error.
   static double parsedouble(String s) {
+
+    if(s.isEmpty){s = '0';}
+
     double p = 0.0;
     try {
-      p = double.parse(s);
-      return p;
+      return double.parse(s);
+    // ignore: avoid_catches_without_on_clauses
     } catch (e) {
-      throw Exception();
+      throw Exception('${s} could not be parsed as a double');
     }
   }
 
@@ -59,12 +62,12 @@ class Util {
   }
 
   static int parseint(s) {
-    int p = 0;
+    if(s.isEmpty){s = '0';}
     try {
-      p = int.parse(s);
-      return p;
-    } catch (Exeption) {
-      throw Exception();
+      return int.parse(s);
+    // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      throw Exception('${s} could not be parsed as an int');
     }
   }
 

@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/more_op.dart';
+import 'package:five_level_one/backend/models/general.dart';
 import 'package:five_level_one/widgets/input/more_op_modal.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,16 +9,16 @@ Widget makeWidgetTestable(Widget child) {
   return MaterialApp(home: Scaffold(body: child));
 }
 
-class MockMoreOp extends Mock implements MoreOp {}
+class MockMoreOp extends Mock implements General {}
 
 void main() {
   testWidgets('given a moreop, when created, then the moreopmodal will draw',
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -35,9 +35,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -53,9 +53,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -74,9 +74,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -95,9 +95,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -116,9 +116,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['asdasdas', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([-3, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -138,9 +138,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -162,9 +162,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -187,9 +187,9 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icon).thenReturn(['58712', '58713']);
-    when(mockMoreOp.name).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.url).thenReturn(['asdasd', 'asdad']);
+    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
     final test = MoreOpModal(mockMoreOp);
     final wrapper = makeWidgetTestable(test);

@@ -91,7 +91,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -124,7 +124,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -177,7 +177,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -213,7 +213,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -268,7 +268,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -311,7 +311,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -391,7 +391,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);
@@ -595,7 +595,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -675,7 +675,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);

@@ -15,7 +15,7 @@ import '../../widgets/layout/rows/row1.dart';
 import '../../widgets/layout/rows/row2.dart';
 
 class ValidatedCargoUI extends StatefulWidget {
-  final String fs0, fs1, cargoMaxWeight;
+  final num fs0, fs1, cargoMaxWeight;
   final Cargo nwf;
   final IntCallBackIntPara onRemovePressed;
   final NotifyCargoValid notifyValid;
@@ -45,9 +45,9 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
 
     //init valid map to refect init state of nwfs
     childValid[0] = validateName(this.widget.nwf.name);
-    childValid[1] = validateWeight(this.widget.nwf.weight);
-    childValid[2] = validateFS(this.widget.nwf.getfs());
-    childValid[3] = validateQty(this.widget.nwf.qty);
+    childValid[1] = validateWeight(this.widget.nwf.weight.toString());
+    childValid[2] = validateFS(this.widget.nwf.fs.toString());
+    childValid[3] = validateQty(this.widget.nwf.qty.toString());
     
     //call back because this may set state again 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -69,7 +69,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
           Tex('Weight'),
           ValidatedText(
             notifyIsValid: (v) {updateValid(1, v);},
-            initText: this.widget.nwf.weight,
+            initText: this.widget.nwf.weight.toString(),
             inputType: 1,
             onChange: changeWeight,
             maxChars: 8,
@@ -80,7 +80,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
           Tex('Fuselage Station'),
           ValidatedText(
             notifyIsValid: (v) {updateValid(2, v);},
-            initText: this.widget.nwf.getfs(),
+            initText: this.widget.nwf.fs.toString(),
             inputType: 1,
             onChange: changeFS,
             maxChars: 8,
@@ -91,7 +91,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
           Tex('Qty'),
           ValidatedText(
             notifyIsValid: (v) {updateValid(3, v);},
-            initText: this.widget.nwf.qty,
+            initText: this.widget.nwf.qty.toString(),
             inputType: 1,
             onChange: changeQty,
             maxChars: 8,
@@ -145,7 +145,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   bool validateWeight(String x) {
     if (double.tryParse(x) != null &&
         double.parse(x) > 0 &&
-        double.parse(x) <= double.parse(this.widget.cargoMaxWeight)) {
+        double.parse(x) <= this.widget.cargoMaxWeight) {
       return true;
     }
     return false;
@@ -153,8 +153,8 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
 
   bool validateFS(String x) {
     if (double.tryParse(x) != null &&
-        double.parse(x) >= double.parse(this.widget.fs0) &&
-        double.parse(x) <= double.parse(this.widget.fs1)) {
+        double.parse(x) >= this.widget.fs0 &&
+        double.parse(x) <= this.widget.fs1) {
       return true;
     }
     return false;
@@ -173,17 +173,17 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   }
 
   void changeWeight(String x) {
-    this.widget.nwf.weight = x;
+    this.widget.nwf.weight = Util.parsedouble(x);
     //setState(() {});
   }
 
   void changeFS(String x) {
-    this.widget.nwf.fs = x;
+    this.widget.nwf.fs =  Util.parsedouble(x);
     //setState(() {});
   }
 
   void changeQty(String x) {
-    this.widget.nwf.qty = x;
+    this.widget.nwf.qty =  Util.parseint(x);
     setState(() {});
   }
 
@@ -205,7 +205,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
       return TitleCC(
           open: true,
           tex: Tex(
-            this.widget.nwf.qty + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
+            this.widget.nwf.qty.toString() + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
             fontWeight: FontWeight.normal,
             color: Util.getValidColor(valid),
           ));
@@ -213,7 +213,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
     return TitleCC(
         open: false,
         tex: Tex(
-          this.widget.nwf.qty + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
+          this.widget.nwf.qty.toString() + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
           fontWeight: FontWeight.normal,
           color: Util.getValidColor(valid),
         ));

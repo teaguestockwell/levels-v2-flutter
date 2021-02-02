@@ -8,10 +8,16 @@ class Cargo {
   final CargoType type;
   final dynamic oldjson;
 
+  final dig = 2;
+
   String name;
   num weight;
   num fs; 
   int qty;
+
+  String get weightS => weight.toStringAsFixed(dig);
+  String get fsS => fs.toStringAsFixed(dig);
+  String get qtyS => qty.toString();
 
   /// db refrence
   final int aircraftid;
@@ -81,7 +87,7 @@ class Cargo {
   type = CargoType.Nojson; // tanks are modified using csv 
 
 
-  Cargo.copyNewId(Cargo old) :
+  Cargo.copyNewID(Cargo old) :
   oldjson = {}, 
   name = old.name,
   weight = old.weight,
@@ -102,6 +108,14 @@ class Cargo {
 
   //weight is a field
   num get weightTot => weight * qty;
+
+  void setSimpleMom(num simpleMom, num mommultipler){
+    fs = (simpleMom * mommultipler) / (weight * qty);
+  }
+
+  void setMom(num mom){
+    fs = mom / weight;
+  }
 
   Map<String, dynamic> get json{
     Map<String, dynamic> ret = {};
@@ -130,7 +144,7 @@ class Cargo {
       }break;
       default: throw Exception('.json called on UI Cargo');
     }
-    
+
     return ret;
   }
 }

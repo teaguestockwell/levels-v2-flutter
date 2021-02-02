@@ -1,19 +1,19 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import '../../backend/const.dart';
-import '../../backend/models/more_op.dart';
+import '../../backend/models/general.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/leading_mds.dart';
 import '../../widgets/input/more_op_popup.dart';
 
 class BottomNav extends StatefulWidget {
   final LinkedHashMap<int, List<Widget>> tabPages;
-  final MoreOp moreOp;
+  final General general;
   final List<String> airNames;
   BottomNav(
-      {@required this.tabPages, @required this.moreOp, @required this.airNames})
+      {@required this.tabPages, @required this.general, @required this.airNames})
       : assert(tabPages != null),
-        assert(moreOp != null),
+        assert(general != null),
         assert(airNames != null);
 
   @override
@@ -23,7 +23,7 @@ class BottomNav extends StatefulWidget {
 class BottomNavState extends State<BottomNav> {
   int pageIndex = 1;
   PageController pc;
-  MoreOp airSelector;
+  General airSelector;
   int airIdx = 0;
   final bucket = PageStorageBucket();
 
@@ -31,11 +31,10 @@ class BottomNavState extends State<BottomNav> {
   void initState() {
     super.initState();
 
-    airSelector = MoreOp(
-        name: List.generate(
-            this.widget.airNames.length, (i) => this.widget.airNames[i]),
-        url: null,
-        icon: null);
+    airSelector = General.forPopupModal(
+      names: List.generate(this.widget.airNames.length, (i) => this.widget.airNames[i]),
+      urls: null,
+    );
   }
 
   @override
@@ -82,10 +81,10 @@ class BottomNavState extends State<BottomNav> {
           appBar: AppBar(
             backgroundColor: Const.bottombarcolor,
             title: Tex('Five Level'),
-            actions: [MoreOpPopup(this.widget.moreOp)],
+            actions: [MoreOpPopup(this.widget.general)],
             leadingWidth: Const.pickerWidth,
             leading: LeadingMDS(
-              moreOp: airSelector,
+              general: airSelector,
               text: this.widget.airNames[airIdx],
               onPressed: airChange,
             ),
@@ -106,10 +105,10 @@ class BottomNavState extends State<BottomNav> {
         appBar: AppBar(
           backgroundColor: Const.bottombarcolor,
           title: Tex(['Units', 'MAC%', 'Glossary'].elementAt(airIdx)),
-          actions: [MoreOpPopup(this.widget.moreOp)],
+          actions: [MoreOpPopup(this.widget.general)],
           leadingWidth: Const.pickerWidth,
           leading: LeadingMDS(
-            moreOp: airSelector,
+            general: airSelector,
             text: this.widget.airNames[airIdx],
             onPressed: airChange,
           ),

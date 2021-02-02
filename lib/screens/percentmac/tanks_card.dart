@@ -42,7 +42,7 @@ class TankRow extends StatelessWidget {
   List<String> getTankWeights() {
     List<String> ret = [];
     tank.nwfss.forEach((nwfs) {
-      ret.add(nwfs.weight);
+      ret.add(nwfs.weight.toString());
     });
     return ret;
   }

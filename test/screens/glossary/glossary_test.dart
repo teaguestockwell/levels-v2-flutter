@@ -9,9 +9,9 @@ main() {
      (WidgetTester wt) async {
     //assemble
     final glossarys = [
-      Glossary('title 1', 'body 1'),
-      Glossary('title 2', 'body 2'),
-      Glossary('title 3', 'body 3'),
+      Glossary(aircraftid:-1, id: -1, title: 'title 1', body: 'body 1'),
+      Glossary(aircraftid:-1, id: -1, title: 'title 2', body: 'body 2'),
+      Glossary(aircraftid:-1, id: -1, title: 'title 3', body: 'body 3')
     ];
 
     //act

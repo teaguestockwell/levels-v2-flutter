@@ -1,11 +1,10 @@
 import 'dart:collection';
-import 'package:five_level_one/widgets/layout/cards/ccard.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../backend/const.dart';
 import '../../backend/models/aircraft.dart';
-import '../../backend/models/home_model.dart';
+import '../../backend/models/general.dart';
 import '../../backend/services.dart';
 import '../../screens/glossary/glossary.dart';
 import '../../screens/units/units.dart';
@@ -13,6 +12,7 @@ import '../../widgets/display/row_center_text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/more_op_modal.dart';
 import '../../widgets/layout/cards/card_allways_open.dart';
+import '../../widgets/layout/cards/ccard.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../percentmac/per_mac_screen.dart';
@@ -28,7 +28,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   BottomNav bn;
-  HomeModel homeModel;
+  General general;
   Widget body = Loading();
   Image img = Image.asset('assets/0.png');
   bool didLoad = false;
@@ -57,9 +57,9 @@ class _HomeState extends State<Home> {
     //dont await precache
     await precacheImage(img.image, context);
 
-    //pre cach should complete before home is built
-    homeModel = await this.widget.services.getHomeModel();
-    apiResponse = await this.widget.services.test();
+    //pre cach should complete before general is built
+    general = await this.widget.services.getGeneral();
+
     //state is set and disclaimer is drawn
     buildDiclaimer();
 
@@ -83,7 +83,7 @@ class _HomeState extends State<Home> {
     //set bn bar
     bn = BottomNav(
         tabPages: ap,
-        moreOp: homeModel.moreop,
+        general: general,
         airNames: List.generate(airs.length, (i) => airs[i].name));
     
     //set did load to unlock accept button
@@ -110,13 +110,13 @@ class _HomeState extends State<Home> {
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [img], color: Const.textColor),
               CardAllwaysOpen(
-                  title: homeModel.welcome.title,
+                  title: general.title,
                   color: Const.textColor,
                   children: [
-                    RowCenterText(homeModel.welcome.body),
+                    RowCenterText(general.body),
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
-                        MoreOpModal(homeModel.moreop)),
+                        MoreOpModal(general)),
                   ]),
               CCard(
                 title: 'api reponse',

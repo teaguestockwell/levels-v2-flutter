@@ -15,73 +15,72 @@ Widget mk(Widget child){
 Cargo getValid(){
   return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '1000',
-    qty: '2'
+    weight: 20,
+    fs: 1000,
+    qty: 2
   );
 }
 
 Cargo getValidFromChartC(){
-  return Cargo(
-  name: 'name',
-  weight: '25',
-  fs: '280',
-  qty: '1',
-  mom: '0.7',
-  simplemom: '10000'
+  return Cargo.fromTank(
+    name: 'names',
+    weight: 25,
+    simplemom: 0.7,
+    mommultiplier: 10000
   );
 }
+
 Cargo getInvalidName(){
   return Cargo(
     name: '',
-    weight: '20',
-    fs: '1000',
-    qty: '2'
+    weight: 20,
+    fs: 1000,
+    qty: 2
   );
 }
 
 Cargo getInvalidWeightS(){
   return Cargo(
     name: 'name',
-    weight: '0',
-    fs: '1000',
-    qty: '2'
+    weight: 0,
+    fs: 1000,
+    qty: 2
   );
 }
 
 Cargo getInvalidWeightL(){
   return Cargo(
     name: 'name',
-    weight: '2000000',
-    fs: '1000',
-    qty: '2'
+    weight: 2000000,
+    fs: 1000,
+    qty: 2
   );
 }
 
 Cargo getInvalidFSS(){
   return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '0',
-    qty: '2'
+    weight: 20,
+    fs: 0,
+    qty: 2
   );
 }
 
 Cargo getInvalidFSL(){
   return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '100000',
-    qty: '2'
+    weight: 20,
+    fs: 100000,
+    qty: 2
   );
 }
 
 Cargo getInvalidQty(){
   return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '1000',
-    qty: '0'
+    weight: 20,
+    fs: 1000,
+    qty: 0
   );
 }
 
@@ -104,17 +103,17 @@ List<Cargo> getAllValidNWFS(){
 }
 
 ///min valid fs
-String fs0(){
-  return '100';
+num fs0(){
+  return 100;
 }
 
 ///max valid fs
-String fs1(){
-  return '10000';
+num fs1(){
+  return 10000;
 }
 
-String cargoMaxWeight(){
-  return '10000';
+num cargoMaxWeight(){
+  return 10000;
 }
 
 void main(){
