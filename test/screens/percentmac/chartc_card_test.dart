@@ -13,10 +13,10 @@ class AircraftMock extends Mock implements Aircraft{}
 AircraftMock getAir(){
   final ret = AircraftMock();
 
-  when(ret.weight0).thenReturn('100000');
-  when(ret.weight1).thenReturn('150000');
-  when(ret.mom0).thenReturn('10000');
-  when(ret.mom1).thenReturn('14000');
+  when(ret.weight0).thenReturn(100000);
+  when(ret.weight1).thenReturn(150000);
+  when(ret.mom0).thenReturn(10000);
+  when(ret.mom1).thenReturn(14000);
   
   return ret;
 }

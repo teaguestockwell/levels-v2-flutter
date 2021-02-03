@@ -13,7 +13,7 @@ Future<General> getGeneral() async {
 
 Future<List<Aircraft>> getAirs() async {
   List<Aircraft> ret = [];
-  final response =  await http.get('http://localhost:8080/fl-api/general');
+  final response =  await http.get('http://localhost:8080/fl-api/aircraft');
   final List<dynamic> json = convert.jsonDecode(response.body);
   json.forEach((x) => ret.add(Aircraft.fromJson(x)));
   return ret;

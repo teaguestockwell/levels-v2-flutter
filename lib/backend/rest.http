@@ -1,2 +1,5 @@
 ###
 GET http://localhost:8080/fl-api/aircraft
+
+###
+GET http://localhost:8080/fl-api/general

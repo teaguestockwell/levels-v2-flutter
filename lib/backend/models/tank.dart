@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import '../utils.dart';
 import 'cargo.dart';
@@ -32,8 +31,6 @@ class Tank{
     assert(weightList.length == simplemomsList.length);
 
     for(int i=0; i<weightList.length; i++){
-
-      log(json.toString());
 
       nwfss.add(
         Cargo.fromTank(

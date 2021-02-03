@@ -25,8 +25,8 @@ class Cargo {
   final int cargoid;
   final int configcargoid;
 
-  /// ui refrence
-  final int id; 
+  /// ui refrence, not final for testing 
+  int id; 
 
   /// only to be used when constructing UI object that will not write to db
   Cargo({

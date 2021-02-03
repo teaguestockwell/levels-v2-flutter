@@ -118,11 +118,11 @@ class _HomeState extends State<Home> {
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(general)),
                   ]),
-              CCard(
-                title: 'api reponse',
-                children: [RowCenterText(apiResponse ?? 'no resonse')],
-                initOpen: true,
-              )
+              // CCard(
+              //   title: 'api reponse',
+              //   children: [RowCenterText(apiResponse ?? 'no resonse')],
+              //   initOpen: true,
+              // )
             ]))));
 
     setState(() {

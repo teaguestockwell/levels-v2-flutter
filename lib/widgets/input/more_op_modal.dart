@@ -1,8 +1,9 @@
-import 'package:five_level_one/backend/models/general.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../backend/const.dart';
+import '../../backend/models/general.dart';
 import '../display/text.dart';
 import 'custom_button.dart';
 
@@ -62,15 +63,15 @@ class MoreOpModalState extends State<MoreOpModal> {
   _getSpinnerWidgets() {
     _spinnerWidgets.clear();
     for (int i = 0; i < this.widget.general.names.length; i++) {
-      Icon icon = () {
+      Icon icon;
+
         try {
-          return Icon(IconData(this.widget.general.icondatas[i],
-              fontFamily: 'MaterialIcons'));
+          icon = Icon(IconData(this.widget.general.icondatas[i],fontFamily: 'MaterialIcons'));
         // ignore: avoid_catches_without_on_clauses
         } catch (_) {
-          return Icon(IconData(59362, fontFamily: 'MaterialIcons'));
+          icon = Icon(IconData(59362, fontFamily: 'MaterialIcons'));
         }
-      }();
+      ;
 
       var tex = Tex(
         this.widget.general.names[i],

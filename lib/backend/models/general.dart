@@ -1,12 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-enum Role{
-  User,
-  Admin,
-  Db
-}
+
 class General{
-  final Role role;
+  final int role;
   final List<int> icondatas;
   final List<String> names;
   final List<String> urls;
@@ -27,7 +23,7 @@ class General{
     @required this.names,
     @required this.urls,
   }) :
-  role = Role.User,
+  role = 1,
   title = '',
   body = '';
 

@@ -11,6 +11,8 @@ PerMacMock getPerMac(){
   final ret = PerMacMock();
   final nwfss = getNwfs();
 
+
+  when(ret.mommultipler).thenReturn(10000);
   when(ret.nwfss).thenReturn(nwfss);
   when(ret.grandTotQty).thenReturn('grand');
   when(ret.totSimpleMomAsString).thenReturn('tot simp mom');
@@ -26,8 +28,8 @@ Widget mk(Widget child){
 List<Cargo> getNwfs(){
   List<Cargo> ret = [];
 
-    ret.add(Cargo(name: 'cargo1', weight: '100', qty: '2', fs: '500', ));
-    ret.add(Cargo(name: 'cargo2', weight: '100', qty: '2', fs: '500', ));
+    ret.add(Cargo(name: 'cargo1', weight: 100, qty: 2, fs: 500, ));
+    ret.add(Cargo(name: 'cargo2', weight: 100, qty: 2, fs: 500, ));
   
   return ret;
 }

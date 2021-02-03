@@ -47,7 +47,6 @@ class Util {
 
     if(s.isEmpty){s = '0';}
 
-    double p = 0.0;
     try {
       return double.parse(s);
     // ignore: avoid_catches_without_on_clauses

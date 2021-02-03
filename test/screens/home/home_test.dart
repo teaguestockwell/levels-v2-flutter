@@ -1,7 +1,6 @@
 import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/general.dart';
 import 'package:five_level_one/backend/models/glossary.dart';
-import 'package:five_level_one/backend/models/home_model.dart';
-import 'package:five_level_one/backend/models/more_op.dart';
 import 'package:five_level_one/screens/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:five_level_one/backend/services.dart';
@@ -15,9 +14,8 @@ Widget mk(Widget child){
 //are you mocking me?
 class ServicesMock extends Mock implements Services{}
 class AircraftMock extends Mock implements Aircraft{}
-class HomeModelMock extends Mock implements HomeModel{}
-class MoreOpMock extends Mock implements MoreOp{}
 class GlossMock extends Mock implements Glossary{}
+class GeneralMock extends Mock implements General{}
 
 ServicesMock getServiceMocks(int secToResponse){
   final sm = ServicesMock();
@@ -38,24 +36,19 @@ ServicesMock getServiceMocks(int secToResponse){
     return ret;
   });
 
-  when(sm.getHomeModel()).thenAnswer((_) async{
+  when(sm.getGeneral()).thenAnswer((_) async{
 
     await Future.delayed(Duration(seconds: secToResponse));
 
-    final mo = MoreOpMock();
-    when(mo.icon).thenReturn([' ',' ']);
-    when(mo.name).thenReturn([' ', ' ']);
-    when(mo.url).thenReturn([' ', ' ']);
+    final gen = GeneralMock();
+    when(gen.body).thenReturn('body');
+    when(gen.title).thenReturn('title');
+    when(gen.role).thenReturn(Role.User);
+    when(gen.icondatas).thenReturn([123,123]);
+    when(gen.names).thenReturn(['one','two']);
+    when(gen.urls).thenReturn(['url1','url2']);
 
-    final gloss = GlossMock();
-    when(gloss.body).thenReturn('body');
-    when(gloss.title).thenReturn('title');
-
-    final ret = HomeModelMock();
-    when(ret.moreop).thenReturn(mo);
-    when(ret.welcome).thenReturn(gloss);
-
-    return ret;
+    return gen;
   });
   
   return sm;

@@ -1,7 +1,6 @@
-import 'package:flutter/foundation.dart';
+import 'cargo.dart';
 import 'config.dart';
 import 'glossary.dart';
-import 'cargo.dart';
 import 'tank.dart';
 
 class Aircraft {

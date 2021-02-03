@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import '../utils.dart';
 import 'cargo.dart';
 
 ///used to store and caculate final variables for percent mac

@@ -14,7 +14,7 @@ class TankMock extends Mock implements Tank{}
 int numTanks = 20;
 int fuelCap = 20000;
 int fuelIncrament = 250;
-String simpleMom = '10000';
+num mommultiplier = 10000;
 
 //mock needed here beacuse nwfs.id is staticly incremented 
 Tank getTankMock(){
@@ -22,7 +22,7 @@ Tank getTankMock(){
 
   List<Cargo> nwfs = [];
   for(int i=0; i<20; i++){
-    final f = Cargo(name: i.toString(), weight: i.toString(), mom: (i/5).toString());
+    final f =  Cargo.fromTank(name: i.toString(), weight: i, simplemom: 1/5, mommultiplier: mommultiplier);
     f.id = i;
     nwfs.add(f);
   }
@@ -50,13 +50,16 @@ List<Tank> getTanks(){
       weightCSV += ',' + j.toString();
       momCSV += ',' + (j/7).toString();
     }
-    
-    ret.add(Tank(
-      'tank ' + i.toString(),
-      weightCSV,
-      momCSV,
-      simpleMom
-    ));
+
+    Map<String,dynamic> json = {};
+    json['name'] = 'tank ' + i.toString();
+    json['aircraftid'] = -1;
+    json['tankid'] = -1;
+    json['weights'] = weightCSV;
+    json['simplemoms'] = momCSV;
+
+
+    ret.add( Tank.fromJson(json, mommultiplier));
 
   }
   return ret;
@@ -107,7 +110,17 @@ void main(){
 
       //given 
 
-      final tank = Tank('tank', '0,1,2,3', '1,2,3,4', '10');
+      //final tank = Tank('tank', '0,1,2,3', '1,2,3,4', '10');
+       Map<String,dynamic> json = {};
+      json['name'] = 'tank';
+      json['aircraftid'] = -1;
+      json['tankid'] = -1;
+      json['weights'] = '0,1,2,3';
+      json['simplemoms'] = '1,2,3,4';
+
+      final tank = Tank.fromJson(json, mommultiplier);
+      expect(tank.weightList[0], '0');
+      expect(tank.nwfss[0].weight, 0);
       final tc = TankRow(tank: tank, callBack: (i,b){});
       final test = mk(tc);
 
@@ -116,7 +129,7 @@ void main(){
 
       //then
       expect(find.text('tank'), findsOneWidget);
-      expect(find.text('0'), findsOneWidget);
+      expect(find.text('0.0'), findsOneWidget);
     });
 
 
