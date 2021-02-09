@@ -3,3 +3,28 @@ GET http://localhost:8080/fl-api/aircraft
 
 ###
 GET http://localhost:8080/fl-api/general
+
+###
+GET http://localhost:8080/fl-api/user
+content-type: application/json
+
+{
+  "aircraftid": 1
+}
+###
+POST http://localhost:8080/fl-api/user
+content-type: application/json
+
+{
+  "aircraftid": 1,
+  "role": 1,
+  "email": "fakeemail",
+  "userid": 5
+}
+###
+DELETE http://localhost:8080/fl-api/user
+content-type: application/json
+
+{
+  "userid": 1
+}
