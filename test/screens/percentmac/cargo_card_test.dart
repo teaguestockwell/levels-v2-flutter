@@ -866,7 +866,7 @@ void main(){
       //when
       await wt.pumpWidget(wrap);
       CargoCardState state0 = wt.state(find.byType(CargoCard));
-      state0.addCargo();
+      state0.addEmptyCargo();
       await wt.pumpAndSettle();
       CargoCardState state1 = wt.state(find.byType(CargoCard));
 
@@ -892,7 +892,7 @@ void main(){
       //when
       await wt.pumpWidget(wrap);
       CargoCardState state0 = wt.state(find.byType(CargoCard));
-      state0.addCargo();
+      state0.addCargo(0);
       await wt.pumpAndSettle();
       CargoCardState state1 = wt.state(find.byType(CargoCard));
 
@@ -917,7 +917,7 @@ void main(){
       //when
       await wt.pumpWidget(wrap);
       CargoCardState state0 = wt.state(find.byType(CargoCard));
-      state0.updateConfig();
+      state0.updateConfig(0);
       await wt.pumpAndSettle();
       CargoCardState state1 = wt.state(find.byType(CargoCard));
 
@@ -941,7 +941,7 @@ void main(){
       //when
       await wt.pumpWidget(wrap);
       CargoCardState state0 = wt.state(find.byType(CargoCard));
-      state0.updateConfig();
+      state0.updateConfig(0);
       await wt.pumpAndSettle();
       CargoCardState state1 = wt.state(find.byType(CargoCard));
 

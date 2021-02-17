@@ -1,4 +1,8 @@
+import 'dart:async';
 import 'dart:collection';
+import 'package:five_level_one/widgets/input/button_modal_button.dart';
+import 'package:five_level_one/widgets/input/button_modal_spinner.dart';
+import 'package:five_level_one/widgets/input/custom_button.dart';
 import 'package:flutter/material.dart';
 import '../../backend/const.dart';
 import '../../backend/models/aircraft.dart';
@@ -43,11 +47,11 @@ class CargoCardState extends State<CargoCard> {
   bool valid = true;
 
   ///modal spinner that changes this.selectedSpinnerConfig
-  ButtonModalSpinnerButton configSpin;
+  ButtonModalSpinner configSpin;
   Cargo selectedSpinnerCargo;
 
   ///modal spinner that changes this.selectedSpinnerCargo
-  ButtonModalSpinnerButton cargoSpin;
+  ButtonModalButton cargoSpin;
   Config selectedSpinnerConfig;
   ButtonModalSpinnerButton removeAllSpin;
 
@@ -56,29 +60,22 @@ class CargoCardState extends State<CargoCard> {
 
   //key is nwfs.id, value is bool of validated cargo ui
   final childrenCargoIsValidMap = HashMap<int, bool>();
+  var configIdx = 0;
+
 
   @override
   initState() {
     super.initState();
-
+    
     this.widget.onValidationChange(1, valid);
     selectedSpinnerConfig = this.widget.air.configs[0];
     selectedSpinnerCargo = this.widget.air.cargos[0];
 
-    configSpin = ButtonModalSpinnerButton(
-      stringList: List.generate(
-        this.widget.air.configs.length,
-         (i) => this.widget.air.configs[i].name),
-      modalButtonText: 'Update Config',
-      onPress: updateConfig,
-      onSpin: (i) => selectedSpinnerConfig = this.widget.air.configs[i],
-    );
-
-    cargoSpin = ButtonModalSpinnerButton(
+    cargoSpin = ButtonModalButton(
+      buttText: 'Add',
       stringList: List.generate(this.widget.air.cargos.length,
        (i) => this.widget.air.cargos[i].name),
       modalButtonText: 'Add Cargo',
-      onSpin: (i) => selectedSpinnerCargo = this.widget.air.cargos[i],
       onPress: addCargo,
     );
 
@@ -127,12 +124,13 @@ class CargoCardState extends State<CargoCard> {
   }
 
   ///remove old config then add new NWFS and CargoUI for each config in selectedSpinnerConfig
-  void updateConfig() {
+  void updateConfig(int i) {
+     final selectedConfig = this.widget.air.configs[i];
     //before adding new config remove the old one
     removeConfig();
-    for (Cargo oldSelectedConfigNWFS in selectedSpinnerConfig.nwfList) {
+    for (Cargo oldSelectedConfigNWFS in selectedConfig.nwfList) {
       var newNWFS = Cargo.copyNewID(oldSelectedConfigNWFS);
-      newNWFS.name += ' ' + selectedSpinnerConfig.name;
+      newNWFS.name += ' ' + selectedConfig.name;
 
       var newCargoUI = ValidatedCargoUI(
         fs0: this.widget.air.fs0,
@@ -169,6 +167,7 @@ class CargoCardState extends State<CargoCard> {
     this.widget.cargo.clear();
     importedConfigIDs.clear();
     childrenCargoIsValidMap.clear();
+    configIdx = 0;
     checkValidation();
     setState(() {});
   }
@@ -179,13 +178,13 @@ class CargoCardState extends State<CargoCard> {
     });
   }
 
-  void addCargo() {
+  void addCargo(int i) {
     var newCargoUI = ValidatedCargoUI(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
       cargoMaxWeight: this.widget.air.cargoweight1,
       onRemovePressed: removeCargoID,
-      nwf: Cargo.copyNewID(selectedSpinnerCargo),
+      nwf: Cargo.copyNewID(this.widget.air.cargos[i]),
       notifyValid: cargoUIValidationChanged,
     );
 
@@ -195,11 +194,35 @@ class CargoCardState extends State<CargoCard> {
     setState(() {});
   }
 
+  void addEmptyCargo(){
+    var newCargoUI = ValidatedCargoUI(
+      fs0: this.widget.air.fs0,
+      fs1: this.widget.air.fs1,
+      cargoMaxWeight: this.widget.air.cargoweight1,
+      onRemovePressed: removeCargoID,
+      nwf: Cargo(),
+      notifyValid: cargoUIValidationChanged,
+    );
+
+    this.widget.cargo[newCargoUI.nwf.id] = newCargoUI;
+    checkValidation();
+    ////print('Adding cargo '+newCargoUI.nwf.toString());
+    setState(() {});
+  }
+
+
   Widget build(BuildContext context) {
     return CardAllwaysOpen(title: 'Cargo', color: Util.getValidColor(valid), children: [
       Row2(
         Tex('Select Config'),
-        configSpin,
+        ButtonModalSpinner(
+          onClose: updateConfig,
+          onSpin: (i) => configIdx = i,
+          initIdx: configIdx,
+          stringList: List.generate(
+            this.widget.air.configs.length,
+            (i) => this.widget.air.configs[i].name),
+        ),
       ),
 
       Divider(
@@ -207,7 +230,14 @@ class CargoCardState extends State<CargoCard> {
         thickness: Const.divThickness,
       ),
 
-      Row2(Tex('Add Cargo'), cargoSpin),
+      Row2(Tex('Addenda A Cargo'), cargoSpin),
+
+      Divider(
+        color: Const.divColor,
+        thickness: Const.divThickness,
+      ),
+
+      Row2(Text('Custom Cargo'), CustomButton('Add', onPressed:addEmptyCargo)),
 
       Divider(
         color: Const.divColor,

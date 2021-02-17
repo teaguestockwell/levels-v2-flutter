@@ -3,35 +3,44 @@ import 'package:flutter/material.dart';
 
 import '../../backend/const.dart';
 import '../../backend/utils.dart';
-import '../../widgets/display/text.dart';
+import '../display/text.dart';
 import 'custom_button.dart';
 
-class ButtonModalSpinner extends StatefulWidget {
+class ButtonModalButton extends StatefulWidget {
   final List<String> stringList;
-  final IntCallBackIntPara onSpin;
-  final int initIdx;
-  final IntCallBackIntPara onClose;
+  final IntCallBackIntPara onPress;
+  final String modalButtonText;
+  final String buttText;
 
-  ButtonModalSpinner({
-    this.onClose,
-    this.initIdx,
-    @required this.onSpin,
-    @required this.stringList,
-  })  : assert(onSpin != null),
+  ButtonModalButton({
+      @required this.buttText,
+      @required this.onPress,
+      @required this.stringList,
+      @required this.modalButtonText})
+      : 
+        assert(onPress != null),
         assert(stringList != null),
-        assert(stringList.isNotEmpty),
-        super(key: UniqueKey());
+        assert(modalButtonText != null),
+        assert(stringList.isNotEmpty);
 
   @override
-  _ButtonModalSpinnerState createState() => _ButtonModalSpinnerState();
+  _ButtonModalButtonState createState() =>
+      _ButtonModalButtonState();
 }
 
-class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
-  List<Widget> spinnerWidgets;
-  int spinIdx;
+class _ButtonModalButtonState extends State<ButtonModalButton> {
+   List<Widget> spinnerWidgets;
+  int spinIdx = 0;
   FixedExtentScrollController sc;
 
-  List<Widget> getSpinnerWidgets(List<String> strings) {
+  @override
+  void initState() {
+    super.initState();
+    spinnerWidgets =getSpinnerWidgets(this.widget.stringList);
+    sc = FixedExtentScrollController(initialItem: spinIdx);
+  }
+
+   List<Widget> getSpinnerWidgets(List<String> strings) {
     return List.generate(strings.length, (i) {
       return Center(
           key: Key('spinner'),
@@ -44,21 +53,17 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    spinIdx = this.widget.initIdx ?? 0;
-    spinnerWidgets = getSpinnerWidgets(this.widget.stringList);
-    sc = FixedExtentScrollController(initialItem: spinIdx);
-  }
-
-  @override
   void dispose() {
     sc.dispose();
     super.dispose();
   }
 
-  void _spin(int newIdx) {
-    this.widget.onSpin(newIdx);
+  void pressModal() {
+    Navigator.pop(context);
+    this.widget.onPress(spinIdx);
+  }
+
+    void _spin(int newIdx) {
     if (this.mounted) {
       setState(() {
         spinIdx = newIdx;
@@ -67,8 +72,8 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
     }
   }
 
-  press() async {
-    var bottomSheet = showModalBottomSheet<void>(
+  press() {
+    showModalBottomSheet<void>(
       context: context,
       builder: (BuildContext context) {
         return Container(
@@ -91,6 +96,11 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
                               itemExtent: 35,
                               children: spinnerWidgets)),
                       Flexible(child: Container()),
+                      CustomButton(
+                        this.widget.modalButtonText,
+                        onPressed: pressModal,
+                      ),
+                      Flexible(child: Container()),
                     ])),
               ],
             ),
@@ -98,14 +108,12 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
         );
       },
     );
-
-    await bottomSheet.then((_) => this.widget.onClose?.call(spinIdx));
   }
 
   @override
   Widget build(BuildContext context) {
     return CustomButton(
-      this.widget.stringList[spinIdx],
+      this.widget.buttText,
       onPressed: press,
     );
   }
