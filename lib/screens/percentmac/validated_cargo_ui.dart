@@ -35,7 +35,6 @@ class ValidatedCargoUI extends StatefulWidget {
 
 class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   bool valid = false;
-  List<Widget> children;
   var childValid = LinkedHashMap<int, bool>();
   bool ope = false;
 
@@ -53,58 +52,6 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       updateAllValid();
     });
-
-    children = [
-      Row1(ValidatedText(
-        initText: this.widget.nwf.name,
-        inputType: 2,
-        onChange: changeName,
-        maxChars: 30,
-        validateText: validateName,
-        width: double.infinity, 
-        notifyIsValid: (v) {updateValid(0, v);},
-      )),
-      Div(),
-      Row2(
-          Tex('Weight'),
-          ValidatedText(
-            notifyIsValid: (v) {updateValid(1, v);},
-            initText: this.widget.nwf.weight.toString(),
-            inputType: 1,
-            onChange: changeWeight,
-            maxChars: 8,
-            validateText: validateWeight,
-          )),
-      Div(),
-      Row2(
-          Tex('Fuselage Station'),
-          ValidatedText(
-            notifyIsValid: (v) {updateValid(2, v);},
-            initText: this.widget.nwf.fs.toString(),
-            inputType: 1,
-            onChange: changeFS,
-            maxChars: 8,
-            validateText: validateFS,
-          )),
-      Div(),
-      Row2(
-          Tex('Qty'),
-          ValidatedText(
-            notifyIsValid: (v) {updateValid(3, v);},
-            initText: this.widget.nwf.qty.toString(),
-            inputType: 1,
-            onChange: changeQty,
-            maxChars: 8,
-            validateText: validateQty,
-          )),
-      Div(),
-      Row1(CustomButton(
-        'Remove',
-        onPressed: () {
-          this.widget.onRemovePressed(this.widget.nwf.id);
-        },
-      )),
-    ];
   }
 
   /// put new value into map of all children
@@ -187,9 +134,63 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
     setState(() {});
   }
 
+  List<Widget> buildChildren(){
+    return [
+      Row1(ValidatedText(
+        initText: this.widget.nwf.name,
+        inputType: 2,
+        onChange: changeName,
+        maxChars: 30,
+        validateText: validateName,
+        width: double.infinity, 
+        notifyIsValid: (v) {updateValid(0, v);},
+      )),
+      Div(),
+      Row2(
+          Tex('Weight'),
+          ValidatedText(
+            notifyIsValid: (v) {updateValid(1, v);},
+            initText: this.widget.nwf.weight.toString(),
+            inputType: 1,
+            onChange: changeWeight,
+            maxChars: 8,
+            validateText: validateWeight,
+          )),
+      Div(),
+      Row2(
+          Tex('Fuselage Station'),
+          ValidatedText(
+            notifyIsValid: (v) {updateValid(2, v);},
+            initText: this.widget.nwf.fs.toString(),
+            inputType: 1,
+            onChange: changeFS,
+            maxChars: 8,
+            validateText: validateFS,
+          )),
+      Div(),
+      Row2(
+          Tex('Qty'),
+          ValidatedText(
+            notifyIsValid: (v) {updateValid(3, v);},
+            initText: this.widget.nwf.qty.toString(),
+            inputType: 1,
+            onChange: changeQty,
+            maxChars: 8,
+            validateText: validateQty,
+          )),
+      Div(),
+      Row1(CustomButton(
+        'Remove',
+        onPressed: () {
+          this.widget.onRemovePressed(this.widget.nwf.id);
+        },
+      )),
+    ];
+  }
+
   List<Widget> buildInput() {
     if (ope) {
-      return children;
+      return buildChildren();
     }
     return [Container()];
   }
