@@ -30,7 +30,7 @@ RUN flutter clean
 # Get app packages
 RUN flutter pub get
 
-# Echo version
+# Echo version && SCA && Lint
 RUN flutter doctor
 
 # Run tests
