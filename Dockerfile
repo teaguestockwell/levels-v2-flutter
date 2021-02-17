@@ -56,7 +56,7 @@ FROM nginx
 #COPY --from=0 /app/build/web /usr/share/nginx/html
 COPY ./build/web/ /usr/share/nginx/html
 
-# Copy nginx config from first stage --from=0 /fl/nginx.config
+# Copy nginx config
 COPY nginx.config /etc/nginx/nginx.conf
 
 # Document the exposed port

@@ -53,8 +53,10 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       updateAllValid();
     });
+  }
 
-    children = [
+  List<Widget> buildChildren(){
+    return children = [
       Row1(ValidatedText(
         initText: this.widget.nwf.name,
         inputType: 2,
@@ -189,7 +191,7 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
 
   List<Widget> buildInput() {
     if (ope) {
-      return children;
+      return buildChildren();
     }
     return [Container()];
   }
