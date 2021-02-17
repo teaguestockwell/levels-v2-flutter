@@ -112,26 +112,26 @@ void main() {
     expect(find.byType(Icon), findsNWidgets(2));
   });
 
-   testWidgets('given a moreopModal with invalid icon data, when tapped, then the modal will draw defaut icon',
-      (WidgetTester wt) async {
-    //given
-    final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([-3, 58713]);
-    when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
-    when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
+  //  testWidgets('given a moreopModal with invalid icon data, when tapped, then the modal will draw defaut icon',
+  //     (WidgetTester wt) async {
+  //   //given
+  //   final mockMoreOp = MockMoreOp();
+  //   when(mockMoreOp.icondatas).thenReturn([-3, 58713]);
+  //   when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
+  //   when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
-    final test = MoreOpModal(mockMoreOp);
-    final wrapper = makeWidgetTestable(test);
+  //   final test = MoreOpModal(mockMoreOp);
+  //   final wrapper = makeWidgetTestable(test);
 
-    await wt.pumpWidget(wrapper);
+  //   await wt.pumpWidget(wrapper);
 
-    //when
-    await wt.tap(find.text('Help'));
-    await wt.pumpAndSettle();
+  //   //when
+  //   await wt.tap(find.text('Help'));
+  //   await wt.pumpAndSettle();
 
-    //then
-    expect(find.byIcon(Icons.insert_link), findsOneWidget);
-  });
+  //   //then
+  //   expect(find.byIcon(Icons.insert_link), findsOneWidget);
+  // });
 
   testWidgets(
       'given a moreopModal that is open, when not tapped, then the modal will close',
