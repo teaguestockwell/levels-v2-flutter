@@ -5,6 +5,7 @@ class Config {
   List<NameWeightFS> nwfList = [];
   String name, simplemom;
   Config(String csv, this.simplemom) {
+    if(csv != ''){
     var nameWeightMomentQtyList = csv.split(';');
     this.name = nameWeightMomentQtyList[0];
 
@@ -22,6 +23,9 @@ class Config {
           simplemom: this.simplemom,
           qty: nwmqAtIndexList[3].trim() // qty = qty
           ));
+    }
+    } else{
+      name = 'No Config';
     }
   }
 }

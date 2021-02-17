@@ -108,6 +108,9 @@ class Aircraft {
       ));
     }
 
+    //add empty config
+    configs.add(Config('',this.simplemom));
+
     //create configs
     for (int i = 0; i < configstrings.length; i++) {
       configs.add(Config(configstrings[i], this.simplemom));

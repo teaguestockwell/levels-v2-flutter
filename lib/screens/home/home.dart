@@ -106,7 +106,7 @@ class _HomeState extends State<Home> {
             controller: sc,
             child:Column(children: [
               CardAllwaysOpen(
-                  title: 'FIVE LEVEL', children: [img], color: Const.textColor),
+                  title: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: Const.textColor),
               CardAllwaysOpen(
                   title: homeModel.welcome.title,
                   color: Const.textColor,
