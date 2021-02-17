@@ -102,9 +102,12 @@ class _HomeState extends State<Home> {
         body: CupertinoScrollbar(
             isAlwaysShown: true,
             controller: sc,
-            child: SingleChildScrollView( //wrapper to prevent jitters
+            child:Center(child: SingleChildScrollView( //wrapper to prevent jitters
             controller: sc,
-            child:Column(children: [
+            child:Container(
+              width: Const.maxCardWidth*.75,
+              child:Column(
+              children: [
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: Const.textColor),
               CardAllwaysOpen(
@@ -116,7 +119,7 @@ class _HomeState extends State<Home> {
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(homeModel.moreop))
                   ])
-            ]))));
+            ]))))));
 
     setState(() {
       body = ret;
