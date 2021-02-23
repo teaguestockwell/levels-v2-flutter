@@ -56,10 +56,10 @@ FROM nginx
 #USER appuser
 
 # Copy build output from first stage 
-COPY --from=0 /app/build/web /usr/share/nginx/html
+#COPY --from=0 /app/build/web /usr/share/nginx/html
 
 # Copy local build from root dir 
-#COPY ./build/web/ /usr/share/nginx/html
+COPY ./build/web/ /usr/share/nginx/html
 
 # Copy nginx config root dir
 COPY nginx.config /etc/nginx/nginx.conf

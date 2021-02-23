@@ -105,7 +105,7 @@ class BottomNavState extends State<BottomNav> {
         backgroundColor: Const.background,
         appBar: AppBar(
           backgroundColor: Const.bottombarcolor,
-          title: Tex(['Units', 'MAC%', 'Glossary'].elementAt(airIdx)),
+          title: Tex(['Units', 'MAC%', 'Glossary'].elementAt(pageIndex)),
           actions: [MoreOpPopup(this.widget.general)],
           leadingWidth: Const.pickerWidth,
           leading: LeadingMDS(

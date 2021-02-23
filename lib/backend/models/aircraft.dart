@@ -67,10 +67,28 @@ class Aircraft {
     glossarysJson = json['glossarys'],
     configsJson = json['configs']
     {
-      cargosJson.forEach((json) => cargos.add(Cargo.fromJsonCargo(json)));
-      tanksJson.forEach((json) => tanks.add(Tank.fromJson(json, mommultiplier)));
-      glossarysJson.forEach((json) => glossarys.add(Glossary.fromJson(json)));
-      configsJson.forEach((json) => configs.add(Config.fromJson(json)));
+      // while an admin user is modifying these nested values,
+      // they may be incomplete, so dont add them if they throw
+      
+      cargosJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+        try{cargos.add(Cargo.fromJsonCargo(json));}catch(e){print(e);}
+      });
+
+      tanksJson.forEach((json) { 
+        // ignore: avoid_catches_without_on_clauses
+        try{tanks.add(Tank.fromJson(json, mommultiplier));}catch(e){print(e);};
+      });
+
+      glossarysJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+        try{glossarys.add(Glossary.fromJson(json));} catch(e){print(e);};
+      });
+
+      configsJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+         try{configs.add(Config.fromJson(json));} catch(e){print(e);}
+      });
     }
 
     Map<String, dynamic> get json {
@@ -105,63 +123,4 @@ class Aircraft {
       ret['glossarys'] = configlist;
       return ret;
     }
-
-
-  // Aircraft({
-  //   @required this.name,
-  //   @required this.fs0,
-  //   @required this.fs1,
-  //   @required this.mom0,
-  //   @required this.mom1,
-  //   @required this.weight0,
-  //   @required this.weight1,
-  //   @required this.mommultiplier,
-  //   @required this.lemac,
-  //   @required this.mac,
-  //   @required this.cargoweight1,
-  //   @required this.tanknames,
-  //   @required this.tankmoms,
-  //   @required this.tankweights,
-  //   @required this.titles,
-  //   @required this.bodys,
-  //   @required this.cargonames,
-  //   @required this.cargoweights,
-  //   @required this.cargomoms,
-  //   @required this.configstrings,
-  // }) {
-
-  //   // create tanks
-  //   for (int i = 0; i < tanknames.length; i++) {
-  //     tanks.add(Tank(
-  //       tanknames[i],
-  //       tankweights[i],
-  //       tankmoms[i],
-  //       mommultiplier,
-  //     ));
-  //   }
-
-  //   //create addaA cargo
-  //   for (int i = 0; i < cargomoms.length; i++) {
-  //     addaCargo.add(NameWeightFS(
-  //       name: cargonames[i],
-  //       weight: cargoweights[i],
-  //       mom: cargomoms[i],
-  //       simplemom: this.mommultiplier,
-  //     ));
-  //   }
-
-  //   //create configs
-  //   for (int i = 0; i < configstrings.length; i++) {
-  //     configs.add(Config(configstrings[i], this.mommultiplier));
-  //   }
-
-  //   // create glossarys
-  //   for (int i = 0; i < titles.length; i++) {
-  //     glossarys.add(Glossary(
-  //       titles[i],
-  //       bodys[i]
-  //     ));
-  //   }
-
-  // }
 }
