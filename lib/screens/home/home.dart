@@ -104,9 +104,12 @@ class _HomeState extends State<Home> {
         body: CupertinoScrollbar(
             isAlwaysShown: true,
             controller: sc,
-            child: SingleChildScrollView( //wrapper to prevent jitters
+            child:Center(child: SingleChildScrollView( //wrapper to prevent jitters
             controller: sc,
-            child:Column(children: [
+            child:Container(
+              width: Const.maxCardWidth*.75,
+              child:Column(
+              children: [
               CardAllwaysOpen(
                   title: 'FIVE LEVEL', children: [img], color: Const.textColor),
               CardAllwaysOpen(
@@ -123,7 +126,7 @@ class _HomeState extends State<Home> {
               //   children: [RowCenterText(apiResponse ?? 'no resonse')],
               //   initOpen: true,
               // )
-            ]))));
+            ]))))));
 
     setState(() {
       body = ret;
