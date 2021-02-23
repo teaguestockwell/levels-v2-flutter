@@ -85,6 +85,9 @@ class Aircraft {
         try{glossarys.add(Glossary.fromJson(json));} catch(e){print(e);};
       });
 
+      //add empty config
+      configs.add(Config());
+      
       configsJson.forEach((json) {
         // ignore: avoid_catches_without_on_clauses
          try{configs.add(Config.fromJson(json));} catch(e){print(e);}
