@@ -809,7 +809,7 @@ void main(){
       //then
       expect(test.cargo.entries.length, 0);
       expect(state0.childrenCargoIsValidMap.entries.length, 0);
-      expect(find.byType(Text), findsNWidgets(7));
+      expect(find.byType(Text), findsNWidgets(9));
     });
 
     testWidgets(
@@ -875,7 +875,7 @@ void main(){
       expect(state1.valid, false);
       expect(test.cargo.entries.length, 1);
       expect(onChangeMap[1], false);
-      expect(find.byType(Text), findsNWidgets(12));
+      expect(find.byType(Text), findsNWidgets(14));
 
     });
 
@@ -901,7 +901,7 @@ void main(){
       expect(state1.valid, true);
       expect(test.cargo.entries.length, 1);
       expect(onChangeMap[1], true);
-      expect(find.byType(Text), findsNWidgets(8));
+      expect(find.byType(Text), findsNWidgets(10));
     });
 
     testWidgets(

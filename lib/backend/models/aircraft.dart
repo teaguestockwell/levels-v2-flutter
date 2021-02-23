@@ -86,7 +86,7 @@ class Aircraft {
       });
 
       //add empty config
-      configs.add(Config());
+      configs.add(Config.empty());
       
       configsJson.forEach((json) {
         // ignore: avoid_catches_without_on_clauses

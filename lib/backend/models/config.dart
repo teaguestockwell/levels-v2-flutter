@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import 'cargo.dart';
 
 class Config {
@@ -14,6 +16,11 @@ class Config {
 
       configcargos.forEach((x) => nwfList.add(Cargo.fromJsonConfigCargo(x)));
     }
+  
+  Config.empty():
+  aircraftid = -1,
+  configid = -1,
+  name = 'No Config';
 
   Map<String,dynamic> get json{
     Map<String,dynamic> ret = {};
