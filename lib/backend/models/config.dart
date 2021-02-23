@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'cargo.dart';
 
 class Config {

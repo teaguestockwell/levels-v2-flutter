@@ -12,7 +12,7 @@ import '../../widgets/display/row_center_text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/more_op_modal.dart';
 import '../../widgets/layout/cards/card_allways_open.dart';
-import '../../widgets/layout/cards/ccard.dart'; // this should throw a lint error
+// this should throw a lint error
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row2.dart';
 import '../percentmac/per_mac_screen.dart';
