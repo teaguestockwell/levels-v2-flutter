@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'const.dart';
-import 'models/name_weight_fs.dart';
+import 'models/cargo.dart';
 
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);
@@ -15,7 +15,7 @@ typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
 typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
-typedef void NWFSCallBack(int key, NameWeightFS value);
+typedef void NWFSCallBack(int key, Cargo value);
 typedef void UnitChangeCB(var i);
 class Util {
   static String getTruncated(String s, int max) {
@@ -44,12 +44,14 @@ class Util {
   static int idx = 0;
   ///Given a string try to parse into double. If fail make toast with error.
   static double parsedouble(String s) {
-    double p = 0.0;
+
+    if(s.isEmpty){s = '0';}
+
     try {
-      p = double.parse(s);
-      return p;
+      return double.parse(s);
+    // ignore: avoid_catches_without_on_clauses
     } catch (e) {
-      throw Exception();
+      throw Exception('${s} could not be parsed as a double');
     }
   }
 
@@ -59,14 +61,16 @@ class Util {
   }
 
   static int parseint(s) {
-    int p = 0;
+    if(s.isEmpty){s = '0';}
     try {
-      p = int.parse(s);
-      return p;
-    } catch (Exeption) {
-      throw Exception();
+      return int.parse(s);
+    // ignore: avoid_catches_without_on_clauses
+    } catch (e) {
+      throw Exception('${s} could not be parsed as an int');
     }
   }
+
+  static String fixed(double x) => x.toStringAsFixed(2);
 }
 
 

@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 
 import '../../backend/const.dart';
 import '../../backend/models/aircraft.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/get_mac_button.dart';
 import 'cargo_card.dart';
@@ -35,7 +35,7 @@ class PerMacScreenState extends State<PerMacScreen>
   final childValid = LinkedHashMap<int, bool>();
   final sc = ScrollController();
   /// call back for tanks spiner key = tanks.id, value = nwfs
-  final tanksMap = LinkedHashMap<int, NameWeightFS>();
+  final tanksMap = LinkedHashMap<int, Cargo>();
  
 
   @override
@@ -72,7 +72,7 @@ class PerMacScreenState extends State<PerMacScreen>
 
   getPerMac() {
     if (valid) {
-      List<NameWeightFS> nwfs = [];
+      List<Cargo> nwfs = [];
       nwfs.add(chartcCard.nwfs);
       nwfs.addAll(tanksMap.values);
       //check for no cargo
@@ -99,11 +99,12 @@ class PerMacScreenState extends State<PerMacScreen>
               )))));
   }
 
-  void showWork(List<NameWeightFS> nwfs){
+  void showWork(List<Cargo> nwfs){
     Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => ShowWork(
+                    mommultipler: this.widget.air.mommultiplier,
                     lemac: this.widget.air.lemac,
                     mac: this.widget.air.mac,
                     nwfs: nwfs,

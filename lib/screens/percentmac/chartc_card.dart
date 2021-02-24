@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../backend/models/aircraft.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/utils.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validated_text.dart';
@@ -13,7 +13,7 @@ import '../../widgets/layout/div.dart';
 import '../../widgets/layout/rows/row2.dart';
 
 class ChartCCard extends StatefulWidget {
-  final nwfs = NameWeightFS();
+  final nwfs = Cargo();
   final Aircraft air;
   final NotifyCargoValid onValidationChange;
   ///the inti state of false of this map is handled by the callback of validated text after drawn
@@ -51,7 +51,6 @@ class ChartCCardState extends State<ChartCCard> {
 
     ///init the basic acft nwfs
     this.widget.nwfs.name = 'Basic Aircraft';
-    this.widget.nwfs.simplemom = this.widget.air.simplemom;
 
     //init the cards body
     body = [
@@ -62,9 +61,8 @@ class ChartCCardState extends State<ChartCCard> {
             maxChars: 12,
             notifyIsValid: (b) {updateValidChildren(0,b);},
             validateText: _validateWeight,
-            onChange: (String weight) {
-              this.widget.nwfs.weight = weight;
-            },
+            onChange: 
+              (weight) =>this.widget.nwfs.weight = Util.parsedouble(weight),
           )),
 
       Div(),
@@ -76,17 +74,17 @@ class ChartCCardState extends State<ChartCCard> {
             inputType: 1,
             notifyIsValid: (b) {updateValidChildren(1,b);},
             validateText: _validateMoment,
-            onChange: (String mom) {
-              this.widget.nwfs.mom = mom;
-            },
+            onChange: (mom) =>
+              this.widget.nwfs.setMom(Util.parsedouble(mom))
+            ,
           )),
     ];
   }
 
   bool _validateWeight(String weight) {
     if (double.tryParse(weight) != null &&
-        double.parse(weight) >= double.parse(this.widget.air.weight0) &&
-        double.parse(weight) <= double.parse(this.widget.air.weight1)) {
+        double.parse(weight) >= this.widget.air.weight0 &&
+        double.parse(weight) <= this.widget.air.weight1) {
       return true;
     }
     return false;
@@ -94,8 +92,8 @@ class ChartCCardState extends State<ChartCCard> {
 
   bool _validateMoment(String mom) {
     if (double.tryParse(mom) != null &&
-        double.parse(mom) >= double.parse(this.widget.air.mom0) &&
-        double.parse(mom) <= double.parse(this.widget.air.mom1)) {
+        double.parse(mom) >= this.widget.air.mom0 &&
+        double.parse(mom) <= this.widget.air.mom1) {
       return true;
     }
     return false;

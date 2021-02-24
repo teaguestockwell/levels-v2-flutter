@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/models/more_op.dart';
+import 'package:five_level_one/backend/models/general.dart';
 import 'package:five_level_one/widgets/input/validated_text.dart';
 import 'package:five_level_one/screens/home/bottom_navigation.dart';
 import 'package:flutter/material.dart';
@@ -57,19 +57,19 @@ LinkedHashMap<int, List<Widget>> tabPages() {
   return ret;
 }
 
-class MoreOpm extends Mock implements MoreOp {}
+class MoreOpm extends Mock implements General {}
 
 MoreOpm moreOp() {
   final ret = MoreOpm();
-  when(ret.icon).thenReturn([
-    '234',
-    '234',
+  when(ret.icondatas).thenReturn([
+    234,
+    234,
   ]);
-  when(ret.name).thenReturn([
+  when(ret.names).thenReturn([
     'op 1',
     'op2',
   ]);
-  when(ret.url).thenReturn(['url1', 'url2']);
+  when(ret.urls).thenReturn(['url1', 'url2']);
   return ret;
 }
 
@@ -91,7 +91,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -124,7 +124,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -177,7 +177,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -213,7 +213,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -268,7 +268,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     await wt.pumpWidget(test);
     await wt.pumpAndSettle();
@@ -311,7 +311,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -391,7 +391,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);
@@ -595,7 +595,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     //when
     await wt.pumpWidget(test);
@@ -675,7 +675,7 @@ void main() {
     addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
 
     final test = mkTest(BottomNav(
-        tabPages: tabPages(), moreOp: moreOp(), airNames: airNames()));
+        tabPages: tabPages(), general: moreOp(), airNames: airNames()));
 
     for (int i = 0; i < 3; i++) {
       await wt.pumpWidget(test);

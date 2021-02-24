@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 import '../../backend/const.dart';
-import '../../backend/models/more_op.dart';
+import '../../backend/models/general.dart';
 import '../../widgets/display/text.dart';
 
 class MoreOpPopup extends StatelessWidget {
-  final MoreOp moreOp;
-  MoreOpPopup(this.moreOp)
-      : assert(moreOp != null),
-        assert(moreOp.icon != null),
-        assert(moreOp.name != null),
-        assert(moreOp.url != null);
+  final General general;
+  MoreOpPopup(this.general)
+      : assert(general != null),
+        assert(general.icondatas != null),
+        assert(general.names != null),
+        assert(general.urls != null);
 
   void launchURL(String url) async {
     if (await canLaunch(url)) {
@@ -20,7 +21,7 @@ class MoreOpPopup extends StatelessWidget {
 
   void more(var x) {
     try {
-      launchURL(moreOp.url[x]);
+      launchURL(general.urls[x]);
     // ignore: avoid_catches_without_on_clauses
     } catch (_) {}
   }
@@ -42,17 +43,17 @@ class MoreOpPopup extends StatelessWidget {
             icon: Icon(Icons.more_vert),
             itemBuilder: (_) {
               List<PopupMenuEntry> ret = [];
-              for (int i = 0; i < moreOp.name.length; i++) {
+              for (int i = 0; i < general.names.length; i++) {
                 String text = () {
-                  if (moreOp.name[i].length > 24) {
-                    return moreOp.name[i].substring(0, 20) + '...';
+                  if (general.names[i].length > 24) {
+                    return general.names[i].substring(0, 20) + '...';
                   }
-                  return moreOp.name[i];
+                  return general.names[i];
                 }();
                 
                 Icon icon = Icon(IconData(59362, fontFamily: 'MaterialIcons'));
                 try {
-                  icon =  Icon(IconData(int.parse(moreOp.icon[i]),fontFamily: 'MaterialIcons'));
+                  icon =  Icon(IconData(general.icondatas[i],fontFamily: 'MaterialIcons'));
                 // ignore: avoid_catches_without_on_clauses
                 } catch(_){}
                 

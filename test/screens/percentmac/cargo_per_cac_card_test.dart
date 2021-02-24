@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/backend/models/per_mac.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
@@ -11,9 +11,11 @@ PerMacMock getPerMac(){
   final ret = PerMacMock();
   final nwfss = getNwfs();
 
+
+  when(ret.mommultipler).thenReturn(10000);
   when(ret.nwfss).thenReturn(nwfss);
   when(ret.grandTotQty).thenReturn('grand');
-  when(ret.totMomAsString).thenReturn('tot simp mom');
+  when(ret.totSimpleMomAsString).thenReturn('tot simp mom');
   when(ret.totUnSimpMomAsString).thenReturn('tot un simp mom');
   when(ret.totWeightAsSting).thenReturn('tot weight');
   return ret;
@@ -23,11 +25,11 @@ Widget mk(Widget child){
   return MaterialApp(home: child);
 }
 
-List<NameWeightFS> getNwfs(){
-  List<NameWeightFS> ret = [];
+List<Cargo> getNwfs(){
+  List<Cargo> ret = [];
 
-    ret.add(NameWeightFS(name: 'cargo1', weight: '100', qty: '2', fs: '500', ));
-    ret.add(NameWeightFS(name: 'cargo2', weight: '100', qty: '2', fs: '500', ));
+    ret.add(Cargo(name: 'cargo1', weight: 100, qty: 2, fs: 500, ));
+    ret.add(Cargo(name: 'cargo2', weight: 100, qty: 2, fs: 500, ));
   
   return ret;
 }

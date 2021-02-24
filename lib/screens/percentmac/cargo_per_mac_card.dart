@@ -19,15 +19,15 @@ class _CargoPerMacCardState extends State<CargoPerMacCard> {
       ret.add(
         DataRow(
           cells: <DataCell>[
-            DataCell(Tex(nwfs.qty)),
+            DataCell(Tex(nwfs.qtyS)),
             DataCell(Tex(nwfs.name)),
-            DataCell(Tex(nwfs.weight)),
-            DataCell(Tex(nwfs.fs)),
-            DataCell(Tex(nwfs.getUnSimpMomAsStringFixed(0))),
-            DataCell(Tex(nwfs.getMomAsStringFixes(2))),
-            DataCell(Tex(nwfs.getTotWeightFixed(2))),
-            DataCell(Tex(nwfs.getTotUnSimpMomAsStringFixed(0))),
-            DataCell(Tex(nwfs.getTotMomAsStringFixes(2))),
+            DataCell(Tex(nwfs.weightS)),
+            DataCell(Tex(nwfs.fsS)),
+            DataCell(Tex(nwfs.mom.toStringAsFixed(0))),
+            DataCell(Tex(nwfs.simpleMom(this.widget.permac.mommultipler).toStringAsFixed(2))),
+            DataCell(Tex(nwfs.weightTot.toStringAsFixed(2))),
+            DataCell(Tex(nwfs.momTot.toStringAsFixed(0))),
+            DataCell(Tex(nwfs.simpleMomTot(this.widget.permac.mommultipler).toStringAsFixed(0))),
           ]
         )
       );
@@ -62,7 +62,7 @@ class _CargoPerMacCardState extends State<CargoPerMacCard> {
           DataCell(Tex('NA')),
           DataCell(Tex(this.widget.permac.totWeightAsSting)),
           DataCell(Tex(this.widget.permac.totUnSimpMomAsString)),
-          DataCell(Tex(this.widget.permac.totMomAsString)),
+          DataCell(Tex(this.widget.permac.totSimpleMomAsString)),
           
         ]
       )

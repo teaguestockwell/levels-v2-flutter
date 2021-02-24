@@ -1,128 +1,129 @@
-import 'package:flutter/foundation.dart';
+import 'cargo.dart';
 import 'config.dart';
 import 'glossary.dart';
-import 'name_weight_fs.dart';
 import 'tank.dart';
 
 class Aircraft {
+  /// pk in pg
+  final num id;
   /// the name of the mds ex: C-17A-NON-ER, C-17A-ER
   /// mds of the same type will have diffrent models if their capabilitys are diffrent,
   /// for example, the two c17 variants have diffren fuel capacitys, and this changes, 
   /// the moment of fuel in the wings
   final String name;
   /// the minimun fuselage station that cargo can be placed at.
-  final String fs0;
+  final num fs0;
   /// the maximum fuselage station that cargo can be placed
-  final String fs1;
+  final num fs1;
   /// the minimum simple momment of the basic long moment of the acft in/lbs
-  final String mom0;
+  final num mom0;
   /// the maximum simple momment of the basic long moment of the acft in/lbs
-  final String mom1;
+  final num mom1;
   /// the minumum basic weight of the acft in lbs
-  final String weight0;
-    /// the max basic weight of the acft in lbs
-  final String weight1;
-    /// the simple moment modifier  basic moment * simple moment modifier = basic moment
-  final String simplemom;
+  final num weight0;
+  /// the max basic weight of the acft in lbs
+  final num weight1;
+  /// the simple moment modifier  basic moment * simple moment modifier = basic moment
+  final num mommultiplier;
   /// leading edge of mean aerodynamic chord.
-  final String lemac;
+  final num lemac;
   /// mean aerodynamic width of the wing
-  final String mac;
+  final num mac;
   /// 0 < valid cargo > cargo max weight 
-  final String cargomaxweight;
+  final num cargoweight1;
 
-
-  final List<NameWeightFS> addaCargo = [];
+  // below is 1-n relationship or models within models
+  final List<Cargo> cargos = [];
   final List<Tank> tanks = [];
   final List<Config> configs = [];
   final List<Glossary> glossarys = [];
-  // fields below are used to contruct addaCargo, tanks, and configs
+
+  // fields below are used to hold json while contructing addaCargo, tanks, and configs
+  final List<dynamic> cargosJson;
+  final List<dynamic> tanksJson;
+  final List<dynamic> glossarysJson;
+  final List<dynamic> configsJson;
 
 
-  /// an array of names for each tank
-  final List<dynamic> tanknames;
-  /// an array of csv represeting simple moments for each weight of fuel in a tank
-  /// tanksmoms[0] = tank one; tankone[0] = simple moment
-  final List<dynamic> tankmoms;
-  /// an array of csv represeting weight of fuel in lbs in a each tank
-  /// tanksweights[0] = tank one; tankone[0] = weight
-  final List<dynamic> tankweights;
-  /// a list of titles for the glossary cards
-  final List<dynamic> titles;
-  /// a list of bodys for for each glossary card
-  final List<dynamic> bodys;
-  /// a list of names for each of the cargo items
-  final List<dynamic> cargonames;
-  /// a list of weights for each cargo item
-  final List<dynamic> cargoweights;
-  /// a lsit of simple moment for each cargo item
-  final List<dynamic> cargomoms;
-  /// a list of strings. Each string represents a cargo configuaration.
-  /// each cargo item in a config is delimited by ';' each cargo item
-  /// is delimited by ','
-  ///  where [0] = cargo name, [1] = total cargo weight in lb
-  /// [2] = total simple moment [3] = qty
-  final List<dynamic> configstrings;
+  
 
 
-  Aircraft({
-    @required this.name,
-    @required this.fs0,
-    @required this.fs1,
-    @required this.mom0,
-    @required this.mom1,
-    @required this.weight0,
-    @required this.weight1,
-    @required this.simplemom,
-    @required this.lemac,
-    @required this.mac,
-    @required this.cargomaxweight,
-    @required this.tanknames,
-    @required this.tankmoms,
-    @required this.tankweights,
-    @required this.titles,
-    @required this.bodys,
-    @required this.cargonames,
-    @required this.cargoweights,
-    @required this.cargomoms,
-    @required this.configstrings,
-  }) {
+  Aircraft.fromJson(Map<String,dynamic> json):
+    id = json['id'],
+    name = json['name'],
+    fs0 = json['fs0'],
+    fs1 = json['fs1'],
+    mom0 = json['mom0'],
+    mom1 = json['mom1'],
+    weight0 = json['weight0'],
+    weight1 = json['weight1'],
+    cargoweight1 = json['cargoweight1'],
+    lemac = json['lemac'],
+    mac = json['mac'],
+    mommultiplier = json['mommultiplyer'],
 
-    // create tanks
-    for (int i = 0; i < tanknames.length; i++) {
-      tanks.add(Tank(
-        tanknames[i],
-        tankweights[i],
-        tankmoms[i],
-        simplemom,
-      ));
+    cargosJson = json['cargos'],
+    tanksJson = json['tanks'],
+    glossarysJson = json['glossarys'],
+    configsJson = json['configs']
+    {
+      // while an admin user is modifying these nested values,
+      // they may be incomplete, so dont add them if they throw
+      
+      cargosJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+        try{cargos.add(Cargo.fromJsonCargo(json));}catch(e){print(e);}
+      });
+
+      tanksJson.forEach((json) { 
+        // ignore: avoid_catches_without_on_clauses
+        try{tanks.add(Tank.fromJson(json, mommultiplier));}catch(e){print(e);};
+      });
+
+      glossarysJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+        try{glossarys.add(Glossary.fromJson(json));} catch(e){print(e);};
+      });
+
+      //add empty config
+      configs.add(Config.empty());
+      
+      configsJson.forEach((json) {
+        // ignore: avoid_catches_without_on_clauses
+         try{configs.add(Config.fromJson(json));} catch(e){print(e);}
+      });
     }
 
-    //create addaA cargo
-    for (int i = 0; i < cargomoms.length; i++) {
-      addaCargo.add(NameWeightFS(
-        name: cargonames[i],
-        weight: cargoweights[i],
-        mom: cargomoms[i],
-        simplemom: this.simplemom,
-      ));
+    Map<String, dynamic> get json {
+      Map<String, dynamic> ret = {};
+      ret['id'] = id;
+      ret['name'] = name;
+      ret['fs0'] = fs0;
+      ret['fs1'] = fs1;
+      ret['mom0'] = mom0;
+      ret['mom1'] = mom1;
+      ret['weight0'] = weight0;
+      ret['weight1'] = weight1;
+      ret['cargoweight1'] = cargoweight1;
+      ret['lemac'] = lemac;
+      ret['mac'] = mac;
+      ret['mommultiplyer'] = mommultiplier;
+
+      var cargolist = [];
+      cargos.forEach((x) => cargolist.add(x.json));
+      ret['cargos'] = cargolist;
+
+      var tanklist = [];
+      tanks.forEach((x) => tanklist.add(x.json));
+      ret['tanks'] = tanklist;
+      
+      var glossarylist = [];
+      glossarys.forEach((x) => glossarylist.add(x.json));
+      ret['glossarys'] = glossarylist;
+
+      var configlist = [];
+      configs.forEach((x) => configlist.add(x.json));
+      ret['glossarys'] = configlist;
+      return ret;
     }
-
-    //add empty config
-    configs.add(Config('',this.simplemom));
-
-    //create configs
-    for (int i = 0; i < configstrings.length; i++) {
-      configs.add(Config(configstrings[i], this.simplemom));
-    }
-
-    // create glossarys
-    for (int i = 0; i < titles.length; i++) {
-      glossarys.add(Glossary(
-        titles[i],
-        bodys[i]
-      ));
-    }
-
-  }
 }

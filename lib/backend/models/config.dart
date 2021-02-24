@@ -1,31 +1,35 @@
-import '../utils.dart';
-import 'name_weight_fs.dart';
+import 'cargo.dart';
 
 class Config {
-  List<NameWeightFS> nwfList = [];
-  String name, simplemom;
-  Config(String csv, this.simplemom) {
-    if(csv != ''){
-    var nameWeightMomentQtyList = csv.split(';');
-    this.name = nameWeightMomentQtyList[0];
+  final int aircraftid;
+  final int configid;
+  final String name;
+  final List<Cargo> nwfList = [];
 
-    for (int i = 1; i < nameWeightMomentQtyList.length; i++) {
-      String nwmqAtIndex = nameWeightMomentQtyList[i];
-      var nwmqAtIndexList = nwmqAtIndex.split(',');
+  Config.fromJson(Map<String,dynamic> json):
+    aircraftid = json['aircraftid'],
+    configid = json['configid'],
+    name = json['name']{
+      List<dynamic> configcargos = json['configcargos'];
 
-      this.nwfList.add(NameWeightFS(
-          name: nwmqAtIndexList[0].trim(),
-          weight:
-              (Util.parsedouble(nwmqAtIndexList[1].trim()) / Util.parsedouble(nwmqAtIndexList[3].trim()))
-                  .toString(), // weight = totweight / qty
-          mom: (Util.parsedouble(nwmqAtIndexList[2].trim()) / Util.parsedouble(nwmqAtIndexList[3].trim()))
-              .toString(), // mom = totmom / qty
-          simplemom: this.simplemom,
-          qty: nwmqAtIndexList[3].trim() // qty = qty
-          ));
+      configcargos.forEach((x) => nwfList.add(Cargo.fromJsonConfigCargo(x)));
     }
-    } else{
-      name = 'No Config';
-    }
+  
+  Config.empty():
+  aircraftid = -1,
+  configid = -1,
+  name = 'No Config';
+
+  Map<String,dynamic> get json{
+    Map<String,dynamic> ret = {};
+    ret['aircraftid'] = aircraftid;
+    ret['configid'] = configid;
+    ret['name'] = name;
+    
+    List<dynamic> cc = [];
+    nwfList.forEach((x) => cc.add(x.json));
+    ret['configcargos'] = cc;
+    return ret;
+
   }
 }

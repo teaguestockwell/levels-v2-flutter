@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../backend/const.dart';
-import '../../backend/models/name_weight_fs.dart';
+import '../../backend/models/cargo.dart';
 import '../../backend/models/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../home/loading.dart';
@@ -13,11 +13,13 @@ import 'cargo_per_mac_card.dart';
 import 'per_mac_card.dart';
 
 class ShowWork extends StatefulWidget {
-  final String lemac;
-  final String mac;
-  final List<NameWeightFS> nwfs;
+  final num lemac;
+  final num mac;
+  final num mommultipler;
+  final List<Cargo> nwfs;
 
   ShowWork({
+    @required this.mommultipler,
     @required this.lemac,
     @required this.mac,
     @required this.nwfs,
@@ -27,9 +29,8 @@ class ShowWork extends StatefulWidget {
   assert(nwfs.length > 0),
   assert(nwfs[0] != null),
   assert(lemac!= null),
-  assert(lemac.isNotEmpty),
-  assert(mac!=null),
-  assert(mac.isNotEmpty);
+  assert(mac!=null);
+
 
   @override
   _ShowWorkState createState() => _ShowWorkState();
@@ -45,9 +46,10 @@ class _ShowWorkState extends State<ShowWork> {
     super.initState();
 
     permac = PerMac(
-      lemacS: this.widget.lemac,
-      macS: this.widget.mac,
-      nwfss: this.widget.nwfs
+      lemac: this.widget.lemac,
+      mac: this.widget.mac,
+      nwfss: this.widget.nwfs,
+      mommultipler: this.widget.mommultipler
     );
 
     //execute after first build

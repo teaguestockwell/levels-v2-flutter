@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/name_weight_fs.dart';
+import 'package:five_level_one/backend/models/cargo.dart';
 import 'package:five_level_one/screens/percentmac/validated_cargo_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,84 +8,83 @@ Widget mk(Widget child){
   return MaterialApp(home:child);
 }
 
- NameWeightFS getEmpty(){
-  return NameWeightFS();
+ Cargo getEmpty(){
+  return Cargo();
 }
 
-NameWeightFS getValid(){
-  return NameWeightFS(
+Cargo getValid(){
+  return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '1000',
-    qty: '2'
+    weight: 20,
+    fs: 1000,
+    qty: 2
   );
 }
 
-NameWeightFS getValidFromChartC(){
-  return NameWeightFS(
-  name: 'name',
-  weight: '25',
-  fs: '280',
-  qty: '1',
-  mom: '0.7',
-  simplemom: '10000'
+Cargo getValidFromChartC(){
+  return Cargo.fromTank(
+    name: 'names',
+    weight: 25,
+    simplemom: 0.7,
+    mommultiplier: 10000
   );
 }
-NameWeightFS getInvalidName(){
-  return NameWeightFS(
+
+Cargo getInvalidName(){
+  return Cargo(
     name: '',
-    weight: '20',
-    fs: '1000',
-    qty: '2'
+    weight: 20,
+    fs: 1000,
+    qty: 2
   );
 }
 
-NameWeightFS getInvalidWeightS(){
-  return NameWeightFS(
+Cargo getInvalidWeightS(){
+  return Cargo(
     name: 'name',
-    weight: '0',
-    fs: '1000',
-    qty: '2'
+    weight: 0,
+    fs: 1000,
+    qty: 2
   );
 }
 
-NameWeightFS getInvalidWeightL(){
-  return NameWeightFS(
+Cargo getInvalidWeightL(){
+  return Cargo(
     name: 'name',
-    weight: '2000000',
-    fs: '1000',
-    qty: '2'
+    weight: 2000000,
+    fs: 1000,
+    qty: 2
   );
 }
 
-NameWeightFS getInvalidFSS(){
-  return NameWeightFS(
+Cargo getInvalidFSS(){
+  return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '0',
-    qty: '2'
+    weight: 20,
+    fs: 0,
+    qty: 2
   );
 }
 
-NameWeightFS getInvalidFSL(){
-  return NameWeightFS(
+Cargo getInvalidFSL(){
+  return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '100000',
-    qty: '2'
+    weight: 20,
+    fs: 100000,
+    qty: 2
   );
 }
 
-NameWeightFS getInvalidQty(){
-  return NameWeightFS(
+Cargo getInvalidQty(){
+  return Cargo(
     name: 'name',
-    weight: '20',
-    fs: '1000',
-    qty: '0'
+    weight: 20,
+    fs: 1000,
+    qty: 0
   );
 }
 
-List<NameWeightFS> getAllInvalidNWFS(){
+List<Cargo> getAllInvalidNWFS(){
   return [
     getInvalidFSL(),
     getInvalidFSS(),
@@ -96,7 +95,7 @@ List<NameWeightFS> getAllInvalidNWFS(){
   ];
 }
 
-List<NameWeightFS> getAllValidNWFS(){
+List<Cargo> getAllValidNWFS(){
   return [
     getValid(),
     getValidFromChartC(),
@@ -104,17 +103,17 @@ List<NameWeightFS> getAllValidNWFS(){
 }
 
 ///min valid fs
-String fs0(){
-  return '100';
+num fs0(){
+  return 100;
 }
 
 ///max valid fs
-String fs1(){
-  return '10000';
+num fs1(){
+  return 10000;
 }
 
-String cargoMaxWeight(){
-  return '10000';
+num cargoMaxWeight(){
+  return 10000;
 }
 
 void main(){

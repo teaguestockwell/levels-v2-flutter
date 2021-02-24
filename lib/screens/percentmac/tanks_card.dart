@@ -41,8 +41,8 @@ class TankRow extends StatelessWidget {
 
   List<String> getTankWeights() {
     List<String> ret = [];
-    tank.nameWeightFSs.forEach((nwfs) {
-      ret.add(nwfs.weight);
+    tank.nwfss.forEach((nwfs) {
+      ret.add(nwfs.weight.toString());
     });
     return ret;
   }
@@ -51,7 +51,7 @@ class TankRow extends StatelessWidget {
   //0 refers to the first nwfs, since each nwfs.id is unique this.nwfs[0] is used to identify the tank
   // we are passing the new nwfs of the selected spin to a map stored in permac state
   void spin(int i) {
-    this.callBack(tank.nameWeightFSs[0].id, tank.nameWeightFSs[i]);
+    this.callBack(tank.nwfss[0].id, tank.nwfss[i]);
   }
 
   @override
