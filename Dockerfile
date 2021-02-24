@@ -10,7 +10,7 @@ RUN git clone https://github.com/flutter/flutter.git -b master
 WORKDIR /flutter
 
 # Roll flutter to the same commit hash as local dev
-RUN git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
+RUN git checkout f8cd24de95b16b5a1ce6ebc0716154271fbf6252
 
 # Set flutter path 
 ENV PATH "$PATH:/flutter/bin"
