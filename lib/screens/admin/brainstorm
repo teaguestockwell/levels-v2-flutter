@@ -1,0 +1,12 @@
+Coupling between api and UI shallow vs deep?
+  Read deep once at admin portal and build children objects for other screens?
+  Read shallow at admin portal and send req when loading other screens?  ---
+
+Admin portal
+  Future: /aircraft => [Aircraft] => Gridview.builder((idx) {return buildTile(aricrafts[i])})
+  Search: searchBox(onChange: setState((){filterList()}))
+    void filterList(){
+      var ret = <String>[];
+      aircrafts.foreach((x) {if(x.name.startswith(searchtext){ret.add(x)})})
+    }
+  Create: Nav.push()
