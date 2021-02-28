@@ -129,7 +129,7 @@ void main(){
 
       //then
       expect(find.text('tank'), findsOneWidget);
-      expect(find.text('0.0'), findsOneWidget);
+      expect(find.text('0'), findsOneWidget);
     });
 
 
