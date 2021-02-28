@@ -27,7 +27,7 @@ class TanksCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CardAllwaysOpen(
-        title: 'Tanks',
+        name: 'Tanks',
         children: getTanks(),
         color: Const.nonfocusedBoderColors);
   }
@@ -38,14 +38,6 @@ class TankRow extends StatelessWidget {
   final NWFSCallBack callBack;
 
   TankRow({@required this.tank, @required this.callBack});
-
-  List<String> getTankWeights() {
-    List<String> ret = [];
-    tank.nwfss.forEach((nwfs) {
-      ret.add(nwfs.weight.toString());
-    });
-    return ret;
-  }
 
 
   //0 refers to the first nwfs, since each nwfs.id is unique this.nwfs[0] is used to identify the tank
@@ -61,7 +53,7 @@ class TankRow extends StatelessWidget {
         Tex(this.tank.name),
         ButtonModalSpinner(
           onSpin: spin,
-          stringList: getTankWeights(),
+          stringList: tank.nwfss.map((x) => x.weight.toStringAsFixed(0)).toList(),
         ));
   }
 }

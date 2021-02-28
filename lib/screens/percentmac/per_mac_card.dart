@@ -28,7 +28,7 @@ class PerMacCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CCard(
-      title: 'Mean Aerodynamic Chord %',
+      name: 'Mean Aerodynamic Chord %',
       initOpen: true,
       children: [SingleChildScrollView(scrollDirection: Axis.horizontal, physics: ClampingScrollPhysics(), child:
       DataTable(

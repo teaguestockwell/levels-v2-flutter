@@ -24,7 +24,7 @@ class BalArmCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CCard(
-      title: 'Balance Arm',
+      name: 'Balance Arm',
       initOpen: true,
       children: [SingleChildScrollView(scrollDirection: Axis.horizontal, physics: ClampingScrollPhysics(), child:
       DataTable(

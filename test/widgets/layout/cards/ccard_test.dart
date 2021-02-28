@@ -62,7 +62,7 @@ void main() {
 
     final test = CCard(
       children: children,
-      title: title,
+      name: title,
       initOpen: initOpen,
       callBack: callBack,
     );
@@ -104,7 +104,7 @@ void main() {
 
     final test = CCard(
       children: children,
-      title: title,
+      name: title,
       initOpen: initOpen,
       callBack: callBack,
     );

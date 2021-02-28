@@ -211,7 +211,7 @@ class CargoCardState extends State<CargoCard> {
 
 
   Widget build(BuildContext context) {
-    return CardAllwaysOpen(title: 'Cargo', color: Util.getValidColor(valid), children: [
+    return CardAllwaysOpen(name: 'Cargo', color: Util.getValidColor(valid), children: [
       Row2(
         Tex('Select Config'),
         ButtonModalSpinner(

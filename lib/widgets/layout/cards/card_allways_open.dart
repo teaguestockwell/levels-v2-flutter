@@ -12,10 +12,10 @@ class CardAllwaysOpen extends StatelessWidget {
   final Color color;
 
   /// the name displayed at the top of the card
-  final String title;
+  final String name;
 
   CardAllwaysOpen(
-      {@required this.title, @required this.children, @required this.color});
+      {@required this.name, @required this.children, @required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +43,7 @@ class CardAllwaysOpen extends StatelessWidget {
                                     child: Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                                   child: Tex(
-                                    title,
+                                    name,
                                     fontWeight: FontWeight.normal,
                                     color: color,
                                   ),

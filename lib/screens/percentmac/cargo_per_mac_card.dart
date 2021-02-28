@@ -92,7 +92,7 @@ class _CargoPerMacCardState extends State<CargoPerMacCard> {
   @override
   Widget build(BuildContext context) {
     return CCard(
-      title:'Aircraft, Fuel & Cargo',
+      name:'Aircraft, Fuel & Cargo',
       initOpen: true,
       children:[SingleChildScrollView(
         physics: ClampingScrollPhysics(),

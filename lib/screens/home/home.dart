@@ -111,9 +111,9 @@ class _HomeState extends State<Home> {
               child:Column(
               children: [
               CardAllwaysOpen(
-                  title: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: Const.textColor),
+                  name: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: Const.textColor),
               CardAllwaysOpen(
-                  title: general.title,
+                  name: general.name,
                   color: Const.textColor,
                   children: [
                     RowCenterText(general.body),

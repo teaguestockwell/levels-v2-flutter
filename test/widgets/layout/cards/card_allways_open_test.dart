@@ -27,7 +27,7 @@ void main() {
     final test = SingleChildScrollView(child:CardAllwaysOpen(
       children: children,
       color: Colors.cyan,
-      title: 'title',
+      name: 'title',
     ));
 
     final wrapper = makeWidgetTestable(test);

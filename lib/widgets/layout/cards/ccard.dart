@@ -6,7 +6,7 @@ import '../../../widgets/display/text.dart';
 import '../align_padding.dart';
 
 class CCard extends StatefulWidget {
-  final String title;
+  final String name;
   final List<Widget> children;
   final bool initOpen;
   final IntCallBack callBack;
@@ -15,7 +15,7 @@ class CCard extends StatefulWidget {
   final Color color;
 
   CCard(
-      {@required this.title,
+      {@required this.name,
       @required this.children,
       @required this.initOpen,
       this.callBack,
@@ -29,12 +29,12 @@ class _CCardState extends State<CCard> {
   bool open;
   List<Widget> children;
   Color color;
-  String title;
+  String name;
 
   @override
   void initState() {
     super.initState();
-    title = Util.getTruncated(this.widget.title, 30);
+    name = Util.getTruncated(this.widget.name, 30);
     color = this.widget.color ?? Const.rc();
     open = this.widget.initOpen;
     children = this.widget.children;
@@ -72,7 +72,7 @@ class _CCardState extends State<CCard> {
                             TitleCC(
                                 open: open,
                                 tex: Tex(
-                                  title,
+                                  name,
                                   color: color,
                                 ))),
                         onTap: () => setState(() {

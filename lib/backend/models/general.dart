@@ -1,21 +1,29 @@
 import 'package:flutter/foundation.dart';
 
-
 class General{
-  final int role;
+  final List<String> names ;
   final List<int> icondatas;
-  final List<String> names;
   final List<String> urls;
-  final String title;
+  final int role;
+  final String name;
   final String body;
 
   General.fromJson(Map<String,dynamic> json):
-    names = json['names'],
-    icondatas = json['icondatas'],
-    urls = json['urls'],
-    title = json['title'],
+    names = [],
+    icondatas = [],
+    urls = [],
+    name = json['name'],
     body = json['body'],
-    role = json['role'];
+    role = json['role'] {
+      List<dynamic> namesJson = json['names'];
+      namesJson.forEach((x) => names.add(x as String));
+
+      List<dynamic> iconDatasJson = json['icondatas'];
+      iconDatasJson.forEach((x) => icondatas.add(x as int));
+
+      List<dynamic> urlsJson = json['urls'];
+      urlsJson.forEach((x) => urls.add(x as String));
+    }
 
   /// used for popup menus like aircraft selector, and more options menue
   General.forPopupModal({
@@ -24,7 +32,7 @@ class General{
     @required this.urls,
   }) :
   role = 1,
-  title = '',
+  name = '',
   body = '';
 
   Map<String, dynamic> get json {
@@ -42,7 +50,7 @@ class General{
     urls.forEach((x) => urlslist.add(x));
     ret['urls'] = urlslist;
 
-    ret['title'] = title;
+    ret['name'] = name;
     ret['body'] = body;
     ret['role'] = role;
     return ret;

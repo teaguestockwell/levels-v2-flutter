@@ -118,7 +118,7 @@ class ChartCCardState extends State<ChartCCard> {
   @override
   Widget build(_) {
     return CardAllwaysOpen(
-      title: 'Chart C',
+      name: 'Chart C',
       color: Util.getValidColor(valid),
       children: body,
     );

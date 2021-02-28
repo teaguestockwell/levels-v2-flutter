@@ -30,7 +30,7 @@ class _GlossaryScreenState extends State<GlossaryScreen> {
             itemCount: this.widget.glossarys.length,
             itemBuilder: (BuildContext context, int i) {
               return CCard(
-                title: this.widget.glossarys[i].title,
+                name: this.widget.glossarys[i].name,
                 children: [RowCenterText(this.widget.glossarys[i].body)],
                 initOpen: true,
             );}));

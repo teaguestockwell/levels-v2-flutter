@@ -42,7 +42,7 @@ ServicesMock getServiceMocks(int secToResponse){
 
     final gen = GeneralMock();
     when(gen.body).thenReturn('body');
-    when(gen.title).thenReturn('title');
+    when(gen.name).thenReturn('title');
     when(gen.role).thenReturn(1);
     when(gen.icondatas).thenReturn([123,123]);
     when(gen.names).thenReturn(['one','two']);

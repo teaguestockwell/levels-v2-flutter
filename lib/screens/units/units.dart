@@ -21,32 +21,32 @@ with AutomaticKeepAliveClientMixin<Units>{
   bool get wantKeepAlive => true;
   final List<Widget> widgets = [
     CCard(
-      title: 'Now',
+      name: 'Now',
       children: [TimeGrid()],
       initOpen: true,
     ),
     CCard(
-      title: 'Pre/Insp Expire',
+      name: 'Pre/Insp Expire',
       children: [PreInsp()],
       initOpen: true,
     ),
     CCard(
-      title: 'Julian Lookup',
+      name: 'Julian Lookup',
       children: [JJJLookup()],
       initOpen: true,
     ),
     CCard(
-      title: 'YYYY MM DD Lookup',
+      name: 'YYYY MM DD Lookup',
       children: [YYYYMMDDLookup()],
       initOpen: true,
     ),
     CCard(
-      title: 'Duration',
+      name: 'Duration',
       children: [DurationLookup()],
       initOpen: true,
     ),
     CCard(
-      title: 'Unit Conversion',
+      name: 'Unit Conversion',
       children: [UnitConversion()],
       initOpen: true,
     ),
