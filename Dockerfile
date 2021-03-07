@@ -33,14 +33,14 @@ RUN flutter pub get
 # Echo version 
 RUN flutter doctor
 
-# SCA && Lint
-RUN flutter analyze; exit 0
+# # SCA && Lint
+# RUN flutter analyze; exit 0
 
-# Run tests, continue on error
-RUN flutter test --machine > tests.output; exit 0
+# # Run tests, continue on error
+# RUN flutter test --machine > tests.output; exit 0
 
-# Compute coverage (--machine and --coverage cannot be run at once...), continue on error
-RUN flutter test --coverage; exit 0
+# # Compute coverage (--machine and --coverage cannot be run at once...), continue on error
+# RUN flutter test --coverage; exit 0
 
 # Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
 #RUN sonar-scanner
@@ -59,7 +59,7 @@ FROM nginx
 COPY --from=0 /app/build/web /usr/share/nginx/html
 
 # Copy local build from root dir 
-# COPY ./build/web/ /usr/share/nginx/html
+#COPY ./build/web/ /usr/share/nginx/html
 
 # Copy nginx config root dir
 COPY nginx.config /etc/nginx/nginx.conf
