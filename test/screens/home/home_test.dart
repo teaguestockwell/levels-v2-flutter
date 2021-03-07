@@ -1,6 +1,6 @@
-import 'package:five_level_one/backend/models/nested/aircraft.dart';
-import 'package:five_level_one/backend/models/nested/general.dart';
-import 'package:five_level_one/backend/models/nested/glossary.dart';
+import 'package:five_level_one/models/nested/aircraft.dart';
+import 'package:five_level_one/models/nested/general.dart';
+import 'package:five_level_one/models/nested/glossary.dart';
 import 'package:five_level_one/screens/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:five_level_one/services/user_service.dart';

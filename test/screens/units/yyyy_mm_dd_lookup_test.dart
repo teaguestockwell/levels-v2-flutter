@@ -48,7 +48,7 @@ void main() {
     final test = MaterialApp(
         home: Scaffold(
       body: YYYYMMDDLookup(),
-      backgroundColor: Const.background,
+      backgroundColor: background,
     ));
     final rnd = Random();
 
@@ -78,7 +78,7 @@ void main() {
 
       //then
       expect(find.byType(Text), findsNWidgets(6));
-      expect(diy, Util.getDaysInYear(year));
+      expect(diy, getDaysInYear(year));
       expect(find.text(jjj.toString()), findsOneWidget);
       expect(find.text(year.toString()), findsOneWidget);
       expect(find.text(ymd), findsOneWidget);
@@ -92,7 +92,7 @@ void main() {
     final test = MaterialApp(
         home: Scaffold(
       body: YYYYMMDDLookup(),
-      backgroundColor: Const.background,
+      backgroundColor: background,
     ));
     final rnd = Random();
 
@@ -122,7 +122,7 @@ void main() {
 
       //then
       expect(find.byType(Text), findsNWidgets(6));
-      expect(diy, Util.getDaysInYear(year));
+      expect(diy, getDaysInYear(year));
       expect(find.text(jjj.toString()), findsOneWidget);
       expect(find.text(year.toString()), findsOneWidget);
       expect(find.text(ymd), findsOneWidget);

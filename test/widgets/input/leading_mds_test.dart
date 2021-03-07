@@ -1,5 +1,5 @@
 import 'package:five_level_one/constant.dart';
-import 'package:five_level_one/backend/models/nested/general.dart';
+import 'package:five_level_one/models/nested/general.dart';
 import 'package:five_level_one/widgets/input/leading_mds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -9,11 +9,11 @@ Widget makeWidgetTestable(Widget child) {
   return MaterialApp(
       home: Scaffold(
     appBar: AppBar(
-        backgroundColor: Const.bottombarcolor,
-        leadingWidth: Const.pickerWidth,
+        backgroundColor: bottombarcolor,
+        leadingWidth: pickerWidth,
         leading: child),
     body: Container(),
-    backgroundColor: Const.background,
+    backgroundColor: background,
   ));
 }
 
