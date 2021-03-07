@@ -23,21 +23,24 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^0.12.2
   url_launcher: ^5.5.1
   flutter_linkify: ^3.1.3
   intl: ^0.16.1
+  jiffy: ^3.0.1
+  google_fonts: ^1.1.2
   flutter_datetime_picker:
      git:
        url: https://github.com/espresso3389/flutter_datetime_picker
-  jiffy: ^3.0.1
-  http: ^0.12.2
-  google_fonts: ^1.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   mockito:
-  
+  flutter_native_splash: 
+flutter_native_splash: 
+  color: "#141414"
+  image: assets/0.png
 
 
 # For information on the generic Dart part of this file, see the
