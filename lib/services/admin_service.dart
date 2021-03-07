@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import '../constant.dart';
-import './isolate.dart';
 
 Future<List<dynamic>> getN(String ep, {Map<String, String> reqParam}) async {
   Response res;
@@ -49,4 +48,9 @@ String getQueryString(Map<String, dynamic> reqParam) {
     }
   }
   return queryString;
+}
+
+List<dynamic> parseJsonIsolate(String json) {
+  final ret = jsonDecode(json) as List<dynamic>;
+  return ret;
 }

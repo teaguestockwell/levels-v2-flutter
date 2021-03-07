@@ -114,10 +114,10 @@ class _HomeState extends State<Home> {
               CardAllwaysOpen(
                   name: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: textColor),
               CardAllwaysOpen(
-                  name: general.name,
+                  name: 'TODO: encode users name here',
                   color: textColor,
                   children: [
-                    RowCenterText(general.body),
+                    RowCenterText('instead on disclaimer, put date time of last api req, the aircraft that currently loaded for ofline, and an update button to reload models. Also make I accept a page navigation, not a setstate so user can go back an refresh models'),
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(general))
@@ -133,11 +133,13 @@ class _HomeState extends State<Home> {
   Widget getAdminCard(){
     if(general.role > 1){
       return CardAllwaysOpen(
-        name: 'You are an admin with role: ${general.role}',
+        name: 'Admin',
         color: textColor,
         children: [
+          RowCenterText('short blurb about admin goes here with hyperlink to youtube tuts https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+          Div(),
           Row2(
-            Tex('Admin Portal'),
+            Tex('Admin Portal (Desktop Only)'),
 
             CustomButton(
               'Open',

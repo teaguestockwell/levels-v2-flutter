@@ -62,58 +62,63 @@ class _SideBarState extends State<SideBar> {
 
   @override
   Widget build(_) {
-    return Container(
-        child: Row(children: [
-      Container(
-          width: 250,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.15),
-                spreadRadius: 3,
-                blurRadius: 3,
-                offset: Offset(0, 2),
-              ),
-            ],
-          ),
-          child: Material(
-              shadowColor: Colors.black.withOpacity(0.15),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15, top:15.0),
-                    child: Text('All Aircraft', style: dmTitle2),
+    return Theme(
+      data: ThemeData(),
+      child: Scaffold(
+        body: Container(
+            child: Row(children: [
+          Container(
+              width: 250,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.15),
+                    spreadRadius: 3,
+                    blurRadius: 3,
+                    offset: Offset(0, 2),
                   ),
-                  getTile(0, 15),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text('Master Settings', style: dmTitle2),
-                  ),
-                  Padding(
-                      padding: EdgeInsets.only(left: 30, right: 30),
-                      child: drop),
-                  Flexible(
-                    child: ListView.builder(
-                        itemCount: topEPs.length-1,
-                        itemBuilder: (_,i) => getTile(i+1, 15.0),
-                  )
-                  )
-                  ,
                 ],
-              ))),
-      Flexible(
-          child: Padding(
-        padding: const EdgeInsets.all(40.0),
-        child: EPSheet(
-            rebuildCallback: rebuild,
-            airid: airIdx,
-            ep: topEPs[menuIdx],
-            reqParam: {topLvlEPPK : airIdx.toString()},
-            title: getTitle(menuIdx)
-        ),
-      ))
-    ]));
+              ),
+              child: Material(
+                  shadowColor: Colors.black.withOpacity(0.15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15, top:15.0),
+                        child: Text('All Aircraft', style: dmTitle2),
+                      ),
+                      getTile(0, 15),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 15),
+                        child: Text('Master Settings', style: dmTitle2),
+                      ),
+                      Padding(
+                          padding: EdgeInsets.only(left: 30, right: 30),
+                          child: drop),
+                      Flexible(
+                        child: ListView.builder(
+                            itemCount: topEPs.length-1,
+                            itemBuilder: (_,i) => getTile(i+1, 15.0),
+                      )
+                      )
+                      ,
+                    ],
+                  ))),
+          Flexible(
+              child: Padding(
+            padding: const EdgeInsets.all(40.0),
+            child: EPSheet(
+                rebuildCallback: rebuild,
+                airid: airIdx,
+                ep: topEPs[menuIdx],
+                reqParam: {topLvlEPPK : airIdx.toString()},
+                title: getTitle(menuIdx)
+            ),
+          ))
+        ])),
+      ),
+    );
   }
 }
