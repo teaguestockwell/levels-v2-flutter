@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'admin_statless/black_button.dart';
-import 'api_request.dart';
-import 'const.dart';
+import '../../constant.dart';
+import '../../models/shallow/serializable.dart';
+import '../../services/admin_service.dart';
+import '../../widgets/input/black_button_admin.dart';
 import 'json_table.dart';
-import 'shallow_models/serializable.dart';
 
 class EPSheet extends StatefulWidget {
   final void Function() rebuildCallback;

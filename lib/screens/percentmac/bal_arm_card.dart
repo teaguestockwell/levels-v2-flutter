@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/per_mac.dart';
+import '../../models/nested/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/ccard.dart';
 
@@ -28,7 +28,7 @@ class BalArmCard extends StatelessWidget {
       initOpen: true,
       children: [SingleChildScrollView(scrollDirection: Axis.horizontal, physics: ClampingScrollPhysics(), child:
       DataTable(
-        dividerThickness: Const.divThickness,
+        dividerThickness: divThickness,
         columns: [
           DataColumn(label: Tex('Balance Arm')),
           DataColumn(label: Tex('=')),

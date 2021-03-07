@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/general.dart';
+import '../../models/nested/general.dart';
 import '../../util.dart';
 import '../../widgets/display/text.dart';
 
@@ -34,7 +34,7 @@ class LeadingMDS extends StatelessWidget {
                     this.onPressed(i);
                   },
                   tooltip: '',
-                  color: Const.modalPickerColor,
+                  color: modalPickerColor,
 
                   ///three vertical dots icon
                   icon: Icon(Icons.flight),

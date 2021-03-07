@@ -11,8 +11,8 @@ class Row1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: Const.rowHeight,
-        margin: EdgeInsets.all(Const.rowInset),
+        height: rowHeight,
+        margin: EdgeInsets.all(rowInset),
         child: Center(child: w ),
       );
   }
@@ -24,6 +24,6 @@ class RowCenter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlignPadding(Const.rowInset, Alignment.center, this.w);
+    return AlignPadding(rowInset, Alignment.center, this.w);
   }
 }

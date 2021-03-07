@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../backend/models/nested/glossary.dart';
+import '../../models/nested/glossary.dart';
 import '../../widgets/display/row_center_text.dart';
 import '../../widgets/layout/ccard.dart';
 

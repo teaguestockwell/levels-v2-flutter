@@ -16,17 +16,17 @@ class _CustomButtonState extends State<CustomButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: Const.pickerHeight,
-        width: Const.pickerWidth,
+        height: pickerHeight,
+        width: pickerWidth,
         decoration: BoxDecoration(
-            color: Const.buttonColor, borderRadius: BorderRadius.circular(8)),
+            color: buttonColor, borderRadius: BorderRadius.circular(8)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
           child: FlatButton(
             onPressed: this.widget.onPressed ?? () {},
             child: Tex(
               this.widget.text,
-              color: this.widget.color ?? Const.textColor,
+              color: this.widget.color ?? textColor,
               fontWeight: FontWeight.normal,
             ),
           ),

@@ -15,7 +15,7 @@ class Max extends StatelessWidget {
       children: [
         Spacer(),
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: Const.maxCardWidth),
+          constraints: BoxConstraints(maxWidth: maxCardWidth),
           child: child
         ),
         Spacer()

@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
-import 'const.dart';
+import '../constant.dart';
+import './isolate.dart';
 
 Future<List<dynamic>> getN(String ep, {Map<String, String> reqParam}) async {
   Response res;

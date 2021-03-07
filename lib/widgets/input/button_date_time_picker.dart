@@ -33,15 +33,15 @@ class ButtonDateTimePicker extends StatelessWidget {
           currentTime: this.currentTime,
           locale: LocaleType.en,
           theme: DatePickerTheme(
-              backgroundColor: Const.modalPickerColor,
+              backgroundColor: modalPickerColor,
               itemStyle: TextStyle(
-                  color: Const.textColor,
-                  fontWeight: Const.fwSpinner,
-                  fontSize: Const.textSizeModalSpinner),
+                  color: textColor,
+                  fontWeight: fwSpinner,
+                  fontSize: textSizeModalSpinner),
               doneStyle: TextStyle(
-                  color: Const.textColor,
-                  fontWeight: Const.fwSpinner,
-                  fontSize: Const.textSizeModalSpinner)),
+                  color: textColor,
+                  fontWeight: fwSpinner,
+                  fontSize: textSizeModalSpinner)),
         );
       },
     );

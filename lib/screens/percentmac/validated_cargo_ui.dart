@@ -1,9 +1,7 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
-
 import '../../constant.dart';
-import '../../backend/models/nested/cargo.dart';
+import '../../models/nested/cargo.dart';
 import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/custom_button.dart';
@@ -122,17 +120,17 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   }
 
   void changeWeight(String x) {
-    this.widget.nwf.weight = Util.parsedouble(x);
+    this.widget.nwf.weight = parsedouble(x);
     //setState(() {});
   }
 
   void changeFS(String x) {
-    this.widget.nwf.fs =  Util.parsedouble(x);
+    this.widget.nwf.fs =  parsedouble(x);
     //setState(() {});
   }
 
   void changeQty(String x) {
-    this.widget.nwf.qty =  Util.parseint(x);
+    this.widget.nwf.qty =  parseint(x);
     setState(() {});
   }
 
@@ -208,17 +206,17 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
       return TitleCC(
           open: true,
           tex: Tex(
-            this.widget.nwf.qty.toString() + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
+            this.widget.nwf.qty.toString() + ' EA ' + getTruncated(this.widget.nwf.name,30),
             fontWeight: FontWeight.normal,
-            color: Util.getValidColor(valid),
+            color: getValidColor(valid),
           ));
     }
     return TitleCC(
         open: false,
         tex: Tex(
-          this.widget.nwf.qty.toString() + ' EA ' + Util.getTruncated(this.widget.nwf.name,30),
+          this.widget.nwf.qty.toString() + ' EA ' + getTruncated(this.widget.nwf.name,30),
           fontWeight: FontWeight.normal,
-          color: Util.getValidColor(valid),
+          color: getValidColor(valid),
         ));
   }
 
@@ -226,15 +224,15 @@ class ValidatedCargoUIState extends State<ValidatedCargoUI> {
   Widget build(BuildContext context) {
     return Padding(
         padding:
-            EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+            EdgeInsets.fromLTRB(cardP, cardP, cardP, 0.0),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
-                color: Const.cargoUIColor,
+                color: cargoUIColor,
                 shape: Border(
                     top: BorderSide(
-                  color: Const.cargoUIColor,
-                  width: Const.cardTabSize,
+                  color: cargoUIColor,
+                  width: cardTabSize,
                 )),
                 child: Column(
                   children: [

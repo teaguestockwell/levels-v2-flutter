@@ -11,7 +11,7 @@ class CCard extends StatefulWidget {
   final bool initOpen;
   final IntCallBack callBack;
 
-  ///nullable, if null default value is Const.rc()
+  ///nullable, if null default value is rc()
   final Color color;
 
   CCard(
@@ -34,8 +34,8 @@ class _CCardState extends State<CCard> {
   @override
   void initState() {
     super.initState();
-    name = Util.getTruncated(this.widget.name, 30);
-    color = this.widget.color ?? Const.rc();
+    name = getTruncated(this.widget.name, 30);
+    color = this.widget.color ?? rc();
     open = this.widget.initOpen;
     children = this.widget.children;
   }
@@ -53,15 +53,15 @@ class _CCardState extends State<CCard> {
   Widget build(BuildContext context) {
     return Padding(
         padding:
-            EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+            EdgeInsets.fromLTRB(cardP, cardP, cardP, 0.0),
         child: ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
             child: Card(
-                color: Const.cardColor,
+                color: cardColor,
                 shape: Border(
                     top: BorderSide(
-                  color: Const.cardColor,
-                  width: Const.cardTabSize,
+                  color: cardColor,
+                  width: cardTabSize,
                 )),
                 child: Column(
                   children: [

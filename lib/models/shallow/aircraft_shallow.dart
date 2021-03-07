@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../admin_statless/black_button.dart';
-import '../admin_statless/edit_text.dart';
-import '../util.dart';
+import '../../util.dart';
+import '../../widgets/input/black_button_admin.dart';
+import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class AircraftShallow implements APISerialiable{
@@ -66,51 +66,51 @@ class AircraftShallow implements APISerialiable{
         key: key,
         child: SingleChildScrollView(
             child: Column(children: [
-          EditText(
+          EditTextAdmin(
               initialValue: name,
               hintText: 'Name',
               validate: (s) => validateStringNotEmpty(s, setName)),
-          EditText(
+          EditTextAdmin(
               initialValue: fs0.toString(),
               hintText: 'Min Fuselage Station',
               validate: (s) => valiadateDoublePositive(s, setFs0)),
-          EditText(
+          EditTextAdmin(
               initialValue: fs1.toString(),
               hintText: 'Max Fuselage Station',
               validate: (s) => valiadateDoublePositive(s, setFs1)),
-          EditText(
+          EditTextAdmin(
               initialValue: mom0.toString(),
               hintText: 'Min Simple Moment',
               validate: (s) => valiadateDoublePositive(s, setMom0)),
-          EditText(
+          EditTextAdmin(
               initialValue: mom1.toString(),
               hintText: 'Max Simple Moment',
               validate: (s) => valiadateDoublePositive(s, setMom1)),
-          EditText(
+          EditTextAdmin(
               initialValue: weight0.toString(),
               hintText: 'Min Basic Weight',
               validate: (s) => valiadateDoublePositive(s, setWeight0)),
-          EditText(
+          EditTextAdmin(
               initialValue: weight1.toString(),
               hintText: 'Max Basic Weight',
               validate: (s) => valiadateDoublePositive(s, setWeight1)),
-          EditText(
+          EditTextAdmin(
               initialValue: cargoweight1.toString(),
               hintText: 'Max individual cargo weight',
               validate: (s) => valiadateDoublePositive(s, setCargoWeight1)),
-          EditText(
+          EditTextAdmin(
               initialValue: lemac.toString(),
               hintText: 'LEMAC',
               validate: (s) => valiadateDoublePositive(s, setLemac)),
-          EditText(
+          EditTextAdmin(
               initialValue: mac.toString(),
               hintText: 'MAC',
               validate: (s) => valiadateDoublePositive(s, setMac)),
-          EditText(
+          EditTextAdmin(
               initialValue: mommultiplyer.toString(),
               hintText: '"x" where: simple moment = moment / x',
               validate: (s) => valiadateDoublePositive(s, setMomMultiplyer)),
-          BlackButton(() {
+          BlackButtonAdmin(() {
             print(key.currentState.validate());
             if (key.currentState.validate()) {
               this.onSave(this.toJson());

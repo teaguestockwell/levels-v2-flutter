@@ -17,12 +17,12 @@ class TitleText extends StatelessWidget {
       return Tex(
         name,
         fontWeight: FontWeight.normal,
-        color: Const.nonfocusedBoderColors,
+        color: nonfocusedBoderColors,
       );
     } else {
       return Tex(name,
           fontWeight: FontWeight.normal,
-          color: Const.nonfocusedErrorBoderColor);
+          color: nonfocusedErrorBoderColor);
     }
   }
 }

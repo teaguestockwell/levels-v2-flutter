@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-
 import '../../constant.dart';
 import '../../util.dart';
 
@@ -22,7 +21,7 @@ class ValidatedText extends StatefulWidget {
     @required this.validateText,
     @required this.maxChars,
     this.initText = '',
-    this.width = Const.pickerWidth,
+    this.width = pickerWidth,
   }) : assert(inputType >= 0 && inputType <= 2);
 
   @override
@@ -43,7 +42,7 @@ class ValidatedTextState extends State<ValidatedText> {
       if(c!=null){c.notifyListeners();}
     });
 
-    c.text = Util.getTruncated(this.widget.initText, this.widget.maxChars);
+    c.text = getTruncated(this.widget.initText, this.widget.maxChars);
 
     c.addListener(() {
       //validate the text and set outline to red or white
@@ -66,7 +65,7 @@ class ValidatedTextState extends State<ValidatedText> {
     switch (type) {
       case 0: //ints only
         return Container(
-            height: Const.pickerHeight,
+            height: pickerHeight,
             width: this.widget.width,
             child: TextField(
               cursorColor: Colors.white,
@@ -81,7 +80,7 @@ class ValidatedTextState extends State<ValidatedText> {
             ));
       case 1: //doubles only
         return Container(
-            height: Const.pickerHeight,
+            height: pickerHeight,
             width: this.widget.width,
             child: TextField(
               cursorColor: Colors.white,
@@ -96,7 +95,7 @@ class ValidatedTextState extends State<ValidatedText> {
             ));
       case 2: //all chars
         return Container(
-            height: Const.pickerHeight,
+            height: pickerHeight,
             width: this.widget.width,
             child: TextField(
               cursorColor: Colors.white,

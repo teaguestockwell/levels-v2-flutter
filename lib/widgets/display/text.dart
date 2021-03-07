@@ -10,9 +10,9 @@ class Tex extends StatelessWidget {
 
   Tex(this.text,{
     this.maxLine = 1,
-    this.size=Const.textSizeCardTitle,
+    this.size=textSizeCardTitle,
     this.fontWeight=FontWeight.bold,
-    this.color=Const.textColor,
+    this.color=textColor,
   }):assert(text!=null),super(key:UniqueKey());
 
 

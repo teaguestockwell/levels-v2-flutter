@@ -8,8 +8,8 @@ class ConstText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: Const.pickerWidth,
-        height: Const.pickerHeight,
+        width: pickerWidth,
+        height: pickerHeight,
         child: Center(
             child: Tex(
           this.text,

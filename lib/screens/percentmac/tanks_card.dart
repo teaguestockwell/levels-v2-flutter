@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/aircraft.dart';
-import '../../backend/models/nested/tank.dart';
+import '../../models/nested/aircraft.dart';
+import '../../models/nested/tank.dart';
 import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/button_modal_spinner.dart';
@@ -29,7 +29,7 @@ class TanksCard extends StatelessWidget {
     return CardAllwaysOpen(
         name: 'Tanks',
         children: getTanks(),
-        color: Const.nonfocusedBoderColors);
+        color: nonfocusedBoderColors);
   }
 }
 

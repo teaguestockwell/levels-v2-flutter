@@ -17,7 +17,7 @@ class YYYYMMDDLookup extends StatefulWidget {
 class YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
   int yearIdx = DateTime.now().year-1;
   int jjjIdx = Jiffy(DateTime.now()).dayOfYear-1;
-  int daysInyea = Util.getDaysInYear(DateTime.now().year);
+  int daysInyea = getDaysInYear(DateTime.now().year);
 
   List<String> getStringYear() {
     List<String> ret = [];
@@ -43,7 +43,7 @@ class YYYYMMDDLookupState extends State<YYYYMMDDLookup> {
   yearChange(int newyear) {
     setState(() {
       yearIdx = newyear;
-      daysInyea = Util.getDaysInYear(yearIdx+1);
+      daysInyea = getDaysInYear(yearIdx+1);
       if (jjjIdx+1 > daysInyea) {
         jjjIdx--;
       }

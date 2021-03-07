@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../constant.dart';
-import '../../backend/models/nested/cargo.dart';
-import '../../backend/models/nested/per_mac.dart';
+import '../../models/nested/cargo.dart';
+import '../../models/nested/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../home/loading.dart';
 import 'bal_arm_card.dart';
@@ -81,8 +81,8 @@ class _ShowWorkState extends State<ShowWork> {
   @override
     Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Const.background,
-      appBar: AppBar(backgroundColor: Const.bottombarcolor, title: Tex('Show Work')),
+      backgroundColor: background,
+      appBar: AppBar(backgroundColor: bottombarcolor, title: Tex('Show Work')),
       body: body
     );
   }

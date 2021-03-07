@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constant.dart';
-import '../../backend/models/nested/general.dart';
+import '../../models/nested/general.dart';
 import '../../widgets/display/text.dart';
 
 class MoreOpPopup extends StatelessWidget {
@@ -36,8 +36,8 @@ class MoreOpPopup extends StatelessWidget {
         child: PopupMenuButton(
             onSelected: more,
             tooltip: '',
-            color: Const.modalPickerColor,
-            padding: EdgeInsets.all(Const.rowInset),
+            color: modalPickerColor,
+            padding: EdgeInsets.all(rowInset),
 
             ///three vertical dots icon
             icon: Icon(Icons.more_vert),

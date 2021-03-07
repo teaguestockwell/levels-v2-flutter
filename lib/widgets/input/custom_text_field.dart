@@ -31,8 +31,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: Const.pickerHeight,
-        width: Const.pickerWidth,
+        height: pickerHeight,
+        width: pickerWidth,
         child: TextField(
           cursorColor: Colors.white,
           controller: this.widget.c,

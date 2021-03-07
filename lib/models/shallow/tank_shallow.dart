@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../admin_statless/black_button.dart';
-import '../admin_statless/edit_text.dart';
-import '../util.dart';
+import '../../util.dart';
+import '../../widgets/input/black_button_admin.dart';
+import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class TankShallow implements APISerialiable {
@@ -64,11 +64,11 @@ class TankShallow implements APISerialiable {
         key: key,
         child: SingleChildScrollView(
             child: Column(children: [
-          EditText(
+          EditTextAdmin(
               initialValue: name,
               hintText: 'Name',
               validate: (s) => validateStringNotEmpty(s, setName)),
-          EditText(
+          EditTextAdmin(
             initialValue: weights.toString(),
             hintText: 'Weights as CSV',
             validate: (s) {
@@ -80,7 +80,7 @@ class TankShallow implements APISerialiable {
               return null;
             },
           ),
-          EditText(
+          EditTextAdmin(
             initialValue: simplemoms.toString(),
             hintText: 'Simple Moments as CSV',
             validate: (s) {
@@ -92,7 +92,7 @@ class TankShallow implements APISerialiable {
               return null;
             },
           ),
-          BlackButton(() {
+          BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());
             }

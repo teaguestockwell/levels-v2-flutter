@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/per_mac.dart';
+import '../../models/nested/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/ccard.dart';
 
@@ -72,7 +72,7 @@ class _CargoPerMacCardState extends State<CargoPerMacCard> {
 
   Widget getDataTable(){
     return DataTable(
-      dividerThickness: Const.divThickness,
+      dividerThickness: divThickness,
       columns: <DataColumn>[
         DataColumn(label: Tex('Qty')),
         DataColumn(label: Tex('Name')),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../admin_statless/black_button.dart';
-import '../admin_statless/edit_text.dart';
-import '../util.dart';
+import '../../util.dart';
+import '../../widgets/input/black_button_admin.dart';
+import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class ConfigShallow implements APISerialiable {
@@ -29,11 +29,11 @@ class ConfigShallow implements APISerialiable {
         key: key,
         child: SingleChildScrollView(
             child: Column(children: [
-          EditText(
+          EditTextAdmin(
               initialValue: name,
               hintText: 'Name',
               validate: (s) => validateStringNotEmpty(s, setName)),
-          BlackButton(() {
+          BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());
             }

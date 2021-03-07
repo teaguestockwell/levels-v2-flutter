@@ -3,8 +3,8 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../backend/models/nested/aircraft.dart';
-import '../../backend/models/nested/cargo.dart';
+import '../../models/nested/aircraft.dart';
+import '../../models/nested/cargo.dart';
 import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validated_text.dart';
@@ -62,7 +62,7 @@ class ChartCCardState extends State<ChartCCard> {
             notifyIsValid: (b) {updateValidChildren(0,b);},
             validateText: _validateWeight,
             onChange: 
-              (weight) =>this.widget.nwfs.weight = Util.parsedouble(weight),
+              (weight) =>this.widget.nwfs.weight = parsedouble(weight),
           )),
 
       Div(),
@@ -75,7 +75,7 @@ class ChartCCardState extends State<ChartCCard> {
             notifyIsValid: (b) {updateValidChildren(1,b);},
             validateText: _validateMoment,
             onChange: (mom) =>
-              this.widget.nwfs.setMom(Util.parsedouble(mom))
+              this.widget.nwfs.setMom(parsedouble(mom))
             ,
           )),
     ];
@@ -119,7 +119,7 @@ class ChartCCardState extends State<ChartCCard> {
   Widget build(_) {
     return CardAllwaysOpen(
       name: 'Chart C',
-      color: Util.getValidColor(valid),
+      color: getValidColor(valid),
       children: body,
     );
   }

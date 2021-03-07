@@ -10,13 +10,13 @@ class Loading extends StatelessWidget {
       
       child: Scaffold(
         key: Key('loading'),
-        backgroundColor: Const.background,
+        backgroundColor: background,
         body: Center(child:Column(
         children: [
         Spacer(),
         Container(height: 100,
       width: 300,
-      child:Tex(LoadingMessage.getLoadingMessage(),maxLine: 2,),
+      child:Tex(getLoadingMessage(),maxLine: 2,),
       ),
       Spacer(),
 
@@ -24,7 +24,7 @@ class Loading extends StatelessWidget {
         width: 300.0,
         height: 300.0,
         child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Const.focusedBorderColor)
+          valueColor: AlwaysStoppedAnimation<Color>(focusedBorderColor)
         )
       ),
       

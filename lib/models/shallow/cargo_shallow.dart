@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../admin_statless/black_button.dart';
-import '../admin_statless/edit_text.dart';
-import '../util.dart';
+import '../../util.dart';
+import '../../widgets/input/black_button_admin.dart';
+import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class CargoShallow implements APISerialiable {
@@ -45,23 +45,23 @@ class CargoShallow implements APISerialiable {
         key: key,
         child: SingleChildScrollView(
             child: Column(children: [
-          EditText(
+          EditTextAdmin(
               initialValue: name,
               hintText: 'Name',
               validate: (s) => validateStringNotEmpty(s, setName)),
-          EditText(
+          EditTextAdmin(
               initialValue: weight.toString(),
               hintText: 'Weight',
               validate: (s) => valiadateDoublePositive(s, setWeight)),
-          EditText(
+          EditTextAdmin(
               initialValue: fs.toString(),
               hintText: 'Default FS (overridden by config)',
               validate: (s) => valiadateDoubleAny(s, setFs)),
-          EditText(
+          EditTextAdmin(
               initialValue: category.toString(),
               hintText: '1: Steward, 2: Emergency, 3: Extra',
               validate: (s) => validateOneTwoOrThree(s, setCategory)),
-          BlackButton(() {
+          BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());
             }

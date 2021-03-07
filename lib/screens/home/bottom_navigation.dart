@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/general.dart';
+import '../../models/nested/general.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/leading_mds.dart';
 import '../../widgets/input/more_op_popup.dart';
@@ -46,7 +46,7 @@ class BottomNavState extends State<BottomNav> {
 
   void pcAnimate(int i) {
     pc.animateToPage(i,
-        duration: const Duration(milliseconds: Const.animationDuration),
+        duration: const Duration(milliseconds: animationDuration),
         curve: Curves.easeInOut);
   }
 
@@ -74,16 +74,16 @@ class BottomNavState extends State<BottomNav> {
     });
 
     /// apx 1270 is the cutoff width for desktop view
-    if (MediaQuery.of(context).size.width / Const.maxCardWidth > 1.8) {
+    if (MediaQuery.of(context).size.width / maxCardWidth > 1.8) {
       pc = PageController(initialPage: 1, viewportFraction: .33);
       pageIndex = 1;
       return Scaffold(
-          backgroundColor: Const.background,
+          backgroundColor: background,
           appBar: AppBar(
-            backgroundColor: Const.bottombarcolor,
+            backgroundColor: bottombarcolor,
             title: Tex('Five Level'),
             actions: [MoreOpPopup(this.widget.general)],
-            leadingWidth: Const.pickerWidth,
+            leadingWidth: pickerWidth,
             leading: LeadingMDS(
               general: airSelector,
               text: this.widget.airNames[airIdx],
@@ -102,12 +102,12 @@ class BottomNavState extends State<BottomNav> {
       pc = PageController(initialPage: pageIndex, viewportFraction: 1);
 
       return Scaffold(
-        backgroundColor: Const.background,
+        backgroundColor: background,
         appBar: AppBar(
-          backgroundColor: Const.bottombarcolor,
+          backgroundColor: bottombarcolor,
           title: Tex(['Units', 'MAC%', 'Glossary'].elementAt(pageIndex)),
           actions: [MoreOpPopup(this.widget.general)],
-          leadingWidth: Const.pickerWidth,
+          leadingWidth: pickerWidth,
           leading: LeadingMDS(
             general: airSelector,
             text: this.widget.airNames[airIdx],
@@ -119,9 +119,9 @@ class BottomNavState extends State<BottomNav> {
           showUnselectedLabels: true,
           currentIndex: pageIndex,
           onTap: onTabTapped,
-          backgroundColor: Const.bottombarcolor,
-          selectedItemColor: Const.navBarSelected,
-          unselectedItemColor: Const.navBarDeselected,
+          backgroundColor: bottombarcolor,
+          selectedItemColor: navBarSelected,
+          unselectedItemColor: navBarDeselected,
           type: BottomNavigationBarType.fixed,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(

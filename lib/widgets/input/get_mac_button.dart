@@ -14,12 +14,12 @@ class GetMacButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(Const.rowInset),
+        padding: EdgeInsets.all(rowInset),
         child: Container(
-            height: Const.pickerHeight * 2,
+            height: pickerHeight * 2,
             width: double.infinity,
             decoration: BoxDecoration(
-                color: Const.buttonColorGetMAC,
+                color: buttonColorGetMAC,
                 borderRadius: BorderRadius.circular(8)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),

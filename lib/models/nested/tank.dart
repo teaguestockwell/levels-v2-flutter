@@ -1,5 +1,4 @@
-
-import '../../../utils.dart';
+import '../../util.dart';
 import 'cargo.dart';
 class Tank{
   final String name;
@@ -35,8 +34,8 @@ class Tank{
       nwfss.add(
         Cargo.fromTank(
           name: name, 
-          weight: Util.parsedouble(weightList[i]),
-          simplemom: Util.parsedouble(simplemomsList[i]),
+          weight: parsedouble(weightList[i]),
+          simplemom: parsedouble(simplemomsList[i]),
           mommultiplier: mommultiplier
         )
       );

@@ -1,18 +1,18 @@
 import 'dart:collection';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/aircraft.dart';
-import '../../backend/models/nested/general.dart';
-import '../../services/user_service.dart';
+import '../../models/nested/aircraft.dart';
+import '../../models/nested/general.dart';
 import '../../screens/glossary/glossary.dart';
 import '../../screens/units/units.dart';
+import '../../services/user_service.dart';
 import '../../widgets/display/row_center_text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/more_op_modal.dart';
 import '../../widgets/layout/card_allways_open.dart';
-// this should throw a lint error
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/row2.dart';
 import '../percentmac/per_mac_screen.dart';
@@ -100,21 +100,21 @@ class _HomeState extends State<Home> {
   void buildDiclaimer() {
     var ret = Scaffold(
       key:Key('home'),
-        backgroundColor: Const.background,
+        backgroundColor: background,
         body: CupertinoScrollbar(
             isAlwaysShown: true,
             controller: sc,
             child:Center(child: SingleChildScrollView( //wrapper to prevent jitters
             controller: sc,
             child:Container(
-              width: Const.maxCardWidth*.75,
+              width: maxCardWidth*.75,
               child:Column(
               children: [
               CardAllwaysOpen(
-                  name: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: Const.textColor),
+                  name: 'FIVE LEVEL', children: [Center(child: Container(width: 500, height: 500, child: img))], color: textColor),
               CardAllwaysOpen(
                   name: general.name,
-                  color: Const.textColor,
+                  color: textColor,
                   children: [
                     RowCenterText(general.body),
                     Div(),

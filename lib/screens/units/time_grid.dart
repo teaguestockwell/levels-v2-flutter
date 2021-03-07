@@ -47,9 +47,9 @@ class TimeGridState extends State<TimeGrid> {
         Table(
             border: TableBorder(
                 horizontalInside: BorderSide(
-                    color: Const.divColor, width: Const.divThickness),
+                    color: divColor, width: divThickness),
                 verticalInside: BorderSide(
-                    color: Const.divColor, width: Const.divThickness)),
+                    color: divColor, width: divThickness)),
             children: [
               TableRow(children: [
                 AlignPadding(

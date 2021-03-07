@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'const.dart';
-import 'util.dart';
+import '../../constant.dart';
+import '../../util.dart';
 
 class JsonTable extends StatefulWidget {
   final String ep;

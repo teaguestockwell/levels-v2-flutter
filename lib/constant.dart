@@ -237,7 +237,7 @@ const loadingTexts = [
     'Please wait while the little elves draw your map',
     'Don\'t worry - a few bits tried to escape, but we caught them',
     'Would you like fries with that?',
-    'Checking the gravitational constant in your locale...',
+    'Checking the gravitational const in your locale...',
     'Go ahead -- hold your breath!',
     '...at least you\'re not on hold...',
     'Hum something loud while others stare',

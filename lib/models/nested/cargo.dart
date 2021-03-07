@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../../../utils.dart';
+import '../../util.dart';
 
 /// NameWeightMom hold a String name,weight,fs,moment; of a cargo item;
 enum CargoType {Cargo,ConfigCargo,Nojson}
@@ -36,7 +36,7 @@ class Cargo {
     this.qty = 1, 
   }) : 
   oldjson = {},
-  id = Util.getUniqueIdx(),
+  id = getUniqueIdx(),
   aircraftid = -1,
   configid = -1,
   cargoid = -1,
@@ -54,7 +54,7 @@ class Cargo {
     cargoid = json['cargoid'],
     configid = - 1,
     configcargoid = -1,
-    id = Util.getUniqueIdx(),
+    id = getUniqueIdx(),
     type = CargoType.Cargo;
 
   Cargo.fromJsonConfigCargo(Map<String,dynamic> json):
@@ -63,7 +63,7 @@ class Cargo {
     weight = json['cargo']['weight'],
     fs = json['fs'],
     qty = json['qty'],
-    id = Util.getUniqueIdx(),
+    id = getUniqueIdx(),
     aircraftid = json['aircraftid'],
     configid = json['configid'],
     cargoid = json['cargoid'],
@@ -79,7 +79,7 @@ class Cargo {
   oldjson = {},
   fs = (simplemom * mommultiplier) / weight,
   qty = 1,
-  id = Util.getUniqueIdx(),
+  id = getUniqueIdx(),
   aircraftid = -1,
   cargoid = -1,
   configid =-1,
@@ -93,7 +93,7 @@ class Cargo {
   weight = old.weight,
   fs = old.fs,
   qty = old.qty,
-  id = Util.getUniqueIdx(),
+  id = getUniqueIdx(),
   aircraftid = -1,
   cargoid = -1,
   configid =-1,

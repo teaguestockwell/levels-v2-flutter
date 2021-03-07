@@ -11,14 +11,14 @@ class RowCenterText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlignPadding(
-        Const.rowInset,
+        rowInset,
         Alignment.center,
         SelectableLinkify(
             cursorColor: Colors.white,
             showCursor: true,
             style: TextStyle(
-                color: Const.textColor,
-                fontSize: Const.textSize,
+                color: textColor,
+                fontSize: textSize,
                 fontWeight: FontWeight.normal),
             text: w,
             options: LinkifyOptions(humanize: false),

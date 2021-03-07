@@ -38,8 +38,8 @@ class JJJLookupState extends State<JJJLookup> {
           currentTime: dateAcomp,
         )),
         Divider(
-          color: Const.divColor,
-          thickness: Const.divThickness,
+          color: divColor,
+          thickness: divThickness,
         ),
         Row2(Tex('Julian Day'), ConstText(dfJJJ.format(dateAcomp)))
       ],

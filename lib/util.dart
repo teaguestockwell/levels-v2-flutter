@@ -1,11 +1,9 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:jiffy/jiffy.dart';
-
+import './models/nested/cargo.dart';
 import 'constant.dart';
-import 'backend/models/nested/cargo.dart';
 
 typedef void NotifyCargoValid(int nwfID, bool valid);
 typedef void OnTextChange(String text);

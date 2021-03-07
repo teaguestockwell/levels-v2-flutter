@@ -1,9 +1,9 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../backend/models/nested/aircraft.dart';
-import '../../backend/models/nested/cargo.dart';
-import '../../backend/models/nested/config.dart';
+import '../../models/nested/aircraft.dart';
+import '../../models/nested/cargo.dart';
+import '../../models/nested/config.dart';
 import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/button_modal_button.dart';
@@ -211,7 +211,7 @@ class CargoCardState extends State<CargoCard> {
 
 
   Widget build(BuildContext context) {
-    return CardAllwaysOpen(name: 'Cargo', color: Util.getValidColor(valid), children: [
+    return CardAllwaysOpen(name: 'Cargo', color: getValidColor(valid), children: [
       Row2(
         Tex('Select Config'),
         ButtonModalSpinner(
@@ -225,22 +225,22 @@ class CargoCardState extends State<CargoCard> {
       ),
 
       Divider(
-        color: Const.divColor,
-        thickness: Const.divThickness,
+        color: divColor,
+        thickness: divThickness,
       ),
 
       Row2(Tex('Addenda A Cargo'), cargoSpin),
 
       Divider(
-        color: Const.divColor,
-        thickness: Const.divThickness,
+        color: divColor,
+        thickness: divThickness,
       ),
 
       Row2(Text('Custom Cargo'), CustomButton('Add', onPressed:addEmptyCargo)),
 
       Divider(
-        color: Const.divColor,
-        thickness: Const.divThickness,
+        color: divColor,
+        thickness: divThickness,
       ),
 
       Row2(Tex('Remove All'), removeAllSpin),

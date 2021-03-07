@@ -70,13 +70,13 @@ class PreInspState extends State<PreInsp> {
               currentTime: acompDate,
             )),
         Divider(
-          color: Const.divColor,
-          thickness: Const.divThickness,
+          color: divColor,
+          thickness: divThickness,
         ),
         Row2(Tex('Hours Until Expire'), buttonDurration),
         Divider(
-          color: Const.divColor,
-          thickness: Const.divThickness,
+          color: divColor,
+          thickness: divThickness,
         ),
         Row2(Tex('Expires At'), ConstText(expireAt))
       ],

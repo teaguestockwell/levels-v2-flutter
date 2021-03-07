@@ -37,8 +37,8 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
           key: Key('spinner'),
           child: Tex(
             strings[i],
-            size: Const.textSizeModalSpinner,
-            fontWeight: Const.fwSpinner,
+            size: textSizeModalSpinner,
+            fontWeight: fwSpinner,
           ));
     });
   }
@@ -72,8 +72,8 @@ class _ButtonModalSpinnerState extends State<ButtonModalSpinner> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: Const.modalSpinHeight,
-          color: Const.modalPickerColor,
+          height: modalSpinHeight,
+          color: modalPickerColor,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

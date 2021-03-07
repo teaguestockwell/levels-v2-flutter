@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../constant.dart';
-import '../../backend/models/nested/general.dart';
+import '../../models/nested/general.dart';
 import '../display/text.dart';
 import 'custom_button.dart';
 
@@ -48,14 +48,14 @@ class MoreOpModalState extends State<MoreOpModal> {
       await launch(url);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Const.modalPickerColor,
+          backgroundColor: modalPickerColor,
           content: Container(
-              height: Const.pickerHeight * 2,
+              height: pickerHeight * 2,
               child: Center(
                   child: Tex(
                 'Error, please email tsAppDevelopment@gmail.com',
                 fontWeight: FontWeight.bold,
-                color: Const.nonfocusedErrorBoderColor,
+                color: nonfocusedErrorBoderColor,
               )))));
     }
   }
@@ -75,9 +75,9 @@ class MoreOpModalState extends State<MoreOpModal> {
 
       var tex = Tex(
         this.widget.general.names[i],
-        size: Const.textSizeModalSpinner,
-        fontWeight: Const.fwSpinner,
-        color: Const.textColor,
+        size: textSizeModalSpinner,
+        fontWeight: fwSpinner,
+        color: textColor,
       );
 
       _spinnerWidgets.add(Center(
@@ -102,15 +102,15 @@ class MoreOpModalState extends State<MoreOpModal> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          height: Const.modalSpinHeight,
-          color: Const.modalPickerColor,
+          height: modalSpinHeight,
+          color: modalPickerColor,
           child: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 Container(
-                    height: Const.modalSpinHeight,
+                    height: modalSpinHeight,
                     child: Column(children: [
                       Flexible(child: Container()),
                       Flexible(

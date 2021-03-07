@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../admin_statless/black_button.dart';
-import '../admin_statless/edit_text.dart';
-import '../api_request.dart';
-import '../future_dropdown_button.dart';
-import '../util.dart';
+import '../../services/admin_service.dart';
+import '../../util.dart';
+import '../../widgets/input/black_button_admin.dart';
+import '../../widgets/input/edit_text_admin.dart';
+import '../../widgets/input/future_dropdown_button.dart';
 import 'serializable.dart';
 
 class ConfigCargoShallow implements APISerialiable {
@@ -57,15 +57,15 @@ class ConfigCargoShallow implements APISerialiable {
               onChange: change,
               apiModelPK: 'cargoid',
           ),
-          EditText(
+          EditTextAdmin(
               initialValue: fs.toString(),
               hintText: 'Fuselage Station',
               validate: (s) => valiadateDoubleAny(s, setFS)),
-          EditText(
+          EditTextAdmin(
               initialValue: qty.toString(),
               hintText: 'Quantity',
               validate: (s) => validateIntPositive(s, setQty)),
-          BlackButton(() {
+          BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());
             }

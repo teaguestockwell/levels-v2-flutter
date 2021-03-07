@@ -121,8 +121,8 @@ class UnitConversionState extends State<UnitConversion> {
     return Column(children: [
       RowCenter(Container(
           padding: EdgeInsets.fromLTRB(0, 5, 0, 0),
-          width: Const.pickerWidth,
-          height: Const.pickerHeight,
+          width: pickerWidth,
+          height: pickerHeight,
           child: ButtonModalSpinner(
             stringList: Unit.units,
             onSpin: unitChange,
@@ -134,7 +134,7 @@ class UnitConversionState extends State<UnitConversion> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                        color: Const.divColor, width: Const.divThickness),
+                        color: divColor, width: divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
@@ -151,7 +151,7 @@ class UnitConversionState extends State<UnitConversion> {
             Container(
                 decoration: BoxDecoration(
                     border: Border.all(
-                        color: Const.divColor, width: Const.divThickness),
+                        color: divColor, width: divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,

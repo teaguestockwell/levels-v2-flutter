@@ -22,15 +22,15 @@ class CardAllwaysOpen extends StatelessWidget {
     return 
         Padding(
             padding:
-                EdgeInsets.fromLTRB(Const.cardP, Const.cardP, Const.cardP, 0.0),
+                EdgeInsets.fromLTRB(cardP, cardP, cardP, 0.0),
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: Card(
-                    color: Const.cardColor,
+                    color: cardColor,
                     shape: Border(
                         top: BorderSide(
-                      color: Const.cardColor,
-                      width: Const.cardTabSize,
+                      color: cardColor,
+                      width: cardTabSize,
                     )),
                     child: Column(
                       children: [
@@ -38,7 +38,7 @@ class CardAllwaysOpen extends StatelessWidget {
                             3.0,
                             Alignment.center,
                             Container(
-                                height: Const.cardTabSize,
+                                height: cardTabSize,
                                 child: Center(
                                     child: Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 5),

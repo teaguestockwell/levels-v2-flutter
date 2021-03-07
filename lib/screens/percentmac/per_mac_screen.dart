@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../constant.dart';
-import '../../backend/models/nested/aircraft.dart';
-import '../../backend/models/nested/cargo.dart';
+import '../../models/nested/aircraft.dart';
+import '../../models/nested/cargo.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/get_mac_button.dart';
 import 'cargo_card.dart';
@@ -87,15 +87,15 @@ class PerMacScreenState extends State<PerMacScreen>
 
   void showError(){
      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Const.modalPickerColor,
+          backgroundColor: modalPickerColor,
           content: Container(
             key: Key('per mac error'),
-              height: Const.pickerHeight * 2,
+              height: pickerHeight * 2,
               child: Center(
                   child: Tex(
                 'Invalid Chart C / Cargo',
                 fontWeight: FontWeight.bold,
-                color: Const.nonfocusedErrorBoderColor,
+                color: nonfocusedErrorBoderColor,
               )))));
   }
 

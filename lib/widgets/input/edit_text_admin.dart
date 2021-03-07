@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../const.dart';
+import '../../constant.dart';
 
 
 class EditTextAdmin extends StatelessWidget {
