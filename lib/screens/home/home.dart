@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -10,11 +9,13 @@ import '../../screens/glossary/glossary.dart';
 import '../../screens/units/units.dart';
 import '../../services/user_service.dart';
 import '../../widgets/display/row_center_text.dart';
+import '../../widgets/display/text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/more_op_modal.dart';
 import '../../widgets/layout/card_allways_open.dart';
 import '../../widgets/layout/div.dart';
 import '../../widgets/layout/row2.dart';
+import '../admin/side_bar.dart';
 import '../percentmac/per_mac_screen.dart';
 import 'bottom_navigation.dart';
 import 'loading.dart';
@@ -120,12 +121,43 @@ class _HomeState extends State<Home> {
                     Div(),
                     Row2(CustomButton('I Accept', onPressed: accept),
                         MoreOpModal(general))
-                  ])
+                  ]),
+                  getAdminCard()
             ]))))));
 
     setState(() {
       body = ret;
     });
+  }
+
+  Widget getAdminCard(){
+    if(general.role > 1){
+      return CardAllwaysOpen(
+        name: 'You are an admin with role: ${general.role}',
+        color: textColor,
+        children: [
+          Row2(
+            Tex('Admin Portal'),
+
+            CustomButton(
+              'Open',
+              onPressed: pushAdminPortal
+            ),
+          )
+        ]
+      );
+    }else{
+      return Container();
+    }
+  }
+
+  void pushAdminPortal(){
+     Navigator.push(
+      context,
+      MaterialPageRoute( 
+        builder: (_) => SideBar()
+      )
+    );
   }
 
   void accept() {

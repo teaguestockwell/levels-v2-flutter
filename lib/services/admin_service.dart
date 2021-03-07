@@ -10,7 +10,7 @@ Future<List<dynamic>> getN(String ep, {Map<String, String> reqParam}) async {
   if (reqParam != null) {
     res = await get(baseurl + ep + getQueryString(reqParam));
     if (res.statusCode == 200) {
-      return jsonDecode(res.body);
+      return jsonDecode(res.body) as List<dynamic>;
     } else {
       return <dynamic>[];
     }
