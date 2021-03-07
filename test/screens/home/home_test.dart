@@ -1,9 +1,9 @@
-import 'package:five_level_one/backend/models/aircraft.dart';
-import 'package:five_level_one/backend/models/general.dart';
-import 'package:five_level_one/backend/models/glossary.dart';
+import 'package:five_level_one/backend/models/nested/aircraft.dart';
+import 'package:five_level_one/backend/models/nested/general.dart';
+import 'package:five_level_one/backend/models/nested/glossary.dart';
 import 'package:five_level_one/screens/home/home.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:five_level_one/backend/services.dart';
+import 'package:five_level_one/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:mockito/mockito.dart';
 
@@ -12,7 +12,7 @@ Widget mk(Widget child){
 }
 
 //are you mocking me?
-class ServicesMock extends Mock implements Services{}
+class ServicesMock extends Mock implements UserService{}
 class AircraftMock extends Mock implements Aircraft{}
 class GlossMock extends Mock implements Glossary{}
 class GeneralMock extends Mock implements General{}

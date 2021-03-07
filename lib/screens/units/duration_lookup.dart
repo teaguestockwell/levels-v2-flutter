@@ -5,7 +5,7 @@ import '../../widgets/display/const_text.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/button_date_time_picker.dart';
 import '../../widgets/layout/div.dart';
-import '../../widgets/layout/rows/row2.dart';
+import '../../widgets/layout/row2.dart';
 
 class DurationLookup extends StatefulWidget {
   @override

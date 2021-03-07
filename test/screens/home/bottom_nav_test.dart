@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/models/general.dart';
+import 'package:five_level_one/backend/models/nested/general.dart';
 import 'package:five_level_one/widgets/input/validated_text.dart';
 import 'package:five_level_one/screens/home/bottom_navigation.dart';
 import 'package:flutter/material.dart';

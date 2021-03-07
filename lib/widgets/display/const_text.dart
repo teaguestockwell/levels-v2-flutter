@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../backend/const.dart';
+import '../../constant.dart';
 import '../../widgets/display/text.dart';
 
 class ConstText extends StatelessWidget {

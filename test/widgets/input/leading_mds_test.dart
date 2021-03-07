@@ -1,5 +1,5 @@
-import 'package:five_level_one/backend/const.dart';
-import 'package:five_level_one/backend/models/general.dart';
+import 'package:five_level_one/constant.dart';
+import 'package:five_level_one/backend/models/nested/general.dart';
 import 'package:five_level_one/widgets/input/leading_mds.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

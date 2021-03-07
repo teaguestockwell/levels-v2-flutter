@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../backend/const.dart';
-import '../../backend/utils.dart';
+import '../../constant.dart';
+import '../../util.dart';
 import '../display/text.dart';
 import 'custom_button.dart';
 

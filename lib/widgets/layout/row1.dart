@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../backend/const.dart';
-import '../align_padding.dart';
+import '../../constant.dart';
+import 'align_padding.dart';
 
 
 class Row1 extends StatelessWidget {

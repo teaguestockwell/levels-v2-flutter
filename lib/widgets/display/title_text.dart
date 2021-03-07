@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../backend/const.dart';
+import '../../constant.dart';
 import 'text.dart';
 
 class TitleText extends StatelessWidget {

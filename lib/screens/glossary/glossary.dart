@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../backend/models/glossary.dart';
+import '../../backend/models/nested/glossary.dart';
 import '../../widgets/display/row_center_text.dart';
-import '../../widgets/layout/cards/ccard.dart';
+import '../../widgets/layout/ccard.dart';
 
 class GlossaryScreen extends StatefulWidget {
   final List<Glossary> glossarys;

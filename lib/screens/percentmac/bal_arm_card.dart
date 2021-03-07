@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../backend/const.dart';
-import '../../backend/models/per_mac.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/per_mac.dart';
 import '../../widgets/display/text.dart';
-import '../../widgets/layout/cards/ccard.dart';
+import '../../widgets/layout/ccard.dart';
 
 class BalArmCard extends StatelessWidget {
   final PerMac permac;

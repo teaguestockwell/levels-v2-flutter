@@ -1,5 +1,5 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/models/aircraft.dart';
+import 'package:five_level_one/backend/models/nested/aircraft.dart';
 import 'package:five_level_one/widgets/input/validated_text.dart';
 import 'package:five_level_one/screens/percentmac/chartc_card.dart';
 import 'package:mockito/mockito.dart';

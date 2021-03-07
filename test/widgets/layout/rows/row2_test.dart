@@ -1,4 +1,4 @@
-import 'package:five_level_one/widgets/layout/rows/row2.dart';
+import 'package:five_level_one/widgets/layout/row2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

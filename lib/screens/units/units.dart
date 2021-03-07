@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../widgets/layout/cards/ccard.dart';
+import '../../widgets/layout/ccard.dart';
 import 'duration_lookup.dart';
 import 'jjj_lookup.dart';
 import 'pre_insp.dart';

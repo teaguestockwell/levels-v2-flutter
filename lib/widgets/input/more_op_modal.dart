@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../backend/const.dart';
-import '../../backend/models/general.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/general.dart';
 import '../display/text.dart';
 import 'custom_button.dart';
 

@@ -3,14 +3,14 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../backend/models/aircraft.dart';
-import '../../backend/models/cargo.dart';
-import '../../backend/utils.dart';
+import '../../backend/models/nested/aircraft.dart';
+import '../../backend/models/nested/cargo.dart';
+import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/validated_text.dart';
-import '../../widgets/layout/cards/card_allways_open.dart';
+import '../../widgets/layout/card_allways_open.dart';
 import '../../widgets/layout/div.dart';
-import '../../widgets/layout/rows/row2.dart';
+import '../../widgets/layout/row2.dart';
 
 class ChartCCard extends StatefulWidget {
   final nwfs = Cargo();

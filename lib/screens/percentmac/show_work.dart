@@ -3,9 +3,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
-import '../../backend/const.dart';
-import '../../backend/models/cargo.dart';
-import '../../backend/models/per_mac.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/cargo.dart';
+import '../../backend/models/nested/per_mac.dart';
 import '../../widgets/display/text.dart';
 import '../home/loading.dart';
 import 'bal_arm_card.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'backend/services.dart';
+import 'services/user_service.dart';
 import 'screens/home/home.dart';
 
 void main() async {
@@ -7,7 +7,7 @@ void main() async {
   runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home:Home(Services())
+      home:Home(UserService())
     )
   );
 }

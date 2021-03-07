@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/cargo.dart';
+import 'package:five_level_one/backend/models/nested/cargo.dart';
 import 'package:five_level_one/screens/home/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

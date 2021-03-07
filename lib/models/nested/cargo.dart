@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import '../utils.dart';
+import '../../../utils.dart';
 
 /// NameWeightMom hold a String name,weight,fs,moment; of a cargo item;
 enum CargoType {Cargo,ConfigCargo,Nojson}

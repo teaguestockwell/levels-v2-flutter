@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../backend/const.dart';
-import '../../../widgets/display/text.dart';
-import '../align_padding.dart';
+import '../../constant.dart';
+import '../display/text.dart';
+import 'align_padding.dart';
 
 class CardAllwaysOpen extends StatelessWidget {
   /// passed to columns children

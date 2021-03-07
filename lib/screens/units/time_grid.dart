@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../backend/const.dart';
+import '../../constant.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/layout/align_padding.dart';
 

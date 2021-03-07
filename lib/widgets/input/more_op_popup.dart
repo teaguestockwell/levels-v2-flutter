@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../backend/const.dart';
-import '../../backend/models/general.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/general.dart';
 import '../../widgets/display/text.dart';
 
 class MoreOpPopup extends StatelessWidget {

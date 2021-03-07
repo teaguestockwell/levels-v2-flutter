@@ -2,17 +2,17 @@ import 'dart:collection';
 
 import 'package:flutter/material.dart';
 
-import '../../backend/const.dart';
-import '../../backend/models/cargo.dart';
-import '../../backend/utils.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/cargo.dart';
+import '../../util.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/validated_text.dart';
 import '../../widgets/layout/align_padding.dart';
-import '../../widgets/layout/cards/ccard.dart';
+import '../../widgets/layout/ccard.dart';
 import '../../widgets/layout/div.dart';
-import '../../widgets/layout/rows/row1.dart';
-import '../../widgets/layout/rows/row2.dart';
+import '../../widgets/layout/row1.dart';
+import '../../widgets/layout/row2.dart';
 
 class ValidatedCargoUI extends StatefulWidget {
   final num fs0, fs1, cargoMaxWeight;

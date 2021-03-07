@@ -1,195 +1,221 @@
-import 'dart:math';
-
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:jiffy/jiffy.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import 'const.dart';
-import 'models/cargo.dart';
+const double 
+  pickerWidth = 160,
+  pickerHeight = 30,
+  timeGridDivSize = 1,
+  rowHeight = 30,
+  divThickness=1.5,
+  rowInset = 10.0,
+  modalSpinHeight = 210,
+  cardP = 4,
+  maxCardWidth = 700,
+  cardTabSize =30,
 
-typedef void NotifyCargoValid(int nwfID, bool valid);
-typedef void OnTextChange(String text);
-typedef bool ValidateText(String text);
-typedef void NotifyValid(bool valid);
-typedef void IntCallBack();
-typedef void IntCallBackIntPara(int i);
-typedef void StringCallBack(String x);
-typedef void DateCallBack(DateTime dateTime);
-typedef void NWFSCallBack(int key, Cargo value);
-typedef void UnitChangeCB(var i);
-class Util {
-  static String getTruncated(String s, int max) {
-    if (s.length <= max) {
-      return s;
+  textSizeCardTitle = 14,
+  textSizeModalSpinner = 22,
+  textSize = 16;
+
+  final 
+  fwSpinner=FontWeight.normal;
+
+  const int 
+    animationDuration = 100;
+
+  const Color topBot = Colors.black87,
+      navBarSelected = Colors.white70,
+      navBarDeselected = Colors.white30,
+      bottombarcolor = Colors.white10,
+      background = Colors.black,
+
+      cardColor = Colors.white10,
+      buttonColor = Colors.white10,
+      buttonColorGetMAC = Color.fromRGBO(255,255,255,0.19),
+      cargoUIColor = Color.fromRGBO(255,255,255,0.07),
+
+      divColor = Colors.white30,
+      textColor = Color.fromRGBO(255,255,255,0.88),
+
+      modalPickerColor= Color.fromRGBO(55,55,55,1),
+      
+      focusedBorderColor = Color.fromRGBO(165,214,167,1),//Color.fromRGBO(255,255,255,0.88),
+      nonfocusedBoderColors = Color.fromRGBO(165,214,167,1), //Colors.white30,
+
+      focusedErrorBorderColor = Color.fromRGBO(244,143,177,1),//Color.fromRGBO(254,112, 123, 1),
+      nonfocusedErrorBoderColor = Color.fromRGBO(244,143,177,1);
+     
+    const _funColors = <Color>[
+      Color.fromRGBO(179,157,219,1),
+      Color.fromRGBO(144,202,249,1),
+      Color.fromRGBO(244,143,177,1),
+      Color.fromRGBO(165,214,167,1),
+      Color.fromRGBO(255,204,128,1),
+      //Color.fromRGBO(62,98,210,1),
+    ];
+
+    int next =-1;
+
+     Color rc(){
+      next++; if(next>_funColors.length-1){next =0;}
+      return _funColors[next];
     }
-    return s.substring(0, max - 3) + '...';
-  }
 
-  static int getDaysInYear(int year) {
-    final isLeap = Jiffy({'year': year}).isLeapYear;
-    if (isLeap) {
-      return 366;
-    } else {
-      return 365;
-    }
-  }
+class InputDec {
+  static final OutlineInputBorder _wi = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: focusedBorderColor,
+        width: divThickness,
+      ),
+    );
 
-  static Color getValidColor(bool isValid){
-     if (isValid) {
-      return Const.nonfocusedBoderColors;
-    }
-    return Const.nonfocusedErrorBoderColor;
-  }
+    static final OutlineInputBorder _wiNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: nonfocusedBoderColors,
+        width: divThickness,
+      ),
+    );
 
-  static int idx = 0;
-  ///Given a string try to parse into double. If fail make toast with error.
-  static double parsedouble(String s) {
+    static final OutlineInputBorder _div = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: divColor,
+        width: divThickness,
+      ),
+    );
 
-    if(s.isEmpty){s = '0';}
+    static final OutlineInputBorder _divNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: divColor,
+        width: divThickness,
+      ),
+    );
 
-    try {
-      return double.parse(s);
-    // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      throw Exception('${s} could not be parsed as a double');
-    }
-  }
+  static final OutlineInputBorder _re = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: focusedErrorBorderColor,
+        width: divThickness,
+      ),
+    );
 
-  static int getUniqueIdx() {
-    idx++;
-    return idx - 1;
-  }
+    static final OutlineInputBorder _reNF = OutlineInputBorder(
+      borderRadius: const BorderRadius.all(
+        const Radius.circular(5.0),
+      ),
+      borderSide: BorderSide(
+        color: nonfocusedErrorBoderColor,
+        width: divThickness,
+      ),
+    );
 
-  static int parseint(s) {
-    if(s.isEmpty){s = '0';}
-    try {
-      return int.parse(s);
-    // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      throw Exception('${s} could not be parsed as an int');
-    }
-  }
+  static final InputDecoration wi = InputDecoration(
+    enabledBorder: _wiNF,
+    focusedBorder: _wi,
+  );
 
-  static String fixed(double x) => x.toStringAsFixed(2);
+  static final InputDecoration re = InputDecoration(
+    enabledBorder: _reNF,
+    focusedBorder: _re,
+  );
+
+  static final InputDecoration div = InputDecoration(
+    enabledBorder: _divNF,
+    focusedBorder: _div,
+  );
+
 }
 
+final dmSelected = GoogleFonts.dmSans(
+    color: Color.fromRGBO(56, 56, 56, 1),
+    fontSize: 14.0,
+    fontWeight: FontWeight.bold);
+final dmSelectedNormal = GoogleFonts.dmSans(
+    color: Color.fromRGBO(56, 56, 56, 1),
+    fontSize: 14.0,
+    fontWeight: FontWeight.normal);
 
-class Distance {
-  double numOfBases;
-  String name;
-  Distance(this.name, this.numOfBases);
-}
+final dmSelectedWhiteBold = GoogleFonts.dmSans(
+    color: Colors.white, fontSize: 14.0, fontWeight: FontWeight.bold);
 
-class Unit {
-  List<Distance> list = [];
-  static final units = ['Length', 'Mass', 'Area', 'Time', 'Volume', 'Speed'];
-  int unit;
-  Unit(this.unit) {
-    // list.add(Distance('',));
-    //if distance 'x',1 then that unit is the base multiplier
-    switch (unit) {
-      case 0:
-        list.add(Distance('32nds Inch', 0.00079375));
-        list.add(Distance('Milimeter', 0.001));
-        list.add(Distance('16nths Inch', 0.0015875));
-        list.add(Distance('Centimeter', 0.01));
-        list.add(Distance('Inch', 0.0254));
-        list.add(Distance('Foot', 0.3048));
-        list.add(Distance('Yard', 0.9144));
-        list.add(Distance('Meter', 1));
-        list.add(Distance('Kiliometer', 1000));
-        list.add(Distance('Mile', 1609.344));
-        list.add(Distance('Nautical Mile', 1852));
-        break;
-      case 1:
-        list.add(Distance('Microgram', 0.000000001));
-        list.add(Distance('Miligram', 0.000001));
-        list.add(Distance('Gram', 0.001));
-        list.add(Distance('Ounce', 0.0283495));
-        list.add(Distance('Pound', 0.453592));
-        list.add(Distance('Kilogram', 1));
-        list.add(Distance('Stone', 6.35029));
-        list.add(Distance('US Ton', 907.185));
-        list.add(Distance('Metric Ton', 1000));
-        list.add(Distance('Imperial Ton', 1016.05));
-        break;
-      case 2:
-        list.add(Distance('Inch^2', 0.00064516));
-        list.add(Distance('Foot^2', 0.092903));
-        list.add(Distance('Yard^2', 0.092903));
-        list.add(Distance('Meter^2', 1));
-        list.add(Distance('Acre', 4046.86));
-        list.add(Distance('Hectare', 10000));
-        list.add(Distance('Kilometer^2', 1000000));
-        list.add(Distance('Mile^2', 2589988.1103360000998));
-        break;
-      case 3:
-        list.add(Distance('Nanosecond', 0.000000000000011574));
-        list.add(Distance('Microsecond', 0.000000000011574));
-        list.add(Distance('Milisecond', 0.000000011574));
-        list.add(Distance('Second', 0.000011574));
-        list.add(Distance('Minute', 0.000694444));
-        list.add(Distance('Hour', 0.0416667));
-        list.add(Distance('Day', 1));
-        list.add(Distance('Week', 7));
-        list.add(Distance('Month', 30.4167243334));
-        list.add(Distance('Year', 365));
-        list.add(Distance('Decade', 3650));
-        list.add(Distance('Century', 36500));
-        break;
-      case 4:
-        list.add(Distance('Mililiter', 0.001));
-        list.add(Distance('US Teaspoon', 0.00492892));
-        list.add(Distance('US Tablespoon', 0.0147868));
-        list.add(Distance('Inch^3', 0.0163871));
-        list.add(Distance('US Fluid Ounce', 0.0295735));
-        list.add(Distance('US Cup', 0.24));
-        list.add(Distance('US Pint', 0.473176));
-        list.add(Distance('US Quart', 0.946353));
-        list.add(Distance('Liter', 1));
-        list.add(Distance('US Gallon', 3.78541));
-        list.add(Distance('Foot^3', 28.3168));
-        list.add(Distance('Meter^3', 1000));
-        break;
-      case 5:
-        list.add(Distance('Kilometer/Hr', 1));
-        list.add(Distance('Foot/Sec', 1.09728));
-        list.add(Distance('Miles/Hr', 1.60934));
-        list.add(Distance('Knot', 1.852));
-        list.add(Distance('Meter/Sec', 3.6));
-        break;
-    }
-  }
-}
+final dmDisabled = GoogleFonts.dmSans(
+    color: Color.fromRGBO(151, 151, 151, 1),
+    fontSize: 14.0,
+    fontWeight: FontWeight.normal);
+final dmTitle2 = GoogleFonts.dmSans(
+    color: Color.fromRGBO(56, 56, 56, 1),
+    fontSize: 18.0,
+    fontWeight: FontWeight.bold);
+final dmTitle1 = GoogleFonts.dmSans(
+    color: Color.fromRGBO(56, 56, 56, 1),
+    fontSize: 36.0,
+    fontWeight: FontWeight.bold);
+final dmbody1 = GoogleFonts.dmSans(
+    color: Color.fromRGBO(51, 51, 51, 1),
+    fontSize: 16.0,
+    fontWeight: FontWeight.normal);
 
-class DecimalTextInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    final regEx = RegExp(r"^\-?\d*\.?\d*");
-    String newString = regEx.stringMatch(newValue.text) ?? "";
-    return newString == newValue.text ? newValue : oldValue;
-  }
-}
-///allows 'decimal,nums,+,-,e' to not lock exponents 
-class DecimalTextInputFormatter2 extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    //final regEx = RegExp(r'[0-9.+-e]+$');
-    final regEx = RegExp(r'[0-9.+e-]+$');
-    String newString = regEx.stringMatch(newValue.text) ?? "";
-    return newString == newValue.text ? newValue : oldValue;
-  }
-}
+const topEPs = <String>[
+  aircraftS,
+  cargoS,
+  configS,
+  tankS,
+  userS,
+  glossaryS
+];
 
-class LoadingMessage {
-  static String getText() {
-    final r = Random();
-    return _text[r.nextInt(_text.length - 1)];
-  }
+// magic strings //
+//please see more magic strings within the shallow model constructors
 
-  static const _text = [
+// base url for api requests
+const baseurl = 'http://localhost:8080/fl-api/';
+
+// endpoints
+const aircraftS = 'aircraft';
+const cargoS = 'cargo';
+const configS = 'config';
+const tankS = 'tank';
+const userS = 'user';
+const glossaryS = 'glossary';
+const configCargosS = 'configcargo';
+
+// api model primary keys
+const topLvlEPPK = 'aircraftid';
+const airPK = 'id';
+const configCargoPK = 'configid';
+const configFK = 'configcargos';
+
+/// will be common to all modifiable models,
+/// sorted alabeticly as well
+const searchField = 'name';
+
+/// keys containing this will be filterd from the json table
+const rmKey = 'id';
+
+// keys containing this will be filtered from api query strings
+const rmKeyQS = 'id';
+
+/// the font family used for icon datas
+const matIcons = 'MaterialIcons';
+
+/// http req headers
+const reqHeaders = {"Content-Type": "application/json"};
+
+const loadingTexts = [
     'Reticulating splines...',
     'Generating witty dialog...',
     'Swapping time and space...',
@@ -429,4 +455,3 @@ class LoadingMessage {
     'Still faster than Windows update',
     'Composer hack: Waiting for reqs to be fetched is less frustrating if you add -vvv to your command.',
   ];
-}

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../backend/const.dart';
-import '../../backend/utils.dart';
+import '../../constant.dart';
+import '../../util.dart';
 import '../../widgets/display/text.dart';
 
 class Loading extends StatelessWidget {
@@ -16,7 +16,7 @@ class Loading extends StatelessWidget {
         Spacer(),
         Container(height: 100,
       width: 300,
-      child:Tex(LoadingMessage.getText(),maxLine: 2,),
+      child:Tex(LoadingMessage.getLoadingMessage(),maxLine: 2,),
       ),
       Spacer(),
 

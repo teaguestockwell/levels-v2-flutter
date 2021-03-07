@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/general.dart';
+import 'package:five_level_one/backend/models/nested/general.dart';
 import 'package:five_level_one/widgets/input/more_op_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

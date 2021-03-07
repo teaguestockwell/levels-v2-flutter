@@ -2,25 +2,25 @@ import 'dart:collection';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../../backend/const.dart';
-import '../../backend/models/aircraft.dart';
-import '../../backend/models/general.dart';
-import '../../backend/services.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/aircraft.dart';
+import '../../backend/models/nested/general.dart';
+import '../../services/user_service.dart';
 import '../../screens/glossary/glossary.dart';
 import '../../screens/units/units.dart';
 import '../../widgets/display/row_center_text.dart';
 import '../../widgets/input/custom_button.dart';
 import '../../widgets/input/more_op_modal.dart';
-import '../../widgets/layout/cards/card_allways_open.dart';
+import '../../widgets/layout/card_allways_open.dart';
 // this should throw a lint error
 import '../../widgets/layout/div.dart';
-import '../../widgets/layout/rows/row2.dart';
+import '../../widgets/layout/row2.dart';
 import '../percentmac/per_mac_screen.dart';
 import 'bottom_navigation.dart';
 import 'loading.dart';
 
 class Home extends StatefulWidget {
-  final Services services;
+  final UserService services;
   Home(this.services): assert(services!=null);
   @override
   _HomeState createState() => _HomeState();

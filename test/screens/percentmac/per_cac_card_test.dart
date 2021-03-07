@@ -1,4 +1,4 @@
-import 'package:five_level_one/backend/models/per_mac.dart';
+import 'package:five_level_one/backend/models/nested/per_mac.dart';
 import 'package:mockito/mockito.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';

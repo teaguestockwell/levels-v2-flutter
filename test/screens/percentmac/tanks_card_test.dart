@@ -1,7 +1,7 @@
 import 'dart:collection';
-import 'package:five_level_one/backend/models/aircraft.dart';
-import 'package:five_level_one/backend/models/cargo.dart';
-import 'package:five_level_one/backend/models/tank.dart';
+import 'package:five_level_one/backend/models/nested/aircraft.dart';
+import 'package:five_level_one/backend/models/nested/cargo.dart';
+import 'package:five_level_one/backend/models/nested/tank.dart';
 import 'package:five_level_one/widgets/layout/div.dart';
 import 'package:five_level_one/screens/percentmac/tanks_card.dart';
 import 'package:flutter/material.dart';

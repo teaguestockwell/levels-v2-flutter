@@ -1,7 +1,7 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
-import '../../backend/const.dart';
-import '../../backend/models/general.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/general.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/leading_mds.dart';
 import '../../widgets/input/more_op_popup.dart';

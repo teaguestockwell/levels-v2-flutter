@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../backend/const.dart';
-import '../../backend/models/general.dart';
-import '../../backend/utils.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/general.dart';
+import '../../util.dart';
 import '../../widgets/display/text.dart';
 
 class LeadingMDS extends StatelessWidget {

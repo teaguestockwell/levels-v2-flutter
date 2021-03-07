@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../backend/const.dart';
+import '../../constant.dart';
 
 class Row2 extends StatelessWidget {
   final Widget one, two;

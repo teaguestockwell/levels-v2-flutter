@@ -4,9 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../backend/const.dart';
-import '../../backend/models/aircraft.dart';
-import '../../backend/models/cargo.dart';
+import '../../constant.dart';
+import '../../backend/models/nested/aircraft.dart';
+import '../../backend/models/nested/cargo.dart';
 import '../../widgets/display/text.dart';
 import '../../widgets/input/get_mac_button.dart';
 import 'cargo_card.dart';
