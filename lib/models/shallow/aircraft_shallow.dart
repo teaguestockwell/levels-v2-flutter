@@ -111,7 +111,7 @@ class AircraftShallow implements APISerialiable{
               hintText: '"x" where: simple moment = moment / x',
               validate: (s) => valiadateDoublePositive(s, setMomMultiplyer)),
           BlackButtonAdmin(() {
-            print(key.currentState.validate());
+            //print(key.currentState.validate());
             if (key.currentState.validate()) {
               this.onSave(this.toJson());
             }

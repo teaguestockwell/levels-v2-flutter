@@ -39,9 +39,9 @@ class ConfigCargoShallow implements APISerialiable {
       };
 
   void change(Map<String, dynamic> map) {
-    print(map);
+    //print(map);
     cargoid = map.values.elementAt(0);
-    print(cargoid);
+    //print(cargoid);
   }
 
   Widget getForm() {

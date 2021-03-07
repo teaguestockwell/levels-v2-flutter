@@ -1,7 +1,6 @@
-import 'dart:convert';
-import 'package:flutter/foundation.dart';
 import 'package:http/http.dart';
 import '../constant.dart';
+import 'isolate.dart';
 
 Future<List<dynamic>> getN(String ep, {Map<String, String> reqParam}) async {
   Response res;
@@ -9,14 +8,14 @@ Future<List<dynamic>> getN(String ep, {Map<String, String> reqParam}) async {
   if (reqParam != null) {
     res = await get(baseurl + ep + getQueryString(reqParam));
     if (res.statusCode == 200) {
-      return jsonDecode(res.body) as List<dynamic>;
+      return decodeJsonIsolate<List<dynamic>>(res.body);
     } else {
       return <dynamic>[];
     }
   } else {
     res = await get(baseurl + ep);
     if (res.statusCode == 200) {
-      return compute(parseJsonIsolate, res.body);
+      return await decodeJsonIsolate<List<dynamic>>(res.body);
     } else {
       return <dynamic>[];
     }
@@ -28,11 +27,11 @@ Future<Response> delete1(String ep, Map<String, dynamic> obj) async {
 }
 
 Future<Response> put1(String ep, Map<String, dynamic> obj) async {
-  print(baseurl + ep);
-  print(obj);
-  final stringBody = jsonEncode(obj);
-  return await put(baseurl + ep,
-      body: stringBody, headers: reqHeaders);
+  return put(
+    baseurl + ep,
+    body: await encodeJsonIsolate(obj),
+    headers: reqHeaders
+  );
 }
 
 String getQueryString(Map<String, dynamic> reqParam) {
@@ -48,9 +47,4 @@ String getQueryString(Map<String, dynamic> reqParam) {
     }
   }
   return queryString;
-}
-
-List<dynamic> parseJsonIsolate(String json) {
-  final ret = jsonDecode(json) as List<dynamic>;
-  return ret;
 }

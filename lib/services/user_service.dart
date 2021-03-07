@@ -1,29 +1,26 @@
-import 'dart:convert';
 import 'package:http/http.dart';
+import '../constant.dart';
 import '../models/nested/aircraft.dart';
 import '../models/nested/general.dart';
+import 'isolate.dart';
 
 class UserService{
 
 Future<General> getGeneral() async {
-  final response =  await get('http://localhost:8080/fl-api/general');
+  final res =  await get(baseurl + 'general');
   return General.fromJson(
-    await parseJsonIsolate(response.body) as Map<String,dynamic>
+    await decodeJsonIsolate<Map<String,dynamic>>(res.body)
   );
 }
 
 Future<List<Aircraft>> getAirs() async {
-  List<Aircraft> ret = [];
-  final response =  await get('http://localhost:8080/fl-api/aircraft');
-  final json = await parseJsonIsolate(response.body)as List<dynamic>;
-  json.forEach((x) {
+  final res =  await get(baseurl + 'aircraft');
+  final jsonMap = await decodeJsonIsolate<List<dynamic>>(res.body);
+  return jsonMap.map((air){
+    try{
+      return Aircraft.fromJson(air as Map<String,dynamic>);
     // ignore: avoid_catches_without_on_clauses
-    try{ret.add(Aircraft.fromJson(x));} catch(e){print(e);}
-  });
-  return ret;
+    }catch(e){}
+  }).toList();
   }
-}
-
-Future<dynamic> parseJsonIsolate(String json) async{
-  return jsonDecode(json);
 }
