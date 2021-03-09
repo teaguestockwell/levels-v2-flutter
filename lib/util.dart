@@ -224,15 +224,6 @@ String valiadateDoublePositive(String s, void Function(double) setter) {
   }
 }
 
-String validateOneTwoOrThree(String s, void Function(int) setter) {
-  if (int.tryParse(s) == 1 || int.tryParse(s) == 2 || int.tryParse(s) == 3) {
-    setter(int.parse(s));
-    return null;
-  } else {
-    return 'Must be 1, 2, or 3';
-  }
-}
-
 extension StringExtension on String {
   String capitalize() {
     return "${this[0].toUpperCase()}${this.substring(1)}";

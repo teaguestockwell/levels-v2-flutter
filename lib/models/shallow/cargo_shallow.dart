@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import '../../constant.dart';
 import '../../util.dart';
 import '../../widgets/input/black_button_admin.dart';
 import '../../widgets/input/edit_text_admin.dart';
+import '../../widgets/input/future_dropdown_button.dart';
 import 'serializable.dart';
 
 class CargoShallow implements APISerialiable {
@@ -14,8 +16,8 @@ class CargoShallow implements APISerialiable {
   void setWeight(double w) => weight = w;
   double fs;
   void setFs(double s) => fs = s;
-  int category;
-  void setCategory(int c) => category = c;
+  String category;
+  void setCategory(Map<String,dynamic> m) => category = m.keys.elementAt(0);
 
   String ep = 'cargo';
   Function(Map<String, dynamic>) onSave;
@@ -26,7 +28,7 @@ class CargoShallow implements APISerialiable {
         name = json["name"] ?? '',
         weight = json["weight"] ?? 0,
         fs = json["fs"] ?? -1,
-        category = json["category"] ?? 3;
+        category = json["category"] ?? 'Extra';
 
   @override
   Map<String, dynamic> toJson() => {
@@ -45,6 +47,12 @@ class CargoShallow implements APISerialiable {
         key: key,
         child: SingleChildScrollView(
             child: Column(children: [
+          DropDownButton(
+            map: cargoCategory,
+            // get the value where the key == initial category
+            initID: cargoCategory.entries.firstWhere((e) => e.key == category).value,
+            onChange: setCategory,
+          ),
           EditTextAdmin(
               initialValue: name,
               hintText: 'Name',
@@ -57,10 +65,6 @@ class CargoShallow implements APISerialiable {
               initialValue: fs.toString(),
               hintText: 'Default FS (overridden by config)',
               validate: (s) => valiadateDoubleAny(s, setFs)),
-          EditTextAdmin(
-              initialValue: category.toString(),
-              hintText: '1: Steward, 2: Emergency, 3: Extra',
-              validate: (s) => validateOneTwoOrThree(s, setCategory)),
           BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());

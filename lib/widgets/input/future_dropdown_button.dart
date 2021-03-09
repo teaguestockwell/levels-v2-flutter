@@ -23,7 +23,6 @@ class FutureDropDownButton extends StatelessWidget {
           if (sh.data != null && sh.data.length > 0) {
               return DropDownButton(
                 onChange: onChange,
-                apiModelPK: apiModelPK,
                 initID: initID,
                 map: Map.fromEntries(
                   sh.data.map<MapEntry<String,dynamic>>(
@@ -51,12 +50,10 @@ class DropDownButton extends StatefulWidget {
   final Map<String, dynamic> map;
   final void Function(Map<String, dynamic>) onChange;
   final int initID;
-  final String apiModelPK;
 
   DropDownButton({
     @required this.map,
     @required this.onChange,
-    @required this.apiModelPK,
     @required this.initID
     }) : super(key: UniqueKey());
 

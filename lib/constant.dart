@@ -178,8 +178,18 @@ const topEPs = <String>[
   glossaryS
 ];
 
+
 // magic strings //
-//please see more magic strings within the shallow model constructors
+//please see more magic strings within model constructors
+
+/// this is a json map instead of an enum
+/// so it can be passed to a common dropdown button
+const cargoCategory = <String,dynamic>{
+    'Steward':0,
+    'Emergency': 1,
+    'Extra':2
+};
+
 
 // base url for api requests
 const baseurl = 'http://localhost:8080/fl-api/';
