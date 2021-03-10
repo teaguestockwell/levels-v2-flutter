@@ -13,32 +13,17 @@ COPY . .
 # Get app packages
 RUN flutter pub get
 
-# Echo version 
-RUN flutter doctor
-
-# SCA && Lint
-RUN flutter analyze; exit 0
-
-# Run tests, continue on error
-RUN flutter test --machine > tests.output; exit 0
-
-# Compute coverage (--machine and --coverage cannot be run at once...), continue on error
-RUN flutter test --coverage; exit 0
-
-# Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
-#RUN sonar-scanner
-
 # Build app for web using skia => webassembly using webgl
 RUN flutter build web --web-renderer canvaskit --release
 
 # Final docker stage.
-FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.0.244
-
-# Run as a unprivileged user
-USER appuser
+FROM nginx
 
 # Copy build output from first stage into dir that nginx serves
 COPY --from=0 /app/build/web /usr/share/nginx/html
+
+# Copy local build from root dir into dir that nginx serves 
+#COPY ./build/web/ /usr/share/nginx/html
 
 # Copy nginx config from root dir into nginx config
 COPY nginx.config /etc/nginx/nginx.conf

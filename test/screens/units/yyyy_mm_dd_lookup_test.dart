@@ -22,7 +22,7 @@ void main() {
     expect(find.text('Julian Day'), findsOneWidget);
     expect(find.text('YYYY MM DD'), findsOneWidget);
     expect(find.byType(Divider), findsNWidgets(2));
-    expect(find.byType(FlatButton), findsNWidgets(2));
+    expect(find.byType(TextButton), findsNWidgets(2));
   });
 
   testWidgets(

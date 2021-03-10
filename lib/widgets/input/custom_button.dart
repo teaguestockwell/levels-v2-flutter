@@ -22,7 +22,7 @@ class _CustomButtonState extends State<CustomButton> {
             color: buttonColor, borderRadius: BorderRadius.circular(8)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: FlatButton(
+          child: TextButton(
             onPressed: this.widget.onPressed ?? () {},
             child: Tex(
               this.widget.text,

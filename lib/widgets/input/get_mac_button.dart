@@ -23,7 +23,7 @@ class GetMacButton extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: FlatButton(
+              child: TextButton(
                 key: Key('get mac'),
                 onPressed: onPressed,
                 child: Tex(

@@ -1,0 +1,11 @@
+android
+build
+ios
+coverage
+local
+.idea
+.dart_tool
+.vscode
+build
+coverage
+Path_toCtF
