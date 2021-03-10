@@ -32,7 +32,8 @@ RUN flutter test --coverage; exit 0
 RUN flutter build web --web-renderer canvaskit --release
 
 # Final docker stage.
-FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.0.244
+FROM nginx
+#FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.0.244
 
 # Run as a unprivileged user
 USER appuser
