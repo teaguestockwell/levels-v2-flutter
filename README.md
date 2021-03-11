@@ -1,5 +1,22 @@
-A X-Platform application for aircraft weight an balance using Google Flutter.
+# Required dependancies
+1. install git https://www.atlassian.com/git/tutorials/install-git
+2. install docker: https://docs.docker.com/get-docker/
+3. install vscode: https://code.visualstudio.com/download
+4. install the vs code extension: https://marketplace.visualstudio.com/items?
+# To compose UI-API-DB
+#### Mac
+git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.sh
+#### Windows
+git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.ps1
+# Setup your dev env
+1. click on green button that looks like this in bottom left of vs code >< 
+2. click open workspace in container
+3. run: flutter pub get
+4. code stuff && profit?
+# What the heck is a fullstack template?
+BSwenson made a tool that mock the P1 env locally by injecting an auth header. This allows us to create roles and profiles for users authenticated with P1's Keycloak: https://code.il2.dso.mil/brandon.swenson/fullstack-template
 
+# A X-Platform application for aircraft weight an balance using Google Flutter.
 AMC MX Group Confrence presentation https://www.youtube.com/watch?v=ybnVkH23D60&feature=youtu.be
 
 To run an old web build that is hosted on the interwebs: https://fivelevel.web.app
@@ -7,18 +24,11 @@ To run an old web build that is hosted on the interwebs: https://fivelevel.web.a
 Flutter build command used for release
 flutter build web --web-renderer canvaskit --release
 
-Flutter commit used to build release 
-git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
-
 Docker command used to rm, build, and run img
 docker rm flfimg && docker build . -t flf && docker run -p 8080:8080 --name flfimg flf && docker exec -it flfimg bash
 
-endpoint for all aircraft http://localhost:8080/fl-api/
-
 ![Screen Shot 2020-12-22 at 18 50 33](https://user-images.githubusercontent.com/71202372/102958744-814aa980-4492-11eb-8420-7692dfcef107.png)
-
 ![Screen Shot 2020-12-22 at 19 32 21](https://user-images.githubusercontent.com/71202372/102958745-827bd680-4492-11eb-908d-df18c108b170.png)
-
 ![Screen Shot 2020-12-22 at 20 22 54](https://user-images.githubusercontent.com/71202372/102960181-40549400-4496-11eb-8c22-245797438541.png)
 ![Screen Shot 2020-12-22 at 20 23 01](https://user-images.githubusercontent.com/71202372/102960183-40ed2a80-4496-11eb-87a1-0b0b4d932784.png)
 ![Screen Shot 2020-12-22 at 20 23 10](https://user-images.githubusercontent.com/71202372/102960184-40ed2a80-4496-11eb-984f-92550c2a8b8a.png)
