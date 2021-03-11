@@ -13,7 +13,7 @@
 
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"coenraads.bracket-pair-colorizer-2",
+		"coenraads.bracket-pair-colorizer",
 		"dart-code.dart-code",
 		"dart-code.flutter",
 		"ms-vsliveshare.vsliveshare"

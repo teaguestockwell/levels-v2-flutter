@@ -1,4 +1,4 @@
-A X-Platform application for aircraft weight an balance using Google Flutter.
+### A X-Platform application for aircraft weight an balance using Google Flutter.
 
 AMC MX Group Confrence presentation https://www.youtube.com/watch?v=ybnVkH23D60&feature=youtu.be
 
@@ -7,18 +7,23 @@ To run an old web build that is hosted on the interwebs: https://fivelevel.web.a
 Flutter build command used for release
 flutter build web --web-renderer canvaskit --release
 
-Flutter commit used to build release 
-git checkout 19b76ade6f6fa0cd739b43eac7c369375c2bc4a5
-
 Docker command used to rm, build, and run img
 docker rm flfimg && docker build . -t flf && docker run -p 8080:8080 --name flfimg flf && docker exec -it flfimg bash
 
-endpoint for all aircraft http://localhost:8080/fl-api/
+### Setup your dev env
+1. install git https://www.atlassian.com/git/tutorials/install-git
+2. install docker: https://docs.docker.com/get-docker/
+3. install vscode: https://code.visualstudio.com/download
+4. install the vs code extension: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers 
+5. run: git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git
+6. open in vscode
+7. click on green button that looks like this in bottom left of vs code >< 
+8. click open workspace in container
+9. run: flutter pub get
+10. code stuff && profit?
 
 ![Screen Shot 2020-12-22 at 18 50 33](https://user-images.githubusercontent.com/71202372/102958744-814aa980-4492-11eb-8420-7692dfcef107.png)
-
 ![Screen Shot 2020-12-22 at 19 32 21](https://user-images.githubusercontent.com/71202372/102958745-827bd680-4492-11eb-908d-df18c108b170.png)
-
 ![Screen Shot 2020-12-22 at 20 22 54](https://user-images.githubusercontent.com/71202372/102960181-40549400-4496-11eb-8c22-245797438541.png)
 ![Screen Shot 2020-12-22 at 20 23 01](https://user-images.githubusercontent.com/71202372/102960183-40ed2a80-4496-11eb-87a1-0b0b4d932784.png)
 ![Screen Shot 2020-12-22 at 20 23 10](https://user-images.githubusercontent.com/71202372/102960184-40ed2a80-4496-11eb-984f-92550c2a8b8a.png)
