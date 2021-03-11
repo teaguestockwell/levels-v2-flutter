@@ -9,6 +9,7 @@
 .history
 .svn/
 .md
+.dart_tool
 
 # IntelliJ related
 *.iml
