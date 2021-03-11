@@ -11,8 +11,7 @@ git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git fro
 # Setup your dev env
 1. click on green button that looks like this in bottom left of vs code >< 
 2. click open workspace in container
-3. run: flutter pub get
-4. code stuff && profit?
+3. code stuff && profit?
 # What the heck is a fullstack template?
 BSwenson made a tool that mock the P1 env locally by injecting an auth header. This allows us to create roles and profiles for users authenticated with P1's Keycloak: https://code.il2.dso.mil/brandon.swenson/fullstack-template
 
