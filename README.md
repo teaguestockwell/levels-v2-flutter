@@ -5,9 +5,9 @@
 4. install the vs code extension: https://marketplace.visualstudio.com/items?
 # To compose UI-API-DB
 #### Mac
-git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.sh
+git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git api && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.sh
 #### Windows
-git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.ps1
+git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git frontend && git clone https://code.il2.dso.mil/tron/products/five-level-app/api.git api && git clone https://code.il2.dso.mil/tron/products/five-level-app/docker-compose-dev.git fullstack-template && cd fullstack-template && bin/run.ps1
 # Setup your dev env
 1. click on green button that looks like this in bottom left of vs code >< 
 2. click open workspace in container
