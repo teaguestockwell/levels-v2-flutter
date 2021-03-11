@@ -9,6 +9,7 @@
 .history
 .svn/
 .md
+.dart_tool
 
 # IntelliJ related
 *.iml
@@ -30,7 +31,6 @@
 .packages
 .pub-cache/
 .pub/
-/.devcontainer
 
 /gen
 # Web related
