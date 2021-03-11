@@ -30,7 +30,6 @@
 .packages
 .pub-cache/
 .pub/
-/.devcontainer
 
 /gen
 # Web related
