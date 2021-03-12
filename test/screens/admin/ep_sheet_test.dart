@@ -1,3 +1,4 @@
+import 'package:five_level_one/constant.dart';
 import 'package:five_level_one/screens/admin/ep_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -170,6 +171,45 @@ main(){
     expect(find.byKey(Key('putting')), findsOneWidget);
   });
 
+    testWidgets('given a ep_sheet, when is back button is pressed, then it it change state to !putting', 
+  (WidgetTester wt) async {
+    // given
+    final test = EPSheet(
+      getN: getN,
+      delete1: delete1400,
+      put1: put1400,
+      apiResErrorMsgKey: apiResErrorMsgKey,
+      ep: ep,
+      title: title,
+      rebuildCallback: (){},
+      airid: airid,
+    );
+
+    final wrapper = wrap(test);
+    setScreenSize(wt);
+
+    await wt.pumpWidget(wrapper);
+    await wt.pumpAndSettle();
+
+    EPSheetState state = wt.state(find.byType(EPSheet));
+    expect(state.isPuttingState, false);
+
+    //when 
+    state.create();
+    await wt.pumpAndSettle();
+    expect(state.isPuttingState, true);
+    expect(find.byKey(Key('back')), findsOneWidget);
+    state = wt.state(find.byType(EPSheet));
+
+    state.goBack();
+    await wt.pumpAndSettle();
+    state = wt.state(find.byType(EPSheet));
+
+    //then
+    expect(state.isPuttingState, false);
+    expect(state.isNestedState, false);
+  });
+
 
   testWidgets('given a ep_sheet, when put returns 400, then Error will be displayed', 
   (WidgetTester wt) async {
@@ -226,4 +266,91 @@ main(){
 
     expect(find.text('Saved'), findsNWidgets(1));
   });
+
+  testWidgets('given a ep_sheet, when delete returns 400, then Error will be displayed', 
+  (WidgetTester wt) async {
+    // given
+    final test = EPSheet(
+      getN: getN,
+      delete1: delete1400,
+      put1: put1400,
+      apiResErrorMsgKey: apiResErrorMsgKey,
+      ep: ep,
+      title: title,
+      rebuildCallback: (){},
+      airid: airid,
+    );
+
+    final wrapper = wrap(test);
+    setScreenSize(wt);
+
+    //when
+    await wt.pumpWidget(wrapper);
+    expect(find.text('Error'), findsNWidgets(0));
+
+    EPSheetState state = wt.state(find.byType(EPSheet));
+    state.delete({});
+    await wt.pump();
+
+    expect(find.text('Error'), findsNWidgets(1));
+  });
+
+  testWidgets('given a ep_sheet, when delete returns 200, then Deleted will be displayed', 
+  (WidgetTester wt) async {
+    // given
+    final test = EPSheet(
+      getN: getN,
+      delete1: delete1200,
+      put1: put1400,
+      apiResErrorMsgKey: apiResErrorMsgKey,
+      ep: ep,
+      title: title,
+      rebuildCallback: (){},
+      airid: airid,
+    );
+
+    final wrapper = wrap(test);
+    setScreenSize(wt);
+
+    //when
+    await wt.pumpWidget(wrapper);
+    expect(find.text('Deleted'), findsNWidgets(0));
+
+    EPSheetState state = wt.state(find.byType(EPSheet));
+    state.delete({});
+    await wt.pump();
+
+    expect(find.text('Deleted'), findsNWidgets(1));
+  });
+
+   testWidgets('given a ep_sheet, update callback is called with a deep model (Config), then is nested will be true', 
+  (WidgetTester wt) async {
+    // given
+    final test = EPSheet(
+      getN: getN,
+      delete1: delete1200,
+      put1: put1400,
+      apiResErrorMsgKey: apiResErrorMsgKey,
+      ep: ep,
+      title: title,
+      rebuildCallback: (){},
+      airid: airid,
+    );
+
+    final wrapper = wrap(test);
+    setScreenSize(wt);
+
+    //when
+    await wt.pumpWidget(wrapper);
+    EPSheetState state = wt.state(find.byType(EPSheet));
+    expect(state.isNestedState, false);
+    expect(state.configIDState, null);
+
+    state.update(<String,dynamic>{searchField: 'ae1', configFK: [], configCargoPK: 1});
+    await wt.pumpAndSettle();
+
+    expect(state.isNestedState, true);
+    expect(state.configIDState, 1);
+  });
+ 
 }

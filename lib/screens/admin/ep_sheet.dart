@@ -136,6 +136,7 @@ class EPSheetState extends State<EPSheet> {
     final empty = Container(width: 150.0, height: 40.0);
 
     final backButton = Container(
+      key: Key('back'),
       width: w,
       height: h,
       child: Align(
