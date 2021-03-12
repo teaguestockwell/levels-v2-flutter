@@ -6,14 +6,14 @@ import '../../util.dart';
 class JsonTable extends StatefulWidget {
   final String ep;
   final List<dynamic> jsonList;
-  final void Function(Map<String, dynamic>) delete;
-  final void Function(Map<String, dynamic>) edit;
+  final void Function(Map<String, dynamic>) onDelete;
+  final void Function(Map<String, dynamic>) onEdit;
 
   JsonTable({
     @required this.ep,
     @required this.jsonList,
-    @required this.delete,
-    @required this.edit,
+    @required this.onDelete,
+    @required this.onEdit,
   }) : super(key: UniqueKey());
 
   @override
@@ -169,11 +169,11 @@ class _JsonTableState extends State<JsonTable> {
 
     // delete icon
     cells.add(getIconButtonCell(
-        iconData: 59043, obj: objInRowAsMap, onPressed: this.widget.delete));
+        iconData: 59043, obj: objInRowAsMap, onPressed: this.widget.onDelete));
 
     // edit icon
     cells.add(getIconButtonCell(
-        iconData: 57623, obj: objInRowAsMap, onPressed: this.widget.edit));
+        iconData: 57623, obj: objInRowAsMap, onPressed: this.widget.onEdit));
 
     // flexible space at end of row
     cells.add(Spacer());

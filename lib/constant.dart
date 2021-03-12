@@ -209,6 +209,8 @@ const airPK = 'id';
 const configCargoPK = 'configid';
 const configFK = 'configcargos';
 
+const apiErrorKey = 'msg';
+
 /// will be common to all modifiable models,
 /// sorted alabeticly as well
 const searchField = 'name';

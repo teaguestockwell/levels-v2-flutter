@@ -12,3 +12,6 @@ linter:
     - prefer_relative_imports
     - avoid_init_to_null
     - avoid_catches_without_on_clauses
+analyzer:
+  errors:
+    missing_required_param: error
