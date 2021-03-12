@@ -19,7 +19,8 @@
 		"ms-vsliveshare.vsliveshare"
 	],
 
-	"postCreateCommand": "flutter pub get && apt-get update -qq -y && apt-get install lcov -y && chmod +x test/cc_report.sh",
+	// get flutter packages and make cc_report executable
+	"postCreateCommand": "flutter pub get && chmod +x test/cc_report.sh",
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
