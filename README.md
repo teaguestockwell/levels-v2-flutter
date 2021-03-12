@@ -12,6 +12,13 @@ git clone https://code.il2.dso.mil/tron/products/five-level-app/frontend.git fro
 1. click on green button that looks like this in bottom left of vs code >< 
 2. click open workspace in container
 3. code stuff && profit?
+# Testing
+#### Where are the integration tests?
+Flutter comes bundled with the dart vm. When you run flutter test it renders widgets of the app in memory or on a device. The test has full interactivity with that running widget. https://flutter.dev/docs/testing
+#### run tests
+inside container run: flutter test 
+#### run tests generate html code cov
+inside container run: test/cc_report.sh
 # What the heck is a fullstack template?
 BSwenson made a tool that mock the P1 env locally by injecting an auth header. This allows us to create roles and profiles for users authenticated with P1's Keycloak: https://code.il2.dso.mil/brandon.swenson/fullstack-template
 
