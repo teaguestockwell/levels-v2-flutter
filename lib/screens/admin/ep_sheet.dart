@@ -228,7 +228,6 @@ class EPSheetState extends State<EPSheet> {
         Flexible(
           child: JsonTable(
             jsonList: jsonList,
-            ep: epState,
             onDelete: delete,
             onEdit: put
           ),

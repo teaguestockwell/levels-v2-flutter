@@ -4,13 +4,11 @@ import '../../constant.dart';
 import '../../util.dart';
 
 class JsonTable extends StatefulWidget {
-  final String ep;
   final List<dynamic> jsonList;
   final void Function(Map<String, dynamic>) onDelete;
   final void Function(Map<String, dynamic>) onEdit;
 
   JsonTable({
-    @required this.ep,
     @required this.jsonList,
     @required this.onDelete,
     @required this.onEdit,
@@ -55,6 +53,7 @@ class _JsonTableState extends State<JsonTable> {
           borderRadius: BorderRadius.circular(25),
         ),
         child: TextField(
+          key: Key('searchbar'),
           style: dmDisabled,
           onChanged: onSearch,
           decoration: InputDecoration(

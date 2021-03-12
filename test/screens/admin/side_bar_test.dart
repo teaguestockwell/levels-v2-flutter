@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Widget wrap(Widget t) => MaterialApp(home: t);
+
+void setScreenSize(WidgetTester wt){
+  //set screen size to desktop
+  wt.binding.window.physicalSizeTestValue = Size(1280, 700);
+  wt.binding.window.devicePixelRatioTestValue = 1.0;
+  // resets the screen to its orinal size after the test end
+  addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+}
+
 main(){
 testWidgets('given a side_bar, when rendered, then it will draw', 
   (WidgetTester wt) async {
     // given
     final test = SideBar();
     final wrapper = wrap(test);
-    //set screen size to desktop
-    wt.binding.window.physicalSizeTestValue = Size(1280, 700);
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+setScreenSize(wt);
 
     //when
     await wt.pumpWidget(wrapper);
@@ -27,11 +32,7 @@ testWidgets('given a side_bar, when rendered, then it will draw',
     // given
     final test = SideBar();
     final wrapper = wrap(test);
-    //set screen size to desktop
-    wt.binding.window.physicalSizeTestValue = Size(1280, 700);
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+setScreenSize(wt);
 
     //when
     await wt.pumpWidget(wrapper);
@@ -48,11 +49,7 @@ testWidgets('given a side_bar, when rendered, then it will draw',
     final test = SideBar();
     final wrapper = wrap(test);
     await wt.pumpWidget(wrapper);
-    //set screen size to desktop
-    wt.binding.window.physicalSizeTestValue = Size(1280, 700);
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+setScreenSize(wt);
 
     //when
     await wt.tap(find.byKey(Key('sidebar menu item 1')));
@@ -69,11 +66,7 @@ testWidgets('given a side_bar, when rendered, then it will draw',
     final test = SideBar();
     final wrapper = wrap(test);
     await wt.pumpWidget(wrapper);
-    //set screen size to desktop
-    wt.binding.window.physicalSizeTestValue = Size(1280, 700);
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+setScreenSize(wt);
 
     //when
     SideBarState state0 = wt.state(find.byType(SideBar));
@@ -91,11 +84,7 @@ testWidgets('given a side_bar, when rendered, then it will draw',
     final test = SideBar();
     final wrapper = wrap(test);
     await wt.pumpWidget(wrapper);
-    //set screen size to desktop
-    wt.binding.window.physicalSizeTestValue = Size(1280, 700);
-    wt.binding.window.devicePixelRatioTestValue = 1.0;
-    // resets the screen to its orinal size after the test end
-    addTearDown(wt.binding.window.clearPhysicalSizeTestValue);
+setScreenSize(wt);
     final mockDropDownSpinnerCallbackParams = <String,dynamic>{'c17':1};
 
     //when
