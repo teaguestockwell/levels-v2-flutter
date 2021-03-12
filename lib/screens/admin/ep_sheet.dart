@@ -12,14 +12,12 @@ class EPSheet extends StatefulWidget {
   final int airid;
   final String title;
   final void Function() rebuildCallback;
-  final Map<String, String> reqParam;
   final Future<List<dynamic>> Function(String,{Map<String,String> reqParam}) getN;
   final Future<Response> Function(String,Map<String,dynamic>) put1;
   final String apiResErrorMsgKey;
   final Future<Response> Function(String,Map<String, dynamic>) delete1;
   EPSheet({
     @required this.ep,
-    @required this.reqParam,
     @required this.title,
     @required this.airid,
     @required this.rebuildCallback,
@@ -29,10 +27,10 @@ class EPSheet extends StatefulWidget {
     @required this.delete1
   }) : super(key: UniqueKey());
   @override
-  _EPSheetState createState() => _EPSheetState();
+  EPSheetState createState() => EPSheetState();
 }
 
-class _EPSheetState extends State<EPSheet> {
+class EPSheetState extends State<EPSheet> {
   String epState;
   String titleState;
   Map<String, String> reqParamState;
@@ -48,7 +46,7 @@ class _EPSheetState extends State<EPSheet> {
     isNestedState = false;
     epState = this.widget.ep;
     titleState = this.widget.title;
-    reqParamState = this.widget.reqParam;
+    reqParamState = {topLvlEPPK: this.widget.airid.toString()};
   }
 
   /// create is a wrapper arund update that sets the model
@@ -96,7 +94,7 @@ class _EPSheetState extends State<EPSheet> {
       setState(() {
         epState = this.widget.ep;
         titleState = this.widget.title;
-        reqParamState = this.widget.reqParam;
+        reqParamState = {topLvlEPPK: this.widget.airid.toString()};
         isNestedState = false;
       });
     } else {
@@ -209,7 +207,7 @@ class _EPSheetState extends State<EPSheet> {
         content: Container(
           height: 200,
           child: Center(
-            child: Text(error, style: dmbody1)
+            child: Text(error ?? 'Error', style: dmbody1)
           )
         )
       )
@@ -218,6 +216,7 @@ class _EPSheetState extends State<EPSheet> {
 
   Widget getOn200(List<dynamic> jsonList) {
     return Column(
+      key: Key('json'),
       children: [
         Padding(
             padding: const EdgeInsets.only(bottom: 40),
@@ -239,6 +238,7 @@ class _EPSheetState extends State<EPSheet> {
 
   Widget getOn200IsPutting() {
     return Column(
+      key: Key('putting'),
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
@@ -255,6 +255,7 @@ class _EPSheetState extends State<EPSheet> {
 
   Widget getOnLoading() {
     return Column(
+      key: Key('loading'),
       children: [
         Padding(
           padding: const EdgeInsets.only(bottom: 40),
@@ -269,7 +270,9 @@ class _EPSheetState extends State<EPSheet> {
   }
 
   Widget getOn200Empty() {
-    return Column(children: [
+    return Column(
+      key: Key('empty'),
+      children: [
       Padding(
         padding: const EdgeInsets.only(bottom: 40),
         child: Row(

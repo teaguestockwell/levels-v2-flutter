@@ -118,7 +118,6 @@ class SideBarState extends State<SideBar> {
                 rebuildCallback: rebuild,
                 airid: airIdx,
                 ep: topEPs[menuIdx],
-                reqParam: {topLvlEPPK: airIdx.toString()},
                 title: getTitle(menuIdx)),
           ))
         ])),
