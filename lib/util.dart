@@ -16,60 +16,69 @@ typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, Cargo value);
 typedef void UnitChangeCB(var i);
 
-  String getTruncated(String s, int max) {
-    if (s.length <= max) {
-      return s;
-    }
-    return s.substring(0, max - 3) + '...';
+/// for each model in api response, add the model.name as key and model[pk] as val into map
+Map<String,dynamic> mapOfNameIDFromAPIGetN(List<dynamic> x, String apiModelPK) {
+  return Map.fromEntries(
+    x.map<MapEntry<String,dynamic>>(
+      (x) => MapEntry(x[searchField],x[apiModelPK])
+    )
+  );
+}
+
+
+String getTruncated(String s, int max) {
+  if (s.length <= max) {
+    return s;
   }
+  return s.substring(0, max - 3) + '...';
+}
 
-  int getDaysInYear(int year) {
-    final isLeap = Jiffy({'year': year}).isLeapYear;
-    if (isLeap) {
-      return 366;
-    } else {
-      return 365;
-    }
+int getDaysInYear(int year) {
+  final isLeap = Jiffy({'year': year}).isLeapYear;
+  if (isLeap) {
+    return 366;
+  } else {
+    return 365;
   }
+}
 
-  Color getValidColor(bool isValid){
-     if (isValid) {
-      return nonfocusedBoderColors;
-    }
-    return nonfocusedErrorBoderColor;
+Color getValidColor(bool isValid){
+    if (isValid) {
+    return nonfocusedBoderColors;
   }
+  return nonfocusedErrorBoderColor;
+}
 
-  int idx = 0;
-  ///Given a string try to parse into double. If fail make toast with error.
-  double parsedouble(String s) {
+int idx = 0;
+///Given a string try to parse into double. If fail make toast with error.
+double parsedouble(String s) {
 
-    if(s.isEmpty){s = '0';}
+  if(s.isEmpty){s = '0';}
 
-    try {
-      return double.parse(s);
-    // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      throw Exception('${s} could not be parsed as a double');
-    }
+  try {
+    return double.parse(s);
+  // ignore: avoid_catches_without_on_clauses
+  } catch (e) {
+    throw Exception('${s} could not be parsed as a double');
   }
+}
 
-  int getUniqueIdx() {
-    idx++;
-    return idx - 1;
+int getUniqueIdx() {
+  idx++;
+  return idx - 1;
+}
+
+int parseint(s) {
+  if(s.isEmpty){s = '0';}
+  try {
+    return int.parse(s);
+  // ignore: avoid_catches_without_on_clauses
+  } catch (e) {
+    throw Exception('${s} could not be parsed as an int');
   }
+}
 
-  int parseint(s) {
-    if(s.isEmpty){s = '0';}
-    try {
-      return int.parse(s);
-    // ignore: avoid_catches_without_on_clauses
-    } catch (e) {
-      throw Exception('${s} could not be parsed as an int');
-    }
-  }
-
-  String fixed(double x) => x.toStringAsFixed(2);
-
+String fixed(double x) => x.toStringAsFixed(2);
 
 class Distance {
   double numOfBases;
