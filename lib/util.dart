@@ -16,15 +16,14 @@ typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, Cargo value);
 typedef void UnitChangeCB(var i);
 
-/// for each model in api response, add the model.name as key and model[pk] as val into map
-Map<String,dynamic> mapOfNameIDFromAPIGetN(List<dynamic> x, String apiModelPK) {
-  return Map.fromEntries(
-    x.map<MapEntry<String,dynamic>>(
-      (x) => MapEntry(x[searchField],x[apiModelPK])
-    )
-  );
-}
-
+// /// for each model in api response, add the model.name as key and model[pk] as val into map
+// Map<String,dynamic> mapOfNameIDFromAPIGetN(List<dynamic> x, String apiModelPK) {
+//   return Map.fromEntries(
+//     x.map<MapEntry<String,dynamic>>(
+//       (x) => MapEntry(x[searchField],x[apiModelPK])
+//     )
+//   );
+// }
 
 String getTruncated(String s, int max) {
   if (s.length <= max) {

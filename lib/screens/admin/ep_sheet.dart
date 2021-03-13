@@ -229,7 +229,7 @@ class EPSheetState extends State<EPSheet> {
           child: JsonTable(
             jsonList: jsonList,
             onDelete: delete,
-            onEdit: put
+            onEdit: update
           ),
         )
       ]

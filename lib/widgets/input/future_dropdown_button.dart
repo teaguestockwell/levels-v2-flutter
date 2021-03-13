@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../constant.dart';
-import '../../util.dart';
 class FutureDropDownButton extends StatelessWidget {
   /// call back of the newly selected model
   final void Function(Map<String, dynamic>) onChange;
@@ -9,7 +8,7 @@ class FutureDropDownButton extends StatelessWidget {
   /// the future containg a list of models
   final Future<List<dynamic>> future;
   /// the primary key of the model to be displayied first and passed to onchange after initState
-  final int initID;
+  final int initPKID;
   /// msg shown when future res.length = 0
   final String onEmptyMSG;
 
@@ -18,7 +17,7 @@ class FutureDropDownButton extends StatelessWidget {
     @required this.onChange,
     @required this.apiModelPK,
     @required this.future,
-    this.initID = -1 // -1 is never a valid index
+    this.initPKID = -1 // -1 is never a valid index
   }) : super(key: UniqueKey());
 
   @override
@@ -28,9 +27,10 @@ class FutureDropDownButton extends StatelessWidget {
         builder: (_,sh) {
           if (sh.data != null && sh.data.length > 0) {
               return DropDownButton(
+                apiModelPK: apiModelPK,
                 onChange: onChange,
-                initID: initID,
-                map: mapOfNameIDFromAPIGetN(sh.data, apiModelPK)
+                initPKID: initPKID,
+                jsonList: sh.data
               );
           }  else if(sh.data != null){
             return Container(
@@ -51,17 +51,20 @@ class FutureDropDownButton extends StatelessWidget {
 }
 class DropDownButton extends StatefulWidget {
   /// k = seachfield v = model's pk
-  final Map<String, dynamic> map;
+  final List<Map<String, dynamic>> jsonList;
   /// call back of the newly selected model
   final void Function(Map<String, dynamic>) onChange;
   /// the primary key of the model
-  final int initID;
+  final int initPKID;
+  /// the key where the val is the models pk
+  final String apiModelPK;
 
   DropDownButton({
-    @required this.map,
+    @required this.apiModelPK,
+    @required this.jsonList,
     @required this.onChange,
-    @required this.initID
-    }) : super(key: UniqueKey());
+    @required this.initPKID
+  }) : super(key: UniqueKey());
 
   @override
   DropDownButtonState createState() => DropDownButtonState();
@@ -70,7 +73,7 @@ class DropDownButton extends StatefulWidget {
 class DropDownButtonState extends State<DropDownButton> {
   var _dropdownMenuItems = <DropdownMenuItem<String>>[];
   String selected;
-  Map<int, int> pkiDIndexMap = {};
+  //Map<int, int> pkiDIndexMap = {};
 
   @override
   void initState() {
@@ -79,37 +82,36 @@ class DropDownButtonState extends State<DropDownButton> {
     _dropdownMenuItems = buildDropdownMenuItems();
 
     // if has init index
-    if (this.widget.initID != -1) {
+    if (this.widget.initPKID != -1) {
 
       // init drop title to pkid using map
-      selected = _dropdownMenuItems[pkiDIndexMap[this.widget.initID]].value;
+      selected = this.widget.jsonList.firstWhere(
+        (obj) => obj[this.widget.apiModelPK] == this.widget.initPKID
+      )[searchField];
 
     } else {
-      selected = _dropdownMenuItems[0].value;
+      selected = this.widget.jsonList[0][searchField];
     }
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // init state to displaied element
-      this.widget.onChange(Map.fromEntries(this.widget.map.entries.where((x) => x.key == selected)));
+      this.widget.onChange(
+        this.widget.jsonList.firstWhere(
+          (obj) => obj[searchField] == selected
+        )
+      );
     });
   }
 
   List<DropdownMenuItem<String>> buildDropdownMenuItems() {
-    final items = <DropdownMenuItem<String>>[];
-    int counter = 0;
-    this.widget.map.forEach((k, v) {
-      pkiDIndexMap[v] = counter;
-      counter++;
-      items.add(
-        DropdownMenuItem(
-          key: UniqueKey(),
-          value: k,
-          child: Text(k, style: dmDisabled),
-          onTap: () => this.widget.onChange({k: v}),
-        )
-      );
-    });
-    return items;
+    return this.widget.jsonList.map<DropdownMenuItem<String>>(
+      (obj) => DropdownMenuItem(
+        key: UniqueKey(),
+        value: obj[searchField],
+        child: Text(obj[searchField],style: dmDisabled),
+        onTap: () => this.widget.onChange(obj),
+      )
+    ).toList();
   }
 
   @override

@@ -17,7 +17,7 @@ class CargoShallow implements APISerialiable {
   double fs;
   void setFs(double s) => fs = s;
   String category;
-  void setCategory(Map<String,dynamic> m) => category = m.keys.elementAt(0);
+  void setCategory(Map<String,dynamic> m) => category = m[searchField];
 
   String ep = 'cargo';
   Function(Map<String, dynamic>) onSave;
@@ -48,10 +48,12 @@ class CargoShallow implements APISerialiable {
         child: SingleChildScrollView(
             child: Column(children: [
           DropDownButton(
-            map: cargoCategory,
-            // get the value where the key == initial category
-            initID: cargoCategory.entries.firstWhere((e) => e.key == category).value,
+            jsonList: cargoCategorys,
+            apiModelPK: cargoCategoryPK,
             onChange: setCategory,
+            initPKID: cargoCategorys.firstWhere(
+              (obj) => obj[searchField] == category
+            )[cargoCategoryPK],
           ),
           EditTextAdmin(
               initialValue: name,

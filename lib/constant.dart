@@ -184,12 +184,12 @@ const topEPs = <String>[
 
 /// this is a json map instead of an enum
 /// so it can be passed to a common dropdown button
-const cargoCategory = <String,dynamic>{
-    'Steward':0,
-    'Emergency': 1,
-    'Extra':2
-};
+const cargoCategorys = [
+  {searchField:'Steward', cargoCategoryPK: 0},
+  {searchField:'Emergency', cargoCategoryPK: 1},
+  {searchField:'Extra', cargoCategoryPK: 2},
 
+];
 
 // base url for api requests
 const baseurl = 'http://localhost:8080/fl-api/';
@@ -208,8 +208,8 @@ const topLvlEPPK = 'aircraftid';
 const airPK = 'id';
 const configCargoPK = 'configid';
 const configFK = 'configcargos';
-
 const apiErrorKey = 'msg';
+const cargoCategoryPK = 'id';
 
 /// will be common to all modifiable models,
 /// sorted alabeticly as well

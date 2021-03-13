@@ -39,8 +39,8 @@ setScreenSize(wt);
     SideBarState state0 = wt.state(find.byType(SideBar));
 
     // then
-    expect(state0.airIdx,0);
-    expect(state0.menuIdx,0);
+    expect(state0.airPKState,0);
+    expect(state0.menuIdxState,0);
   });
 
   testWidgets('given a side_bar, when menu item is tapped, then it change to it', 
@@ -56,8 +56,8 @@ setScreenSize(wt);
     SideBarState state0 = wt.state(find.byType(SideBar));
 
     // then
-    expect(state0.airIdx,0);
-    expect(state0.menuIdx,1);
+    expect(state0.airPKState,0);
+    expect(state0.menuIdxState,1);
   });
 
    testWidgets('given a side_bar, when rebuild callback is called, then it build', 
@@ -94,6 +94,6 @@ setScreenSize(wt);
     SideBarState state1 = wt.state(find.byType(SideBar));
 
     // then
-    expect(state1.airIdx, isNot(0));
+    expect(state1.airPKState, isNot(0));
   });
 }

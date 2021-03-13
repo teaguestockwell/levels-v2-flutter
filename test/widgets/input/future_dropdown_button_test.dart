@@ -1,4 +1,3 @@
-import 'package:five_level_one/util.dart';
 import 'package:five_level_one/widgets/input/future_dropdown_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,27 +14,17 @@ Future<List<dynamic>> getNEmpty() async {
 
 // mock api res for getN of model
 Future<List<dynamic>> getN() async {
-  return <dynamic>[
-    {'id': 1, 'userid':1, 'name':'joe', 'role': 1},
-    {'id': 1, 'userid':10, 'name':'dan', 'role': 1}
-  ];
+  return jsonList;
 }
 
-// this is what api res looks like after each element is transformed
-// into 1 map where key = searchField && val = apiModelPK
-final map = <String,dynamic>{
-  'joe':1,
-  'dan':10
-};
+const jsonList = <Map<String,dynamic>>[
+  {'id': 1, 'userid':1, 'name':'joe', 'role': 1},
+  {'id': 1, 'userid':10, 'name':'dan', 'role': 1}
+];
 const emptyMsg = 'empty';
-const apiModelPK = 'id';
+const apiModelPK = 'userid';
 
 main(){
-
-test('given an api res that contains list of models, when mapOfNameIDFromAPIGetN is called, then return map', ()async{
-  final ret = await mapOfNameIDFromAPIGetN(await getN(),'userid');
-  expect(ret,map);
-});
 testWidgets('given a future_drop_down_button, when future is null, then it will render loading state', 
   (WidgetTester wt) async {
     // given
@@ -96,9 +85,10 @@ testWidgets('given a future_drop_down_button, when future is null, then it will 
   (WidgetTester wt) async {
     // given
     final test = DropDownButton(
+      apiModelPK: apiModelPK,
       onChange: (_){},
-      map: map,
-      initID: -1,
+      jsonList: jsonList,
+      initPKID: -1,
     );
     final wrapper = wrap(test);
 
@@ -115,9 +105,10 @@ testWidgets('given a future_drop_down_button, when future is null, then it will 
   (WidgetTester wt) async {
     // given
     final test = DropDownButton(
+      apiModelPK: apiModelPK,
       onChange: (_){},
-      map: map,
-      initID: 10,
+      jsonList: jsonList,
+      initPKID: 10,
     );
     final wrapper = wrap(test);
 
@@ -132,22 +123,22 @@ testWidgets('given a future_drop_down_button, when future is null, then it will 
 
   testWidgets('given a down_button with initid 10, when redered, then it will callback with model where pk = 10', 
   (WidgetTester wt) async {
-    Map<String, dynamic> acctualCallBack;
+    Map<String, dynamic> acctual;
     // given
     final test = DropDownButton(
-      onChange: (x) => acctualCallBack = x,
-      map: map,
-      /// dan has a pkid of 10, so this should be reflected in the callback on initstate
-      initID: 10,
+      apiModelPK: apiModelPK,
+      onChange: (x) => acctual = x,
+      jsonList: jsonList,
+      initPKID: 10,
     );
     final wrapper = wrap(test);
 
     //when
     await wt.pumpWidget(wrapper);
     await wt.pumpAndSettle();
-    final expectedCallbackPKID = map['dan'];
+    final expected = jsonList.firstWhere((obj) => obj[apiModelPK] == 10);
 
     // then
-    expect(acctualCallBack.entries.elementAt(0).value,expectedCallbackPKID,);
+    expect(acctual,expected);
   });
 }

@@ -12,8 +12,8 @@ class SideBar extends StatefulWidget {
 
 class SideBarState extends State<SideBar> {
   FutureDropDownButton drop;
-  int airIdx = 0;
-  int menuIdx = 0;
+  int airPKState = 0;
+  int menuIdxState = 0;
   int buildCount = 0; // to test rebuilds
 
   @override
@@ -22,12 +22,13 @@ class SideBarState extends State<SideBar> {
     drop = getAirDropDown();
   }
 
-  void panelTapped(int i) => setState(() => menuIdx = i);
+  void panelTapped(int i) => setState(() => menuIdxState = i);
 
+  /// used to callback an rebuild airdropdown so when air is deleted the dropdown is updated
   void rebuild() => setState(() => drop = getAirDropDown());
 
-  void setAirState(Map<String, dynamic> newAir) {
-    setState(() => airIdx = newAir.values.elementAt(0));
+  void setAirState(Map<String, dynamic> obj) {
+    setState(() => airPKState = obj[airPK]);
   }
 
   String getTitle(int i) => topEPs[i].capitalize() + 's';
@@ -40,7 +41,7 @@ class SideBarState extends State<SideBar> {
       );
 
   Widget getTile(int i, double pad) {
-    if (i == menuIdx) {
+    if (i == menuIdxState) {
       return ListTile(
           key: Key('sidebar menu item ${i}'),
           title: Padding(
@@ -116,9 +117,9 @@ class SideBarState extends State<SideBar> {
                 delete1: delete1,
                 getN: getN,
                 rebuildCallback: rebuild,
-                airid: airIdx,
-                ep: topEPs[menuIdx],
-                title: getTitle(menuIdx)),
+                airid: airPKState,
+                ep: topEPs[menuIdxState],
+                title: getTitle(menuIdxState)),
           ))
         ])),
       ),

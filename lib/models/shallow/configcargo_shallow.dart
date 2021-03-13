@@ -38,12 +38,8 @@ class ConfigCargoShallow implements APISerialiable {
         "name": name,
       };
 
-  void change(Map<String, dynamic> map) {
-    //print(map);
-    cargoid = map.values.elementAt(0);
-    //print(cargoid);
-  }
-
+  void change(Map<String, dynamic> m) => cargoid = m["cargoid"];
+  
   Widget getForm() {
     final key = GlobalKey<FormState>();
     return Form(
@@ -52,7 +48,7 @@ class ConfigCargoShallow implements APISerialiable {
             child: Column(children: [
           FutureDropDownButton(
             onEmptyMSG: '0 Cargo to connect to config. Try making one',
-              initID: cargoid,
+              initPKID: cargoid,
               future: getN('cargo',reqParam: {'aircraftid': aircraftid.toString()}),
               onChange: change,
               apiModelPK: 'cargoid',
