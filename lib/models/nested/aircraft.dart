@@ -94,36 +94,36 @@ class Aircraft {
       });
     }
 
-    Map<String, dynamic> get json {
-      Map<String, dynamic> ret = {};
-      ret['id'] = id;
-      ret['name'] = name;
-      ret['fs0'] = fs0;
-      ret['fs1'] = fs1;
-      ret['mom0'] = mom0;
-      ret['mom1'] = mom1;
-      ret['weight0'] = weight0;
-      ret['weight1'] = weight1;
-      ret['cargoweight1'] = cargoweight1;
-      ret['lemac'] = lemac;
-      ret['mac'] = mac;
-      ret['mommultiplyer'] = mommultiplier;
+    // Map<String, dynamic> get json {
+    //   Map<String, dynamic> ret = {};
+    //   ret['id'] = id;
+    //   ret['name'] = name;
+    //   ret['fs0'] = fs0;
+    //   ret['fs1'] = fs1;
+    //   ret['mom0'] = mom0;
+    //   ret['mom1'] = mom1;
+    //   ret['weight0'] = weight0;
+    //   ret['weight1'] = weight1;
+    //   ret['cargoweight1'] = cargoweight1;
+    //   ret['lemac'] = lemac;
+    //   ret['mac'] = mac;
+    //   ret['mommultiplyer'] = mommultiplier;
 
-      var cargolist = [];
-      cargos.forEach((x) => cargolist.add(x.json));
-      ret['cargos'] = cargolist;
+    //   var cargolist = [];
+    //   cargos.forEach((x) => cargolist.add(x.json));
+    //   ret['cargos'] = cargolist;
 
-      var tanklist = [];
-      tanks.forEach((x) => tanklist.add(x.json));
-      ret['tanks'] = tanklist;
+    //   var tanklist = [];
+    //   tanks.forEach((x) => tanklist.add(x.json));
+    //   ret['tanks'] = tanklist;
       
-      var glossarylist = [];
-      glossarys.forEach((x) => glossarylist.add(x.json));
-      ret['glossarys'] = glossarylist;
+    //   var glossarylist = [];
+    //   glossarys.forEach((x) => glossarylist.add(x.json));
+    //   ret['glossarys'] = glossarylist;
 
-      var configlist = [];
-      configs.forEach((x) => configlist.add(x.json));
-      ret['glossarys'] = configlist;
-      return ret;
-    }
+    //   var configlist = [];
+    //   configs.forEach((x) => configlist.add(x.json));
+    //   ret['glossarys'] = configlist;
+    //   return ret;
+    // }
 }

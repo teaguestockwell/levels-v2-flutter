@@ -20,16 +20,16 @@ class Config {
   configid = -1,
   name = 'No Config';
 
-  Map<String,dynamic> get json{
-    Map<String,dynamic> ret = {};
-    ret['aircraftid'] = aircraftid;
-    ret['configid'] = configid;
-    ret['name'] = name;
+  // Map<String,dynamic> get json{
+  //   Map<String,dynamic> ret = {};
+  //   ret['aircraftid'] = aircraftid;
+  //   ret['configid'] = configid;
+  //   ret['name'] = name;
     
-    List<dynamic> cc = [];
-    nwfList.forEach((x) => cc.add(x.json));
-    ret['configcargos'] = cc;
-    return ret;
+  //   List<dynamic> cc = [];
+  //   nwfList.forEach((x) => cc.add(x.json));
+  //   ret['configcargos'] = cc;
+  //   return ret;
 
-  }
+  // }
 }

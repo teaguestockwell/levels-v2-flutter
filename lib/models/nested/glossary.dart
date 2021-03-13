@@ -11,11 +11,7 @@ class Glossary {
     @required this.id,
     @required this.name,
     @required this.body
-  }) :
-    assert(name!=null),
-    assert(name.isNotEmpty),
-    assert(body!=null),
-    assert(body.isNotEmpty);
+  });
 
   Glossary.fromJson(Map<String,dynamic> json):
     aircraftid = json['aircraftid'],
@@ -23,12 +19,12 @@ class Glossary {
     name = json['name'],
     body = json['body'];
 
-  Map<String, dynamic> get json {
-    Map<String, dynamic> ret = {};
-    ret['aircraftid'] = aircraftid;
-    ret['id'] = id;
-    ret['name'] = name;
-    ret['body'] = body;
-    return ret;
-  }
+  // Map<String, dynamic> get json {
+  //   Map<String, dynamic> ret = {};
+  //   ret['aircraftid'] = aircraftid;
+  //   ret['id'] = id;
+  //   ret['name'] = name;
+  //   ret['body'] = body;
+  //   return ret;
+  // }
 }

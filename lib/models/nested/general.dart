@@ -35,24 +35,24 @@ class General{
   name = '',
   body = '';
 
-  Map<String, dynamic> get json {
-    Map<String, dynamic> ret = {};
+  // Map<String, dynamic> get json {
+  //   Map<String, dynamic> ret = {};
 
-    var namelist = [];
-    names.forEach((x) => namelist.add(x));
-    ret['names'] = namelist;
+  //   var namelist = [];
+  //   names.forEach((x) => namelist.add(x));
+  //   ret['names'] = namelist;
 
-    var icondatalist = [];
-    icondatas.forEach((x) => icondatalist.add(x));
-    ret['icondatas'] = icondatalist;
+  //   var icondatalist = [];
+  //   icondatas.forEach((x) => icondatalist.add(x));
+  //   ret['icondatas'] = icondatalist;
 
-    var urlslist = [];
-    urls.forEach((x) => urlslist.add(x));
-    ret['urls'] = urlslist;
+  //   var urlslist = [];
+  //   urls.forEach((x) => urlslist.add(x));
+  //   ret['urls'] = urlslist;
 
-    ret['name'] = name;
-    ret['body'] = body;
-    ret['role'] = role;
-    return ret;
-  }
+  //   ret['name'] = name;
+  //   ret['body'] = body;
+  //   ret['role'] = role;
+  //   return ret;
+  // }
 }

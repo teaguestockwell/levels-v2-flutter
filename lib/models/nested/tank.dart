@@ -42,13 +42,13 @@ class Tank{
     }
   }
 
-  Map<String, dynamic> get json {
-    Map<String, dynamic> ret = {};
-    ret['name'] = name;
-    ret['aircraftid'] = aircraftid;
-    ret['tankid'] = tankid;
-    ret['weights'] = weights;
-    ret['simplemoms'] = simplemoms;
-    return ret;
-  }
+  // Map<String, dynamic> get json {
+  //   Map<String, dynamic> ret = {};
+  //   ret['name'] = name;
+  //   ret['aircraftid'] = aircraftid;
+  //   ret['tankid'] = tankid;
+  //   ret['weights'] = weights;
+  //   ret['simplemoms'] = simplemoms;
+  //   return ret;
+  // }
 }

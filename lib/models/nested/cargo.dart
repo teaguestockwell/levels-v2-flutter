@@ -43,7 +43,6 @@ class Cargo {
   configcargoid = -1,
   type = CargoType.Nojson; 
 
-  /// can be used to write cargo db
   Cargo.fromJsonCargo(Map<String,dynamic> json):
     oldjson = json,
     name = json['name'], // eryething is named
@@ -117,34 +116,34 @@ class Cargo {
     fs = mom / weight;
   }
 
-  Map<String, dynamic> get json{
-    Map<String, dynamic> ret = {};
+  // Map<String, dynamic> get json{
+  //   Map<String, dynamic> ret = {};
     
-    switch (type) {
-      case CargoType.Cargo: {
-        ret['aircraftid'] = aircraftid;
-        ret['cargoid'] = cargoid;
-        ret['name'] = name;
-        ret['fs'] = fs;
-      }break;
-      case CargoType.ConfigCargo: {
-        ret['configid'] = configid;
-        ret['aircraftid'] = aircraftid;
-        ret['cargoid'] = cargoid;
-        ret['configcargoid'] = configcargoid;
-        ret['fs'] = fs;
-        ret['qty'] = qty;
-        // relation to cargo
-        Map<String,dynamic> cargo = {};
-        cargo['aircraftid'] = aircraftid;
-        cargo['cargoid'] = cargoid;
-        cargo['name'] = name;
-        cargo['weight'] = weight;
-        cargo['fs'] = oldjson['cargo']['fs'];
-      }break;
-      default: throw Exception('.json called on UI Cargo');
-    }
+  //   switch (type) {
+  //     case CargoType.Cargo: {
+  //       ret['aircraftid'] = aircraftid;
+  //       ret['cargoid'] = cargoid;
+  //       ret['name'] = name;
+  //       ret['fs'] = fs;
+  //     }break;
+  //     case CargoType.ConfigCargo: {
+  //       ret['configid'] = configid;
+  //       ret['aircraftid'] = aircraftid;
+  //       ret['cargoid'] = cargoid;
+  //       ret['configcargoid'] = configcargoid;
+  //       ret['fs'] = fs;
+  //       ret['qty'] = qty;
+  //       // relation to cargo
+  //       Map<String,dynamic> cargo = {};
+  //       cargo['aircraftid'] = aircraftid;
+  //       cargo['cargoid'] = cargoid;
+  //       cargo['name'] = name;
+  //       cargo['weight'] = weight;
+  //       cargo['fs'] = oldjson['cargo']['fs'];
+  //     }break;
+  //     default: throw Exception('.json called on UI Cargo');
+  //   }
 
-    return ret;
-  }
+  //   return ret;
+  // }
 }
