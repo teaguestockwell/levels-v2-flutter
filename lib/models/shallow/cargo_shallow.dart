@@ -12,10 +12,10 @@ class CargoShallow implements APISerialiable {
 
   String name;
   void setName(String s) => name = s;
-  double weight;
-  void setWeight(double w) => weight = w;
-  double fs;
-  void setFs(double s) => fs = s;
+  num weight;
+  void setWeight(num w) => weight = w;
+  num fs;
+  void setFs(num s) => fs = s;
   String category;
   void setCategory(Map<String,dynamic> m) => category = m[searchField];
 
@@ -62,11 +62,11 @@ class CargoShallow implements APISerialiable {
           EditTextAdmin(
               initialValue: weight.toString(),
               hintText: 'Weight',
-              validate: (s) => valiadateDoublePositive(s, setWeight)),
+              validate: (s) => valiadateNumPositive(s, setWeight)),
           EditTextAdmin(
               initialValue: fs.toString(),
               hintText: 'Default FS (overridden by config)',
-              validate: (s) => valiadateDoubleAny(s, setFs)),
+              validate: (s) => valiadateNumAny(s, setFs)),
           BlackButtonAdmin(() {
             if (key.currentState.validate()) {
               this.onSave(this.toJson());

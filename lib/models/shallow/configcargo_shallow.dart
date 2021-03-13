@@ -11,8 +11,8 @@ class ConfigCargoShallow implements APISerialiable {
   int aircraftid;
   int cargoid;
   int configcargoid;
-  double fs;
-  void setFS(double s) => fs = s;
+  num fs;
+  void setFS(num s) => fs = s;
   int qty;
   void setQty(int s) => qty = s;
   String name;
@@ -56,7 +56,7 @@ class ConfigCargoShallow implements APISerialiable {
           EditTextAdmin(
               initialValue: fs.toString(),
               hintText: 'Fuselage Station',
-              validate: (s) => valiadateDoubleAny(s, setFS)),
+              validate: (s) => valiadateNumAny(s, setFS)),
           EditTextAdmin(
               initialValue: qty.toString(),
               hintText: 'Quantity',

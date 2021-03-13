@@ -39,11 +39,11 @@ class TankShallow implements APISerialiable {
       }
 
       final weightList =
-          this.weights.split(',').map<double>((x) => double.parse(x)).toList();
+          this.weights.split(',').map<num>((x) => num.parse(x)).toList();
       final simplemomsList = this
           .simplemoms
           .split(',')
-          .map<double>((x) => double.parse(x))
+          .map<num>((x) => num.parse(x))
           .toList();
 
       if (weightList.length != simplemomsList.length) {

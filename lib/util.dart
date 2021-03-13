@@ -208,26 +208,26 @@ String validateStringNotEmpty(String s, void Function(String) setter) {
   }
 }
 
-String valiadateDoubleAny(String s, void Function(double) setter) {
+String valiadateNumAny(String s, void Function(num) setter) {
   if (s.isEmpty) {
     return 'Can not be empty';
-  } else if (double.tryParse(s) == null) {
+  } else if (num.tryParse(s) == null) {
     return 'Must be a number';
   } else {
-    setter(double.parse(s));
+    setter(num.parse(s));
     return null;
   }
 }
 
-String valiadateDoublePositive(String s, void Function(double) setter) {
+String valiadateNumPositive(String s, void Function(num) setter) {
   if (s.isEmpty) {
     return 'Can not be empty';
-  } else if (double.tryParse(s) == null) {
+  } else if (num.tryParse(s) == null) {
     return 'Must be a number';
-  } else if (double.tryParse(s) != null && double.tryParse(s) <= 0) {
+  } else if (num.tryParse(s) != null && num.tryParse(s) <= 0) {
     return 'Must be a positive number';
   } else {
-    setter(double.parse(s));
+    setter(num.parse(s));
     return null;
   }
 }

@@ -16,7 +16,7 @@ class GlossaryShallow implements APISerialiable {
 
   GlossaryShallow.fromJson(Map<String, dynamic> json, this.onSave)
       : aircraftid = json["aircraftid"],
-        glossaryid = json["userid"] ?? 0,
+        glossaryid = json["glossaryid"] ?? 0,
         name = json["name"] ?? '',
         body = json["body"] ?? '';
 

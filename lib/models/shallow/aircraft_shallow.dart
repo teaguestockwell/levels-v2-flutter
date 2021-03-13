@@ -8,26 +8,26 @@ class AircraftShallow implements APISerialiable{
   int id;
   String name;
   void setName(String s) => name = s;
-  double fs0;
-  void setFs0(double s) => fs0 = s;
-  double fs1;
-  void setFs1(double s) => fs1 = s;
-  double mom0;
-  void setMom0(double s) => mom0 = s;
-  double mom1;
-  void setMom1(double s) => mom1 = s;
-  double weight0;
-  void setWeight0(double s) => weight0 = s;
-  double weight1;
-  void setWeight1(double s) => weight1 = s;
-  double cargoweight1;
-  void setCargoWeight1(double s) => cargoweight1 = s;
-  double lemac;
-  void setLemac(double s) => lemac = s;
-  double mac;
-  void setMac(double s) => mac = s;
-  double mommultiplyer;
-  void setMomMultiplyer(double s) => mommultiplyer = s;
+  num fs0;
+  void setFs0(num s) => fs0 = s;
+  num fs1;
+  void setFs1(num s) => fs1 = s;
+  num mom0;
+  void setMom0(num s) => mom0 = s;
+  num mom1;
+  void setMom1(num s) => mom1 = s;
+  num weight0;
+  void setWeight0(num s) => weight0 = s;
+  num weight1;
+  void setWeight1(num s) => weight1 = s;
+  num cargoweight1;
+  void setCargoWeight1(num s) => cargoweight1 = s;
+  num lemac;
+  void setLemac(num s) => lemac = s;
+  num mac;
+  void setMac(num s) => mac = s;
+  num mommultiplyer;
+  void setMomMultiplyer(num s) => mommultiplyer = s;
   void Function(Map<String, dynamic>) onSave;
   String ep = 'aircraft';
 
@@ -73,43 +73,43 @@ class AircraftShallow implements APISerialiable{
           EditTextAdmin(
               initialValue: fs0.toString(),
               hintText: 'Min Fuselage Station',
-              validate: (s) => valiadateDoublePositive(s, setFs0)),
+              validate: (s) => valiadateNumPositive(s, setFs0)),
           EditTextAdmin(
               initialValue: fs1.toString(),
               hintText: 'Max Fuselage Station',
-              validate: (s) => valiadateDoublePositive(s, setFs1)),
+              validate: (s) => valiadateNumPositive(s, setFs1)),
           EditTextAdmin(
               initialValue: mom0.toString(),
               hintText: 'Min Simple Moment',
-              validate: (s) => valiadateDoublePositive(s, setMom0)),
+              validate: (s) => valiadateNumPositive(s, setMom0)),
           EditTextAdmin(
               initialValue: mom1.toString(),
               hintText: 'Max Simple Moment',
-              validate: (s) => valiadateDoublePositive(s, setMom1)),
+              validate: (s) => valiadateNumPositive(s, setMom1)),
           EditTextAdmin(
               initialValue: weight0.toString(),
               hintText: 'Min Basic Weight',
-              validate: (s) => valiadateDoublePositive(s, setWeight0)),
+              validate: (s) => valiadateNumPositive(s, setWeight0)),
           EditTextAdmin(
               initialValue: weight1.toString(),
               hintText: 'Max Basic Weight',
-              validate: (s) => valiadateDoublePositive(s, setWeight1)),
+              validate: (s) => valiadateNumPositive(s, setWeight1)),
           EditTextAdmin(
               initialValue: cargoweight1.toString(),
               hintText: 'Max individual cargo weight',
-              validate: (s) => valiadateDoublePositive(s, setCargoWeight1)),
+              validate: (s) => valiadateNumPositive(s, setCargoWeight1)),
           EditTextAdmin(
               initialValue: lemac.toString(),
               hintText: 'LEMAC',
-              validate: (s) => valiadateDoublePositive(s, setLemac)),
+              validate: (s) => valiadateNumPositive(s, setLemac)),
           EditTextAdmin(
               initialValue: mac.toString(),
               hintText: 'MAC',
-              validate: (s) => valiadateDoublePositive(s, setMac)),
+              validate: (s) => valiadateNumPositive(s, setMac)),
           EditTextAdmin(
               initialValue: mommultiplyer.toString(),
               hintText: '"x" where: simple moment = moment / x',
-              validate: (s) => valiadateDoublePositive(s, setMomMultiplyer)),
+              validate: (s) => valiadateNumPositive(s, setMomMultiplyer)),
           BlackButtonAdmin(() {
             //print(key.currentState.validate());
             if (key.currentState.validate()) {
