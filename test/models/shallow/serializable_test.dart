@@ -115,9 +115,8 @@ main(){
       }
       bool filter(String x){
         if(
-          x.contains('id') || 
-          x.contains('category') || 
-          x.contains('mommultiplyer')
+          x.contains('id') || // id does not have ui to modify
+          x.contains('category') // this is not an edit text, it is a drop down
         ){
           return true;
         }
