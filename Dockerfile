@@ -1,8 +1,8 @@
 # Install dependencies
-FROM cirrusci/flutter:2.0.1
+FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/flutter:2.0.1
 
 # Install web sdk
-RUN flutter precache --web 
+RUN /flutter/bin/flutter precache --web 
 
 # Make folder for project
 WORKDIR /app
@@ -11,28 +11,28 @@ WORKDIR /app
 COPY . .
 
 # Get app packages
-RUN flutter pub get
+RUN /flutter/bin/flutter pub get
 
 # Echo version 
-RUN flutter doctor
+RUN /flutter/bin/flutter doctor
 
 # SCA && Lint
-RUN flutter analyze; exit 0
+RUN /flutter/bin/flutter analyze; exit 0
 
 # Run tests, continue on error
-RUN flutter test --machine > tests.output; exit 0
+RUN /flutter/bin/flutter test --machine > tests.output; exit 0
 
 # Compute coverage (--machine and --coverage cannot be run at once...), continue on error
-RUN flutter test --coverage; exit 0
+RUN /flutter/bin/flutter test --coverage; exit 0
 
 # Run SonarQube using this plugin https://github.com/insideapp-oss/sonar-flutter
 #RUN sonar-scanner
 
 # Build app for web using skia => webassembly using webgl
-RUN flutter build web --web-renderer canvaskit --release
+RUN /flutter/bin/flutter build web --web-renderer canvaskit --release
 
 # Final docker stage.
-FROM registry1.dso.mil/ironbank/opensource/nginx/nginx:1.19.6
+FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/base-image/harden-nginx-19:1.19.2
 
 # Run as a unprivileged user
 USER appuser
