@@ -1,5 +1,5 @@
 # Install dependencies
-FROM cirrusci/flutter:2.0.1
+FROM registry.il2.dso.mil/platform-one/devops/pipeline-templates/flutter:2.0.1
 
 # Install web sdk
 RUN flutter precache --web 
