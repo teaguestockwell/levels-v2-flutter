@@ -11,6 +11,7 @@ typedef bool ValidateText(String text);
 typedef void NotifyValid(bool valid);
 typedef void IntCallBack();
 typedef void IntCallBackIntPara(int i);
+typedef void UnitCategoriesCallBackUnitCategoriesPara(UnitCategories u);
 typedef void StringCallBack(String x);
 typedef void DateCallBack(DateTime dateTime);
 typedef void NWFSCallBack(int key, Cargo value);
@@ -41,22 +42,24 @@ int getDaysInYear(int year) {
   }
 }
 
-Color getValidColor(bool isValid){
-    if (isValid) {
+Color getValidColor(bool isValid) {
+  if (isValid) {
     return nonfocusedBoderColors;
   }
   return nonfocusedErrorBoderColor;
 }
 
 int idx = 0;
+
 ///Given a string try to parse into double. If fail make toast with error.
 double parsedouble(String s) {
-
-  if(s.isEmpty){s = '0';}
+  if (s.isEmpty) {
+    s = '0';
+  }
 
   try {
     return double.parse(s);
-  // ignore: avoid_catches_without_on_clauses
+    // ignore: avoid_catches_without_on_clauses
   } catch (e) {
     throw Exception('${s} could not be parsed as a double');
   }
@@ -68,10 +71,12 @@ int getUniqueIdx() {
 }
 
 int parseint(s) {
-  if(s.isEmpty){s = '0';}
+  if (s.isEmpty) {
+    s = '0';
+  }
   try {
     return int.parse(s);
-  // ignore: avoid_catches_without_on_clauses
+    // ignore: avoid_catches_without_on_clauses
   } catch (e) {
     throw Exception('${s} could not be parsed as an int');
   }
@@ -79,93 +84,98 @@ int parseint(s) {
 
 String fixed(double x) => x.toStringAsFixed(2);
 
-class Distance {
-  double numOfBases;
+class Unit {
+  Unit(this.name, this.baseMultiplier);
+  double baseMultiplier;
   String name;
-  Distance(this.name, this.numOfBases);
 }
 
-class Unit {
-  List<Distance> list = [];
-  static final units = ['Length', 'Mass', 'Area', 'Time', 'Volume', 'Speed'];
-  int unit;
-  Unit(this.unit) {
-    // list.add(Distance('',));
-    //if distance 'x',1 then that unit is the base multiplier
-    switch (unit) {
-      case 0:
-        list.add(Distance('32nds Inch', 0.00079375));
-        list.add(Distance('Milimeter', 0.001));
-        list.add(Distance('16nths Inch', 0.0015875));
-        list.add(Distance('Centimeter', 0.01));
-        list.add(Distance('Inch', 0.0254));
-        list.add(Distance('Foot', 0.3048));
-        list.add(Distance('Yard', 0.9144));
-        list.add(Distance('Meter', 1));
-        list.add(Distance('Kiliometer', 1000));
-        list.add(Distance('Mile', 1609.344));
-        list.add(Distance('Nautical Mile', 1852));
-        break;
-      case 1:
-        list.add(Distance('Microgram', 0.000000001));
-        list.add(Distance('Miligram', 0.000001));
-        list.add(Distance('Gram', 0.001));
-        list.add(Distance('Ounce', 0.0283495));
-        list.add(Distance('Pound', 0.453592));
-        list.add(Distance('Kilogram', 1));
-        list.add(Distance('Stone', 6.35029));
-        list.add(Distance('US Ton', 907.185));
-        list.add(Distance('Metric Ton', 1000));
-        list.add(Distance('Imperial Ton', 1016.05));
-        break;
-      case 2:
-        list.add(Distance('Inch^2', 0.00064516));
-        list.add(Distance('Foot^2', 0.092903));
-        list.add(Distance('Yard^2', 0.092903));
-        list.add(Distance('Meter^2', 1));
-        list.add(Distance('Acre', 4046.86));
-        list.add(Distance('Hectare', 10000));
-        list.add(Distance('Kilometer^2', 1000000));
-        list.add(Distance('Mile^2', 2589988.1103360000998));
-        break;
-      case 3:
-        list.add(Distance('Nanosecond', 0.000000000000011574));
-        list.add(Distance('Microsecond', 0.000000000011574));
-        list.add(Distance('Milisecond', 0.000000011574));
-        list.add(Distance('Second', 0.000011574));
-        list.add(Distance('Minute', 0.000694444));
-        list.add(Distance('Hour', 0.0416667));
-        list.add(Distance('Day', 1));
-        list.add(Distance('Week', 7));
-        list.add(Distance('Month', 30.4167243334));
-        list.add(Distance('Year', 365));
-        list.add(Distance('Decade', 3650));
-        list.add(Distance('Century', 36500));
-        break;
-      case 4:
-        list.add(Distance('Mililiter', 0.001));
-        list.add(Distance('US Teaspoon', 0.00492892));
-        list.add(Distance('US Tablespoon', 0.0147868));
-        list.add(Distance('Inch^3', 0.0163871));
-        list.add(Distance('US Fluid Ounce', 0.0295735));
-        list.add(Distance('US Cup', 0.24));
-        list.add(Distance('US Pint', 0.473176));
-        list.add(Distance('US Quart', 0.946353));
-        list.add(Distance('Liter', 1));
-        list.add(Distance('US Gallon', 3.78541));
-        list.add(Distance('Foot^3', 28.3168));
-        list.add(Distance('Meter^3', 1000));
-        break;
-      case 5:
-        list.add(Distance('Kilometer/Hr', 1));
-        list.add(Distance('Foot/Sec', 1.09728));
-        list.add(Distance('Miles/Hr', 1.60934));
-        list.add(Distance('Knot', 1.852));
-        list.add(Distance('Meter/Sec', 3.6));
-        break;
-    }
-  }
-}
+enum UnitCategories { Distance, Mass, Area, Time, Volume, Speed }
+
+final indexToUnitCatagory = {
+  UnitCategories.Distance.index : UnitCategories.Distance,
+  UnitCategories.Mass.index : UnitCategories.Mass,
+  UnitCategories.Area.index : UnitCategories.Area,
+  UnitCategories.Time.index : UnitCategories.Time,
+  UnitCategories.Volume.index : UnitCategories.Volume,
+  UnitCategories.Speed.index : UnitCategories.Speed,
+};
+
+// <UnitCategories
+//[Unit]>{}=
+final unitCategoryConversions = <UnitCategories, List<Unit>>{
+  UnitCategories.Distance: [
+    Unit('32nds Inch', 0.00079375),
+    Unit('Milimeter', 0.001),
+    Unit('16nths Inch', 0.0015875),
+    Unit('Centimeter', 0.01),
+    Unit('Inch', 0.0254),
+    Unit('Foot', 0.3048),
+    Unit('Yard', 0.9144),
+    Unit('Meter', 1),
+    Unit('Kiliometer', 1000),
+    Unit('Mile', 1609.344),
+    Unit('Nautical Mile', 1852),
+    Unit('Light Year', 9460730472580938)
+  ], // for space force and spock
+  UnitCategories.Mass: [
+    Unit('Microgram', 0.000000001),
+    Unit('Miligram', 0.000001),
+    Unit('Gram', 0.001),
+    Unit('Ounce', 0.0283495),
+    Unit('Pound', 0.453592),
+    Unit('Kilogram', 1),
+    Unit('Stone', 6.35029),
+    Unit('US Ton', 907.185),
+    Unit('Metric Ton', 1000),
+    Unit('Imperial Ton', 1016.05)
+  ],
+  UnitCategories.Area: [
+    Unit('Inch^2', 0.00064516),
+    Unit('Foot^2', 0.092903),
+    Unit('Yard^2', 0.092903),
+    Unit('Meter^2', 1),
+    Unit('Acre', 4046.86),
+    Unit('Hectare', 10000),
+    Unit('Kilometer^2', 1000000),
+    Unit('Mile^2', 2589988.1103360000998)
+  ],
+  UnitCategories.Time: [
+    Unit('Nanosecond', 0.000000000000011574),
+    Unit('Microsecond', 0.000000000011574),
+    Unit('Milisecond', 0.000000011574),
+    Unit('Second', 0.000011574),
+    Unit('Minute', 0.000694444),
+    Unit('Hour', 0.0416667),
+    Unit('Day', 1),
+    Unit('Week', 7),
+    Unit('Month', 30.4167243334),
+    Unit('Year', 365),
+    Unit('Decade', 3650),
+    Unit('Century', 36500)
+  ],
+  UnitCategories.Volume: [
+    Unit('Mililiter', 0.001),
+    Unit('US Teaspoon', 0.00492892),
+    Unit('US Tablespoon', 0.0147868),
+    Unit('Inch^3', 0.0163871),
+    Unit('US Fluid Ounce', 0.0295735),
+    Unit('US Cup', 0.24),
+    Unit('US Pint', 0.473176),
+    Unit('US Quart', 0.946353),
+    Unit('Liter', 1),
+    Unit('US Gallon', 3.78541),
+    Unit('Foot^3', 28.3168),
+    Unit('Meter^3', 1000)
+  ],
+  UnitCategories.Speed: [
+    Unit('Kilometer/Hr', 1),
+    Unit('Foot/Sec', 1.09728),
+    Unit('Miles/Hr', 1.60934),
+    Unit('Knot', 1.852),
+    Unit('Meter/Sec', 3.6)
+  ]
+};
 
 class DecimalTextInputFormatter extends TextInputFormatter {
   @override
@@ -176,7 +186,8 @@ class DecimalTextInputFormatter extends TextInputFormatter {
     return newString == newValue.text ? newValue : oldValue;
   }
 }
-///allows 'decimal,nums,+,-,e' to not lock exponents 
+
+///allows 'decimal,nums,+,-,e' to not lock exponents
 class DecimalTextInputFormatter2 extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -238,9 +249,7 @@ extension StringExtension on String {
   }
 }
 
-
 String getLoadingMessage() {
   final r = Random();
   return loadingTexts[r.nextInt(loadingTexts.length - 1)];
 }
-

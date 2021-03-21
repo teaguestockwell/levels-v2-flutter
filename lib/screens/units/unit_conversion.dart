@@ -17,7 +17,7 @@ class UnitConversionState extends State<UnitConversion> {
   final controllerTwo = TextEditingController();
   int leftUnitUnitIdx, rightUnitUnitIdx, unitIdx;
   Widget tfOne, tfTwo;
-  List<Distance> selectedUnitUnits = [];
+  List<Unit> selectedUnitUnits = [];
   String unitName;
   bool toggle = true;
 
@@ -35,9 +35,9 @@ class UnitConversionState extends State<UnitConversion> {
     tfOne = CustomTextField(controllerOne);
     tfTwo = CustomTextField(controllerTwo);
 
-    selectedUnitUnits = Unit(0).list;
-    unitName = Unit.units[0];
-    unitIdx = 0;
+    selectedUnitUnits = unitCategoryConversions[UnitCategories.Distance];
+    unitName = UnitCategories.Distance.toString();
+    unitIdx = UnitCategories.Distance.index;
     leftUnitUnitIdx = 0;
     rightUnitUnitIdx = 0;
   }
@@ -51,13 +51,13 @@ class UnitConversionState extends State<UnitConversion> {
 
   List<String> getListDistanceNames() {
     List<String> ret = [];
-    for (Distance d in selectedUnitUnits) {
+    for (Unit d in selectedUnitUnits) {
       ret.add(d.name);
     }
     return ret;
   }
 
-  void unitChange(int n) {
+  void unitChange(int unitsCategoryIndex) {
     setState(() {
       leftUnitUnitIdx = 0;
       rightUnitUnitIdx = 0;
@@ -65,13 +65,13 @@ class UnitConversionState extends State<UnitConversion> {
       controllerOne.text = '';
       toggle = false;
       controllerTwo.text = '';
-      selectedUnitUnits = Unit(n).list;
-      unitIdx = n;
-      unitName = Unit.units[n];
+      selectedUnitUnits =unitCategoryConversions[indexToUnitCatagory[unitsCategoryIndex]];
+      unitIdx = unitsCategoryIndex;
+      unitName = unitsCategoryIndex.toString();
     });
   }
 
-  ///accepts bool or ino unlock toggle and make opisite
+  ///accepts bool or int unlock toggle and make opisite
   void rightUnitUnitChanged(var i) {
     if (i is int) {
       rightUnitUnitIdx = i;
@@ -81,13 +81,13 @@ class UnitConversionState extends State<UnitConversion> {
     if (toggle) {
       toggle = !toggle;
       String x = controllerTwo.text;
-      if (x == '' || x == null || double.tryParse(x)==null) {
+      if (x == '' || x == null || double.tryParse(x) == null) {
         x = '0';
       }
       controllerOne.text = (double.parse(x) * //double from feild 1 times
               selectedUnitUnits[rightUnitUnitIdx]
-                  .numOfBases / //double from spinner 1 base divided by
-              selectedUnitUnits[leftUnitUnitIdx].numOfBases)
+                  .baseMultiplier / //double from spinner 1 base divided by
+              selectedUnitUnits[leftUnitUnitIdx].baseMultiplier)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
@@ -103,13 +103,13 @@ class UnitConversionState extends State<UnitConversion> {
     if (toggle) {
       toggle = !toggle;
       String x = controllerOne.text;
-      if (x == '' || x == null || double.tryParse(x)==null) {
+      if (x == '' || x == null || double.tryParse(x) == null) {
         x = '0';
       }
       controllerTwo.text = (double.parse(x) * //double from feild 1 times
               selectedUnitUnits[leftUnitUnitIdx]
-                  .numOfBases / //double from spinner 1 base divided by
-              selectedUnitUnits[rightUnitUnitIdx].numOfBases)
+                  .baseMultiplier / //double from spinner 1 base divided by
+              selectedUnitUnits[rightUnitUnitIdx].baseMultiplier)
           .toStringAsPrecision(6); //spinner 2 base
     } else {
       toggle = !toggle;
@@ -124,7 +124,7 @@ class UnitConversionState extends State<UnitConversion> {
           width: pickerWidth,
           height: pickerHeight,
           child: ButtonModalSpinner(
-            stringList: Unit.units,
+            stringList: UnitCategories.values.map((u) => u.toString()).toList(),
             onSpin: unitChange,
             initIdx: unitIdx,
           ))),
@@ -133,8 +133,7 @@ class UnitConversionState extends State<UnitConversion> {
           child: Row(children: [
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(
-                        color: divColor, width: divThickness),
+                    border: Border.all(color: divColor, width: divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfOne,
@@ -150,8 +149,7 @@ class UnitConversionState extends State<UnitConversion> {
             Spacer(),
             Container(
                 decoration: BoxDecoration(
-                    border: Border.all(
-                        color: divColor, width: divThickness),
+                    border: Border.all(color: divColor, width: divThickness),
                     borderRadius: BorderRadius.all(Radius.circular(5))),
                 child: Column(children: [
                   tfTwo,

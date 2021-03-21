@@ -1,4 +1,5 @@
-import 'dart:developer';
+// @dart=2.9
+// @dart=2.9
 import 'package:five_level_one/constant.dart';
 import 'package:five_level_one/util.dart';
 import 'package:five_level_one/screens/units/unit_conversion.dart';
@@ -41,7 +42,7 @@ void main() {
   testWidgets(
       'given a unit converison, when unit changed, then text feilds will be blank',
       (WidgetTester wt) async {
-    for (int i = 0; i < Unit.units.length; i++) {
+    for (var unitCategory in UnitCategories.values) {
       //given
       final test = MaterialApp(home: Scaffold(body: UnitConversion()));
 
@@ -52,7 +53,7 @@ void main() {
       await wt.enterText(find.byType(CustomTextField).last, '123');
       await wt.pumpAndSettle();
       final UnitConversionState state3 = wt.state(find.byType(UnitConversion));
-      state3.unitChange(i);
+      state3.unitChange(unitCategory.index);
       await wt.pumpAndSettle();
 
       //then
@@ -67,7 +68,7 @@ void main() {
 
   testWidgets('given a unit converison, when unit changed, then l & r idx = 0',
       (WidgetTester wt) async {
-    for (int i = 0; i < Unit.units.length; i++) {
+    for (var unitCategory in UnitCategories.values) {
       //given
       final test = MaterialApp(home: Scaffold(body: UnitConversion()));
 
@@ -80,7 +81,7 @@ void main() {
       state2.rightUnitUnitChanged(1);
       await wt.pumpAndSettle();
       final UnitConversionState state3 = wt.state(find.byType(UnitConversion));
-      state3.unitChange(i);
+      state3.unitChange(unitCategory.index);
       await wt.pumpAndSettle();
 
       //then
@@ -94,113 +95,84 @@ void main() {
   });
 
   testWidgets(
-      'given a unit converison, when l unit unit changed, then l text will remain',
+      'given a unit converison, when left unit unit changed, then left text will remain',
       (WidgetTester wt) async {
-    for (int i = 0; i < Unit(0).list.length; i++) {
-      //given
-      final test = MaterialApp(home: Scaffold(body: UnitConversion()));
+    //given
+    final test = MaterialApp(home: Scaffold(body: UnitConversion()));
 
-      //when
-      await wt.pumpWidget(test);
-      await wt.enterText(find.byType(CustomTextField).first, '100');
-      await wt.pumpAndSettle();
-      final UnitConversionState state0 = wt.state(find.byType(UnitConversion));
-      state0.leftUnitUnitChanged(i); //left unit unit to mm
-      await wt.pumpAndSettle();
+    //when
+    await wt.pumpWidget(test);
+    await wt.enterText(find.byType(CustomTextField).first, '100');
+    await wt.pumpAndSettle();
+    final UnitConversionState state0 = wt.state(find.byType(UnitConversion));
+    state0.leftUnitUnitChanged(
+        UnitCategories.Distance.index); //left unit unit to mm
+    await wt.pumpAndSettle();
 
-      //then
-      final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
-      final l = state1.controllerOne.text;
+    //then
+    final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
+    final l = state1.controllerOne.text;
 
-      expect(l, '100');
-    }
+    expect(l, '100');
   });
 
   testWidgets(
-      'given a unit converison, when r unit unit changed, then r text will remain',
+      'given a unit converison, when right unit unit changed, then right text will remain',
       (WidgetTester wt) async {
-    for (int i = 0; i < Unit(0).list.length; i++) {
-      //given
-      final test = MaterialApp(home: Scaffold(body: UnitConversion()));
+    //given
+    final test = MaterialApp(home: Scaffold(body: UnitConversion()));
 
-      //when
-      await wt.pumpWidget(test);
-      await wt.enterText(find.byType(CustomTextField).last, '100');
-      await wt.pumpAndSettle();
-      final UnitConversionState state0 = wt.state(find.byType(UnitConversion));
-      state0.rightUnitUnitChanged(i); //left unit unit to mm
-      await wt.pumpAndSettle();
+    //when
+    await wt.pumpWidget(test);
+    await wt.enterText(find.byType(CustomTextField).last, '100');
+    await wt.pumpAndSettle();
+    final UnitConversionState state0 = wt.state(find.byType(UnitConversion));
+    state0.rightUnitUnitChanged(
+        UnitCategories.Distance.index); //left unit unit to mm
+    await wt.pumpAndSettle();
 
-      //then
-      final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
-      final r = state1.controllerTwo.text;
+    //then
+    final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
+    final r = state1.controllerTwo.text;
 
-      expect(r, '100');
-    }
-  });
-
-  testWidgets(
-      'given a unit converison, when r unit unit changed, then r text will remain',
-      (WidgetTester wt) async {
-    for (int i = 0; i < Unit(0).list.length; i++) {
-      //given
-      final test = MaterialApp(home: Scaffold(body: UnitConversion()));
-
-      //when
-      await wt.pumpWidget(test);
-      await wt.enterText(find.byType(CustomTextField).last, '100');
-      await wt.pumpAndSettle();
-      final UnitConversionState state0 = wt.state(find.byType(UnitConversion));
-      state0.rightUnitUnitChanged(i); //left unit unit to mm
-      await wt.pumpAndSettle();
-
-      //then
-      final UnitConversionState state1 = wt.state(find.byType(UnitConversion));
-      final r = state1.controllerTwo.text;
-
-      expect(r, '100');
-    }
+    expect(r, '100');
   });
 
   testWidgets(
       'given a unit converison, when each unit is used, then each unit unit change will be accurate',
       (WidgetTester wt) async {
     //each unit ex: length
-    for (int i = 0; i < Unit.units.length; i++) {
-      //each unit of units ex: inches
-      for (int j = 0; j < Unit(i).list.length; j++) {
-        log('j ' + j.toString());
-        log('i' + i.toString());
-        //given
-        final ridx = Unit(i).list.length - 1 - j;
-        final selectedUnitUnit = Unit(i).list;
+    //given
+    for (var unitCategory in UnitCategories.values) {
+      var index = 0;
+      var conversions = unitCategoryConversions[unitCategory];
+      for (var conversion in conversions) {
+        // Distance as dropdown List<Units>.length -1 -index
+        final rightTextFieldConversionIdx = conversions.length - 1 - index;
         final test = MaterialApp(
-          home: Scaffold(
-          backgroundColor: background,
-          body:  UnitConversion()
-        ));
-
+            home:
+                Scaffold(backgroundColor: background, body: UnitConversion()));
         //when
         await wt.pumpWidget(test);
 
         //change unit idx
         final UnitConversionState state10 =
             wt.state(find.byType(UnitConversion));
-        state10.unitChange(i);
+        state10.unitChange(unitCategory.index);
         await wt.pumpAndSettle();
 
         //change l unit unit idx = j
         final UnitConversionState state0 =
             wt.state(find.byType(UnitConversion));
         state0.toggle = true;
-        state0.leftUnitUnitChanged(j);
+        state0.leftUnitUnitChanged(index);
         await wt.pumpAndSettle();
 
-        //change r unit unit idx = uulength - j +1
+        //change right unit unit idx = uulength - j +1
         final UnitConversionState state1 =
             wt.state(find.byType(UnitConversion));
         state1.toggle = true;
-        state1.rightUnitUnitChanged(ridx);
+        state1.rightUnitUnitChanged(rightTextFieldConversionIdx);
         await wt.pumpAndSettle();
 
         //enter text in left
@@ -221,8 +193,8 @@ void main() {
         expect(
             r,
             (double.parse(l) *
-                    selectedUnitUnit[j].numOfBases /
-                    selectedUnitUnit[ridx].numOfBases)
+                    conversion.baseMultiplier /
+                    conversions[rightTextFieldConversionIdx].baseMultiplier)
                 .toStringAsPrecision(6));
 
         //enter text right
@@ -243,9 +215,10 @@ void main() {
         expect(
             l2,
             (double.parse(r2) *
-                    selectedUnitUnit[ridx].numOfBases /
-                    selectedUnitUnit[j].numOfBases)
+                    conversions[rightTextFieldConversionIdx].baseMultiplier /
+                    conversions[index].baseMultiplier)
                 .toStringAsPrecision(6));
+        index++;
       }
     }
   });

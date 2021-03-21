@@ -190,6 +190,14 @@ const cargoCategorys = [
   {searchField:'Extra', cargoCategoryPK: 2},
 
 ];
+enum CargoCategory {Steward, Emergency,Extra}
+
+const cargoCategoryMap = {
+    CargoCategory.Steward:0,
+    CargoCategory.Emergency: 1,
+    CargoCategory.Extra:2
+};
+// .entries.where((x) => x.key == selected)))
 
 // base url for api requests
 const baseurl = 'http://localhost:8080/fl-api/';
