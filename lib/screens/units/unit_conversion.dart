@@ -124,7 +124,7 @@ class UnitConversionState extends State<UnitConversion> {
           width: pickerWidth,
           height: pickerHeight,
           child: ButtonModalSpinner(
-            stringList: UnitCategories.values.map((u) => u.toString()).toList(),
+            stringList: UnitCategories.values.map((u) => u.toString().split('.').last).toList(),
             onSpin: unitChange,
             initIdx: unitIdx,
           ))),
