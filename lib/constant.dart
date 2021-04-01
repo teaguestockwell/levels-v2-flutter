@@ -209,11 +209,11 @@ const configS = 'config';
 const tankS = 'tank';
 const userS = 'user';
 const glossaryS = 'glossary';
-const configCargosS = 'configcargo';
+const configCargosS = 'configCargo';
 
 // api model primary keys
 const topLvlEPPK = 'aircraftId';
-const airPK = 'id';
+const airPK = 'aircraftId';
 const configCargoPK = 'configId';
 const configFK = 'configCargos';
 const apiErrorKey = 'msg';
@@ -224,10 +224,10 @@ const cargoCategoryPK = 'id';
 const searchField = 'name';
 
 /// keys containing this will be filterd from the json table
-const rmKey = 'id';
+const rmKey = 'Id';
 
 // keys containing this will be filtered from api query strings
-const rmKeyQS = 'id';
+const rmKeyQS = 'Id';
 
 /// the font family used for icon datas
 const matIcons = 'MaterialIcons';
