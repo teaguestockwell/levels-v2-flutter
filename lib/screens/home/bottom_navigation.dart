@@ -32,7 +32,7 @@ class BottomNavState extends State<BottomNav> {
     super.initState();
 
     airSelector = General.forPopupModal(
-      icondatas: null,
+      iconDatas: null,
       names: List.generate(this.widget.airNames.length, (i) => this.widget.airNames[i]),
       urls: null,
     );

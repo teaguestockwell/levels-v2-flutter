@@ -5,21 +5,21 @@ import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class ConfigShallow implements APISerialiable {
-  int configid;
-  int aircraftid;
+  int configId;
+  int aircraftId;
   String name;
   void setName(String s) => name = s;
   String ep = 'config';
   void Function(Map<String, dynamic> obj) onSave;
 
   ConfigShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : configid = json["configid"] ?? 0,
-        aircraftid = json["aircraftid"],
+      : configId = json["configId"] ?? 0,
+        aircraftId = json["aircraftId"],
         name = json["name"] ?? '';
 
   Map<String, dynamic> toJson() => {
-        "configid": configid,
-        "aircraftid": aircraftid,
+        "configId": configId,
+        "aircraftId": aircraftId,
         "name": name,
       };
 

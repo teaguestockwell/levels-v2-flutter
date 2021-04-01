@@ -61,7 +61,7 @@ class MoreOpm extends Mock implements General {}
 
 MoreOpm moreOp() {
   final ret = MoreOpm();
-  when(ret.icondatas).thenReturn([
+  when(ret.iconDatas).thenReturn([
     234,
     234,
   ]);

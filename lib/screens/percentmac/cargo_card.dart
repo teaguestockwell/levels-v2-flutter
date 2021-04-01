@@ -134,7 +134,7 @@ class CargoCardState extends State<CargoCard> {
       var newCargoUI = ValidatedCargoUI(
         fs0: this.widget.air.fs0,
         fs1: this.widget.air.fs1,
-        cargoMaxWeight: this.widget.air.cargoweight1,
+        cargoMaxWeight: this.widget.air.cargoWeight1,
         onRemovePressed: removeCargoID,
         nwf: newNWFS,
         notifyValid: cargoUIValidationChanged,
@@ -181,7 +181,7 @@ class CargoCardState extends State<CargoCard> {
     var newCargoUI = ValidatedCargoUI(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
-      cargoMaxWeight: this.widget.air.cargoweight1,
+      cargoMaxWeight: this.widget.air.cargoWeight1,
       onRemovePressed: removeCargoID,
       nwf: Cargo.copyNewID(this.widget.air.cargos[i]),
       notifyValid: cargoUIValidationChanged,
@@ -197,7 +197,7 @@ class CargoCardState extends State<CargoCard> {
     var newCargoUI = ValidatedCargoUI(
       fs0: this.widget.air.fs0,
       fs1: this.widget.air.fs1,
-      cargoMaxWeight: this.widget.air.cargoweight1,
+      cargoMaxWeight: this.widget.air.cargoWeight1,
       onRemovePressed: removeCargoID,
       nwf: Cargo(),
       notifyValid: cargoUIValidationChanged,

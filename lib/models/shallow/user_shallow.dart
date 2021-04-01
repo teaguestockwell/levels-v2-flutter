@@ -5,8 +5,8 @@ import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class UserShallow implements APISerialiable {
-  int aircraftid;
-  int userid;
+  int aircraftId;
+  int userId;
   String name;
   void setName(String s) => name = s;
   int role;
@@ -15,14 +15,14 @@ class UserShallow implements APISerialiable {
   void Function(Map<String, dynamic> obj) onSave;
 
   UserShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : aircraftid = json["aircraftid"],
-        userid = json["userid"] ?? 0,
+      : aircraftId = json["aircraftId"],
+        userId = json["userId"] ?? 0,
         name = json["name"] ?? '',
         role = json["role"] ?? 1;
 
   Map<String, dynamic> toJson() => {
-        "aircraftid": aircraftid,
-        "userid": userid,
+        "aircraftId": aircraftId,
+        "userId": userId,
         "name": name,
         "role": role,
       };

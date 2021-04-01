@@ -9,7 +9,7 @@ class MoreOpPopup extends StatelessWidget {
   final General general;
   MoreOpPopup(this.general)
       : assert(general != null),
-        assert(general.icondatas != null),
+        assert(general.iconDatas != null),
         assert(general.names != null),
         assert(general.urls != null);
 
@@ -53,7 +53,7 @@ class MoreOpPopup extends StatelessWidget {
                 
                 Icon icon = Icon(IconData(59362, fontFamily: 'MaterialIcons'));
                 try {
-                  icon =  Icon(IconData(general.icondatas[i],fontFamily: 'MaterialIcons'));
+                  icon =  Icon(IconData(general.iconDatas[i],fontFamily: 'MaterialIcons'));
                 // ignore: avoid_catches_without_on_clauses
                 } catch(_){}
                 

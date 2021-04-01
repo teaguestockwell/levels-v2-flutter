@@ -5,8 +5,8 @@ import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class GlossaryShallow implements APISerialiable {
-  int aircraftid;
-  int glossaryid;
+  int aircraftId;
+  int glossaryId;
   String name;
   void setName(String s) => name = s;
   String body;
@@ -15,14 +15,14 @@ class GlossaryShallow implements APISerialiable {
   void Function(Map<String, dynamic> obj) onSave;
 
   GlossaryShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : aircraftid = json["aircraftid"],
-        glossaryid = json["glossaryid"] ?? 0,
+      : aircraftId = json["aircraftId"],
+        glossaryId = json["glossaryId"] ?? 0,
         name = json["name"] ?? '',
         body = json["body"] ?? '';
 
   Map<String, dynamic> toJson() => {
-        "aircraftid": aircraftid,
-        "glossaryid": glossaryid,
+        "aircraftId": aircraftId,
+        "glossaryId": glossaryId,
         "name": name,
         "body": body,
       };

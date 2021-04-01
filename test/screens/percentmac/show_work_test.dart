@@ -7,7 +7,7 @@ import 'package:five_level_one/screens/percentmac/show_work.dart';
 
 List<Cargo> getNWFS(){
   return [
-    Cargo.fromTank(name: 'plane', weight: 100000, simplemom: 10000, mommultiplier: 10000),
+    Cargo.fromTank(name: 'plane', weight: 100000, simplemom: 10000, momMultiplier: 10000),
     Cargo(name: 'cargo', weight: 100, fs: 50, qty: 1),
 
     // Cargo(name: 'plane', weight: 100000, simplemom: 10000, mom: '10000', qty: '1'),

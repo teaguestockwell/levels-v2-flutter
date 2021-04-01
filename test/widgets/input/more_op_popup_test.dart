@@ -16,7 +16,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -35,7 +35,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -54,7 +54,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn(
+    when(mockMoreOp.iconDatas).thenReturn(
       [58712, 58713]
     );
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
@@ -73,11 +73,11 @@ void main() {
     expect(find.text('time to wake up'), findsOneWidget);
   });
 
-  testWidgets('given a moreoppop, when clicked, it will open and create icondatass',
+  testWidgets('given a moreoppop, when clicked, it will open and create iconDatass',
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn(
+    when(mockMoreOp.iconDatas).thenReturn(
       [58712, 58713]
     );
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
@@ -99,7 +99,7 @@ void main() {
   //     (WidgetTester wt) async {
   //   //given
   //   final mockMoreOp = MockMoreOp();
-  //   when(mockMoreOp.icondatas).thenReturn([0, -1]);
+  //   when(mockMoreOp.iconDatas).thenReturn([0, -1]);
   //   when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
   //   when(mockMoreOp.urls).thenReturn(['asdadf', 'asdasd']);
 
@@ -119,7 +119,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn(
+    when(mockMoreOp.iconDatas).thenReturn(
       [58712, 58713]
     );
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
@@ -145,7 +145,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['web', 'asdasd']);
 

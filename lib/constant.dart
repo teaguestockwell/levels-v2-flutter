@@ -212,10 +212,10 @@ const glossaryS = 'glossary';
 const configCargosS = 'configcargo';
 
 // api model primary keys
-const topLvlEPPK = 'aircraftid';
+const topLvlEPPK = 'aircraftId';
 const airPK = 'id';
-const configCargoPK = 'configid';
-const configFK = 'configcargos';
+const configCargoPK = 'configId';
+const configFK = 'configCargos';
 const apiErrorKey = 'msg';
 const cargoCategoryPK = 'id';
 

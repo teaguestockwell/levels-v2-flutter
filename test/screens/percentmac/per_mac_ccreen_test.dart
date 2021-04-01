@@ -14,338 +14,338 @@ import 'package:mockito/mockito.dart';
 int numTanks = 20;
 int fuelCap = 20000;
 int fuelIncrament = 250;
-num mommultiplier = 10000;
+num momMultiplier = 10000;
 
 final dynamic json = convert.jsonDecode('''{
-        "aircraftid": 1,
-        "configid": 1,
+        "aircraftId": 1,
+        "configId": 1,
         "name": "AE-1",
-        "configcargos": [
+        "configCargos": [
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 28,
-            "configcargoid": 1,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 28,
+            "configCargoId": 1,
             "fs": 400,
             "qty": 4,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 28,
+              "aircraftId": 1,
+              "cargoId": 28,
               "name": "Flare Hazard Placards (Note 1)",
               "weight": 20,
               "fs": 400
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 27,
-            "configcargoid": 2,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 27,
+            "configCargoId": 2,
             "fs": 744,
             "qty": 6,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 27,
+              "aircraftId": 1,
+              "cargoId": 27,
               "name": "Flares/Flare Cans (Note 1)",
               "weight": 255,
               "fs": 744
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 29,
-            "configcargoid": 3,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 29,
+            "configCargoId": 3,
             "fs": 217,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 29,
+              "aircraftId": 1,
+              "cargoId": 29,
               "name": "Aircraft Armor (Note 1)",
               "weight": 1125,
               "fs": 217
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 33,
-            "configcargoid": 4,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 33,
+            "configCargoId": 4,
             "fs": 305,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 33,
+              "aircraftId": 1,
+              "cargoId": 33,
               "name": "MX TO File",
               "weight": 30,
               "fs": 305
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 20,
-            "configcargoid": 5,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 20,
+            "configCargoId": 5,
             "fs": 280,
             "qty": 5,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 20,
+              "aircraftId": 1,
+              "cargoId": 20,
               "name": "Survival Vest",
               "weight": 11.5,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 21,
-            "configcargoid": 6,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 21,
+            "configCargoId": 6,
             "fs": 280,
             "qty": 5,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 21,
+              "aircraftId": 1,
+              "cargoId": 21,
               "name": "Aircrew Body Armor (Level IIIA)",
               "weight": 8.5,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 16,
-            "configcargoid": 7,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 16,
+            "configCargoId": 7,
             "fs": 280,
             "qty": 2,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 16,
+              "aircraftId": 1,
+              "cargoId": 16,
               "name": "BA-22 Parachute",
               "weight": 28,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 19,
-            "configcargoid": 8,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 19,
+            "configCargoId": 8,
             "fs": 744,
             "qty": 6,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 19,
+              "aircraftId": 1,
+              "cargoId": 19,
               "name": "PBE",
               "weight": 5,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 18,
-            "configcargoid": 9,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 18,
+            "configCargoId": 9,
             "fs": 744,
             "qty": 102,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 18,
+              "aircraftId": 1,
+              "cargoId": 18,
               "name": "EPOS",
               "weight": 2,
               "fs": -1
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 15,
-            "configcargoid": 10,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 15,
+            "configCargoId": 10,
             "fs": 280,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 15,
+              "aircraftId": 1,
+              "cargoId": 15,
               "name": "Protective clothing kit",
               "weight": 36,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 14,
-            "configcargoid": 11,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 14,
+            "configCargoId": 11,
             "fs": 744,
             "qty": 110,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 14,
+              "aircraftId": 1,
+              "cargoId": 14,
               "name": "A/C Life Preserver",
               "weight": 1.5,
               "fs": -1
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 13,
-            "configcargoid": 12,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 13,
+            "configCargoId": 12,
             "fs": 280,
             "qty": 3,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 13,
+              "aircraftId": 1,
+              "cargoId": 13,
               "name": "LPU-6P Infant Cot",
               "weight": 4,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 17,
-            "configcargoid": 13,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 17,
+            "configCargoId": 13,
             "fs": 280,
             "qty": 2,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 17,
+              "aircraftId": 1,
+              "cargoId": 17,
               "name": "LPU-10P",
               "weight": 4,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 9,
-            "configcargoid": 14,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 9,
+            "configCargoId": 14,
             "fs": 260,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 9,
+              "aircraftId": 1,
+              "cargoId": 9,
               "name": "Expendable Supplies",
               "weight": 10,
               "fs": 260
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 8,
-            "configcargoid": 15,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 8,
+            "configCargoId": 15,
             "fs": 744,
             "qty": 54,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 8,
+              "aircraftId": 1,
+              "cargoId": 8,
               "name": "Pillow Small w/Case",
               "weight": 0.5,
               "fs": -1
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 7,
-            "configcargoid": 16,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 7,
+            "configCargoId": 16,
             "fs": 744,
             "qty": 54,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 7,
+              "aircraftId": 1,
+              "cargoId": 7,
               "name": "Blanket Small",
               "weight": 1,
               "fs": -1
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 6,
-            "configcargoid": 17,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 6,
+            "configCargoId": 17,
             "fs": 280,
             "qty": 6,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 6,
+              "aircraftId": 1,
+              "cargoId": 6,
               "name": "Pillow Large w/Case",
               "weight": 2,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 5,
-            "configcargoid": 18,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 5,
+            "configCargoId": 18,
             "fs": 280,
             "qty": 6,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 5,
+              "aircraftId": 1,
+              "cargoId": 5,
               "name": "Blanket Large",
               "weight": 3.5,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 4,
-            "configcargoid": 19,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 4,
+            "configCargoId": 19,
             "fs": 280,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 4,
+              "aircraftId": 1,
+              "cargoId": 4,
               "name": "Human Waste Clean-up kit",
               "weight": 5,
               "fs": 280
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 3,
-            "configcargoid": 20,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 3,
+            "configCargoId": 20,
             "fs": 260,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 3,
+              "aircraftId": 1,
+              "cargoId": 3,
               "name": "Hot Cup",
               "weight": 3,
               "fs": 260
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 2,
-            "configcargoid": 21,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 2,
+            "configCargoId": 21,
             "fs": 260,
             "qty": 1,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 2,
+              "aircraftId": 1,
+              "cargoId": 2,
               "name": "Std 2 gal liquid container",
               "weight": 25,
               "fs": 260
             }
           },
           {
-            "configid": 1,
-            "aircraftid": 1,
-            "cargoid": 1,
-            "configcargoid": 22,
+            "configId": 1,
+            "aircraftId": 1,
+            "cargoId": 1,
+            "configCargoId": 22,
             "fs": 358,
             "qty": 3,
             "cargo": {
-              "aircraftid": 1,
-              "cargoid": 1,
+              "aircraftId": 1,
+              "cargoId": 1,
               "name": "Water Container (5 Gallon)",
               "weight": 40,
               "fs": 358
@@ -377,12 +377,12 @@ AirMock getAir(){
   when(ret.configs).thenReturn(getValidConfig());
   when(ret.fs0).thenReturn(80);
   when(ret.fs1).thenReturn(2000);
-  when(ret.cargoweight1).thenReturn(100000);
+  when(ret.cargoWeight1).thenReturn(100000);
 
   //show work dep
   when(ret.lemac).thenReturn(100);
   when(ret.mac).thenReturn(200);
-  when(ret.mommultiplier).thenReturn(10000);
+  when(ret.momMultiplier).thenReturn(10000);
 
   return ret;
 }
@@ -402,12 +402,12 @@ List<Tank> getTanks(){
 
      Map<String,dynamic> json = {};
     json['name'] = 'tank ' + i.toString();
-    json['aircraftid'] = -1;
-    json['tankid'] = -1;
-    json['weights'] = weightCSV;
-    json['simplemoms'] = momCSV;
+    json['aircraftId'] = -1;
+    json['tankId'] = -1;
+    json['weightsCSV'] = weightCSV;
+    json['simpleMomsCSV'] = momCSV;
     
-    ret.add(Tank.fromJson(json, mommultiplier));
+    ret.add(Tank.fromJson(json, momMultiplier));
 
   }
   return ret;

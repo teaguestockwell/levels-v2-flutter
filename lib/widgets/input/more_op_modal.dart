@@ -11,7 +11,7 @@ class MoreOpModal extends StatefulWidget {
   final General general;
   MoreOpModal(this.general)
       : assert(general != null),
-        assert(general.icondatas != null),
+        assert(general.iconDatas != null),
         assert(general.names != null),
         assert(general.urls != null);
 
@@ -66,7 +66,7 @@ class MoreOpModalState extends State<MoreOpModal> {
       Icon icon;
 
         try {
-          icon = Icon(IconData(this.widget.general.icondatas[i],fontFamily: 'MaterialIcons'));
+          icon = Icon(IconData(this.widget.general.iconDatas[i],fontFamily: 'MaterialIcons'));
         // ignore: avoid_catches_without_on_clauses
         } catch (_) {
           icon = Icon(IconData(59362, fontFamily: 'MaterialIcons'));

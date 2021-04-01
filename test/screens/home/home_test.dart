@@ -44,7 +44,7 @@ ServicesMock getServiceMocks(int secToResponse){
     when(gen.body).thenReturn('body');
     when(gen.name).thenReturn('title');
     when(gen.role).thenReturn(1);
-    when(gen.icondatas).thenReturn([123,123]);
+    when(gen.iconDatas).thenReturn([123,123]);
     when(gen.names).thenReturn(['one','two']);
     when(gen.urls).thenReturn(['url1','url2']);
 

@@ -2,32 +2,32 @@ import '../../util.dart';
 import 'cargo.dart';
 class Tank{
   final String name;
-  final int aircraftid;
-  final int tankid;
-  final num mommultiplier;
+  final int aircraftId;
+  final int tankId;
+  final num momMultiplier;
 
   final List<Cargo> nwfss = [];
 
   //csv
-  final String weights;
-  final String simplemoms;
+  final String weightsCSV;
+  final String simpleMomsCSV;
 
   //list
   List<String> weightList;
-  List<String> simplemomsList;
+  List<String> simpleMomsCSVList;
 
-  Tank.fromJson(Map<String,dynamic> json, this.mommultiplier):
+  Tank.fromJson(Map<String,dynamic> json, this.momMultiplier):
     name = json['name'],
-    aircraftid = json['aircraftid'],
-    tankid = json['tankid'],
+    aircraftId = json['aircraftId'],
+    tankId = json['tankId'],
 
-    weights = json['weights'],
-    simplemoms = json['simplemoms']{
+    weightsCSV = json['weightsCSV'],
+    simpleMomsCSV = json['simpleMomsCSV']{
 
-    weightList = weights.split(',');
-    simplemomsList =simplemoms.split(',');
+    weightList = weightsCSV.split(',');
+    simpleMomsCSVList =simpleMomsCSV.split(',');
 
-    assert(weightList.length == simplemomsList.length);
+    assert(weightList.length == simpleMomsCSVList.length);
 
     for(int i=0; i<weightList.length; i++){
 
@@ -35,20 +35,10 @@ class Tank{
         Cargo.fromTank(
           name: name, 
           weight: parsedouble(weightList[i]),
-          simplemom: parsedouble(simplemomsList[i]),
-          mommultiplier: mommultiplier
+          simplemom: parsedouble(simpleMomsCSVList[i]),
+          momMultiplier: momMultiplier
         )
       );
     }
   }
-
-  // Map<String, dynamic> get json {
-  //   Map<String, dynamic> ret = {};
-  //   ret['name'] = name;
-  //   ret['aircraftid'] = aircraftid;
-  //   ret['tankid'] = tankid;
-  //   ret['weights'] = weights;
-  //   ret['simplemoms'] = simplemoms;
-  //   return ret;
-  // }
 }

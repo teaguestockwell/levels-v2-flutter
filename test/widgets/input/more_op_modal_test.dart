@@ -16,7 +16,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -35,7 +35,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -53,7 +53,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -74,7 +74,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -95,7 +95,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -116,7 +116,7 @@ void main() {
   //     (WidgetTester wt) async {
   //   //given
   //   final mockMoreOp = MockMoreOp();
-  //   when(mockMoreOp.icondatas).thenReturn([-3, 58713]);
+  //   when(mockMoreOp.iconDatas).thenReturn([-3, 58713]);
   //   when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
   //   when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -138,7 +138,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -162,7 +162,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 
@@ -187,7 +187,7 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([58712, 58713]);
+    when(mockMoreOp.iconDatas).thenReturn([58712, 58713]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(['asdasd', 'asdad']);
 

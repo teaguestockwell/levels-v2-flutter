@@ -104,7 +104,7 @@ class PerMacScreenState extends State<PerMacScreen>
           context,
           MaterialPageRoute(
               builder: (context) => ShowWork(
-                    mommultipler: this.widget.air.mommultiplier,
+                    mommultipler: this.widget.air.momMultiplier,
                     lemac: this.widget.air.lemac,
                     mac: this.widget.air.mac,
                     nwfs: nwfs,

@@ -20,8 +20,8 @@ class AircraftShallow implements APISerialiable{
   void setWeight0(num s) => weight0 = s;
   num weight1;
   void setWeight1(num s) => weight1 = s;
-  num cargoweight1;
-  void setCargoWeight1(num s) => cargoweight1 = s;
+  num cargoWeight1;
+  void setCargoWeight1(num s) => cargoWeight1 = s;
   num lemac;
   void setLemac(num s) => lemac = s;
   num mac;
@@ -40,7 +40,7 @@ class AircraftShallow implements APISerialiable{
         mom1 = json["mom1"] ?? 0,
         weight0 = json["weight0"] ?? 0,
         weight1 = json["weight1"] ?? 0,
-        cargoweight1 = json["cargoweight1"] ?? 0,
+        cargoWeight1 = json["cargoWeight1"] ?? 0,
         lemac = json["lemac"] ?? 0,
         mac = json["mac"] ?? 0,
         mommultiplyer = json["mommultiplyer"] ?? 0;
@@ -54,7 +54,7 @@ class AircraftShallow implements APISerialiable{
         "mom1": mom1,
         "weight0": weight0,
         "weight1": weight1,
-        "cargoweight1": cargoweight1,
+        "cargoWeight1": cargoWeight1,
         "lemac": lemac,
         'mac': mac,
         'mommultiplyer': mommultiplyer,
@@ -95,7 +95,7 @@ class AircraftShallow implements APISerialiable{
               hintText: 'Max Basic Weight',
               validate: (s) => valiadateNumPositive(s, setWeight1)),
           EditTextAdmin(
-              initialValue: cargoweight1.toString(),
+              initialValue: cargoWeight1.toString(),
               hintText: 'Max individual cargo weight',
               validate: (s) => valiadateNumPositive(s, setCargoWeight1)),
           EditTextAdmin(

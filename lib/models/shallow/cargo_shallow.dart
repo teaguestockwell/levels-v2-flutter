@@ -7,8 +7,8 @@ import '../../widgets/input/future_dropdown_button.dart';
 import 'serializable.dart';
 
 class CargoShallow implements APISerialiable {
-  int aircraftid;
-  int cargoid;
+  int aircraftId;
+  int cargoId;
 
   String name;
   void setName(String s) => name = s;
@@ -23,8 +23,8 @@ class CargoShallow implements APISerialiable {
   Function(Map<String, dynamic>) onSave;
 
   CargoShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : aircraftid = json["aircraftid"],
-        cargoid = json["cargoid"] ?? 0,
+      : aircraftId = json["aircraftId"],
+        cargoId = json["cargoId"] ?? 0,
         name = json["name"] ?? '',
         weight = json["weight"] ?? 0,
         fs = json["fs"] ?? -1,
@@ -32,8 +32,8 @@ class CargoShallow implements APISerialiable {
 
   @override
   Map<String, dynamic> toJson() => {
-        "aircraftid": aircraftid,
-        "cargoid": cargoid,
+        "aircraftId": aircraftId,
+        "cargoId": cargoId,
         "name": name,
         "weight": weight,
         "fs": fs,

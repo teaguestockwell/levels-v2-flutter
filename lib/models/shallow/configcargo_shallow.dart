@@ -7,10 +7,10 @@ import '../../widgets/input/future_dropdown_button.dart';
 import 'serializable.dart';
 
 class ConfigCargoShallow implements APISerialiable {
-  int configid;
-  int aircraftid;
-  int cargoid;
-  int configcargoid;
+  int configId;
+  int aircraftId;
+  int cargoId;
+  int configCargoId;
   num fs;
   void setFS(num s) => fs = s;
   int qty;
@@ -20,25 +20,25 @@ class ConfigCargoShallow implements APISerialiable {
   void Function(Map<String, dynamic> obj) onSave;
 
   ConfigCargoShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : configid = json["configid"] ?? 0,
-        aircraftid = json["aircraftid"],
-        cargoid = json["cargoid"] ?? -1,
-        configcargoid = json["configcargoid"] ?? 0,
+      : configId = json["configId"] ?? 0,
+        aircraftId = json["aircraftId"],
+        cargoId = json["cargoId"] ?? -1,
+        configCargoId = json["configCargoId"] ?? 0,
         fs = json["fs"] ?? -1,
         qty = json["qty"] ?? 1,
         name = json["name"] ?? '';
 
   Map<String, dynamic> toJson() => {
-        "configid": configid,
-        "aircraftid": aircraftid,
-        "cargoid": cargoid,
-        "configcargoid": configcargoid,
+        "configId": configId,
+        "aircraftId": aircraftId,
+        "cargoId": cargoId,
+        "configCargoId": configCargoId,
         "fs": fs,
         "qty": qty,
         "name": name,
       };
 
-  void change(Map<String, dynamic> m) => cargoid = m["cargoid"];
+  void change(Map<String, dynamic> m) => cargoId = m["cargoId"];
   
   Widget getForm() {
     final key = GlobalKey<FormState>();
@@ -48,10 +48,10 @@ class ConfigCargoShallow implements APISerialiable {
             child: Column(children: [
           FutureDropDownButton(
             onEmptyMSG: '0 Cargo to connect to config. Try making one',
-              initPKID: cargoid,
-              future: getN('cargo',reqParam: {'aircraftid': aircraftid.toString()}),
+              initPKID: cargoId,
+              future: getN('cargo',reqParam: {'aircraftId': aircraftId.toString()}),
               onChange: change,
-              apiModelPK: 'cargoid',
+              apiModelPK: 'cargoId',
           ),
           EditTextAdmin(
               initialValue: fs.toString(),

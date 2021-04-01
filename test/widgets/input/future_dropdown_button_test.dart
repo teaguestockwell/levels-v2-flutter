@@ -18,11 +18,11 @@ Future<List<dynamic>> getN() async {
 }
 
 const jsonList = <Map<String,dynamic>>[
-  {'id': 1, 'userid':1, 'name':'joe', 'role': 1},
-  {'id': 1, 'userid':10, 'name':'dan', 'role': 1}
+  {'id': 1, 'userId':1, 'name':'joe', 'role': 1},
+  {'id': 1, 'userId':10, 'name':'dan', 'role': 1}
 ];
 const emptyMsg = 'empty';
-const apiModelPK = 'userid';
+const apiModelPK = 'userId';
 
 main(){
 testWidgets('given a future_drop_down_button, when future is null, then it will render loading state', 

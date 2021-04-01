@@ -7,46 +7,46 @@ import 'serializable.dart';
 class TankShallow implements APISerialiable {
   String name;
   void setName(String s) => name = s;
-  int aircraftid;
-  int tankid;
-  String weights;
-  String simplemoms;
+  int aircraftId;
+  int tankId;
+  String weightsCSV;
+  String simpleMomsCSV;
   String ep = 'tank';
   void Function(Map<String, dynamic> obj) onSave;
 
   TankShallow.fromJson(Map<String, dynamic> json, this.onSave)
       : name = json["name"] ?? '',
-        aircraftid = json["aircraftid"],
-        tankid = json["tankid"] ?? 0,
-        weights = json["weights"] ?? '',
-        simplemoms = json["simplemoms"] ?? '';
+        aircraftId = json["aircraftId"],
+        tankId = json["tankId"] ?? 0,
+        weightsCSV = json["weightsCSV"] ?? '',
+        simpleMomsCSV = json["simpleMomsCSV"] ?? '';
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "aircraftid": aircraftid,
-        "tankid": tankid,
-        "weights": weights,
-        "simplemoms": simplemoms,
+        "aircraftId": aircraftId,
+        "tankId": tankId,
+        "weightsCSV": weightsCSV,
+        "simpleMomsCSV": simpleMomsCSV,
       };
 
-  bool csvIsValid({String simplemoms, String weights}) {
+  bool csvIsValid({String simpleMomsCSV, String weightsCSV}) {
     try {
-      if (simplemoms != null) {
-        this.simplemoms = simplemoms;
+      if (simpleMomsCSV != null) {
+        this.simpleMomsCSV = simpleMomsCSV;
       }
-      if (weights != null) {
-        this.weights = weights;
+      if (weightsCSV != null) {
+        this.weightsCSV = weightsCSV;
       }
 
       final weightList =
-          this.weights.split(',').map<num>((x) => num.parse(x)).toList();
-      final simplemomsList = this
-          .simplemoms
+          this.weightsCSV.split(',').map<num>((x) => num.parse(x)).toList();
+      final simpleMomsCSVList = this
+          .simpleMomsCSV
           .split(',')
           .map<num>((x) => num.parse(x))
           .toList();
 
-      if (weightList.length != simplemomsList.length) {
+      if (weightList.length != simpleMomsCSVList.length) {
         throw Exception();
       }
 
@@ -69,24 +69,24 @@ class TankShallow implements APISerialiable {
               hintText: 'Name',
               validate: (s) => validateStringNotEmpty(s, setName)),
           EditTextAdmin(
-            initialValue: weights.toString(),
+            initialValue: weightsCSV.toString(),
             hintText: 'Weights as CSV',
             validate: (s) {
               if (s.isEmpty) {
                 return 'Can not be empty';
-              } else if (!csvIsValid(weights: s)) {
+              } else if (!csvIsValid(weightsCSV: s)) {
                 return 'CSV must same length';
               }
               return null;
             },
           ),
           EditTextAdmin(
-            initialValue: simplemoms.toString(),
+            initialValue: simpleMomsCSV.toString(),
             hintText: 'Simple Moments as CSV',
             validate: (s) {
               if (s.isEmpty) {
                 return 'Can not be empty';
-              } else if (!csvIsValid(simplemoms: s)) {
+              } else if (!csvIsValid(simpleMomsCSV: s)) {
                 return 'CSV must same length';
               }
               return null;

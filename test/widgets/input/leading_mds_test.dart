@@ -27,7 +27,7 @@ void main() {
     final mockMoreOp = MockMoreOp();
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -46,7 +46,7 @@ void main() {
     final mockMoreOp = MockMoreOp();
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -63,12 +63,12 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([
+    when(mockMoreOp.iconDatas).thenReturn([
       58712, 58713
     ]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -88,12 +88,12 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn([
+    when(mockMoreOp.iconDatas).thenReturn([
       58712, 58713
     ]);
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -113,7 +113,7 @@ void main() {
     final mockMoreOp = MockMoreOp();
     when(mockMoreOp.names).thenReturn(List.generate(50, (i) => i.toString()));
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);
@@ -131,12 +131,12 @@ void main() {
       (WidgetTester wt) async {
     //given
     final mockMoreOp = MockMoreOp();
-    when(mockMoreOp.icondatas).thenReturn(
+    when(mockMoreOp.iconDatas).thenReturn(
       [58712, 58713]
     );
     when(mockMoreOp.names).thenReturn(['cold stuff', 'time to wake up']);
     when(mockMoreOp.urls).thenReturn(null);
-    when(mockMoreOp.icondatas).thenReturn(null);
+    when(mockMoreOp.iconDatas).thenReturn(null);
 
     final test = LeadingMDS(text: 'hi', onPressed: (_) {}, general: mockMoreOp);
     final wrapper = makeWidgetTestable(test);

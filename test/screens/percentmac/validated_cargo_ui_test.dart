@@ -26,7 +26,7 @@ Cargo getValidFromChartC(){
     name: 'names',
     weight: 25,
     simplemom: 0.7,
-    mommultiplier: 10000
+    momMultiplier: 10000
   );
 }
 

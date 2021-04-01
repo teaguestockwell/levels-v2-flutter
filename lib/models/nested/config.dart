@@ -1,35 +1,22 @@
 import 'cargo.dart';
 
 class Config {
-  final int aircraftid;
-  final int configid;
+  final int aircraftId;
+  final int configId;
   final String name;
   final List<Cargo> nwfList = [];
 
   Config.fromJson(Map<String,dynamic> json):
-    aircraftid = json['aircraftid'],
-    configid = json['configid'],
+    aircraftId = json['aircraftId'],
+    configId = json['configId'],
     name = json['name']{
-      List<dynamic> configcargos = json['configcargos'];
+      List<dynamic> configCargos = json['configCargos'];
 
-      configcargos.forEach((x) => nwfList.add(Cargo.fromJsonConfigCargo(x)));
+      configCargos.forEach((x) => nwfList.add(Cargo.fromJsonConfigCargo(x)));
     }
   
   Config.empty():
-  aircraftid = -1,
-  configid = -1,
+  aircraftId = -1,
+  configId = -1,
   name = 'No Config';
-
-  // Map<String,dynamic> get json{
-  //   Map<String,dynamic> ret = {};
-  //   ret['aircraftid'] = aircraftid;
-  //   ret['configid'] = configid;
-  //   ret['name'] = name;
-    
-  //   List<dynamic> cc = [];
-  //   nwfList.forEach((x) => cc.add(x.json));
-  //   ret['configcargos'] = cc;
-  //   return ret;
-
-  // }
 }

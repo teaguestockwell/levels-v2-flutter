@@ -16,7 +16,7 @@ class LeadingMDS extends StatelessWidget {
         assert(onPressed != null),
         assert(general != null),
         assert(general.names != null),
-        assert(general.icondatas == null),
+        assert(general.iconDatas == null),
         assert(general.urls == null);
 
   @override

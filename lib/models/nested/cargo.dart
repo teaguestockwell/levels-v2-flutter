@@ -20,10 +20,10 @@ class Cargo {
   String get qtyS => qty.toString();
 
   /// db refrence
-  final int aircraftid;
-  final int configid;
-  final int cargoid;
-  final int configcargoid;
+  final int aircraftId;
+  final int configId;
+  final int cargoId;
+  final int configCargoId;
 
   /// ui refrence, not final for testing 
   int id; 
@@ -37,10 +37,10 @@ class Cargo {
   }) : 
   oldjson = {},
   id = getUniqueIdx(),
-  aircraftid = -1,
-  configid = -1,
-  cargoid = -1,
-  configcargoid = -1,
+  aircraftId = -1,
+  configId = -1,
+  cargoId = -1,
+  configCargoId = -1,
   type = CargoType.Nojson; 
 
   Cargo.fromJsonCargo(Map<String,dynamic> json):
@@ -49,10 +49,10 @@ class Cargo {
     weight = json['weight'], // everything has weight
     fs = json['fs'], // fs is allways non null beacuse db assied -1 as default 
     qty = 1,
-    aircraftid = json['aircraftid'],
-    cargoid = json['cargoid'],
-    configid = - 1,
-    configcargoid = -1,
+    aircraftId = json['aircraftId'],
+    cargoId = json['cargoId'],
+    configId = - 1,
+    configCargoId = -1,
     id = getUniqueIdx(),
     type = CargoType.Cargo;
 
@@ -63,26 +63,26 @@ class Cargo {
     fs = json['fs'],
     qty = json['qty'],
     id = getUniqueIdx(),
-    aircraftid = json['aircraftid'],
-    configid = json['configid'],
-    cargoid = json['cargoid'],
-    configcargoid = json['configcargoid'],
+    aircraftId = json['aircraftId'],
+    configId = json['configId'],
+    cargoId = json['cargoId'],
+    configCargoId = json['configCargoId'],
     type = CargoType.ConfigCargo;
 
   Cargo.fromTank({
     @required this.name,
     @required this.weight,
     @required num simplemom,
-    @required num mommultiplier,
+    @required num momMultiplier,
   }) :
   oldjson = {},
-  fs = (simplemom * mommultiplier) / weight,
+  fs = (simplemom * momMultiplier) / weight,
   qty = 1,
   id = getUniqueIdx(),
-  aircraftid = -1,
-  cargoid = -1,
-  configid =-1,
-  configcargoid =-1,
+  aircraftId = -1,
+  cargoId = -1,
+  configId =-1,
+  configCargoId =-1,
   type = CargoType.Nojson; // tanks are modified using csv 
 
 
@@ -93,16 +93,16 @@ class Cargo {
   fs = old.fs,
   qty = old.qty,
   id = getUniqueIdx(),
-  aircraftid = -1,
-  cargoid = -1,
-  configid =-1,
-  configcargoid =-1,
+  aircraftId = -1,
+  cargoId = -1,
+  configId =-1,
+  configCargoId =-1,
   type = CargoType.Nojson;
 
   num get mom => fs * weight;
   num get momTot => fs * weight * qty;
 
-  num simpleMom(num mommultiplier) => this.mom/mommultiplier;
+  num simpleMom(num momMultiplier) => this.mom/momMultiplier;
   num simpleMomTot(num mommultipler) => this.momTot/mommultipler;
 
   //weight is a field
@@ -115,35 +115,4 @@ class Cargo {
   void setMom(num mom){
     fs = mom / weight;
   }
-
-  // Map<String, dynamic> get json{
-  //   Map<String, dynamic> ret = {};
-    
-  //   switch (type) {
-  //     case CargoType.Cargo: {
-  //       ret['aircraftid'] = aircraftid;
-  //       ret['cargoid'] = cargoid;
-  //       ret['name'] = name;
-  //       ret['fs'] = fs;
-  //     }break;
-  //     case CargoType.ConfigCargo: {
-  //       ret['configid'] = configid;
-  //       ret['aircraftid'] = aircraftid;
-  //       ret['cargoid'] = cargoid;
-  //       ret['configcargoid'] = configcargoid;
-  //       ret['fs'] = fs;
-  //       ret['qty'] = qty;
-  //       // relation to cargo
-  //       Map<String,dynamic> cargo = {};
-  //       cargo['aircraftid'] = aircraftid;
-  //       cargo['cargoid'] = cargoid;
-  //       cargo['name'] = name;
-  //       cargo['weight'] = weight;
-  //       cargo['fs'] = oldjson['cargo']['fs'];
-  //     }break;
-  //     default: throw Exception('.json called on UI Cargo');
-  //   }
-
-  //   return ret;
-  // }
 }
