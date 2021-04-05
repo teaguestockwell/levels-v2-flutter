@@ -5,7 +5,7 @@ import '../../widgets/input/edit_text_admin.dart';
 import 'serializable.dart';
 
 class AircraftShallow implements APISerialiable{
-  int id;
+  int aircraftId;
   String name;
   void setName(String s) => name = s;
   num fs0;
@@ -26,13 +26,13 @@ class AircraftShallow implements APISerialiable{
   void setLemac(num s) => lemac = s;
   num mac;
   void setMac(num s) => mac = s;
-  num mommultiplyer;
-  void setMomMultiplyer(num s) => mommultiplyer = s;
+  num momMultiplyer;
+  void setMomMultiplyer(num s) => momMultiplyer = s;
   void Function(Map<String, dynamic>) onSave;
   String ep = 'aircraft';
 
   AircraftShallow.fromJson(Map<String, dynamic> json, this.onSave)
-      : id = json["id"] ?? 0,
+      : aircraftId = json["aircraftId"] ?? 0,
         name = json["name"] ?? '',
         fs0 = json["fs0"] ?? 0,
         fs1 = json["fs1"] ?? 0,
@@ -43,10 +43,10 @@ class AircraftShallow implements APISerialiable{
         cargoWeight1 = json["cargoWeight1"] ?? 0,
         lemac = json["lemac"] ?? 0,
         mac = json["mac"] ?? 0,
-        mommultiplyer = json["mommultiplyer"] ?? 0;
+        momMultiplyer = json["momMultiplyer"] ?? 0;
 
   Map<String, dynamic> toJson() => {
-        "id": id,
+        "aircraftId": aircraftId,
         "name": name,
         "fs0": fs0,
         "fs1": fs1,
@@ -57,7 +57,7 @@ class AircraftShallow implements APISerialiable{
         "cargoWeight1": cargoWeight1,
         "lemac": lemac,
         'mac': mac,
-        'mommultiplyer': mommultiplyer,
+        'momMultiplyer': momMultiplyer,
       };
 
   Widget getForm() {
@@ -107,7 +107,7 @@ class AircraftShallow implements APISerialiable{
               hintText: 'MAC',
               validate: (s) => valiadateNumPositive(s, setMac)),
           EditTextAdmin(
-              initialValue: mommultiplyer.toString(),
+              initialValue: momMultiplyer.toString(),
               hintText: '"x" where: simple moment = moment / x',
               validate: (s) => valiadateNumPositive(s, setMomMultiplyer)),
           BlackButtonAdmin(() {

@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 const mockShallows = <String, Map<String,dynamic>>{
   aircraftS: {
-    "id": 1,
+    "aircraftId": 1,
     "name": "C-17A-ER",
     "fs0": 80.5,
     "fs1": 2168,
@@ -16,7 +16,7 @@ const mockShallows = <String, Map<String,dynamic>>{
     "cargoWeight1": 300000,
     "lemac": 793.6,
     "mac": 309.5,
-    "mommultiplyer": 10000
+    "momMultiplyer": 10000
   },
   cargoS: {
     "aircraftId": 1,

@@ -26,7 +26,7 @@ main(){
 const body = '''
   [
   {
-    "id": 1,
+    "aircraftId": 1,
     "name": "C-17A-ER",
     "fs0": 80.5,
     "fs1": 2168,
@@ -37,7 +37,7 @@ const body = '''
     "cargoWeight1": 300000,
     "lemac": 793.6,
     "mac": 309.5,
-    "mommultiplyer": 10000,
+    "momMultiplyer": 10000,
     "cargos": [
       {
         "aircraftId": 1,
@@ -8307,7 +8307,7 @@ const body = '''
     ]
   },
   {
-    "id": 2,
+    "aircraftId": 2,
     "name": "C-17A",
     "fs0": 80.5,
     "fs1": 2168,
@@ -8318,7 +8318,7 @@ const body = '''
     "cargoWeight1": 300000,
     "lemac": 793.6,
     "mac": 309.5,
-    "mommultiplyer": 10000,
+    "momMultiplyer": 10000,
     "cargos": [
       {
         "aircraftId": 2,
