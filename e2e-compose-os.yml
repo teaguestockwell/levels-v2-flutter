@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  PG_DATABASE:
+    image: 'postgres'
+    restart: always
+    environment:
+      POSTGRES_USER: PG_USER
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: PG_DATABASE
+
+  fl-api:
+    build:
+      context: ../api
+      dockerfile: ../api/Dockerfile.builder.os
+    environment:
+      PG_USER: PG_USER
+      APP_DB_ADMIN_PASSWORD: password
+      PHPORT: 5432
+      PGHOST: PG_DATABASE
+      IS_LOCAL: 'true'
+    depends_on:
+      - 'PG_DATABASE'
+
+  fl-ui:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.dev
+    depends_on:
+      - 'fl-api'
+
+  proxy:
+    image: 'nginx'
+    ports:
+      - 8080:80 # map host:8080 to proxy:80
+    expose:
+      - 80 # expose nginx:80 to other container at nginx:80
+    volumes:
+      - ./proxy.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - 'fl-ui'
