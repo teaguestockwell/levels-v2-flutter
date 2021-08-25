@@ -16,7 +16,7 @@ Future<General> getGeneral() async {
     'iconDatas': [59478, 57360], // flutter material icon data
     'urls': [
       'https://forms.gle/Bbqvubn6gwC6fRnc8',
-      'https://tsappdevelopment.github.io/hellohtml/',
+      'https://teaguestockwell.com',
     ],
   });
 }
