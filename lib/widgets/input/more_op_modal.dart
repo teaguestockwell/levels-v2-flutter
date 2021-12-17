@@ -53,7 +53,7 @@ class MoreOpModalState extends State<MoreOpModal> {
               height: pickerHeight * 2,
               child: Center(
                   child: Tex(
-                'Error, please email tsAppDevelopment@gmail.com',
+                'Error',
                 fontWeight: FontWeight.bold,
                 color: nonfocusedErrorBoderColor,
               )))));

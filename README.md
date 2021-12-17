@@ -1,8 +1,8 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[license-shield]: https://img.shields.io/github/license/tsAppDevelopment/hello2.svg
-[license-url]: https://github.com/tsAppDevelopment/hello2/blob/master/licence.txt
+[license-shield]: https://img.shields.io/github/license/teaguestockwell/hello2.svg
+[license-url]: https://github.com/teaguestockwell/hello2/blob/master/licence.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/teague-stockwell/
 
@@ -62,11 +62,11 @@ Five level is a the second iteration of an app that manages aircraft cargo loadi
 
 The first and second iterations were built with tech stacks that could not be accredited and deployed to the Air Force network:
 
-1. [5 Level](https://github.com/tsAppDevelopment/levels-v1-android) Native Android
-2. [Five Level](https://github.com/tsAppDevelopment/levels-v2-flutter) Flutter
-3. Levels - [UI Repo](https://github.com/tsAppDevelopment/levels-v3-react) and [API Repo](https://github.com/tsAppDevelopment/levels-v2v3-express) React
+1. [5 Level](https://github.com/teaguestockwell/levels-v1-android) Native Android
+2. [Five Level](https://github.com/teaguestockwell/levels-v2-flutter) Flutter
+3. Levels - [UI Repo](https://github.com/teaguestockwell/levels-v3-react) and [API Repo](https://github.com/teaguestockwell/levels-v2v3-express) React
 
-Five Level, this iteration is depreciated and has been replaced by Levels. Five Level is deployed [here](http://fivelevel.web.app/) to use a serverless document DB (Firebase Firestore), but the master branch may also be ran as a container using [this API](https://github.com/tsAppDevelopment/levels-v2v3-express)
+Five Level, this iteration is depreciated and has been replaced by Levels. Five Level is deployed [here](http://fivelevel.web.app/) to use a serverless document DB (Firebase Firestore), but the master branch may also be ran as a container using [this API](https://github.com/teaguestockwell/levels-v2v3-express)
 ## About the UI
 The frontend service has four main components. The dashboard, admin portal, unit conversion, and the glossary.
 
@@ -128,7 +128,7 @@ The deployed version uses Firestore and it supports read only. The Node server s
 2. [Docker](https://www.docker.com/get-started)
 3. [Git](https://git-scm.com/downloads)
 4. [VS Code Remote Containers Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-5. Clone the [UI](https://github.com/tsAppDevelopment/levels-v2-flutter) and [API](https://github.com/tsAppDevelopment/levels-v2v3-express) from GitHub into the same directory
+5. Clone the [UI](https://github.com/teaguestockwell/levels-v2-flutter) and [API](https://github.com/teaguestockwell/levels-v2v3-express) from GitHub into the same directory
 ## Compose Prod
 To compose a production version locally, follow these steps.
 1. Open the frontend repo in VS Code
@@ -170,7 +170,7 @@ npm run docker:test
 ```
 
 # Roadmap
-This service has been depreciated and will be replaced by the [Levels UI](https://github.com/tsAppDevelopment/levels-v3-react) written in React.
+This service has been depreciated and will be replaced by the [Levels UI](https://github.com/teaguestockwell/levels-v3-react) written in React.
 
 Report a [bug](https://forms.gle/Bbqvubn6gwC6fRnc8)
 
