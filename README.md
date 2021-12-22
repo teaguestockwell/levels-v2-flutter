@@ -1,8 +1,8 @@
 [![MIT License][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
-[license-shield]: https://img.shields.io/github/license/teaguestockwell/hello2.svg
-[license-url]: https://github.com/teaguestockwell/hello2/blob/master/licence.txt
+[license-shield]: https://img.shields.io/github/license/teaguestockwel/levels-v2-flutter.svg
+[license-url]: https://github.com/teaguestockwell/levels-v2-flutter/blob/master/licence.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/teague-stockwell/
 
